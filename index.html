@@ -4100,6 +4100,21 @@ const coronaryMap = {
             ecgQuizSim.drawReadoutOverlay?.();
         }
 
+        function applyQuizEcgOverride(question) {
+            if (!ecgQuizSim || !question) return null;
+            if (question.ecgId === '0B8A6F') {
+                ecgQuizSim.setHighlightedLeads?.(['V1', 'V2', 'V3', 'V4']);
+                ecgQuizSim.setSelectedLead?.('V1');
+                ecgQuizSim.drawTrace?.();
+                ecgQuizSim.drawExpandedTrace?.();
+                ecgQuizSim.drawReadoutOverlay?.();
+                return {
+                    success: 'Wide complexes with varying morphology reflecting dynamic axis with AV dissociation stand out in V1–V4.'
+                };
+            }
+            return null;
+        }
+
         const DEFAULT_RHYTHM_INSIGHT = {
             incorrect: 'Take another look at the morphology and intervals. Which leads best showcase the abnormality you picked?',
             success: 'Great pickup! These leads highlight the key abnormality for this rhythm.',
@@ -4180,7 +4195,7 @@ const coronaryMap = {
             },
             pvtach: {
                 incorrect: 'Does the rhythm look wide-complex with extreme axis? Check chest leads for monomorphic VT clues.',
-                success: 'Wide, regular complexes with AV dissociation stand out in V1–V4.',
+                success: 'Wide complexes with varying morphology reflecting dynamic axis with AV dissociation stand out in V1–V4',
                 highlights: { P: false, QRS: true, T: false },
                 intervals: { RR: true },
                 focusLead: 'V1',
@@ -4486,6 +4501,7 @@ const coronaryMap = {
                 }
                 if (question.status === 'correct') {
                     applyQuizInsightHighlight(selectedKey);
+                    applyQuizEcgOverride(question);
                 }
             }
         }
@@ -4612,10 +4628,10 @@ const coronaryMap = {
                     expl.classList.add('active');
                 }
                 if (ecgQuizElements.feedback) {
-                    ecgQuizElements.feedback.textContent = 'Not quite — review the hint under your selection and try another option.';
+                    ecgQuizElements.feedback.textContent = 'Incorrect — review the hint under your selection and try another option.';
                     ecgQuizElements.feedback.className = 'ecg-quiz-feedback error';
                 }
-                question.feedbackText = 'Not quite — review the hint under your selection and try another option.';
+                question.feedbackText = 'Incorrect — review the hint under your selection and try another option.';
                 question.feedbackClass = 'ecg-quiz-feedback error';
                 return;
             }
@@ -4639,11 +4655,31 @@ const coronaryMap = {
                     successExpl.classList.add('active');
                 }
             }
+            const override = applyQuizEcgOverride(question);
+            if (override && wrapper) {
+                const successExpl = wrapper.querySelector('.ecg-quiz-choice-expl');
+                if (successExpl) {
+                    successExpl.textContent = override.success;
+                    successExpl.classList.add('active');
+                }
+            }
             if (ecgQuizElements.feedback) {
-                ecgQuizElements.feedback.textContent = insight.success || 'Correct! Nice work.';
+                const successText = override ? override.success : insight.success;
+                if (override) {
+                    ecgQuizElements.feedback.textContent = successText || '';
+                } else {
+                    ecgQuizElements.feedback.textContent = successText ? `Correct! ${successText}` : 'Correct! Nice work.';
+                }
                 ecgQuizElements.feedback.className = 'ecg-quiz-feedback success';
             }
-            question.feedbackText = insight.success || 'Correct! Nice work.';
+            {
+                const successText = override ? override.success : insight.success;
+                if (override) {
+                    question.feedbackText = successText || '';
+                } else {
+                    question.feedbackText = successText ? `Correct! ${successText}` : 'Correct! Nice work.';
+                }
+            }
             question.feedbackClass = 'ecg-quiz-feedback success';
             if (ecgQuizElements.submit) ecgQuizElements.submit.disabled = true;
             if (ecgQuizElements.next) ecgQuizElements.next.disabled = false;
