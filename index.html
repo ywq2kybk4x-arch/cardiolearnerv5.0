@@ -5330,6 +5330,33 @@ const coronaryMap = {
                 }
             };
 
+            const resetEkgOnTutorialExit = () => {
+                applySinusDefaults();
+                const ecg12RhythmSelect = document.getElementById('ecg12RhythmPreset');
+                if (ecg12RhythmSelect) {
+                    ecg12RhythmSelect.value = 'sinus';
+                    ecg12RhythmSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+                const ecg12HeartRate = document.getElementById('ecg12HeartRate');
+                if (ecg12HeartRate && !ecg12HeartRate.disabled) {
+                    ecg12HeartRate.value = '75';
+                    ecg12HeartRate.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+                const axisSelect = document.getElementById('ecg12AxisMode');
+                if (axisSelect) {
+                    axisSelect.value = 'normal';
+                    axisSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+                clearHighlights();
+                setBoxOverlayActive(false);
+                window.ecgSimInstance?.reset?.();
+                window.ecgSimInstance?.setSelectedLead?.('II');
+                window.ecg12SimInstance?.reset?.();
+                window.ecg12SimInstance?.setSelectedLead?.('II');
+                const expandedLabel = document.getElementById('ecg12ActiveLead');
+                if (expandedLabel) expandedLabel.textContent = 'II';
+            };
+
             const mountSingleLead = (target) => {
                 if (!singleLeadContainer || !target) return;
                 if (singleLeadContainer.parentElement !== target) {
@@ -5590,6 +5617,9 @@ const coronaryMap = {
 
             const activate12Lead = () => {
                 if (currentEkgMode === 'twelve') return;
+                if (currentEkgMode === 'tutorial') {
+                    resetEkgOnTutorialExit();
+                }
                 currentEkgMode = 'twelve';
                 clearActive();
                 show12Btn?.classList.add('active');
@@ -5602,6 +5632,9 @@ const coronaryMap = {
 
             const activateSingleLead = () => {
                 if (currentEkgMode === 'single') return;
+                if (currentEkgMode === 'tutorial') {
+                    resetEkgOnTutorialExit();
+                }
                 currentEkgMode = 'single';
                 clearActive();
                 showSingleBtn?.classList.add('active');
