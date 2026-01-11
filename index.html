@@ -2235,6 +2235,7 @@
         .ecg-tutorial-action.primary{background:#fff;color:#0f172a;border-color:rgba(15,23,42,.2)}
         .ecg-tutorial-action[data-active="true"]{background:#0f172a;color:#fff;border-color:#0f172a}
         .ecg-tutorial-note{font-size:.85rem;color:var(--muted-2);margin-top:6px}
+        .ecg-tutorial-note.is-alert{color:var(--danger)}
         .ecg-tutorial-sim{display:flex;flex-direction:column;gap:12px}
         .ecg-tutorial-sim .single-lead-card{margin:0}
         .ecg-tutorial-legend{display:flex;gap:10px;flex-wrap:wrap;font-size:.85rem;color:var(--muted)}
@@ -3281,7 +3282,7 @@
                                 <p>Measure the R–R interval in seconds. Use 60 ÷ R–R. At 25 mm/s, each big box = 0.2 s.</p>
                                 <button class="ecg-tutorial-action primary" data-tutorial-action="rate">Apply: R-R Interval Highlight</button>
                                 <div class="ecg-tutorial-note">Quick conversions: 1 box = 300 bpm, 2 = 150, 3 = 100, 4 = 75, 5 = 60, 6 = 50.</div>
-                                <div class="ecg-tutorial-note">Box tool: Click to add adjacent large boxes, click a box to remove it, double‑click to clear all.</div>
+                                <div class="ecg-tutorial-note is-alert">Box tool: Click to add adjacent large boxes, click a box to remove it, double‑click to clear all.</div>
                             </div>
                             <div class="ecg-tutorial-step" data-step="1">
                                 <h4>2) Evaluate the Rhythm</h4>
