@@ -2544,7 +2544,7 @@
                                         <div style="text-align: center;">
                                             <div style="font-size: 11px; color: #7f8c8d; font-weight: 600; margin-bottom: 4px;">WIGGERS DIAGRAM REFERENCE:</div>
                                             <div id="wiggersDescription" style="color: #2c3e50; font-size: 13px; line-height: 1.6;">
-                                                Normal cardiac cycle showing typical pressure, volume, ECG, and heart sound relationships.
+                                                Normal cardiac cycle showing typical pressure, volume, EKG, and heart sound relationships.
                                             </div>
                                         </div>
                                     </div>
@@ -3109,10 +3109,10 @@
                     </div>
                 </div>
                 <div class="model-3d-sidebar">
-                    <h3>Coronary Territories &amp; ECG Leads</h3>
+                    <h3>Coronary Territories &amp; EKG Leads</h3>
                     <p style="margin-bottom: 8px;">
                         Click a coronary artery to <strong>highlight it on the 3D heart</strong> and see its
-                        classic MI territory, ECG leads, and key complications.
+                        classic MI territory, EKG leads, and key complications.
                     </p>
 
                     <div class="coronary-button-row">
@@ -3133,7 +3133,7 @@
                         </div>
 
                         <div>
-                            <div class="coronary-info-label">Classic ECG Leads</div>
+                            <div class="coronary-info-label">Classic EKG Leads</div>
                             <div class="coronary-info-value">
                                 <span class="coronary-leads-pill" id="coronary-leads">—</span>
                             </div>
@@ -3534,7 +3534,7 @@
             <div id="ecgQuizSection" class="ecg-quiz-section" style="display:none;">
                 <div class="ecg-quiz-header">
                     <div>
-                        <h3>ECG Rhythm Quiz</h3>
+                        <h3>EKG Rhythm Quiz</h3>
                         <p class="muted-text" style="margin:4px 0 0;">Study the static 12-lead snapshot and pick the rhythm diagnosis.</p>
                     </div>
                     <div class="ecg-quiz-header-meta">
@@ -3567,14 +3567,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="ecg-quiz-meta" id="ecgQuizMeta">Speed: 25 mm/s • Gain: 10 mm/mV • ECG ID: ————</div>
+                    <div class="ecg-quiz-meta" id="ecgQuizMeta">Speed: 25 mm/s • Gain: 10 mm/mV • EKG ID: ————</div>
                 </div>
                 <div id="ecgQuizNav" class="ecg-quiz-nav"></div>
                 <p class="ecg-quiz-question">What is the rhythm?</p>
                 <div id="ecgQuizChoices" class="ecg-quiz-choices"></div>
                 <div class="ecg-quiz-actions">
                     <button type="button" id="ecgQuizSubmitBtn" class="btn btn-primary">Submit Answer</button>
-                    <button type="button" id="ecgQuizNextBtn" class="btn btn-ghost">Next ECG</button>
+                    <button type="button" id="ecgQuizNextBtn" class="btn btn-ghost">Next EKG</button>
                 </div>
                 <div id="ecgQuizFeedback" class="ecg-quiz-feedback">Select the rhythm that matches this printout.</div>
                 <div id="ecgQuizSummary" class="ecg-quiz-summary" style="display:none;"></div>
@@ -4575,7 +4575,7 @@ const coronaryMap = {
 
         function updateQuizMetaWithId(ecgId) {
             if (!ecgQuizElements.meta) return;
-            ecgQuizElements.meta.textContent = `Speed: 25 mm/s • Gain: 10 mm/mV • ECG ID: ${ecgId}`;
+            ecgQuizElements.meta.textContent = `Speed: 25 mm/s • Gain: 10 mm/mV • EKG ID: ${ecgId}`;
         }
 
         function handleQuizSubmit() {
@@ -5748,14 +5748,14 @@ const coronaryMap = {
 
         // Wiggers diagram change descriptions for each pathology
         const wiggersDescriptions = {
-            normal: 'Normal cardiac cycle showing typical pressure, volume, ECG, and heart sound relationships.',
-            aorticStenosis: 'Normal cardiac cycle showing typical pressure, volume, ECG, and heart sound relationships.',
-            mitralRegurg: 'Normal cardiac cycle showing typical pressure, volume, ECG, and heart sound relationships.',
-            hfref: 'Normal cardiac cycle showing typical pressure, volume, ECG, and heart sound relationships.',
-            hfpef: 'Normal cardiac cycle showing typical pressure, volume, ECG, and heart sound relationships.',
-            hcm: 'Normal cardiac cycle showing typical pressure, volume, ECG, and heart sound relationships.',
-            tamponade: 'Normal cardiac cycle showing typical pressure, volume, ECG, and heart sound relationships.',
-            septicShock: 'Normal cardiac cycle showing typical pressure, volume, ECG, and heart sound relationships.'
+            normal: 'Normal cardiac cycle showing typical pressure, volume, EKG, and heart sound relationships.',
+            aorticStenosis: 'Normal cardiac cycle showing typical pressure, volume, EKG, and heart sound relationships.',
+            mitralRegurg: 'Normal cardiac cycle showing typical pressure, volume, EKG, and heart sound relationships.',
+            hfref: 'Normal cardiac cycle showing typical pressure, volume, EKG, and heart sound relationships.',
+            hfpef: 'Normal cardiac cycle showing typical pressure, volume, EKG, and heart sound relationships.',
+            hcm: 'Normal cardiac cycle showing typical pressure, volume, EKG, and heart sound relationships.',
+            tamponade: 'Normal cardiac cycle showing typical pressure, volume, EKG, and heart sound relationships.',
+            septicShock: 'Normal cardiac cycle showing typical pressure, volume, EKG, and heart sound relationships.'
         };
 
         function getPharmModifiers() {
@@ -5913,7 +5913,7 @@ const coronaryMap = {
         };
 
         const QBANK_TOPIC_TEMPLATE = {
-            'ECG Interpretation': 120,
+            'EKG Interpretation': 120,
             'Arrhythmias': 180,
             'Ischemia & MI': 140,
             'Heart Failure': 110,
@@ -7241,7 +7241,7 @@ const coronaryMap = {
             } else {
                 img.src = img.getAttribute('data-original-src') || img.src;
                 img.alt = 'Normal Wiggers Diagram';
-                desc.innerHTML = 'Normal cardiac cycle showing typical pressure, volume, ECG, and heart sound relationships.';
+                desc.innerHTML = 'Normal cardiac cycle showing typical pressure, volume, EKG, and heart sound relationships.';
             }
         }
         
