@@ -6354,7 +6354,6 @@ const coronaryMap = {
             const session = qbankState.session;
             if (!session || !qid) return false;
             if (session.reviewUnlocked) return true;
-            if (session.mode === 'test') return false;
             return !!session.answeredById?.[qid];
         }
 
@@ -6394,6 +6393,53 @@ const coronaryMap = {
                 return { ...raw };
             }
             return {};
+        }
+
+        function extractQbankChoiceFeedback(explanation) {
+            if (!explanation) return {};
+            const lines = explanation.split('\n');
+            const feedback = {};
+            let current = null;
+            let buffer = [];
+            const flush = () => {
+                if (current) {
+                    feedback[current] = buffer.join('\n').trim();
+                }
+            };
+            const choiceLine = /^([A-D])(?:[).]|\s)\s*(.*)$/;
+            lines.forEach((rawLine) => {
+                const line = rawLine.trim();
+                if (!line) {
+                    if (current) buffer.push('');
+                    return;
+                }
+                const match = line.match(choiceLine);
+                if (match) {
+                    flush();
+                    current = match[1];
+                    buffer = [line];
+                    return;
+                }
+                if (current) {
+                    buffer.push(line);
+                }
+            });
+            flush();
+            return feedback;
+        }
+
+        function formatQbankFeedback(text) {
+            if (!text) return '';
+            let formatted = text.replace(/\r\n/g, '\n');
+            formatted = formatted
+                .replace(/Correct Answer:\s*/g, '')
+                .replace(/Incorrect Answer Choices:\s*/g, '')
+                .replace(/Wrong-answer analogies:\s*/g, '')
+                .replace(/Click-feedback[^:]*:\s*/g, '')
+                .replace(/(^|\s)([A-D][).]\s)/g, '$1\n$2')
+                .replace(/\n{2,}/g, '\n')
+                .trim();
+            return formatted.replace(/\n/g, '<br>');
         }
 
         function updateQbankMetaCounts() {
@@ -6651,22 +6697,16 @@ const coronaryMap = {
             const correct = choice === question.answer;
             session.responses[qid] = session.responses[qid] || {};
             session.responses[qid].choice = choice;
-            if (session.mode === 'tutor' || session.reviewUnlocked) {
-                session.responses[qid].correct = correct;
-            } else {
-                session.responses[qid].correct = null;
-            }
+            session.responses[qid].correct = correct;
             session.answersById[qid] = choice;
             session.answeredById[qid] = true;
-            if (session.mode === 'tutor' || session.reviewUnlocked) {
-                const status = correct ? 'correct' : 'incorrect';
-                session.gradedById[qid] = {
-                    status,
-                    choice,
-                    correctAnswer: question.answer
-                };
-                applySingleQuestionResultToProgress(qid, status);
-            }
+            const status = correct ? 'correct' : 'incorrect';
+            session.gradedById[qid] = {
+                status,
+                choice,
+                correctAnswer: question.answer
+            };
+            applySingleQuestionResultToProgress(qid, status);
             qbankLog('handleQbankSubmit', { questionId: question.id, choice, correct });
             renderQbank();
         }
@@ -6675,20 +6715,18 @@ const coronaryMap = {
             const session = qbankState.session;
             if (!session) return;
             if (session.finished) return;
-            if (session.mode === 'tutor') {
-                const question = getCurrentSessionQuestion();
-                if (question && !session.answeredById?.[question.id]) {
-                    session.responses[question.id] = session.responses[question.id] || {};
-                    session.responses[question.id].choice = null;
-                    session.responses[question.id].correct = false;
-                    session.gradedById[question.id] = {
-                        status: 'omitted',
-                        choice: null,
-                        correctAnswer: question.answer
-                    };
-                    session.answeredById[question.id] = false;
-                    applySingleQuestionResultToProgress(question.id, 'omitted');
-                }
+            const question = getCurrentSessionQuestion();
+            if (question && !session.answeredById?.[question.id]) {
+                session.responses[question.id] = session.responses[question.id] || {};
+                session.responses[question.id].choice = null;
+                session.responses[question.id].correct = false;
+                session.gradedById[question.id] = {
+                    status: 'omitted',
+                    choice: null,
+                    correctAnswer: question.answer
+                };
+                session.answeredById[question.id] = false;
+                applySingleQuestionResultToProgress(question.id, 'omitted');
             }
             if (session.index < session.questions.length - 1) {
                 session.index += 1;
@@ -6714,11 +6752,6 @@ const coronaryMap = {
                 endQbankSession();
                 return;
             }
-            const unanswered = countUnansweredQuestions(session);
-            if (session.mode === 'test' && unanswered > 0) {
-                const ok = window.confirm(`You have ${unanswered} unanswered question${unanswered === 1 ? '' : 's'}. Finish anyway?`);
-                if (!ok) return;
-            }
             finishQbankSession({ reason: 'user' });
         }
 
@@ -6739,9 +6772,6 @@ const coronaryMap = {
 
         function renderQbankBuilderView() {
             qbankLog('renderQbankBuilderView:start');
-            const modeButtons = ['tutor', 'test']
-                .map(mode => `<button class="qbank-seg-btn ${qbankState.mode === mode ? 'active' : ''}" data-qbank-mode="${mode}">${mode === 'tutor' ? 'Tutor Mode' : 'Test Mode'}</button>`)
-                .join('');
             const timingButtons = ['untimed', 'timed']
                 .map(mode => `<button class="qbank-seg-btn ${qbankState.timing === mode ? 'active' : ''}" data-qbank-timing="${mode}">${mode === 'untimed' ? 'Untimed' : 'Timed'}</button>`)
                 .join('');
@@ -6810,10 +6840,6 @@ const coronaryMap = {
                 <div class="qbank-grid">
                     <div class="qbank-panel">
                         <div>
-                            <div class="qbank-section-title">Question Mode</div>
-                            <div class="qbank-segment">${modeButtons}</div>
-                        </div>
-                        <div>
                             <div class="qbank-section-title">Timing</div>
                             <div class="qbank-segment">${timingButtons}</div>
                         </div>
@@ -6838,7 +6864,6 @@ const coronaryMap = {
                             <div>
                                 <div class="qbank-section-title">Session Summary</div>
                                 <div>
-                                    <span class="qbank-chip">${qbankState.mode === 'tutor' ? 'Tutor Mode' : 'Test Mode'}</span>
                                     <span class="qbank-chip">${qbankState.timing === 'timed' ? 'Timed' : 'Untimed'}</span>
                                     ${selectedSources.length ? selectedSources.map(src => `<span class="qbank-chip">${src}</span>`).join('') : '<span class="qbank-chip">No source selected</span>'}
                                 </div>
@@ -6900,38 +6925,44 @@ const coronaryMap = {
             const selectedChoice = response.choice ?? session.answersById?.[question.id] ?? null;
             const hasChoice = selectedChoice != null;
             const answered = !!session.answeredById?.[question.id];
+            const choiceFeedbackMap = extractQbankChoiceFeedback(question.explanation || '');
             let feedbackText = '';
             if (reveal && graded) {
                 if (graded.status === 'correct') {
                     feedbackText = '✅ Correct';
                 } else if (graded.status === 'incorrect') {
-                    feedbackText = `❌ Incorrect. Correct answer: ${question.answer}`;
+                    feedbackText = '❌ Incorrect. Try again.';
                 } else {
                     feedbackText = '⏭ Omitted';
                 }
             }
-            const explanation = reveal && showExplanation && question.explanation ? question.explanation : '';
-            const answerReview = reveal
+            const explanation = reveal && showExplanation && graded?.status === 'correct' && question.explanation ? question.explanation : '';
+            const answerReview = reveal && graded?.status === 'correct'
                 ? `<div class="muted-text" style="margin-top:4px;">
-                        Your answer: ${hasChoice ? selectedChoice : 'Omitted'}<br>
-                        Correct answer: ${question.answer}
+                        Your answer: ${hasChoice ? selectedChoice : 'Omitted'}
                    </div>`
                 : '';
             const feedbackColor = graded?.status === 'correct'
                 ? '#15803d'
                 : (graded?.status === 'incorrect' ? '#b91c1c' : '#475569');
-            const disableChoices = session.finished || (session.mode === 'tutor' && answered);
+            const disableChoices = session.finished || (session.mode === 'tutor' && graded?.status === 'correct');
             const choicesHtml = Object.entries(question.choices || {}).map(([letter, text]) => {
                 const inputId = `qbank-choice-${letter}`;
                 const checked = selectedChoice === letter ? 'checked' : '';
                 const disabled = disableChoices ? 'disabled' : '';
-                const highlight = reveal && letter === question.answer
+                const isIncorrectSelection = reveal && graded?.status === 'incorrect' && selectedChoice === letter;
+                const highlight = reveal && graded?.status === 'correct' && letter === question.answer
                     ? 'style="background:rgba(34,197,94,0.12);border-color:rgba(34,197,94,0.6);"'
+                    : (isIncorrectSelection ? 'style="background:rgba(239,68,68,0.12);border-color:rgba(239,68,68,0.6);"' : '');
+                const showChoiceFeedback = isIncorrectSelection && letter !== question.answer;
+                const choiceFeedback = showChoiceFeedback
+                    ? (choiceFeedbackMap[letter] || question.explanation || '')
                     : '';
                 return `
                     <label class="answer-label" ${highlight}>
                         <input type="radio" name="qbank-choice" value="${letter}" id="${inputId}" ${checked} ${disabled}>
                         <span><strong>${letter}.</strong> ${text}</span>
+                        ${showChoiceFeedback && choiceFeedback ? `<div class="muted-text" style="margin-top:6px; color:#b91c1c;">${formatQbankFeedback(choiceFeedback)}</div>` : ''}
                     </label>
                 `;
             }).join('');
@@ -6946,20 +6977,12 @@ const coronaryMap = {
                    </div>`
                 : '';
             const navButtons = session.questions.map((q, idx) => {
-                const resp = session.responses[q.id] || {};
                 const gradedMeta = session.gradedById?.[q.id] || null;
-                const answeredQuestion = !!session.answeredById?.[q.id];
                 let stateClass = '';
-                if (session.reviewUnlocked && gradedMeta) {
+                if ((session.reviewUnlocked && gradedMeta) || gradedMeta) {
                     if (gradedMeta.status === 'correct') stateClass = 'correct';
                     else if (gradedMeta.status === 'incorrect') stateClass = 'incorrect';
                     else stateClass = 'omitted';
-                } else if (session.mode === 'tutor' && gradedMeta) {
-                    if (gradedMeta.status === 'correct') stateClass = 'correct';
-                    else if (gradedMeta.status === 'incorrect') stateClass = 'incorrect';
-                    else stateClass = 'omitted';
-                } else if (session.mode === 'test' && answeredQuestion) {
-                    stateClass = 'answered';
                 }
                 const activeClass = idx === session.index ? 'active' : '';
                 const flagged = isQuestionMarked(q.id);
@@ -6970,7 +6993,7 @@ const coronaryMap = {
             }).join('');
             const showTimer = session.timed;
             const timerHtml = showTimer ? `<div class="qbank-chip" id="qbank-timer">${formatSeconds(session.secondsLeft ?? session.totalSeconds)}</div>` : '';
-            const finishBtnLabel = session.finished ? 'Back to Builder' : (session.mode === 'test' ? 'Finish Test' : 'End Session');
+            const finishBtnLabel = session.finished ? 'Back to Builder' : 'End Session';
             const nextDisabled = session.index >= session.questions.length - 1 || session.finished;
             return `
                 <div class="qbank-session-layout">
@@ -6979,7 +7002,6 @@ const coronaryMap = {
                         <div class="qbank-session-card">
                             <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:space-between;">
                                 <div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center;">
-                                    <span class="qbank-chip">${session.mode === 'tutor' ? 'Tutor Mode' : 'Test Mode'}</span>
                                     <span class="qbank-chip">${session.timed ? 'Timed' : 'Untimed'}</span>
                                     ${timerHtml}
                                 </div>
@@ -7022,12 +7044,6 @@ const coronaryMap = {
         }
 
         function attachQbankBuilderEvents() {
-            qbankRoot.querySelectorAll('[data-qbank-mode]').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    qbankState.mode = btn.dataset.qbankMode;
-                    renderQbank();
-                });
-            });
             qbankRoot.querySelectorAll('[data-qbank-timing]').forEach(btn => {
                 btn.addEventListener('click', () => {
                     qbankState.timing = btn.dataset.qbankTiming;
