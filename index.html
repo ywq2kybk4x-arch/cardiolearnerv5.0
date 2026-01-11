@@ -2230,6 +2230,9 @@
         .ecg-tutorial-step.active{display:block}
         .ecg-tutorial-step h4{margin:0 0 6px;font-size:1rem}
         .ecg-tutorial-step p{margin:0 0 10px;color:var(--muted)}
+        .ecg-tutorial-step ul{margin:8px 0 10px 20px;color:var(--muted)}
+        .ecg-tutorial-step li{margin:4px 0}
+        .ecg-tutorial-step .ecg-tutorial-note{margin-top:10px;margin-bottom:12px}
         .ecg-tutorial-actions-row{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 4px}
         .ecg-tutorial-action{display:inline-flex;align-items:center;gap:8px;border-radius:999px;border:1px solid rgba(15,23,42,.2);padding:6px 14px;background:#fff;color:#0f172a;font-weight:600;cursor:pointer}
         .ecg-tutorial-action.primary{background:#fff;color:#0f172a;border-color:rgba(15,23,42,.2)}
@@ -2251,7 +2254,9 @@
         .ecg-tutorial-expanded{border:1px solid var(--border);border-radius:16px;background:#fff;padding:14px;display:none}
         .ecg-tutorial-expanded.active{display:block}
         .ecg-tutorial-expanded h5{margin:0 0 8px;font-size:.95rem}
-        .ecg-tutorial-expanded ul{margin:0 0 0 18px;padding:0;color:var(--muted)}
+        .ecg-tutorial-expanded p{margin:0 0 8px;color:var(--muted)}
+        .ecg-tutorial-expanded p + p{margin-top:6px}
+        .ecg-tutorial-expanded ul{margin:2px 0 0 18px;padding:0;color:var(--muted)}
         .ecg-tutorial-expanded li{margin:4px 0}
         .ecg-tutorial-expanded-toggle{align-self:flex-start;border:1px solid var(--border);background:#fff;border-radius:999px;padding:6px 12px;font-weight:600;cursor:pointer}
         .ecg-tutorial-expanded-toggle[data-open="true"]{background:#0f172a;color:#fff;border-color:#0f172a}
@@ -3281,8 +3286,23 @@
                                 <h4>1) Determine the Heart Rate</h4>
                                 <p>Measure the R–R interval in seconds. Use 60 ÷ R–R. At 25 mm/s, each big box = 0.2 s.</p>
                                 <button class="ecg-tutorial-action primary" data-tutorial-action="rate">Apply: R-R Interval Highlight</button>
-                                <div class="ecg-tutorial-note">Quick conversions: 1 box = 300 bpm, 2 = 150, 3 = 100, 4 = 75, 5 = 60, 6 = 50.</div>
                                 <div class="ecg-tutorial-note is-alert">Box tool: Click to add adjacent large boxes, click a box to remove it, double‑click to clear all.</div>
+                                <p>Divide 60 by the distance between two R‑waves (R–R interval) in seconds. At 25 mm/s, one large box = 0.2 seconds.</p>
+                                <ul>
+                                    <li>1 large box (0.2 s) = 300 bpm</li>
+                                    <li>2 large boxes (0.4 s) = 150 bpm</li>
+                                    <li>3 large boxes (0.6 s) = 100 bpm</li>
+                                    <li>4 large boxes (0.8 s) = 75 bpm</li>
+                                    <li>5 large boxes (1.0 s) = 60 bpm</li>
+                                    <li>6 large boxes (1.2 s) = 50 bpm</li>
+                                </ul>
+                                <div class="ecg-tutorial-actions-row">
+                                    <button class="ecg-tutorial-action" data-tutorial-action="rate-150">Apply: 150 BPM</button>
+                                    <button class="ecg-tutorial-action" data-tutorial-action="rate-100">Apply: 100 BPM</button>
+                                    <button class="ecg-tutorial-action" data-tutorial-action="rate-75">Apply: 75 BPM</button>
+                                    <button class="ecg-tutorial-action" data-tutorial-action="rate-60">Apply: 60 BPM</button>
+                                    <button class="ecg-tutorial-action" data-tutorial-action="rate-50">Apply: 50 BPM</button>
+                                </div>
                             </div>
                             <div class="ecg-tutorial-step" data-step="1">
                                 <h4>2) Evaluate the Rhythm</h4>
@@ -3293,7 +3313,18 @@
                             <div class="ecg-tutorial-step" data-step="2">
                                 <h4>3) Calculate the QRS Axis (Lead I + II)</h4>
                                 <p>Normal axis is QRS positive in Lead I and Lead II (−30° to +60°).</p>
-                                <div class="ecg-tutorial-note">LAD: Lead I positive, Lead II negative. RAD: Lead I negative, Lead II positive.</div>
+                                <ul>
+                                    <li>Normal Axis (−30° to +60°): QRS positive in Lead I and Lead II.</li>
+                                    <li>Left Axis Deviation (&lt; −30°): Lead I positive, Lead II negative.</li>
+                                    <li>Right Axis Deviation (&gt; +110°): axis shifts rightward (110° to 180°).</li>
+                                </ul>
+                                <p>Note: Lead I + II method isolates the normal −30° to +60° window.</p>
+                                <div class="ecg-tutorial-actions-row">
+                                    <button class="ecg-tutorial-action" data-tutorial-action="axis-normal">Apply: Normal Axis</button>
+                                    <button class="ecg-tutorial-action" data-tutorial-action="axis-lad">Apply: LAD</button>
+                                    <button class="ecg-tutorial-action" data-tutorial-action="axis-rad">Apply: RAD</button>
+                                    <button class="ecg-tutorial-action" data-tutorial-action="axis-extreme">Apply: Extreme Axis</button>
+                                </div>
                             </div>
                             <div class="ecg-tutorial-step" data-step="3">
                                 <h4>4) Measure the Intervals</h4>
@@ -3314,18 +3345,6 @@
                         </div>
                         <button class="ecg-tutorial-expanded-toggle" id="toggleExpandedInstructions" data-open="false" type="button">See More</button>
                         <div class="ecg-tutorial-expanded" id="expandedInstructions">
-                            <div data-expanded-step="0">
-                                <h5>Determine the Heart Rate</h5>
-                                <p>Divide 60 by the distance between two R-waves (R–R interval) in seconds. At 25 mm/s, one large box = 0.2 seconds.</p>
-                                <ul>
-                                    <li>1 large box (0.2 s) = 300 bpm</li>
-                                    <li>2 large boxes (0.4 s) = 150 bpm</li>
-                                    <li>3 large boxes (0.6 s) = 100 bpm</li>
-                                    <li>4 large boxes (0.8 s) = 75 bpm</li>
-                                    <li>5 large boxes (1.0 s) = 60 bpm</li>
-                                    <li>6 large boxes (1.2 s) = 50 bpm</li>
-                                </ul>
-                            </div>
                             <div data-expanded-step="1" hidden>
                                 <h5>Evaluate the Rhythm</h5>
                                 <p>Confirm sinus rhythm by looking for upright P waves in leads I, II, aVL, and aVF. Check for irregularities:</p>
@@ -3338,21 +3357,6 @@
                                     <button class="ecg-tutorial-action" data-tutorial-action="aflutter">Apply: Atrial Flutter</button>
                                 </div>
                             </div>
-                            <div data-expanded-step="2" hidden>
-                                <h5>Calculate the Frontal Plane QRS Axis (Lead I + II)</h5>
-                                <ul>
-                                    <li>Normal Axis (−30° to +60°): QRS positive in Lead I and Lead II.</li>
-                                    <li>Left Axis Deviation (&lt; −30°): Lead I positive, Lead II negative.</li>
-                                    <li>Right Axis Deviation (&gt; +110°): axis shifts rightward (110° to 180°).</li>
-                                </ul>
-                                <p>Note: Lead I + II method isolates the normal −30° to +60° window.</p>
-                                <div class="ecg-tutorial-actions-row">
-                                    <button class="ecg-tutorial-action" data-tutorial-action="axis-normal">Apply: Normal Axis</button>
-                                    <button class="ecg-tutorial-action" data-tutorial-action="axis-lad">Apply: LAD</button>
-                                    <button class="ecg-tutorial-action" data-tutorial-action="axis-rad">Apply: RAD</button>
-                                    <button class="ecg-tutorial-action" data-tutorial-action="axis-extreme">Apply: Extreme Axis</button>
-                                </div>
-                            </div>
                             <div data-expanded-step="3" hidden>
                                 <h5>Measure the Intervals</h5>
                                 <ul>
@@ -3360,14 +3364,14 @@
                                     <li>QRS Complex (&lt;100–120 ms): &gt;120 ms suggests BBB or ventricular origin.</li>
                                     <li>QTc Interval (&lt;450 ms): prolonged QTc increases risk for polymorphic VT.</li>
                                 </ul>
-                            </div>
-                            <div data-expanded-step="4" hidden>
-                                <h5>Assess the ST Segment and T Waves</h5>
-                                <p>Look for ST-segment elevation (STEMI) or horizontal/downsloping ST depression (ischemia/NSTEMI). T waves usually follow QRS direction; new inversions can signal evolving infarction.</p>
+                                <div class="ecg-tutorial-actions-row">
+                                    <button class="ecg-tutorial-action" data-tutorial-action="avb1">Apply: 1º AV block</button>
+                                </div>
                             </div>
                             <div data-expanded-step="5" hidden>
                                 <h5>Verify Precordial Transition</h5>
                                 <p>QRS should transition from predominantly negative to positive between V3 and V4.</p>
+                                <p>Precordial transition occurs because the left ventricle generates a larger depolarization vector than the right ventricle, so as the precordial leads move from V1 to V6 and better align with this net vector, the QRS becomes progressively more positive—typically crossing from negative to positive around V3–V4.</p>
                                 <ul>
                                     <li>Early transition (V1–V2): possible RV hypertrophy.</li>
                                     <li>Delayed transition (V5–V6): possible prior anterior infarct.</li>
@@ -5339,6 +5343,64 @@ const coronaryMap = {
                 }
             };
 
+            const applyBoxOverlayPreset = (count) => {
+                if (!boxOverlayCanvas || !boxOverlayCtx || !count) {
+                    clearBoxOverlay();
+                    return;
+                }
+                const sim = window.ecgSimInstance;
+                if (!sim) return;
+                setBoxOverlayActive(true);
+                syncBoxOverlaySize();
+                const scale = sim.viewScale || 1;
+                const pxPerMm = (sim.pixelPerMm || 4) * scale;
+                const speed = sim.config?.speed || 25;
+                const msPerPixel = 1000 / (speed * pxPerMm);
+                const bigBoxSize = 5 * pxPerMm;
+                const totalWidth = count * bigBoxSize;
+                const tWindowStart = sim.sweepStartTime || 0;
+                const tWindowEnd = tWindowStart + boxOverlayCanvas.width * msPerPixel;
+                const rrMs = sim._rhythmRrMs || 60000 / (sim.config?.heartRate || 75);
+                const beats = Array.isArray(sim.beatSchedule)
+                    ? sim.beatSchedule
+                          .map((beat) => beat.rTime)
+                          .filter((t) => t >= tWindowStart && t <= tWindowEnd)
+                          .sort((a, b) => a - b)
+                    : [];
+                let tStart = tWindowStart;
+                if (beats.length >= 2) {
+                    const pairIndex = beats.findIndex(
+                        (t, idx) => idx < beats.length - 1 && t + rrMs <= tWindowEnd
+                    );
+                    if (pairIndex !== -1) {
+                        tStart = beats[pairIndex];
+                    } else {
+                        tStart = Math.max(tWindowStart, beats[beats.length - 1] - rrMs);
+                    }
+                } else if (beats.length === 1) {
+                    tStart = Math.max(tWindowStart, Math.min(beats[0], tWindowEnd - rrMs));
+                }
+
+                let originX = Math.round((tStart - tWindowStart) / msPerPixel);
+                if (originX + totalWidth > boxOverlayCanvas.width) {
+                    originX = Math.max(0, Math.round(boxOverlayCanvas.width - totalWidth));
+                }
+                originX = Math.max(0, originX);
+                const rowY = Math.floor(boxOverlayCanvas.height * 0.45);
+                const originY = Math.floor(rowY / bigBoxSize) * bigBoxSize;
+                boxOverlayRects.length = 0;
+                boxOverlayRowY = originY;
+                for (let i = 0; i < count; i += 1) {
+                    boxOverlayRects.push({
+                        x: originX + i * bigBoxSize,
+                        y: originY,
+                        size: bigBoxSize
+                    });
+                }
+                updateBoxCalc();
+                drawBoxOverlay();
+            };
+
             const syncBoxOverlaySize = () => {
                 if (!boxOverlayCanvas) return;
                 const rect = boxOverlayCanvas.getBoundingClientRect();
@@ -5416,6 +5478,7 @@ const coronaryMap = {
 
             const setTutorialStep = (index, options = {}) => {
                 if (!tutorialSteps.length) return;
+                const previousStep = currentTutorialStep;
                 const safeIndex = Math.max(0, Math.min(index, tutorialSteps.length - 1));
                 currentTutorialStep = safeIndex;
                 tutorialSteps.forEach((step, idx) => {
@@ -5429,6 +5492,16 @@ const coronaryMap = {
                 }
                 if (tutorialPrevBtn) tutorialPrevBtn.disabled = safeIndex === 0;
                 if (tutorialNextBtn) tutorialNextBtn.disabled = safeIndex === tutorialSteps.length - 1;
+                if (toggleExpandedBtn) {
+                    const hideExpanded = safeIndex === 0 || safeIndex === 2 || safeIndex === 4;
+                    toggleExpandedBtn.hidden = hideExpanded;
+                    if (hideExpanded) {
+                        toggleExpandedBtn.dataset.open = 'false';
+                    }
+                }
+                if (expandedInstructions && (safeIndex === 0 || safeIndex === 2 || safeIndex === 4)) {
+                    expandedInstructions.classList.remove('active');
+                }
                 if (currentEkgMode === 'tutorial') {
                     if (safeIndex >= 2) {
                         mountEcg12(tutorialLeadMount);
@@ -5447,6 +5520,13 @@ const coronaryMap = {
                         mountSingleLead(tutorialLeadMount);
                         if (singleLeadContainer) singleLeadContainer.style.display = '';
                         if (ecg12Module) ecg12Module.style.display = 'none';
+                    }
+                }
+                if (previousStep === 2 && safeIndex !== 2) {
+                    const axisSelect = document.getElementById('ecg12AxisMode');
+                    if (axisSelect) {
+                        axisSelect.value = 'normal';
+                        axisSelect.dispatchEvent(new Event('change', { bubbles: true }));
                     }
                 }
                 setBoxOverlayActive(currentEkgMode === 'tutorial' && safeIndex === 0);
@@ -5631,6 +5711,26 @@ const coronaryMap = {
                     clearHighlights();
 
                     if (isActive) {
+                        if (action.startsWith('rate-')) {
+                            clearBoxOverlay();
+                            return;
+                        }
+                        if (action === 'avb1') {
+                            if (currentTutorialStep >= 2) {
+                                const ecg12RhythmSelect = document.getElementById('ecg12RhythmPreset');
+                                if (ecg12RhythmSelect) {
+                                    ecg12RhythmSelect.value = 'sinus';
+                                    ecg12RhythmSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                                }
+                            } else {
+                                const rhythmPreset = document.getElementById('rhythmPreset');
+                                if (rhythmPreset) {
+                                    rhythmPreset.value = 'sinus';
+                                    rhythmPreset.dispatchEvent(new Event('change', { bubbles: true }));
+                                }
+                            }
+                            return;
+                        }
                         if (action === 'inferior-stemi' && currentTutorialStep >= 2) {
                             const ecg12RhythmSelect = document.getElementById('ecg12RhythmPreset');
                             if (ecg12RhythmSelect) {
@@ -5657,6 +5757,17 @@ const coronaryMap = {
                         setCheckbox('ecgHighlightRR', true);
                         return;
                     }
+                    if (action.startsWith('rate-')) {
+                        const bpm = Number(action.replace('rate-', ''));
+                        setCheckbox('ecgHighlightRR', true);
+                        const heartRateInput = document.getElementById('ecgHeartRate');
+                        if (heartRateInput && !heartRateInput.disabled && Number.isFinite(bpm)) {
+                            heartRateInput.value = String(bpm);
+                            heartRateInput.dispatchEvent(new Event('change', { bubbles: true }));
+                        }
+                        clearBoxOverlay();
+                        return;
+                    }
                     if (action === 'rhythm') {
                         setCheckbox('ecgHighlightP', true);
                         setCheckbox('ecgHighlightQRS', true);
@@ -5676,6 +5787,24 @@ const coronaryMap = {
                             rhythmPreset.value = 'aflutter';
                             rhythmPreset.dispatchEvent(new Event('change', { bubbles: true }));
                         }
+                        return;
+                    }
+                    if (action === 'avb1') {
+                        if (currentTutorialStep >= 2) {
+                            const ecg12RhythmSelect = document.getElementById('ecg12RhythmPreset');
+                            if (ecg12RhythmSelect) {
+                                ecg12RhythmSelect.value = 'avb1';
+                                ecg12RhythmSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                            }
+                            setCheckbox('ecg12HighlightPR', true);
+                            return;
+                        }
+                        const rhythmPreset = document.getElementById('rhythmPreset');
+                        if (rhythmPreset) {
+                            rhythmPreset.value = 'avb1';
+                            rhythmPreset.dispatchEvent(new Event('change', { bubbles: true }));
+                        }
+                        setCheckbox('ecgHighlightPR', true);
                         return;
                     }
                     if (action === 'intervals') {
