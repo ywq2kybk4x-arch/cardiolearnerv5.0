@@ -2210,8 +2210,8 @@
         #ecg12Module .ecg12-buttons{display:flex;gap:10px}
         #ecg12Module .ecg12-buttons button{flex:1;padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:var(--surface-2);font-weight:700;cursor:pointer;color:var(--text)}
         #ecg12Module .ecg12-display{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0;box-shadow:var(--shadow-sm)}
-        #ecg12Module .ecg12-canvas-wrap{position:relative;width:100%;height:300px;max-height:none;aspect-ratio:auto;border:1px solid #e5e7eb;border-radius:12px;overflow:auto;background:#fff}
-        #ecg12Module .ecg12-expanded-wrap{height:260px}
+        #ecg12Module .ecg12-canvas-wrap{position:relative;width:100%;height:360px;max-height:none;aspect-ratio:auto;border:1px solid #e5e7eb;border-radius:12px;overflow:auto;background:#fff}
+        #ecg12Module .ecg12-expanded-wrap{height:300px}
         #ecg12Module .ecg12-expanded-header{font-weight:800;color:#0f172a;margin:2px 0 8px}
         #ecg12Module .ecg12-canvas-wrap canvas{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
         #ecg12Module #ecg12Trace,#ecg12Module #ecg12Overlay,#ecg12Module #ecg12BigTrace,#ecg12Module #ecg12BigOverlay{pointer-events:auto}
@@ -2219,6 +2219,41 @@
         .ekg-mode-toggle{display:flex;gap:10px;margin:24px 0}
         .ekg-mode-toggle button{flex:1;border:1px solid rgba(148,163,184,.35);background:#fff;border-radius:999px;padding:10px;font-weight:600;font-size:1rem;cursor:pointer;transition:all .2s}
         .ekg-mode-toggle button.active{background:#0f172a;color:#fff;border-color:#0f172a;box-shadow:0 10px 20px rgba(15,23,42,.2)}
+
+        .ecg-tutorial-section{border:1px solid var(--border);border-radius:20px;padding:20px;background:linear-gradient(140deg,#f8fafc 0%,#eef2ff 100%)}
+        .ecg-tutorial-header{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:16px}
+        .ecg-tutorial-header h3{margin:0}
+        .ecg-tutorial-header .pill{background:#0f172a;color:#fff;border-radius:999px;padding:6px 12px;font-size:.85rem;font-weight:600}
+        .ecg-tutorial-grid{display:flex;flex-direction:column;gap:18px}
+        .ecg-tutorial-steps{display:flex;flex-direction:column;gap:12px}
+        .ecg-tutorial-step{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;box-shadow:0 8px 20px rgba(15,23,42,.08);display:none}
+        .ecg-tutorial-step.active{display:block}
+        .ecg-tutorial-step h4{margin:0 0 6px;font-size:1rem}
+        .ecg-tutorial-step p{margin:0 0 10px;color:var(--muted)}
+        .ecg-tutorial-actions-row{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 4px}
+        .ecg-tutorial-action{display:inline-flex;align-items:center;gap:8px;border-radius:999px;border:1px solid rgba(15,23,42,.2);padding:6px 14px;background:#fff;color:#0f172a;font-weight:600;cursor:pointer}
+        .ecg-tutorial-action.primary{background:#fff;color:#0f172a;border-color:rgba(15,23,42,.2)}
+        .ecg-tutorial-action[data-active="true"]{background:#0f172a;color:#fff;border-color:#0f172a}
+        .ecg-tutorial-note{font-size:.85rem;color:var(--muted-2);margin-top:6px}
+        .ecg-tutorial-sim{display:flex;flex-direction:column;gap:12px}
+        .ecg-tutorial-sim .single-lead-card{margin:0}
+        .ecg-tutorial-legend{display:flex;gap:10px;flex-wrap:wrap;font-size:.85rem;color:var(--muted)}
+        .ecg-tutorial-legend span{background:#fff;border:1px solid var(--border);border-radius:999px;padding:4px 10px}
+        .ecg-tutorial-instructions{display:flex;flex-direction:column;gap:10px}
+        .ecg-tutorial-step-tabs{display:flex;flex-wrap:wrap;gap:8px}
+        .ecg-tutorial-step-tabs button{border:1px solid var(--border);background:#fff;border-radius:999px;padding:6px 12px;font-weight:600;cursor:pointer}
+        .ecg-tutorial-step-tabs button.active{background:#0f172a;color:#fff;border-color:#0f172a}
+        .ecg-tutorial-nav{display:flex;justify-content:space-between;gap:10px;align-items:center}
+        .ecg-tutorial-nav button{border:1px solid var(--border);background:#fff;border-radius:10px;padding:8px 14px;font-weight:600;cursor:pointer}
+        .ecg-tutorial-nav button:disabled{opacity:.5;cursor:not-allowed}
+        .ecg-tutorial-counter{font-size:.9rem;color:var(--muted)}
+        .ecg-tutorial-expanded{border:1px solid var(--border);border-radius:16px;background:#fff;padding:14px;display:none}
+        .ecg-tutorial-expanded.active{display:block}
+        .ecg-tutorial-expanded h5{margin:0 0 8px;font-size:.95rem}
+        .ecg-tutorial-expanded ul{margin:0 0 0 18px;padding:0;color:var(--muted)}
+        .ecg-tutorial-expanded li{margin:4px 0}
+        .ecg-tutorial-expanded-toggle{align-self:flex-start;border:1px solid var(--border);background:#fff;border-radius:999px;padding:6px 12px;font-weight:600;cursor:pointer}
+        .ecg-tutorial-expanded-toggle[data-open="true"]{background:#0f172a;color:#fff;border-color:#0f172a}
 
         #singleLeadEcgContainer{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:20px;box-shadow:var(--shadow-sm)}
         #singleLeadEcgContainer h3{margin-top:0;margin-bottom:12px;font-size:1.1rem}
@@ -2241,6 +2276,11 @@
         .single-lead-buttons button{flex:1;padding:10px;border-radius:10px;border:1px solid var(--border);background:var(--surface-2);font-weight:600;cursor:pointer;color:var(--text)}
         .single-lead-canvas{position:relative;width:100%;height:220px;max-height:none;aspect-ratio:auto;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;background:#fff}
         .single-lead-canvas canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+        .single-lead-box-overlay{position:absolute;inset:0;width:100%;height:100%;display:none;pointer-events:none}
+        .single-lead-box-overlay.is-active{display:block;pointer-events:auto;cursor:crosshair}
+        .single-lead-box-calc{position:absolute;top:10px;right:10px;background:rgba(255,255,255,.92);border:1px solid var(--border);border-radius:12px;padding:10px 12px;font-size:.82rem;line-height:1.35;color:#0f172a;box-shadow:0 10px 24px rgba(15,23,42,.12);max-width:220px}
+        .single-lead-box-calc strong{display:block;font-size:.9rem;margin-bottom:4px}
+        .single-lead-box-calc .calc-muted{color:var(--muted-2);font-size:.78rem}
         .single-lead-display{display:flex;flex-direction:column;gap:0}
         .single-lead-legend{display:flex;gap:12px;flex-wrap:wrap;font-size:.9rem;color:var(--muted);margin-top:8px}
         .single-lead-legend span{display:flex;align-items:center;gap:8px}
@@ -2293,6 +2333,9 @@
             .single-lead-grid {
                 grid-template-columns: 1fr;
             }
+            .ecg-tutorial-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 1000px) {
@@ -2331,7 +2374,7 @@
             <button class="tab-button" id="pathologies-tab-btn">Cardiac Pathologies</button>
             <button class="tab-button" id="shock-tab-btn">Shock Simulator</button>
             <button class="tab-button" id="quiz-tab-btn">PV Loop Quiz</button>
-            <button class="tab-button" id="conduction-tab-btn">Dyanamic EKG Viewer</button>
+            <button class="tab-button" id="conduction-tab-btn">Dynamic EKG</button>
             <button class="tab-button" id="qbank-tab-btn">QBank</button>
         </div>
         
@@ -3125,76 +3168,215 @@
                 </div>
             </details>
             <div class="ekg-mode-toggle">
+                <button type="button" id="showTutorialBtn">EKG Walkthrough</button>
                 <button type="button" id="showSingleLeadBtn" class="active">Single lead</button>
                 <button type="button" id="show12LeadBtn">12 lead</button>
                 <button type="button" id="showQuizBtn">EKG Quiz</button>
             </div>
-            <div id="singleLeadEcgContainer" class="single-lead-card">
-                <h3>Single-Lead Rhythm Simulator</h3>
-                <div class="single-lead-grid">
-                    <div class="single-lead-controls">
-                        <div class="single-lead-section">
-                            <label for="rhythmPreset">Rhythm preset</label>
-                            <select id="rhythmPreset">
-                                <option value="sinus" selected>Sinus Rhythm</option>
-                                <option value="afib">Atrial Fibrillation</option>
-                                <option value="aflutter">Atrial Flutter</option>
-                                <option value="pvtach">Monomorphic VT (polymorphic preset)</option>
-                                <option value="avb1">1° AV Block</option>
-                                <option value="avb2_mobitz1">2° AV Block (Mobitz I)</option>
-                                <option value="avb2_mobitz2">2° AV Block (Mobitz II)</option>
-                                <option value="avb3">3° AV Block</option>
-                            </select>
-                        </div>
-                        <div class="single-lead-section">
-                            <label for="ecgHeartRate">Heart rate <small>(bpm)</small></label>
-                            <input id="ecgHeartRate" type="number" min="40" max="180" value="75">
-                        </div>
-                        <div class="single-lead-section">
-                            <label>Wave highlights</label>
-                            <div class="single-lead-checks">
-                                <label><input type="checkbox" id="ecgHighlightP"> P wave</label>
-                                <label><input type="checkbox" id="ecgHighlightQRS"> QRS</label>
-                                <label><input type="checkbox" id="ecgHighlightT"> T wave</label>
-                                <label id="ecgHighlightDroppedWrap" class="single-lead-hidden" hidden>
-                                    <input type="checkbox" id="ecgHighlightDropped"> Dropped beat
-                                </label>
+            <div id="singleLeadMount">
+                <div id="singleLeadEcgContainer" class="single-lead-card">
+                    <h3>Single-Lead Rhythm Simulator</h3>
+                    <div class="single-lead-grid">
+                        <div class="single-lead-controls">
+                            <div class="single-lead-section">
+                                <label for="rhythmPreset">Rhythm preset</label>
+                                <select id="rhythmPreset">
+                                    <option value="sinus" selected>Sinus Rhythm</option>
+                                    <option value="afib">Atrial Fibrillation</option>
+                                    <option value="aflutter">Atrial Flutter</option>
+                                    <option value="pvtach">Monomorphic VT (polymorphic preset)</option>
+                                    <option value="avb1">1° AV Block</option>
+                                    <option value="avb2_mobitz1">2° AV Block (Mobitz I)</option>
+                                    <option value="avb2_mobitz2">2° AV Block (Mobitz II)</option>
+                                    <option value="avb3">3° AV Block</option>
+                                </select>
+                            </div>
+                            <div class="single-lead-section">
+                                <label for="ecgHeartRate">Heart rate <small>(bpm)</small></label>
+                                <input id="ecgHeartRate" type="number" min="40" max="180" value="75">
+                            </div>
+                            <div class="single-lead-section">
+                                <label>Wave highlights</label>
+                                <div class="single-lead-checks">
+                                    <label><input type="checkbox" id="ecgHighlightP"> P wave</label>
+                                    <label><input type="checkbox" id="ecgHighlightQRS"> QRS</label>
+                                    <label><input type="checkbox" id="ecgHighlightT"> T wave</label>
+                                    <label id="ecgHighlightDroppedWrap" class="single-lead-hidden" hidden>
+                                        <input type="checkbox" id="ecgHighlightDropped"> Dropped beat
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="single-lead-section">
+                                <label>Intervals & tools</label>
+                                <div class="single-lead-checks">
+                                    <label><input type="checkbox" id="ecgHighlightPR"> PR interval</label>
+                                    <label><input type="checkbox" id="ecgHighlightQRSDur"> QRS duration</label>
+                                    <label><input type="checkbox" id="ecgHighlightRR"> R–R interval</label>
+                                    <label><input type="checkbox" id="ecgHighlightQT"> QT interval</label>
+                                    <label><input type="checkbox" id="ecgMeasureTool"> Click &amp; measure</label>
+                                    <button type="button" id="ecgClearMeasurements" class="measure-clear-btn" hidden>Clear measurements</button>
+                                </div>
+                                <div id="ecgMeasureHint" class="single-lead-measure-hint">
+                                    Click to set start/end.<br />
+                                    Drag to measure.<br />
+                                    Hold Shift to keep previous measurements.<br />
+                                    Double-click a measurement to remove it.
+                                </div>
+                            </div>
+                            <div class="single-lead-buttons">
+                                <button type="button" id="ecgPlay">Play</button>
+                                <button type="button" id="ecgPause">Pause</button>
+                                <button type="button" id="ecgReset">Reset</button>
                             </div>
                         </div>
-                        <div class="single-lead-section">
-                            <label>Intervals & tools</label>
-                            <div class="single-lead-checks">
-                                <label><input type="checkbox" id="ecgHighlightPR"> PR interval</label>
-                                <label><input type="checkbox" id="ecgHighlightQRSDur"> QRS duration</label>
-                                <label><input type="checkbox" id="ecgHighlightRR"> R–R interval</label>
-                                <label><input type="checkbox" id="ecgHighlightQT"> QT interval</label>
-                                <label><input type="checkbox" id="ecgMeasureTool"> Click &amp; measure</label>
-                                <button type="button" id="ecgClearMeasurements" class="measure-clear-btn" hidden>Clear measurements</button>
-                            </div>
-                            <div id="ecgMeasureHint" class="single-lead-measure-hint">
-                                Click to set start/end.<br />
-                                Drag to measure.<br />
-                                Hold Shift to keep previous measurements.<br />
-                                Double-click a measurement to remove it.
-                            </div>
-                        </div>
-                        <div class="single-lead-buttons">
-                            <button type="button" id="ecgPlay">Play</button>
-                            <button type="button" id="ecgPause">Pause</button>
-                            <button type="button" id="ecgReset">Reset</button>
-                        </div>
-                    </div>
-                    <div class="single-lead-display">
+                        <div class="single-lead-display">
                         <div class="single-lead-canvas">
                             <canvas id="singleLeadBigBackground"></canvas>
                             <canvas id="singleLeadBigTrace"></canvas>
                             <canvas id="singleLeadBigOverlay"></canvas>
+                            <canvas id="singleLeadBoxOverlay" class="single-lead-box-overlay"></canvas>
+                            <div class="single-lead-box-calc" id="singleLeadBoxCalc" hidden>
+                                <strong>HR = 300 / <span id="boxCalcCount">0</span> Boxes = <span id="boxCalcResult">—</span></strong>
+                                <div class="calc-muted">1 = 300 bpm, 2 = 150, 3 = 100, 4 = 75, 5 = 60, 6 = 50</div>
+                            </div>
                         </div>
-                        <div class="single-lead-legend">
-                            <span><span class="swatch" style="background:#1f2937;"></span>Default</span>
-                            <span id="singleLeadLegendP"><span class="swatch" style="background:#2563eb;"></span>P wave</span>
-                            <span id="singleLeadLegendQRS"><span class="swatch" style="background:#d33f49;"></span>QRS</span>
-                            <span id="singleLeadLegendT"><span class="swatch" style="background:#2f855a;"></span>T wave</span>
+                            <div class="single-lead-legend">
+                                <span><span class="swatch" style="background:#1f2937;"></span>Default</span>
+                                <span id="singleLeadLegendP"><span class="swatch" style="background:#2563eb;"></span>P wave</span>
+                                <span id="singleLeadLegendQRS"><span class="swatch" style="background:#d33f49;"></span>QRS</span>
+                                <span id="singleLeadLegendT"><span class="swatch" style="background:#2f855a;"></span>T wave</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ecgTutorialSection" class="ecg-tutorial-section" style="display:none;">
+                <div class="ecg-tutorial-header">
+                    <div>
+                        <h3>How to Read an EKG</h3>
+                        <p class="muted-text" style="margin:6px 0 0;">Follow each step and click “Apply” to highlight the waveforms and intervals on a normal sinus rhythm strip.</p>
+                    </div>
+                    <div class="pill">25 mm/s • 10 mm/mV</div>
+                </div>
+                <div class="ecg-tutorial-grid">
+                    <div class="ecg-tutorial-sim">
+                        <div id="tutorialLeadMount"></div>
+                        <div class="ecg-tutorial-legend">
+                            <span>Tip: Use the measure tool for R–R, PR, QRS, and QT.</span>
+                            <span>Goal: Identify normal sinus rhythm before moving to pathology.</span>
+                        </div>
+                    </div>
+                    <div class="ecg-tutorial-instructions">
+                        <div class="ecg-tutorial-step-tabs" id="ecgTutorialTabs">
+                            <button type="button" data-step-index="0">Rate</button>
+                            <button type="button" data-step-index="1">Rhythm</button>
+                            <button type="button" data-step-index="2">Axis</button>
+                            <button type="button" data-step-index="3">Intervals</button>
+                            <button type="button" data-step-index="4">ST/T</button>
+                            <button type="button" data-step-index="5">Transition</button>
+                        </div>
+                        <div class="ecg-tutorial-steps">
+                            <div class="ecg-tutorial-step" data-step="0">
+                                <h4>1) Determine the Heart Rate</h4>
+                                <p>Measure the R–R interval in seconds. Use 60 ÷ R–R. At 25 mm/s, each big box = 0.2 s.</p>
+                                <button class="ecg-tutorial-action primary" data-tutorial-action="rate">Apply: R-R Interval Highlight</button>
+                                <div class="ecg-tutorial-note">Quick conversions: 1 box = 300 bpm, 2 = 150, 3 = 100, 4 = 75, 5 = 60, 6 = 50.</div>
+                                <div class="ecg-tutorial-note">Box tool: Click to add adjacent large boxes, click a box to remove it, double‑click to clear all.</div>
+                            </div>
+                            <div class="ecg-tutorial-step" data-step="1">
+                                <h4>2) Evaluate the Rhythm</h4>
+                                <p>Confirm sinus rhythm by finding consistent P waves before every QRS with a steady R–R interval.</p>
+                                <button class="ecg-tutorial-action" data-tutorial-action="rhythm">Apply: Highlight P waves &amp; QRS</button>
+                                <div class="ecg-tutorial-note">Sinus rhythm: upright P waves in leads I, II, aVL, aVF.</div>
+                            </div>
+                            <div class="ecg-tutorial-step" data-step="2">
+                                <h4>3) Calculate the QRS Axis (Lead I + II)</h4>
+                                <p>Normal axis is QRS positive in Lead I and Lead II (−30° to +60°).</p>
+                                <div class="ecg-tutorial-note">LAD: Lead I positive, Lead II negative. RAD: Lead I negative, Lead II positive.</div>
+                            </div>
+                            <div class="ecg-tutorial-step" data-step="3">
+                                <h4>4) Measure the Intervals</h4>
+                                <p>PR 120–200 ms, QRS &lt; 120 ms, QTc &lt; 450 ms. Prolongations suggest conduction disease.</p>
+                                <button class="ecg-tutorial-action" data-tutorial-action="intervals">Apply: Highlight PR, QRS, QT</button>
+                            </div>
+                            <div class="ecg-tutorial-step" data-step="4">
+                                <h4>5) Assess the ST Segment &amp; T Waves</h4>
+                                <p>Look for ST elevation (STEMI) or horizontal/downsloping ST depression (ischemia). T waves usually follow the QRS direction.</p>
+                                <button class="ecg-tutorial-action" data-tutorial-action="st">Apply: Highlight T waves</button>
+                                <button class="ecg-tutorial-action" data-tutorial-action="inferior-stemi">Apply: Inferior STEMI</button>
+                            </div>
+                            <div class="ecg-tutorial-step" data-step="5">
+                                <h4>6) Verify Precordial Transition</h4>
+                                <p>QRS should transition from negative to positive between V3 and V4 on the 12-lead.</p>
+                                <div class="ecg-tutorial-note">Early transition: V1–V2. Delayed: V5–V6.</div>
+                            </div>
+                        </div>
+                        <button class="ecg-tutorial-expanded-toggle" id="toggleExpandedInstructions" data-open="false" type="button">See More</button>
+                        <div class="ecg-tutorial-expanded" id="expandedInstructions">
+                            <div data-expanded-step="0">
+                                <h5>Determine the Heart Rate</h5>
+                                <p>Divide 60 by the distance between two R-waves (R–R interval) in seconds. At 25 mm/s, one large box = 0.2 seconds.</p>
+                                <ul>
+                                    <li>1 large box (0.2 s) = 300 bpm</li>
+                                    <li>2 large boxes (0.4 s) = 150 bpm</li>
+                                    <li>3 large boxes (0.6 s) = 100 bpm</li>
+                                    <li>4 large boxes (0.8 s) = 75 bpm</li>
+                                    <li>5 large boxes (1.0 s) = 60 bpm</li>
+                                    <li>6 large boxes (1.2 s) = 50 bpm</li>
+                                </ul>
+                            </div>
+                            <div data-expanded-step="1" hidden>
+                                <h5>Evaluate the Rhythm</h5>
+                                <p>Confirm sinus rhythm by looking for upright P waves in leads I, II, aVL, and aVF. Check for irregularities:</p>
+                                <ul>
+                                    <li>Atrial Fibrillation: irregularly irregular rhythm, no discernible P waves.</li>
+                                    <li>Atrial Flutter: “sawtooth” baseline.</li>
+                                </ul>
+                                <div class="ecg-tutorial-actions-row">
+                                    <button class="ecg-tutorial-action" data-tutorial-action="afib">Apply: Atrial Fibrillation</button>
+                                    <button class="ecg-tutorial-action" data-tutorial-action="aflutter">Apply: Atrial Flutter</button>
+                                </div>
+                            </div>
+                            <div data-expanded-step="2" hidden>
+                                <h5>Calculate the Frontal Plane QRS Axis (Lead I + II)</h5>
+                                <ul>
+                                    <li>Normal Axis (−30° to +60°): QRS positive in Lead I and Lead II.</li>
+                                    <li>Left Axis Deviation (&lt; −30°): Lead I positive, Lead II negative.</li>
+                                    <li>Right Axis Deviation (&gt; +110°): axis shifts rightward (110° to 180°).</li>
+                                </ul>
+                                <p>Note: Lead I + II method isolates the normal −30° to +60° window.</p>
+                                <div class="ecg-tutorial-actions-row">
+                                    <button class="ecg-tutorial-action" data-tutorial-action="axis-normal">Apply: Normal Axis</button>
+                                    <button class="ecg-tutorial-action" data-tutorial-action="axis-lad">Apply: LAD</button>
+                                    <button class="ecg-tutorial-action" data-tutorial-action="axis-rad">Apply: RAD</button>
+                                    <button class="ecg-tutorial-action" data-tutorial-action="axis-extreme">Apply: Extreme Axis</button>
+                                </div>
+                            </div>
+                            <div data-expanded-step="3" hidden>
+                                <h5>Measure the Intervals</h5>
+                                <ul>
+                                    <li>PR Interval (120–200 ms): &gt;200 ms suggests first-degree AV block.</li>
+                                    <li>QRS Complex (&lt;100–120 ms): &gt;120 ms suggests BBB or ventricular origin.</li>
+                                    <li>QTc Interval (&lt;450 ms): prolonged QTc increases risk for polymorphic VT.</li>
+                                </ul>
+                            </div>
+                            <div data-expanded-step="4" hidden>
+                                <h5>Assess the ST Segment and T Waves</h5>
+                                <p>Look for ST-segment elevation (STEMI) or horizontal/downsloping ST depression (ischemia/NSTEMI). T waves usually follow QRS direction; new inversions can signal evolving infarction.</p>
+                            </div>
+                            <div data-expanded-step="5" hidden>
+                                <h5>Verify Precordial Transition</h5>
+                                <p>QRS should transition from predominantly negative to positive between V3 and V4.</p>
+                                <ul>
+                                    <li>Early transition (V1–V2): possible RV hypertrophy.</li>
+                                    <li>Delayed transition (V5–V6): possible prior anterior infarct.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="ecg-tutorial-nav">
+                            <button type="button" id="ecgTutorialPrev">Back</button>
+                            <div class="ecg-tutorial-counter" id="ecgTutorialCounter">Step 1 of 6</div>
+                            <button type="button" id="ecgTutorialNext">Next</button>
                         </div>
                     </div>
                 </div>
@@ -5054,20 +5236,239 @@ const coronaryMap = {
             const show12Btn = document.getElementById('show12LeadBtn');
             const showSingleBtn = document.getElementById('showSingleLeadBtn');
             const showQuizBtn = document.getElementById('showQuizBtn');
+            const showTutorialBtn = document.getElementById('showTutorialBtn');
             const ecg12Module = document.getElementById('ecg12Module');
+            const ekg12Mount = document.getElementById('ekg12Mount');
             const singleLeadContainer = document.getElementById('singleLeadEcgContainer');
             const ecgQuizSection = document.getElementById('ecgQuizSection');
+            const tutorialSection = document.getElementById('ecgTutorialSection');
+            const singleLeadMount = document.getElementById('singleLeadMount');
+            const tutorialLeadMount = document.getElementById('tutorialLeadMount');
+
+            const tutorialHighlightIds = [
+                'ecgHighlightP',
+                'ecgHighlightQRS',
+                'ecgHighlightT',
+                'ecgHighlightPR',
+                'ecgHighlightQRSDur',
+                'ecgHighlightRR',
+                'ecgHighlightQT'
+            ];
+            const tutorialEcg12HighlightIds = [
+                'ecg12HighlightP',
+                'ecg12HighlightQRS',
+                'ecg12HighlightT',
+                'ecg12HighlightPR',
+                'ecg12HighlightQRSDur',
+                'ecg12HighlightRR',
+                'ecg12HighlightQT'
+            ];
+
+            const setCheckbox = (id, value) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.checked = value;
+                el.dispatchEvent(new Event('change', { bubbles: true }));
+            };
+
+            const clearHighlights = () => {
+                tutorialHighlightIds.forEach((id) => setCheckbox(id, false));
+                tutorialEcg12HighlightIds.forEach((id) => setCheckbox(id, false));
+            };
+
+            const applySinusDefaults = () => {
+                const rhythmPreset = document.getElementById('rhythmPreset');
+                if (rhythmPreset) {
+                    rhythmPreset.value = 'sinus';
+                    rhythmPreset.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+                const heartRateInput = document.getElementById('ecgHeartRate');
+                if (heartRateInput) {
+                    heartRateInput.value = '75';
+                    heartRateInput.dispatchEvent(new Event('input', { bubbles: true }));
+                }
+            };
+
+            const mountSingleLead = (target) => {
+                if (!singleLeadContainer || !target) return;
+                if (singleLeadContainer.parentElement !== target) {
+                    target.appendChild(singleLeadContainer);
+                }
+            };
+
+            const mountEcg12 = (target) => {
+                if (!ecg12Module || !target) return;
+                if (ecg12Module.parentElement !== target) {
+                    target.appendChild(ecg12Module);
+                }
+            };
+
+            let currentTutorialStep = 0;
+            let tutorialPlayTimeout = null;
+            const tutorialSteps = Array.from(document.querySelectorAll('.ecg-tutorial-step'));
+            const tutorialTabs = Array.from(document.querySelectorAll('#ecgTutorialTabs button'));
+            const tutorialPrevBtn = document.getElementById('ecgTutorialPrev');
+            const tutorialNextBtn = document.getElementById('ecgTutorialNext');
+            const tutorialCounter = document.getElementById('ecgTutorialCounter');
+            const toggleExpandedBtn = document.getElementById('toggleExpandedInstructions');
+            const expandedInstructions = document.getElementById('expandedInstructions');
+            const expandedInstructionSteps = Array.from(
+                document.querySelectorAll('[data-expanded-step]')
+            );
+            let expandedOpen = false;
+            const boxOverlayCanvas = document.getElementById('singleLeadBoxOverlay');
+            const boxOverlayCtx = boxOverlayCanvas?.getContext('2d') || null;
+            let boxOverlayActive = false;
+            const boxOverlayRects = [];
+            let boxOverlayRowY = null;
+            const boxCalc = document.getElementById('singleLeadBoxCalc');
+            const boxCalcCount = document.getElementById('boxCalcCount');
+            const boxCalcResult = document.getElementById('boxCalcResult');
+
+            const updateBoxCalc = () => {
+                const count = boxOverlayRects.length;
+                if (boxCalcCount) boxCalcCount.textContent = String(count);
+                if (boxCalcResult) {
+                    if (!count) {
+                        boxCalcResult.textContent = '—';
+                    } else {
+                        const hr = Math.round(300 / count);
+                        boxCalcResult.textContent = `${hr} BPM`;
+                    }
+                }
+            };
+
+            const syncBoxOverlaySize = () => {
+                if (!boxOverlayCanvas) return;
+                const rect = boxOverlayCanvas.getBoundingClientRect();
+                const width = Math.round(rect.width);
+                const height = Math.round(rect.height);
+                if (!width || !height) return;
+                if (boxOverlayCanvas.width !== width) boxOverlayCanvas.width = width;
+                if (boxOverlayCanvas.height !== height) boxOverlayCanvas.height = height;
+            };
+
+            const drawBoxOverlay = () => {
+                if (!boxOverlayCanvas || !boxOverlayCtx) return;
+                syncBoxOverlaySize();
+                boxOverlayCtx.clearRect(0, 0, boxOverlayCanvas.width, boxOverlayCanvas.height);
+                if (!boxOverlayRects.length) return;
+                boxOverlayCtx.strokeStyle = '#2563eb';
+                boxOverlayCtx.lineWidth = 2;
+                boxOverlayCtx.fillStyle = 'rgba(37,99,235,0.12)';
+                boxOverlayRects.forEach((rect) => {
+                    boxOverlayCtx.fillRect(rect.x, rect.y, rect.size, rect.size);
+                    boxOverlayCtx.strokeRect(rect.x, rect.y, rect.size, rect.size);
+                });
+            };
+
+            const clearBoxOverlay = () => {
+                boxOverlayRects.length = 0;
+                boxOverlayRowY = null;
+                if (boxOverlayCanvas && boxOverlayCtx) {
+                    boxOverlayCtx.clearRect(0, 0, boxOverlayCanvas.width, boxOverlayCanvas.height);
+                }
+                updateBoxCalc();
+            };
+
+            const setBoxOverlayActive = (active) => {
+                boxOverlayActive = !!active;
+                if (boxOverlayCanvas) {
+                    boxOverlayCanvas.classList.toggle('is-active', boxOverlayActive);
+                }
+                if (boxCalc) {
+                    boxCalc.hidden = !boxOverlayActive;
+                }
+                if (!boxOverlayActive) {
+                    clearBoxOverlay();
+                } else {
+                    drawBoxOverlay();
+                }
+            };
+
+            const getTutorialSweepDuration = () => {
+                const sim = window.ecgSimInstance;
+                if (!sim || !sim.traceCanvas) return 0;
+                const dpr = window.devicePixelRatio || 1;
+                const w = (sim.traceCanvas.width || sim.traceCanvas.clientWidth || 0) / dpr;
+                const scale = sim.viewScale || 1;
+                const pxPerMm = (sim.pixelPerMm || 1) * scale;
+                const speed = sim.config?.speed || 25;
+                const msPerPixel = 1000 / (speed * pxPerMm);
+                return Math.max(0, w * msPerPixel);
+            };
+
+            const playTutorialSweepOnce = () => {
+                const sim = window.ecgSimInstance;
+                if (!sim) return;
+                if (tutorialPlayTimeout) {
+                    clearTimeout(tutorialPlayTimeout);
+                    tutorialPlayTimeout = null;
+                }
+                sim.reset();
+                sim.play();
+                const duration = Math.max(0, getTutorialSweepDuration() - 2100);
+                tutorialPlayTimeout = window.setTimeout(() => {
+                    sim.pause();
+                }, duration || 0);
+            };
+
+            const setTutorialStep = (index, options = {}) => {
+                if (!tutorialSteps.length) return;
+                const safeIndex = Math.max(0, Math.min(index, tutorialSteps.length - 1));
+                currentTutorialStep = safeIndex;
+                tutorialSteps.forEach((step, idx) => {
+                    step.classList.toggle('active', idx === safeIndex);
+                });
+                tutorialTabs.forEach((tab, idx) => {
+                    tab.classList.toggle('active', idx === safeIndex);
+                });
+                if (tutorialCounter) {
+                    tutorialCounter.textContent = `Step ${safeIndex + 1} of ${tutorialSteps.length}`;
+                }
+                if (tutorialPrevBtn) tutorialPrevBtn.disabled = safeIndex === 0;
+                if (tutorialNextBtn) tutorialNextBtn.disabled = safeIndex === tutorialSteps.length - 1;
+                if (currentEkgMode === 'tutorial') {
+                    if (safeIndex >= 2) {
+                        mountEcg12(tutorialLeadMount);
+                        if (ecg12Module) ecg12Module.style.display = '';
+                        if (singleLeadContainer) singleLeadContainer.style.display = 'none';
+                        initEcg12Once();
+                        if (safeIndex === 2) {
+                            window.ecg12SimInstance?.setHighlightedLeads?.(['I', 'II']);
+                        } else if (safeIndex === 5) {
+                            window.ecg12SimInstance?.setHighlightedLeads?.(['V3', 'V4']);
+                        } else {
+                            window.ecg12SimInstance?.setHighlightedLeads?.([]);
+                        }
+                        window.ecg12SimInstance?.handleResize?.();
+                    } else {
+                        mountSingleLead(tutorialLeadMount);
+                        if (singleLeadContainer) singleLeadContainer.style.display = '';
+                        if (ecg12Module) ecg12Module.style.display = 'none';
+                    }
+                }
+                setBoxOverlayActive(currentEkgMode === 'tutorial' && safeIndex === 0);
+                expandedInstructionSteps.forEach((step) => {
+                    step.hidden = step.getAttribute('data-expanded-step') !== String(safeIndex);
+                });
+                if (options.autoplay && safeIndex < 2) {
+                    playTutorialSweepOnce();
+                }
+            };
 
             const clearActive = () => {
                 show12Btn?.classList.remove('active');
                 showSingleBtn?.classList.remove('active');
                 showQuizBtn?.classList.remove('active');
+                showTutorialBtn?.classList.remove('active');
             };
 
             const hideAllSections = () => {
                 if (singleLeadContainer) singleLeadContainer.style.display = 'none';
                 if (ecg12Module) ecg12Module.style.display = 'none';
                 if (ecgQuizSection) ecgQuizSection.style.display = 'none';
+                if (tutorialSection) tutorialSection.style.display = 'none';
             };
 
             const activate12Lead = () => {
@@ -5076,6 +5477,7 @@ const coronaryMap = {
                 clearActive();
                 show12Btn?.classList.add('active');
                 hideAllSections();
+                mountEcg12(ekg12Mount);
                 if (ecg12Module) ecg12Module.style.display = '';
                 initEcg12Once();
                 window.ecg12SimInstance?.handleResize?.();
@@ -5087,8 +5489,11 @@ const coronaryMap = {
                 clearActive();
                 showSingleBtn?.classList.add('active');
                 hideAllSections();
+                mountSingleLead(singleLeadMount);
+                mountEcg12(ekg12Mount);
                 if (singleLeadContainer) singleLeadContainer.style.display = '';
                 initSingleLeadSimulatorOnce();
+                setBoxOverlayActive(false);
                 window.ecgSimInstance?.handleResize?.();
             };
 
@@ -5098,16 +5503,239 @@ const coronaryMap = {
                 clearActive();
                 showQuizBtn?.classList.add('active');
                 hideAllSections();
+                mountEcg12(ekg12Mount);
                 if (ecgQuizSection) ecgQuizSection.style.display = '';
                 initEcgQuizOnce();
+                setBoxOverlayActive(false);
                 scheduleQuizResize();
+            };
+
+            const activateTutorial = () => {
+                if (currentEkgMode === 'tutorial') return;
+                currentEkgMode = 'tutorial';
+                clearActive();
+                showTutorialBtn?.classList.add('active');
+                hideAllSections();
+                if (tutorialSection) tutorialSection.style.display = '';
+                mountSingleLead(tutorialLeadMount);
+                if (singleLeadContainer) singleLeadContainer.style.display = '';
+                initSingleLeadSimulatorOnce();
+                applySinusDefaults();
+                setTutorialStep(0, { autoplay: true });
+                window.ecgSimInstance?.handleResize?.();
             };
 
             show12Btn?.addEventListener('click', activate12Lead);
             showSingleBtn?.addEventListener('click', activateSingleLead);
             showQuizBtn?.addEventListener('click', activateQuiz);
+            showTutorialBtn?.addEventListener('click', activateTutorial);
+
+            tutorialTabs.forEach((tab) => {
+                tab.addEventListener('click', () => {
+                    const index = Number(tab.getAttribute('data-step-index'));
+                    if (!Number.isNaN(index)) {
+                        setTutorialStep(index, { autoplay: true });
+                    }
+                });
+            });
+
+            tutorialPrevBtn?.addEventListener('click', () => {
+                setTutorialStep(currentTutorialStep - 1, { autoplay: true });
+            });
+
+            tutorialNextBtn?.addEventListener('click', () => {
+                setTutorialStep(currentTutorialStep + 1, { autoplay: true });
+            });
+
+            toggleExpandedBtn?.addEventListener('click', () => {
+                expandedOpen = !expandedOpen;
+                if (toggleExpandedBtn) {
+                    toggleExpandedBtn.dataset.open = expandedOpen ? 'true' : 'false';
+                }
+                if (expandedInstructions) {
+                    expandedInstructions.classList.toggle('active', expandedOpen);
+                }
+            });
+
+            boxOverlayCanvas?.addEventListener('click', (event) => {
+                if (!boxOverlayActive) return;
+                const sim = window.ecgSimInstance;
+                if (!sim) return;
+                const rect = boxOverlayCanvas.getBoundingClientRect();
+                if (!rect.width || !rect.height) return;
+                const x = ((event.clientX - rect.left) / rect.width) * boxOverlayCanvas.width;
+                const y = ((event.clientY - rect.top) / rect.height) * boxOverlayCanvas.height;
+                const bigBoxSize = 5 * (sim.pixelPerMm || 4);
+                const originX = Math.floor(x / bigBoxSize) * bigBoxSize;
+                const originY = Math.floor(y / bigBoxSize) * bigBoxSize;
+                const hitIndex = boxOverlayRects.findIndex((box) => {
+                    return (
+                        x >= box.x &&
+                        x <= box.x + box.size &&
+                        y >= box.y &&
+                        y <= box.y + box.size
+                    );
+                });
+                if (hitIndex !== -1) {
+                    boxOverlayRects.splice(hitIndex, 1);
+                    if (!boxOverlayRects.length) {
+                        boxOverlayRowY = null;
+                    } else {
+                        boxOverlayRowY = boxOverlayRects[0].y;
+                    }
+                    updateBoxCalc();
+                    drawBoxOverlay();
+                    return;
+                }
+                if (boxOverlayRowY === null) {
+                    boxOverlayRowY = originY;
+                }
+                if (originY !== boxOverlayRowY) return;
+                const last = boxOverlayRects[boxOverlayRects.length - 1];
+                if (last && originX !== last.x + bigBoxSize) return;
+                boxOverlayRects.push({ x: originX, y: originY, size: bigBoxSize });
+                updateBoxCalc();
+                drawBoxOverlay();
+            });
+
+            boxOverlayCanvas?.addEventListener('dblclick', () => {
+                if (!boxOverlayActive) return;
+                clearBoxOverlay();
+            });
+
+            const tutorialActionButtons = Array.from(
+                document.querySelectorAll('[data-tutorial-action]')
+            );
+
+            const setTutorialActionActive = (button, isActive) => {
+                if (!button) return;
+                button.dataset.active = isActive ? 'true' : 'false';
+            };
+
+            const clearTutorialActionStates = () => {
+                tutorialActionButtons.forEach((btn) => setTutorialActionActive(btn, false));
+            };
+
+            tutorialActionButtons.forEach((button) => {
+                button.addEventListener('click', (event) => {
+                    const action = event.currentTarget.getAttribute('data-tutorial-action');
+                    if (!action) return;
+                    if (action === 'axis' || action === 'transition') {
+                        show12Btn?.click();
+                        return;
+                    }
+
+                    const isActive = event.currentTarget.dataset.active === 'true';
+                    clearTutorialActionStates();
+                    clearHighlights();
+
+                    if (isActive) {
+                        if (action === 'inferior-stemi' && currentTutorialStep >= 2) {
+                            const ecg12RhythmSelect = document.getElementById('ecg12RhythmPreset');
+                            if (ecg12RhythmSelect) {
+                                ecg12RhythmSelect.value = 'sinus';
+                                ecg12RhythmSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                            }
+                            window.ecg12SimInstance?.setRhythm?.('sinus');
+                            window.ecg12SimInstance?.setHighlightedLeads?.([]);
+                        }
+                        if (action === 'afib' || action === 'aflutter') {
+                            const rhythmPreset = document.getElementById('rhythmPreset');
+                            if (rhythmPreset) {
+                                rhythmPreset.value = 'sinus';
+                                rhythmPreset.dispatchEvent(new Event('change', { bubbles: true }));
+                            }
+                        }
+                        return;
+                    }
+
+                    applySinusDefaults();
+                    setTutorialActionActive(event.currentTarget, true);
+
+                    if (action === 'rate') {
+                        setCheckbox('ecgHighlightRR', true);
+                        return;
+                    }
+                    if (action === 'rhythm') {
+                        setCheckbox('ecgHighlightP', true);
+                        setCheckbox('ecgHighlightQRS', true);
+                        return;
+                    }
+                    if (action === 'afib') {
+                        const rhythmPreset = document.getElementById('rhythmPreset');
+                        if (rhythmPreset) {
+                            rhythmPreset.value = 'afib';
+                            rhythmPreset.dispatchEvent(new Event('change', { bubbles: true }));
+                        }
+                        return;
+                    }
+                    if (action === 'aflutter') {
+                        const rhythmPreset = document.getElementById('rhythmPreset');
+                        if (rhythmPreset) {
+                            rhythmPreset.value = 'aflutter';
+                            rhythmPreset.dispatchEvent(new Event('change', { bubbles: true }));
+                        }
+                        return;
+                    }
+                    if (action === 'intervals') {
+                        if (currentTutorialStep >= 2) {
+                            setCheckbox('ecg12HighlightPR', true);
+                            setCheckbox('ecg12HighlightQRSDur', true);
+                            setCheckbox('ecg12HighlightQT', true);
+                            return;
+                        }
+                        setCheckbox('ecgHighlightPR', true);
+                        setCheckbox('ecgHighlightQRSDur', true);
+                        setCheckbox('ecgHighlightQT', true);
+                        return;
+                    }
+                    if (action === 'st') {
+                        if (currentTutorialStep >= 2) {
+                            setCheckbox('ecg12HighlightT', true);
+                            return;
+                        }
+                        setCheckbox('ecgHighlightT', true);
+                        return;
+                    }
+                    if (action === 'inferior-stemi') {
+                        if (currentTutorialStep >= 2) {
+                            const ecg12RhythmSelect = document.getElementById('ecg12RhythmPreset');
+                            if (ecg12RhythmSelect) {
+                                ecg12RhythmSelect.value = 'stemi_inferior';
+                                ecg12RhythmSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                            }
+                            window.ecg12SimInstance?.setRhythm?.('stemi_inferior');
+                            window.ecg12SimInstance?.setHighlightedLeads?.(['II', 'III', 'aVF']);
+                        }
+                        return;
+                    }
+                    if (action.startsWith('axis-') && currentTutorialStep >= 2) {
+                        const axisMap = {
+                            'axis-normal': 'normal',
+                            'axis-lad': 'lad',
+                            'axis-rad': 'rad',
+                            'axis-extreme': 'extreme'
+                        };
+                        const axisMode = axisMap[action];
+                        if (!axisMode) return;
+                        const axisSelect = document.getElementById('ecg12AxisMode');
+                        if (axisSelect) {
+                            axisSelect.value = axisMode;
+                            axisSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                        }
+                        return;
+                    }
+                });
+            });
+
+            window.addEventListener('resize', () => {
+                if (boxOverlayActive) {
+                    window.requestAnimationFrame(drawBoxOverlay);
+                }
+            });
 
             hideAllSections();
+            mountSingleLead(singleLeadMount);
             if (singleLeadContainer) {
                 singleLeadContainer.style.display = '';
             }
@@ -5115,6 +5743,7 @@ const coronaryMap = {
             currentEkgMode = 'single';
             clearActive();
             showSingleBtn?.classList.add('active');
+            setTutorialStep(0, { autoplay: false });
         });
 
         // Wiggers diagram change descriptions for each pathology

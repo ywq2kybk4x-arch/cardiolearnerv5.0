@@ -1138,7 +1138,7 @@ class Ecg12Simulator {
     const xMax = Math.max(1, Math.floor(sweepProgress * ((this.renderWidth || w) - 1)));
 
     const baselineY = h * 0.45;
-    const overlayBandHeight = 90;
+    const overlayBandHeight = 130;
     const overlayTopY = baselineY + overlayBandHeight * 0.4;
     const leadLabel = this.selectedLead;
     const leadKey = this.selectedLeadKey || normLead(leadLabel);
@@ -1230,7 +1230,7 @@ class Ecg12Simulator {
     const padBottom = 8;
     const usableH = Math.max(72, overlayBandH - padTop - padBottom);
     const laneCount = 4;
-    const laneGap = Math.max(20, Math.floor(usableH / laneCount));
+    const laneGap = Math.max(26, Math.floor(usableH / laneCount));
     const shiftedTop = overlayTopY;
     const laneStart = shiftedTop + padTop;
     const lanes = {
