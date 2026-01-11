@@ -5290,6 +5290,7 @@ const coronaryMap = {
                 'ecgHighlightP',
                 'ecgHighlightQRS',
                 'ecgHighlightT',
+                'ecgHighlightDropped',
                 'ecgHighlightPR',
                 'ecgHighlightQRSDur',
                 'ecgHighlightRR',
@@ -5299,6 +5300,7 @@ const coronaryMap = {
                 'ecg12HighlightP',
                 'ecg12HighlightQRS',
                 'ecg12HighlightT',
+                'ecg12HighlightDropped',
                 'ecg12HighlightPR',
                 'ecg12HighlightQRSDur',
                 'ecg12HighlightRR',
@@ -5351,8 +5353,13 @@ const coronaryMap = {
                 setBoxOverlayActive(false);
                 window.ecgSimInstance?.reset?.();
                 window.ecgSimInstance?.setSelectedLead?.('II');
+                window.ecgSimInstance?.setHighlights?.({ P: false, QRS: false, T: false, Dropped: false });
+                window.ecgSimInstance?.setIntervalHighlights?.({ PR: false, QRSd: false, QT: false, RR: false });
                 window.ecg12SimInstance?.reset?.();
                 window.ecg12SimInstance?.setSelectedLead?.('II');
+                window.ecg12SimInstance?.setHighlightedLeads?.([]);
+                window.ecg12SimInstance?.setHighlights?.({ P: false, QRS: false, T: false, Dropped: false });
+                window.ecg12SimInstance?.setIntervalHighlights?.({ PR: false, QRSd: false, QT: false, RR: false });
                 const expandedLabel = document.getElementById('ecg12ActiveLead');
                 if (expandedLabel) expandedLabel.textContent = 'II';
             };
