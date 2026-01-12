@@ -1,0 +1,134 @@
+:root {
+  --license-footer-height: 32px;
+  --license-footer-bg: rgba(8, 10, 16, 0.72);
+  --license-footer-text: #f8fafc;
+  --license-footer-border: rgba(148, 163, 184, 0.2);
+  --license-modal-bg: #0b1020;
+  --license-modal-text: #f8fafc;
+  --license-modal-muted: #cbd5f5;
+}
+
+body {
+  padding-bottom: calc(var(--license-footer-height) + env(safe-area-inset-bottom, 0px));
+}
+
+.license-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--license-footer-text);
+  background: var(--license-footer-bg);
+  border-top: 1px solid var(--license-footer-border);
+  backdrop-filter: blur(8px);
+}
+
+.license-footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 6px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 4px 10px;
+  text-align: center;
+}
+
+.license-footer a,
+.license-footer button {
+  color: inherit;
+  font: inherit;
+}
+
+.license-footer a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.license-credits-link {
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.license-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 10, 16, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1100;
+}
+
+.license-modal-overlay.is-open {
+  display: flex;
+}
+
+.license-modal {
+  width: min(520px, 92vw);
+  background: var(--license-modal-bg);
+  color: var(--license-modal-text);
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  padding: 20px;
+  position: relative;
+}
+
+.license-modal h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.license-modal p {
+  margin: 0 0 10px;
+  color: var(--license-modal-muted);
+}
+
+.license-modal p strong {
+  color: var(--license-modal-text);
+}
+
+.license-modal a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.license-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border: none;
+  background: rgba(148, 163, 184, 0.2);
+  color: inherit;
+  border-radius: 999px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.license-modal-close:focus-visible,
+.license-credits-link:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.35);
+}
+
+@media (max-width: 640px) {
+  .license-footer-inner {
+    padding: 8px 10px;
+  }
+
+  .license-modal {
+    padding: 18px;
+  }
+}
