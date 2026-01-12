@@ -444,9 +444,15 @@ class EcgSimulator {
     const hasIntervalOverlays =
       this.intervalHighlights &&
       (this.intervalHighlights.PR || this.intervalHighlights.QRSd || this.intervalHighlights.QT);
-    const OVERLAY_BAND_H = hasIntervalOverlays ? 96 : 0;
-    const INTERVAL_OVERLAY_SHIFT_Y = hasIntervalOverlays ? 24 : 0; // pixels (tunable)
-    const OVERLAY_TOP_PAD = hasIntervalOverlays ? 45 : 0;
+    const OVERLAY_BAND_H = hasIntervalOverlays
+      ? Math.round(Math.min(96, Math.max(64, logicalHeight * 0.28)))
+      : 0;
+    const INTERVAL_OVERLAY_SHIFT_Y = hasIntervalOverlays
+      ? Math.round(Math.min(20, Math.max(12, logicalHeight * 0.06)))
+      : 0; // pixels (tunable)
+    const OVERLAY_TOP_PAD = hasIntervalOverlays
+      ? Math.round(Math.min(36, Math.max(24, logicalHeight * 0.12)))
+      : 0;
     const plotHeight = Math.max(60, logicalHeight - OVERLAY_BAND_H - OVERLAY_TOP_PAD);
     const overlayTopY = plotHeight + OVERLAY_TOP_PAD;
     const midY = plotHeight * 0.5;

@@ -283,7 +283,10 @@ class Ecg12Simulator {
     this.bigTraceCtx = bigTraceCanvas ? bigTraceCanvas.getContext('2d') : null;
     this.bigOverlayCtx = bigOverlayCanvas ? bigOverlayCanvas.getContext('2d') : null;
 
-    this.scrollContainer = this.overlayCanvas ? this.overlayCanvas.parentElement : null;
+    this.scrollContainer =
+      (this.overlayCanvas && this.overlayCanvas.parentElement) ||
+      (this.bigOverlayCanvas && this.bigOverlayCanvas.parentElement) ||
+      null;
 
     this.pixelPerMm = PX_PER_MM_12;
     this.viewScale = 1;
@@ -359,9 +362,18 @@ class Ecg12Simulator {
     this.handleBigMouseLeave = this.handleBigMouseLeave.bind(this);
     this.handleBigClick = this.handleBigClick.bind(this);
     this.handleBigDoubleClick = this.handleBigDoubleClick.bind(this);
+    this.bigContainerObserver = null;
 
     this.handleResize();
     window.addEventListener('resize', this.handleResize);
+
+    if (typeof window !== 'undefined' && 'ResizeObserver' in window && this.bigTraceCanvas) {
+      const parent = this.bigTraceCanvas.parentElement;
+      if (parent) {
+        this.bigContainerObserver = new ResizeObserver(() => this.handleResize());
+        this.bigContainerObserver.observe(parent);
+      }
+    }
 
     this.regenerateRhythm();
     this.drawGrid();
@@ -870,7 +882,8 @@ class Ecg12Simulator {
     const containerCssWidth = this.scrollContainer ? this.scrollContainer.clientWidth : 0;
     const requiredCssWidth = Math.max(paperCssWidth, containerCssWidth);
     const mainHeight = this.traceCanvas.clientHeight || 320;
-    const bigHeight = this.bigTraceCanvas ? (this.bigTraceCanvas.clientHeight || 220) : 220;
+    const bigParentHeight = this.bigTraceCanvas?.parentElement?.clientHeight || 0;
+    const bigHeight = this.bigTraceCanvas ? (bigParentHeight || this.bigTraceCanvas.clientHeight || 220) : 220;
 
     const resizeCanvas = (canvas, height) => {
       if (!canvas) return;
@@ -1596,6 +1609,10 @@ class Ecg12Simulator {
     this.pause();
     this.cancelSingleRun();
     window.removeEventListener('resize', this.handleResize);
+    if (this.bigContainerObserver) {
+      this.bigContainerObserver.disconnect();
+      this.bigContainerObserver = null;
+    }
     [this.bigTraceCanvas, this.bigOverlayCanvas].forEach((canvas) => {
       if (!canvas) return;
       canvas.removeEventListener('mousemove', this.handleBigMouseMove);
