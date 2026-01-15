@@ -2321,6 +2321,7 @@
         .ecg-quiz-choice-expl.active{display:block}
         .ecg-quiz-choice input:disabled{cursor:not-allowed}
         .ecg-quiz-actions{display:flex;gap:12px;flex-wrap:wrap}
+        .ecg-quiz-actions .ecg-quiz-restart{margin-left:auto}
         .ecg-quiz-actions button{border-radius:12px}
         .ecg-quiz-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
         .ecg-quiz-nav button{border-radius:10px;border:1px solid rgba(148,163,184,.35);background:var(--surface-2,#f4f6fb);padding:6px 10px;font-weight:600;color:var(--muted);cursor:pointer;min-width:36px}
@@ -3678,6 +3679,8 @@
                 <div class="ecg-quiz-actions">
                     <button type="button" id="ecgQuizSubmitBtn" class="btn btn-primary">Submit Answer</button>
                     <button type="button" id="ecgQuizNextBtn" class="btn btn-ghost">Next EKG</button>
+                    <button type="button" id="ecgQuizFinishBtn" class="btn btn-danger">Submit Quiz</button>
+                    <button type="button" id="ecgQuizRestartBtn" class="btn btn-ghost ecg-quiz-restart">Restart Quiz</button>
                 </div>
                 <div id="ecgQuizFeedback" class="ecg-quiz-feedback">Select the rhythm that matches this printout.</div>
                 <div id="ecgQuizSummary" class="ecg-quiz-summary" style="display:none;"></div>
@@ -4672,6 +4675,8 @@ const coronaryMap = {
             const choicesEl = document.getElementById('ecgQuizChoices');
             const submitBtn = document.getElementById('ecgQuizSubmitBtn');
             const nextBtn = document.getElementById('ecgQuizNextBtn');
+            const finishBtn = document.getElementById('ecgQuizFinishBtn');
+            const restartBtn = document.getElementById('ecgQuizRestartBtn');
             const feedbackEl = document.getElementById('ecgQuizFeedback');
             const metaEl = document.getElementById('ecgQuizMeta');
             const host = document.getElementById('ecgQuiz12LeadHost');
@@ -4690,13 +4695,15 @@ const coronaryMap = {
             const measureToggleWrap = measureToggle?.closest('.ecg-quiz-box-toggle') || null;
             const nav = document.getElementById('ecgQuizNav');
             const summaryEl = document.getElementById('ecgQuizSummary');
-            if (!paper || !choicesEl || !submitBtn || !nextBtn || !feedbackEl || !metaEl || !host || !bgCanvas || !traceCanvas || !gridWrap || !bigBg || !bigTrace) return;
+            if (!paper || !choicesEl || !submitBtn || !nextBtn || !finishBtn || !restartBtn || !feedbackEl || !metaEl || !host || !bgCanvas || !traceCanvas || !gridWrap || !bigBg || !bigTrace) return;
 
             ecgQuizInitialized = true;
             ecgQuizElements.paper = paper;
             ecgQuizElements.choices = choicesEl;
             ecgQuizElements.submit = submitBtn;
             ecgQuizElements.next = nextBtn;
+            ecgQuizElements.finish = finishBtn;
+            ecgQuizElements.restart = restartBtn;
             ecgQuizElements.feedback = feedbackEl;
             ecgQuizElements.meta = metaEl;
             ecgQuizElements.host = host;
@@ -4787,6 +4794,8 @@ const coronaryMap = {
 
             submitBtn.addEventListener('click', handleQuizSubmit);
             nextBtn.addEventListener('click', handleQuizNext);
+            finishBtn.addEventListener('click', handleQuizFinish);
+            restartBtn.addEventListener('click', handleQuizRestart);
             nextBtn.disabled = false;
 
             gridWrap.addEventListener('scroll', () => ecgQuizSim?.drawReadoutOverlay?.());
@@ -4832,12 +4841,13 @@ const coronaryMap = {
         function initQuizSession() {
             const keys = shuffleList(getQuizRhythmKeys());
             if (!keys.length) {
-                ecgQuizSession = {
-                    questions: [],
-                    currentIndex: 0
-                };
-                return;
-            }
+            ecgQuizSession = {
+                questions: [],
+                currentIndex: 0,
+                submitted: false
+            };
+            return;
+        }
             const questions = keys.map((correct, index) => {
                 const otherKeys = shuffleList(keys.filter((k) => k !== correct));
                 const distractors = otherKeys.slice(0, 4);
@@ -4879,7 +4889,8 @@ const coronaryMap = {
             resetQuizSessionState(allQuestions);
             ecgQuizSession = {
                 questions: allQuestions,
-                currentIndex: 0
+                currentIndex: 0,
+                submitted: false
             };
             if (ecgQuizElements.summary) {
                 ecgQuizElements.summary.innerHTML = '';
@@ -5249,6 +5260,10 @@ const coronaryMap = {
         function handleQuizProgress() {
             if (!ecgQuizSession) return;
             renderQuizNav();
+            if (ecgQuizSession.submitted) {
+                showQuizSummary();
+                return;
+            }
             const allCorrect = ecgQuizSession.questions.every((q) => q.status === 'correct');
             if (!allCorrect) {
                 if (ecgQuizElements.summary) {
@@ -5260,29 +5275,116 @@ const coronaryMap = {
             showQuizSummary();
         }
 
+        function handleQuizFinish() {
+            if (!ecgQuizSession) return;
+            ecgQuizSession.submitted = true;
+            ecgQuizSession.questions.forEach((q) => {
+                if (!q.attempts || !q.attempts.length) {
+                    q.status = 'omitted';
+                }
+            });
+            renderQuizNav();
+            if (ecgQuizElements.feedback) {
+                ecgQuizElements.feedback.textContent = 'Quiz submitted. Review your results below.';
+                ecgQuizElements.feedback.className = 'ecg-quiz-feedback';
+            }
+            showQuizSummary();
+        }
+
+        function handleQuizRestart() {
+            if (!ecgQuizSession) return;
+            if (ecgQuizElements.summary) {
+                ecgQuizElements.summary.innerHTML = '';
+                ecgQuizElements.summary.style.display = 'none';
+            }
+            if (ecgQuizElements.feedback) {
+                ecgQuizElements.feedback.textContent = 'Select the rhythm that matches this printout.';
+                ecgQuizElements.feedback.className = 'ecg-quiz-feedback';
+            }
+            initQuizSession();
+        }
+
         function showQuizSummary() {
             if (!ecgQuizElements.summary || !ecgQuizSession) return;
             const summary = ecgQuizElements.summary;
             const total = ecgQuizSession.questions.length;
-            const correct = ecgQuizSession.questions.filter((q) => q.status === 'correct').length;
+            const answered = ecgQuizSession.questions.filter((q) => q.attempts?.length).length;
+            const correct = ecgQuizSession.questions.filter((q) => q.attempts?.length && q.attempts[0] === q.correct).length;
             summary.innerHTML = '';
             const header = document.createElement('h4');
-            header.textContent = `Quiz Summary: ${correct}/${total} correct`;
+            header.textContent = `Quiz Summary: ${correct}/${answered} correct`;
             summary.appendChild(header);
-            const list = document.createElement('ul');
+            const correctItems = [];
+            const incorrectItems = [];
+            const omittedItems = [];
             ecgQuizSession.questions.forEach((q, idx) => {
-                const li = document.createElement('li');
                 const correctLabel =
                     (q.type === 'rhythm'
                         ? RHYTHM_LABELS[q.correct] || q.correct
                         : (q.choiceLabels && q.choiceLabels[q.correct]) || q.correct);
                 const prompt = q.prompt || 'Question';
-                li.textContent = q.status === 'correct'
-                    ? `Q${idx + 1}: ${prompt} (${correctLabel}) — Correct`
-                    : `Q${idx + 1}: ${prompt} (${correctLabel}) — Needs review`;
-                list.appendChild(li);
+                const label = `Q${idx + 1}: ${prompt} (${correctLabel})`;
+                if (!q.attempts?.length) {
+                    omittedItems.push(label);
+                } else if (q.attempts[0] === q.correct) {
+                    correctItems.push(label);
+                } else {
+                    incorrectItems.push(label);
+                }
             });
-            summary.appendChild(list);
+            const table = document.createElement('table');
+            table.style.width = '100%';
+            table.style.borderCollapse = 'collapse';
+            const thead = document.createElement('thead');
+            thead.innerHTML = `<tr>
+                <th style="text-align:left;padding:6px 8px;">Correct</th>
+                <th style="text-align:left;padding:6px 8px;">Incorrect</th>
+            </tr>`;
+            table.appendChild(thead);
+            const tbody = document.createElement('tbody');
+            const row = document.createElement('tr');
+            const makeCell = (items) => {
+                const td = document.createElement('td');
+                td.style.verticalAlign = 'top';
+                td.style.padding = '6px 8px';
+                if (!items.length) {
+                    const empty = document.createElement('div');
+                    empty.className = 'muted-text';
+                    empty.textContent = 'None';
+                    td.appendChild(empty);
+                    return td;
+                }
+                const ul = document.createElement('ul');
+                ul.style.margin = '0';
+                ul.style.paddingLeft = '18px';
+                items.forEach((text) => {
+                    const li = document.createElement('li');
+                    li.textContent = text;
+                    ul.appendChild(li);
+                });
+                td.appendChild(ul);
+                return td;
+            };
+            row.appendChild(makeCell(correctItems));
+            row.appendChild(makeCell(incorrectItems));
+            tbody.appendChild(row);
+            table.appendChild(tbody);
+            summary.appendChild(table);
+            if (omittedItems.length) {
+                const omittedTitle = document.createElement('h5');
+                omittedTitle.style.margin = '12px 0 6px';
+                omittedTitle.textContent = 'Omitted';
+                summary.appendChild(omittedTitle);
+                const omittedList = document.createElement('ul');
+                omittedList.style.margin = '0';
+                omittedList.style.paddingLeft = '18px';
+                omittedItems.forEach((text) => {
+                    const li = document.createElement('li');
+                    li.textContent = text;
+                    omittedList.appendChild(li);
+                });
+                summary.appendChild(omittedList);
+            }
             summary.style.display = 'block';
         }
 
@@ -6920,6 +7022,7 @@ const coronaryMap = {
             session.responses = session.responses || {};
             session.answersById = session.answersById || {};
             session.answeredById = session.answeredById || {};
+            session.firstAttemptById = session.firstAttemptById || {};
             session.gradedById = session.gradedById || {};
             session.questions.forEach((question) => {
                 const resp = session.responses[question.id] || {};
@@ -6929,6 +7032,10 @@ const coronaryMap = {
                 if (answered) {
                     status = storedChoice === question.answer ? 'correct' : 'incorrect';
                 }
+                const firstAttempt = session.firstAttemptById[question.id];
+                const summaryStatus = firstAttempt
+                    ? (firstAttempt.correct ? 'correct' : 'incorrect')
+                    : status;
                 session.responses[question.id] = resp;
                 session.answersById[question.id] = storedChoice;
                 session.answeredById[question.id] = answered;
@@ -6941,7 +7048,7 @@ const coronaryMap = {
                     choice: storedChoice,
                     correctAnswer: question.answer
                 };
-                summary[status] += 1;
+                summary[summaryStatus] += 1;
             });
             const usedSeconds = session.totalSeconds
                 ? session.totalSeconds - (session.secondsLeft ?? session.totalSeconds)
@@ -7292,6 +7399,7 @@ const coronaryMap = {
                 responses: {},
                 answersById: {},
                 answeredById: {},
+                firstAttemptById: {},
                 mode: qbankState.mode,
                 timed: qbankState.timing === 'timed',
                 totalSeconds: qbankState.timing === 'timed' ? limit * 120 : null,
@@ -7331,6 +7439,10 @@ const coronaryMap = {
             const qid = question.id;
             const choice = choiceInput.value;
             const correct = choice === question.answer;
+            session.firstAttemptById = session.firstAttemptById || {};
+            if (!session.firstAttemptById[qid]) {
+                session.firstAttemptById[qid] = { choice, correct };
+            }
             session.responses[qid] = session.responses[qid] || {};
             session.responses[qid].choice = choice;
             session.responses[qid].correct = correct;
