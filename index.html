@@ -2306,13 +2306,18 @@
         .ecg-quiz-measure-hint{font-size:.85rem;color:var(--muted-2);margin-top:6px;opacity:.85}
         .ecg-quiz-meta{font-size:.85rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
         .ecg-quiz-question{font-weight:600;margin:0;font-size:1rem}
-        .ecg-quiz-choices{display:flex;flex-direction:column;gap:8px}
+        .ecg-quiz-question-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+        .ecg-quiz-box-toggle{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:#b91c1c;font-size:.9rem}
+        .ecg-quiz-box-toggle input{accent-color:#dc2626}
+        .ecg-quiz-box-overlay{position:absolute;inset:0;width:100%;height:100%;display:none;pointer-events:none}
+        .ecg-quiz-box-overlay.is-active{display:block;pointer-events:auto;cursor:crosshair}
+        .ecg-quiz-choices{display:flex;flex-direction:column;gap:14px}
         .ecg-quiz-choice{display:flex;flex-direction:column;gap:6px;padding:10px 12px;border:1px solid rgba(148,163,184,.35);border-radius:12px;background:var(--surface-2,#f4f6fb);cursor:pointer;font-weight:600}
         .ecg-quiz-choice-input{display:flex;align-items:center;gap:10px}
         .ecg-quiz-choice input{margin:0}
         .ecg-quiz-choice.correct{border-color:rgba(34,197,94,.7);background:rgba(34,197,94,.12)}
         .ecg-quiz-choice.incorrect{border-color:rgba(239,68,68,.7);background:rgba(239,68,68,.12)}
-        .ecg-quiz-choice-expl{font-size:.9rem;color:#b91c1c;display:none;font-weight:500}
+        .ecg-quiz-choice-expl{font-size:.9rem;color:#b91c1c;display:none;font-weight:500;white-space:pre-line}
         .ecg-quiz-choice-expl.active{display:block}
         .ecg-quiz-choice input:disabled{cursor:not-allowed}
         .ecg-quiz-actions{display:flex;gap:12px;flex-wrap:wrap}
@@ -2321,12 +2326,13 @@
         .ecg-quiz-nav button{border-radius:10px;border:1px solid rgba(148,163,184,.35);background:var(--surface-2,#f4f6fb);padding:6px 10px;font-weight:600;color:var(--muted);cursor:pointer;min-width:36px}
         .ecg-quiz-nav button.active{border-color:var(--primary);color:var(--primary);background:var(--primary-50,rgba(37,99,235,0.08))}
         .ecg-quiz-nav button.correct{background:rgba(34,197,94,.15);border-color:rgba(34,197,94,.8);color:#15803d}
+        .ecg-quiz-nav button.corrected{background:rgba(234,179,8,.18);border-color:rgba(234,179,8,.85);color:#a16207}
         .ecg-quiz-nav button.needs-review{background:rgba(239,68,68,.15);border-color:rgba(239,68,68,.8);color:#b91c1c}
         .ecg-quiz-summary{margin-top:16px;border:1px solid rgba(148,163,184,.35);border-radius:16px;padding:16px;background:var(--surface-2,#f8fafc)}
         .ecg-quiz-summary h4{margin:0 0 8px;font-size:1rem}
         .ecg-quiz-summary ul{margin:0;padding-left:18px}
         .ecg-quiz-summary li{margin-bottom:4px}
-        .ecg-quiz-feedback{font-weight:600;font-size:.95rem;color:var(--muted)}
+        .ecg-quiz-feedback{font-weight:600;font-size:.95rem;color:var(--muted);white-space:pre-line}
         .ecg-quiz-feedback.success{color:#15803d}
         .ecg-quiz-feedback.error{color:#b91c1c}
         @media (max-width: 820px){
@@ -3609,6 +3615,7 @@
                             <div>
                                 <div class="ecg12-expanded-header">
                                     Expanded Lead: <span id="ecg12ActiveLead">II</span>
+                                    <span class="ecg12-hint">(Click any lead to view below)</span>
                                 </div>
                                 <div class="ecg12-canvas-wrap ecg12-expanded-wrap">
                                     <canvas id="ecg12BigBackground"></canvas>
@@ -3649,8 +3656,9 @@
                                     <canvas id="ecgQuizBigBackground"></canvas>
                                     <canvas id="ecgQuizBigTrace"></canvas>
                                     <canvas id="ecgQuizBigOverlay"></canvas>
+                                    <canvas id="ecgQuizBoxOverlay" class="ecg-quiz-box-overlay"></canvas>
                                 </div>
-                                <div class="ecg-quiz-measure-hint">
+                                <div class="ecg-quiz-measure-hint" id="ecgQuizMeasureHint">
                                     Measure tool active: click & drag on the expanded lead to capture intervals. Hold Shift to keep marks, double-click a label to remove it.
                                 </div>
                             </div>
@@ -3659,7 +3667,13 @@
                     <div class="ecg-quiz-meta" id="ecgQuizMeta">Speed: 25 mm/s • Gain: 10 mm/mV • EKG ID: ————</div>
                 </div>
                 <div id="ecgQuizNav" class="ecg-quiz-nav"></div>
-                <p class="ecg-quiz-question">What is the rhythm?</p>
+                <div class="ecg-quiz-question-row">
+                    <p class="ecg-quiz-question" id="ecgQuizQuestionText">What is the rhythm?</p>
+                    <label class="ecg-quiz-box-toggle">
+                        <input type="checkbox" id="ecgQuizMeasureTool">
+                        Enable box tool
+                    </label>
+                </div>
                 <div id="ecgQuizChoices" class="ecg-quiz-choices"></div>
                 <div class="ecg-quiz-actions">
                     <button type="button" id="ecgQuizSubmitBtn" class="btn btn-primary">Submit Answer</button>
@@ -4124,6 +4138,11 @@ const coronaryMap = {
         let ecgQuizSession = null;
         let ecgQuizRhythmPool = [];
         const ecgQuizElements = {};
+        let quizBoxOverlayCanvas = null;
+        let quizBoxOverlayCtx = null;
+        let quizBoxOverlayActive = false;
+        const quizBoxOverlayRects = [];
+        let quizBoxOverlayRowY = null;
 
         function updateQuizExpandedLeadLabel() {
             if (!ecgQuizSim || !ecgQuizElements.activeLeadLabel) return;
@@ -4156,12 +4175,323 @@ const coronaryMap = {
             return RHYTHM_INSIGHTS[key] || DEFAULT_RHYTHM_INSIGHT;
         }
 
+        function getQuizInsight(question, choiceKey) {
+            if (question && question.type === 'rhythm') {
+                return getRhythmInsight(choiceKey);
+            }
+            return question?.insight || {
+                incorrect: 'Try measuring again using the grid.',
+                success: 'Nice work. Double-check your measurement.'
+            };
+        }
+
+        function formatCorrectFeedback(text) {
+            const trimmed = (text || '').trim();
+            if (!trimmed) return 'Correct! Nice work.';
+            const lower = trimmed.toLowerCase();
+            return lower.startsWith('correct') ? trimmed : `Correct! ${trimmed}`;
+        }
+
+        function setQuizQuestionPrompt(question) {
+            if (!ecgQuizElements.questionText) return;
+            const prompt = question?.prompt || 'What is the rhythm?';
+            ecgQuizElements.questionText.textContent = prompt;
+        }
+
+        function rhythmSupportsPrInterval(key) {
+            const preset = ecgQuizSim?.getPresetForId?.(key);
+            const pr = preset?.intervals?.prIntervalMs;
+            return Number.isFinite(pr) && pr > 0;
+        }
+
+        function pickRhythmForInterval(type, keys) {
+            if (!Array.isArray(keys) || !keys.length) return 'sinus';
+            const pool = type === 'PR' ? keys.filter(rhythmSupportsPrInterval) : keys;
+            const usable = pool.length ? pool : keys;
+            return usable[Math.floor(Math.random() * usable.length)];
+        }
+
+        function buildNumericChoices(correct, deltas, minValue) {
+            const values = [];
+            const addValue = (val) => {
+                const rounded = Math.round(val);
+                if (rounded >= (minValue || 1) && !values.includes(rounded)) {
+                    values.push(rounded);
+                }
+            };
+            addValue(correct);
+            deltas.forEach((delta) => {
+                if (values.length < 4) addValue(correct + delta);
+                if (values.length < 4) addValue(correct - delta);
+            });
+            let step = deltas[deltas.length - 1] + 10;
+            while (values.length < 4) {
+                addValue(correct + step);
+                step += 10;
+            }
+            return values;
+        }
+
+        function buildIntervalQuestion(type, rhythmKey) {
+            return {
+                id: `q${Math.random().toString(36).slice(2, 8)}`,
+                ecgId: Math.random().toString(16).slice(2, 8).toUpperCase(),
+                type: 'interval',
+                intervalType: type,
+                rhythmKey,
+                choices: [],
+                choiceLabels: {},
+                correct: null,
+                status: 'unanswered',
+                attempts: [],
+                correctedAfterWrong: false,
+                selected: null,
+                prompt: `What is the ${type} interval?`,
+                feedbackText: 'Measure the interval and select the best answer.',
+                feedbackClass: 'ecg-quiz-feedback',
+                insight: {
+                    incorrect: 'Try measuring again using the grid.',
+                    success: 'Nice work. Double-check your measurement.'
+                }
+            };
+        }
+
+        function buildAxisQuestion(axisMode) {
+            const labelMap = {
+                normal: 'Normal axis (0° to +90°)',
+                lad: 'Left axis deviation',
+                rad: 'Right axis deviation',
+                extreme: 'Extreme axis deviation'
+            };
+            const explanationMap = {
+                normal: 'Lead I upright, lead II upright.',
+                lad: 'Lead I upright, lead II predominantly negative.',
+                rad: 'Lead I predominantly negative, lead II upright.',
+                extreme: 'Lead I predominantly negative, lead II predominantly negative.'
+            };
+            const axisSummary =
+                '\n\nAxis reference (Lead I / Lead II):\n' +
+                'Normal: upright / upright\n' +
+                'LAD: upright / predominantly negative\n' +
+                'RAD: predominantly negative / upright\n' +
+                'Extreme: predominantly negative / predominantly negative';
+            return {
+                id: `q${Math.random().toString(36).slice(2, 8)}`,
+                ecgId: Math.random().toString(16).slice(2, 8).toUpperCase(),
+                type: 'axis',
+                axisMode,
+                choices: ['normal', 'lad', 'rad', 'extreme'],
+                choiceLabels: labelMap,
+                correct: axisMode,
+                status: 'unanswered',
+                attempts: [],
+                correctedAfterWrong: false,
+                selected: null,
+                prompt: 'What is the cardiac axis?',
+                feedbackText: 'Determine the axis and select the best answer.',
+                feedbackClass: 'ecg-quiz-feedback',
+                insight: {
+                    incorrect: 'Re-evaluate the axis using leads I and II.',
+                    success: `${labelMap[axisMode]} is correct. ${explanationMap[axisMode]}${axisSummary}`
+                }
+            };
+        }
+
+        function buildHrQuestion(rhythmKey) {
+            return {
+                id: `q${Math.random().toString(36).slice(2, 8)}`,
+                ecgId: Math.random().toString(16).slice(2, 8).toUpperCase(),
+                type: 'hr',
+                rhythmKey,
+                choices: [],
+                choiceLabels: {},
+                correct: null,
+                status: 'unanswered',
+                attempts: [],
+                correctedAfterWrong: false,
+                selected: null,
+                prompt: 'What is the heart rate?',
+                feedbackText: 'Calculate the rate and select the best answer.',
+                feedbackClass: 'ecg-quiz-feedback',
+                insight: {
+                    incorrect: 'Count the R-R interval and convert to BPM.',
+                    success: 'Correct. Nice calculation.'
+                }
+            };
+        }
+
+        function buildIntervalChoices(question) {
+            if (!ecgQuizSim || !question) return;
+            if (question.type === 'interval') {
+                const iv = ecgQuizSim.getIntervalReadout?.() || {};
+                const map = { PR: iv.prMs, QRS: iv.qrsMs, QT: iv.qtMs };
+                const fallback = { PR: 160, QRS: 90, QT: 400 };
+                const raw = map[question.intervalType];
+                const correct = Number.isFinite(raw) && raw > 0 ? raw : fallback[question.intervalType];
+                const isVariablePr =
+                    question.intervalType === 'PR' &&
+                    ['avb2_mobitz1', 'avb3'].includes(question.rhythmKey);
+                const choices = buildNumericChoices(correct, [40, 80, 120], 40);
+                const labels = choices.reduce((acc, val) => {
+                    acc[String(val)] = `${val} ms`;
+                    return acc;
+                }, {});
+                if (question.intervalType === 'PR') {
+                    labels.variable = 'PR is variable';
+                    if (isVariablePr) {
+                        question.choices = ['variable', ...choices.slice(0, 3).map(String)];
+                        question.correct = 'variable';
+                        question.choiceLabels = labels;
+                        question.insight = {
+                            incorrect: 'PR interval is not fixed in this rhythm.',
+                            success: 'Correct — the PR interval is variable.'
+                        };
+                        return;
+                    }
+                    const prChoices = [String(choices[0]), String(choices[1]), String(choices[2]), 'variable'];
+                    question.choices = prChoices;
+                    question.choiceLabels = labels;
+                    question.correct = String(correct);
+                    question.insight = {
+                        incorrect: 'PR interval is fixed in this rhythm.',
+                        success: `PR interval is ${correct} ms.`
+                    };
+                    return;
+                }
+                question.choices = choices.map(String);
+                question.choiceLabels = labels;
+                question.correct = String(correct);
+                question.insight = {
+                    incorrect: `Recheck the ${question.intervalType} interval.`,
+                    success: `${question.intervalType} interval is ${correct} ms.`
+                };
+                return;
+            }
+            if (question.type === 'hr') {
+                const correct = ecgQuizSim.getHeartRate?.() || 75;
+                const rrMs = Math.round(60000 / Math.max(10, correct));
+                const choices = buildNumericChoices(correct, [10, 20, 30], 30);
+                question.choices = choices.map(String);
+                question.choiceLabels = choices.reduce((acc, val) => {
+                    acc[String(val)] = `${val} bpm`;
+                    return acc;
+                }, {});
+                question.correct = String(correct);
+                question.insight = {
+                    incorrect: 'Recalculate the rate from the R-R interval.',
+                    success: `Heart rate is ${correct} bpm (RR ≈ ${rrMs} ms; 60,000 ÷ ${rrMs} ≈ ${correct}).`
+                };
+            }
+        }
+
+        function applyQuizQuestionHighlight(question, choiceKey) {
+            if (!ecgQuizSim || !question) return;
+            if (question.type === 'rhythm') {
+                applyQuizInsightHighlight(choiceKey);
+                const insight = getQuizInsight(question, choiceKey);
+                if (String(choiceKey).startsWith('stemi_') && insight.leadRegions) {
+                    ecgQuizSim.setHighlightedLeads?.(insight.leadRegions);
+                    ecgQuizSim.drawTrace?.();
+                }
+                return;
+            }
+            if (question.type === 'axis') {
+                ecgQuizSim.setHighlights?.({ P: false, QRS: false, T: false });
+                ecgQuizSim.setIntervalHighlights?.({ PR: false, QRSd: false, QT: false, RR: false });
+                ecgQuizSim.setHighlightedLeads?.(['I', 'II']);
+                ecgQuizSim.drawTrace?.();
+                ecgQuizSim.drawExpandedTrace?.();
+                ecgQuizSim.drawReadoutOverlay?.();
+                return;
+            }
+            const intervalConfig = { PR: false, QRSd: false, QT: false, RR: false };
+            if (question.type === 'interval') {
+                if (question.intervalType === 'PR') intervalConfig.PR = true;
+                if (question.intervalType === 'QRS') intervalConfig.QRSd = true;
+                if (question.intervalType === 'QT') intervalConfig.QT = true;
+            } else if (question.type === 'hr') {
+                intervalConfig.RR = true;
+            }
+            ecgQuizSim.setHighlights?.({ P: false, QRS: false, T: false });
+            ecgQuizSim.setIntervalHighlights?.(intervalConfig);
+            ecgQuizSim.setHighlightedLeads?.([]);
+            ecgQuizSim.setSelectedLead?.('II');
+            ecgQuizSim.drawTrace?.();
+            ecgQuizSim.drawExpandedTrace?.();
+            ecgQuizSim.drawReadoutOverlay?.();
+        }
+
         function resetQuizHighlights() {
             if (!ecgQuizSim) return;
             ecgQuizSim.setHighlights?.({ P: false, QRS: false, T: false });
             ecgQuizSim.setIntervalHighlights?.({ PR: false, QRSd: false, QT: false, RR: false });
             ecgQuizSim.setSelectedLead?.('II');
             ecgQuizSim.setHighlightedLeads?.([]);
+        }
+
+        function syncQuizBoxOverlaySize() {
+            if (!quizBoxOverlayCanvas) return;
+            const rect = quizBoxOverlayCanvas.getBoundingClientRect();
+            const width = Math.round(rect.width);
+            const height = Math.round(rect.height);
+            if (!width || !height) return;
+            if (quizBoxOverlayCanvas.width !== width) quizBoxOverlayCanvas.width = width;
+            if (quizBoxOverlayCanvas.height !== height) quizBoxOverlayCanvas.height = height;
+        }
+
+        function drawQuizBoxOverlay() {
+            if (!quizBoxOverlayCanvas || !quizBoxOverlayCtx) return;
+            syncQuizBoxOverlaySize();
+            quizBoxOverlayCtx.clearRect(0, 0, quizBoxOverlayCanvas.width, quizBoxOverlayCanvas.height);
+            if (!quizBoxOverlayRects.length) return;
+            quizBoxOverlayCtx.strokeStyle = '#dc2626';
+            quizBoxOverlayCtx.lineWidth = 2;
+            quizBoxOverlayCtx.fillStyle = 'rgba(220,38,38,0.12)';
+            quizBoxOverlayRects.forEach((rect) => {
+                quizBoxOverlayCtx.fillRect(rect.x, rect.y, rect.size, rect.size);
+                quizBoxOverlayCtx.strokeRect(rect.x, rect.y, rect.size, rect.size);
+            });
+        }
+
+        function clearQuizBoxOverlay() {
+            quizBoxOverlayRects.length = 0;
+            quizBoxOverlayRowY = null;
+            if (quizBoxOverlayCanvas && quizBoxOverlayCtx) {
+                quizBoxOverlayCtx.clearRect(0, 0, quizBoxOverlayCanvas.width, quizBoxOverlayCanvas.height);
+            }
+        }
+
+        function setQuizBoxOverlayActive(active) {
+            quizBoxOverlayActive = !!active;
+            if (quizBoxOverlayCanvas) {
+                quizBoxOverlayCanvas.classList.toggle('is-active', quizBoxOverlayActive);
+            }
+            if (!quizBoxOverlayActive) {
+                clearQuizBoxOverlay();
+            } else {
+                drawQuizBoxOverlay();
+            }
+        }
+
+        function updateQuizMeasureHint() {
+            const hint = ecgQuizElements.measureHint;
+            if (!hint) return;
+            if (quizBoxOverlayActive) {
+                hint.textContent = 'Measure tool inactive, deselect box tool to enable click and measure.';
+            } else {
+                hint.textContent =
+                    'Measure tool active: click & drag on the expanded lead to capture intervals. Hold Shift to keep marks, double-click a label to remove it.';
+            }
+        }
+
+        function updateQuizMeasureMode() {
+            const boxEnabled = !!ecgQuizElements.measureToggle?.checked;
+            setQuizBoxOverlayActive(boxEnabled);
+            if (ecgQuizSim) {
+                ecgQuizSim.setMeasureToolEnabled?.(!boxEnabled);
+                if (boxEnabled) ecgQuizSim.clearMeasurements?.();
+            }
+            updateQuizMeasureHint();
         }
 
         function applyQuizInsightHighlight(key) {
@@ -4352,7 +4682,12 @@ const coronaryMap = {
             const bigBg = document.getElementById('ecgQuizBigBackground');
             const bigTrace = document.getElementById('ecgQuizBigTrace');
             const bigOverlay = document.getElementById('ecgQuizBigOverlay');
+            const boxOverlayCanvas = document.getElementById('ecgQuizBoxOverlay');
             const activeLeadLabel = document.getElementById('ecgQuizActiveLead');
+            const questionText = document.getElementById('ecgQuizQuestionText');
+            const measureToggle = document.getElementById('ecgQuizMeasureTool');
+            const measureHint = document.getElementById('ecgQuizMeasureHint');
+            const measureToggleWrap = measureToggle?.closest('.ecg-quiz-box-toggle') || null;
             const nav = document.getElementById('ecgQuizNav');
             const summaryEl = document.getElementById('ecgQuizSummary');
             if (!paper || !choicesEl || !submitBtn || !nextBtn || !feedbackEl || !metaEl || !host || !bgCanvas || !traceCanvas || !gridWrap || !bigBg || !bigTrace) return;
@@ -4367,6 +4702,10 @@ const coronaryMap = {
             ecgQuizElements.host = host;
             ecgQuizElements.gridWrap = gridWrap;
             ecgQuizElements.activeLeadLabel = activeLeadLabel;
+            ecgQuizElements.questionText = questionText;
+            ecgQuizElements.measureToggle = measureToggle;
+            ecgQuizElements.measureHint = measureHint;
+            ecgQuizElements.measureToggleWrap = measureToggleWrap;
             ecgQuizElements.nav = nav;
             ecgQuizElements.summary = summaryEl;
             if (summaryEl) {
@@ -4386,12 +4725,65 @@ const coronaryMap = {
                 { displayTime: 10, heartRate: 75 }
             );
             window.ecgQuizSimInstance = ecgQuizSim;
+            ecgQuizSim.showReadout = false;
+            ecgQuizSim.readoutHiddenText = 'Waiting for correct answer';
+            ecgQuizSim.drawReadoutOverlay?.();
             if (typeof ecgQuizSim.setLoopingEnabled === 'function') {
                 ecgQuizSim.setLoopingEnabled(false);
             }
             ecgQuizSim.pause();
             ecgQuizSim.scrollContainer = gridWrap;
-            ecgQuizSim.setMeasureToolEnabled?.(true);
+            quizBoxOverlayCanvas = boxOverlayCanvas;
+            quizBoxOverlayCtx = boxOverlayCanvas?.getContext('2d') || null;
+            updateQuizMeasureMode();
+
+            measureToggle?.addEventListener('change', () => {
+                updateQuizMeasureMode();
+            });
+
+            boxOverlayCanvas?.addEventListener('click', (event) => {
+                if (!quizBoxOverlayActive) return;
+                if (!ecgQuizSim || !quizBoxOverlayCanvas) return;
+                const rect = quizBoxOverlayCanvas.getBoundingClientRect();
+                if (!rect.width || !rect.height) return;
+                syncQuizBoxOverlaySize();
+                const x = ((event.clientX - rect.left) / rect.width) * quizBoxOverlayCanvas.width;
+                const y = ((event.clientY - rect.top) / rect.height) * quizBoxOverlayCanvas.height;
+                const bigBoxSize = 5 * (ecgQuizSim.pixelPerMm || 4);
+                const originX = Math.floor(x / bigBoxSize) * bigBoxSize;
+                const originY = Math.floor(y / bigBoxSize) * bigBoxSize;
+                const hitIndex = quizBoxOverlayRects.findIndex((box) => {
+                    return (
+                        x >= box.x &&
+                        x <= box.x + box.size &&
+                        y >= box.y &&
+                        y <= box.y + box.size
+                    );
+                });
+                if (hitIndex !== -1) {
+                    quizBoxOverlayRects.splice(hitIndex, 1);
+                    if (!quizBoxOverlayRects.length) {
+                        quizBoxOverlayRowY = null;
+                    } else {
+                        quizBoxOverlayRowY = quizBoxOverlayRects[0].y;
+                    }
+                    drawQuizBoxOverlay();
+                    return;
+                }
+                if (quizBoxOverlayRowY === null) {
+                    quizBoxOverlayRowY = originY;
+                }
+                if (originY !== quizBoxOverlayRowY) return;
+                const last = quizBoxOverlayRects[quizBoxOverlayRects.length - 1];
+                if (last && originX !== last.x + bigBoxSize) return;
+                quizBoxOverlayRects.push({ x: originX, y: originY, size: bigBoxSize });
+                drawQuizBoxOverlay();
+            });
+
+            boxOverlayCanvas?.addEventListener('dblclick', () => {
+                if (!quizBoxOverlayActive) return;
+                clearQuizBoxOverlay();
+            });
 
             submitBtn.addEventListener('click', handleQuizSubmit);
             nextBtn.addEventListener('click', handleQuizNext);
@@ -4456,16 +4848,37 @@ const coronaryMap = {
                     ecgId,
                     choices,
                     correct,
+                    type: 'rhythm',
+                    rhythmKey: correct,
                     status: 'unanswered',
                     attempts: [],
+                    correctedAfterWrong: false,
                     selected: null,
+                    prompt: 'What is the rhythm?',
                     feedbackText: 'Select the rhythm that matches this printout.',
                     feedbackClass: 'ecg-quiz-feedback'
                 };
             });
-            resetQuizSessionState(questions);
+            const intervalQuestions = [];
+            const prPool = keys.filter((key) => !String(key).startsWith('avb'));
+            const qtPool = keys.filter((key) => key === 'sinus');
+            const prRhythm = keys.includes('avb1')
+                ? 'avb1'
+                : pickRhythmForInterval('PR', prPool.length ? prPool : keys);
+            const qrsPool = keys.filter((key) => key !== 'pvtach');
+            const qrsRhythm = pickRhythmForInterval('QRS', qrsPool.length ? qrsPool : keys);
+            const qtRhythm = pickRhythmForInterval('QT', qtPool.length ? qtPool : keys);
+            intervalQuestions.push(buildIntervalQuestion('PR', prRhythm));
+            intervalQuestions.push(buildIntervalQuestion('QRS', qrsRhythm));
+            intervalQuestions.push(buildIntervalQuestion('QT', qtRhythm));
+            const hrPool = keys.filter((key) => key !== 'pvtach');
+            const hrQuestion = buildHrQuestion(pickRhythmForInterval('HR', hrPool.length ? hrPool : keys));
+            const axisModes = ['normal', 'lad', 'rad', 'extreme'];
+            const axisQuestions = axisModes.map((mode) => buildAxisQuestion(mode));
+            const allQuestions = shuffleList([...questions, ...intervalQuestions, hrQuestion, ...axisQuestions]);
+            resetQuizSessionState(allQuestions);
             ecgQuizSession = {
-                questions,
+                questions: allQuestions,
                 currentIndex: 0
             };
             if (ecgQuizElements.summary) {
@@ -4483,6 +4896,7 @@ const coronaryMap = {
                 q.selected = null;
                 q.status = 'unanswered';
                 q.attempts = [];
+                q.correctedAfterWrong = false;
                 q.feedbackText = q.feedbackText || 'Select the rhythm that matches this printout.';
                 q.feedbackClass = q.feedbackClass || 'ecg-quiz-feedback';
             });
@@ -4497,7 +4911,11 @@ const coronaryMap = {
                 btn.dataset.index = idx;
                 btn.classList.toggle('active', idx === ecgQuizSession.currentIndex);
                 if (question.status === 'correct') {
-                    btn.classList.add('correct');
+                    if (question.correctedAfterWrong) {
+                        btn.classList.add('corrected');
+                    } else {
+                        btn.classList.add('correct');
+                    }
                 } else if (question.status === 'incorrect') {
                     btn.classList.add('needs-review');
                 }
@@ -4551,32 +4969,44 @@ const coronaryMap = {
                 const wrapper = input?.closest('.ecg-quiz-choice');
                 if (!wrapper) return;
                 const expl = wrapper.querySelector('.ecg-quiz-choice-expl');
+                const insight = getQuizInsight(question, key);
                 if (key === question.correct) {
                     wrapper.classList.add('correct');
                     if (expl && question.status === 'correct') {
-                        const insight = getRhythmInsight(key);
-                        expl.textContent = insight.success || '';
+                        expl.textContent = formatCorrectFeedback(insight.success);
                         expl.classList.toggle('active', !!expl.textContent);
                     }
                 } else {
                     wrapper.classList.add('incorrect');
                     if (expl) {
-                        const insight = getRhythmInsight(key);
                         expl.textContent = insight.incorrect || '';
                         expl.classList.toggle('active', !!expl.textContent);
                     }
                 }
             });
 
+            if (question.status === 'correct') {
+                const input = document.querySelector(
+                    `input[name="ecg-quiz-choice"][value="${cssEscape(question.correct)}"]`
+                );
+                const wrapper = input?.closest('.ecg-quiz-choice');
+                const expl = wrapper?.querySelector('.ecg-quiz-choice-expl');
+                if (expl) {
+                    const insight = getQuizInsight(question, question.correct);
+                    expl.textContent = formatCorrectFeedback(insight.success);
+                    expl.classList.toggle('active', !!expl.textContent);
+                }
+            }
+
             // Restore the explanation under the current selection (if any).
             if (selectedKey) {
                 const input = document.querySelector(`input[name="ecg-quiz-choice"][value="${cssEscape(selectedKey)}"]`);
                 const wrapper = input?.closest('.ecg-quiz-choice');
                 const expl = wrapper?.querySelector('.ecg-quiz-choice-expl');
-                const insight = getRhythmInsight(selectedKey);
+                const insight = getQuizInsight(question, selectedKey);
                 if (expl) {
                     if (question.status === 'correct') {
-                        expl.textContent = insight.success || '';
+                        expl.textContent = formatCorrectFeedback(insight.success);
                         expl.classList.toggle('active', !!expl.textContent);
                     } else if (question.status === 'incorrect') {
                         expl.textContent = insight.incorrect || '';
@@ -4584,7 +5014,7 @@ const coronaryMap = {
                     }
                 }
                 if (question.status === 'correct') {
-                    applyQuizInsightHighlight(selectedKey);
+                    applyQuizQuestionHighlight(question, selectedKey);
                     applyQuizEcgOverride(question);
                 }
             }
@@ -4597,11 +5027,36 @@ const coronaryMap = {
             ecgQuizSession.currentIndex = index;
             renderQuizNav();
             resetQuizHighlights();
-            applyQuizRhythm(question.correct);
+            ecgQuizSim.clearMeasurements?.();
+            clearQuizBoxOverlay();
+            updateQuizMeasureMode();
+            ecgQuizSim.showReadout = question.status === 'correct';
+            setQuizQuestionPrompt(question);
+            const rhythmKey = question.rhythmKey || question.correct;
+            applyQuizRhythm(rhythmKey);
+            if (question.type === 'interval' || question.type === 'hr') {
+                buildIntervalChoices(question);
+            }
+            if (question.type === 'axis') {
+                ecgQuizSim?.setAxisMode?.(question.axisMode);
+            } else {
+                ecgQuizSim?.setAxisMode?.('normal');
+            }
+            if (ecgQuizElements.measureToggle) {
+                const showBoxToggle = question.type === 'hr';
+                if (ecgQuizElements.measureToggleWrap) {
+                    ecgQuizElements.measureToggleWrap.style.display = showBoxToggle ? '' : 'none';
+                }
+                if (!showBoxToggle) {
+                    ecgQuizElements.measureToggle.checked = false;
+                }
+                updateQuizMeasureMode();
+            }
             const ecgId = question.ecgId;
             renderQuizChoices(question);
             rehydrateQuestionUI(question);
             updateQuizMetaWithId(ecgId);
+            ecgQuizSim.drawReadoutOverlay?.();
         }
 
         function getQuizRhythmKeys() {
@@ -4624,7 +5079,9 @@ const coronaryMap = {
             ecgQuizElements.choices.innerHTML = '';
             question.choices.forEach((key, index) => {
                 const optionId = `ecgQuizChoice_${index}`;
-                const label = RHYTHM_LABELS[key] || key;
+                const label =
+                    (question.choiceLabels && question.choiceLabels[key]) ||
+                    (question.type === 'rhythm' ? RHYTHM_LABELS[key] || key : key);
                 const wrapper = document.createElement('label');
                 wrapper.className = 'ecg-quiz-choice';
                 const inputRow = document.createElement('div');
@@ -4700,8 +5157,9 @@ const coronaryMap = {
             const chosen = selected.value;
             question.selected = chosen;
             const isCorrect = chosen === question.correct;
+            const hadIncorrectAttempt = question.attempts.some((attempt) => attempt !== question.correct);
             const wrapper = selected.closest('.ecg-quiz-choice');
-            const insight = getRhythmInsight(chosen);
+            const insight = getQuizInsight(question, chosen);
             if (!isCorrect) {
                 question.status = 'incorrect';
                 question.attempts.push(chosen);
@@ -4720,6 +5178,7 @@ const coronaryMap = {
                 return;
             }
             question.status = 'correct';
+            question.correctedAfterWrong = hadIncorrectAttempt;
             question.attempts.push(chosen);
             document.querySelectorAll('input[name="ecg-quiz-choice"]').forEach((input) => {
                 input.disabled = true;
@@ -4731,11 +5190,11 @@ const coronaryMap = {
                     }
                 }
             });
-            applyQuizInsightHighlight(chosen);
+            applyQuizQuestionHighlight(question, chosen);
             if (wrapper) {
                 const successExpl = wrapper.querySelector('.ecg-quiz-choice-expl');
                 if (successExpl) {
-                    successExpl.textContent = insight.success;
+                    successExpl.textContent = formatCorrectFeedback(insight.success);
                     successExpl.classList.add('active');
                 }
             }
@@ -4743,30 +5202,38 @@ const coronaryMap = {
             if (override && wrapper) {
                 const successExpl = wrapper.querySelector('.ecg-quiz-choice-expl');
                 if (successExpl) {
-                    successExpl.textContent = override.success;
+                    successExpl.textContent = formatCorrectFeedback(override.success);
                     successExpl.classList.add('active');
                 }
             }
             if (ecgQuizElements.feedback) {
                 const successText = override ? override.success : insight.success;
-                if (override) {
-                    ecgQuizElements.feedback.textContent = successText || '';
+                if (successText) {
+                    const trimmed = successText.trim();
+                    const prefix = trimmed.toLowerCase().startsWith('correct') ? '' : 'Correct! ';
+                    ecgQuizElements.feedback.textContent = `${prefix}${trimmed}`;
                 } else {
-                    ecgQuizElements.feedback.textContent = successText ? `Correct! ${successText}` : 'Correct! Nice work.';
+                    ecgQuizElements.feedback.textContent = 'Correct! Nice work.';
                 }
                 ecgQuizElements.feedback.className = 'ecg-quiz-feedback success';
             }
             {
                 const successText = override ? override.success : insight.success;
-                if (override) {
-                    question.feedbackText = successText || '';
+                if (successText) {
+                    const trimmed = successText.trim();
+                    const prefix = trimmed.toLowerCase().startsWith('correct') ? '' : 'Correct! ';
+                    question.feedbackText = `${prefix}${trimmed}`;
                 } else {
-                    question.feedbackText = successText ? `Correct! ${successText}` : 'Correct! Nice work.';
+                    question.feedbackText = 'Correct! Nice work.';
                 }
             }
             question.feedbackClass = 'ecg-quiz-feedback success';
             if (ecgQuizElements.submit) ecgQuizElements.submit.disabled = true;
             if (ecgQuizElements.next) ecgQuizElements.next.disabled = false;
+            if (ecgQuizSim) {
+                ecgQuizSim.showReadout = true;
+                ecgQuizSim.drawReadoutOverlay?.();
+            }
             handleQuizProgress();
         }
 
@@ -4805,10 +5272,14 @@ const coronaryMap = {
             const list = document.createElement('ul');
             ecgQuizSession.questions.forEach((q, idx) => {
                 const li = document.createElement('li');
-                const rhythmLabel = RHYTHM_LABELS[q.correct] || q.correct;
+                const correctLabel =
+                    (q.type === 'rhythm'
+                        ? RHYTHM_LABELS[q.correct] || q.correct
+                        : (q.choiceLabels && q.choiceLabels[q.correct]) || q.correct);
+                const prompt = q.prompt || 'Question';
                 li.textContent = q.status === 'correct'
-                    ? `Q${idx + 1}: ${rhythmLabel} — Correct`
-                    : `Q${idx + 1}: ${rhythmLabel} — Needs review`;
+                    ? `Q${idx + 1}: ${prompt} (${correctLabel}) — Correct`
+                    : `Q${idx + 1}: ${prompt} (${correctLabel}) — Needs review`;
                 list.appendChild(li);
             });
             summary.appendChild(list);
@@ -5229,13 +5700,18 @@ const coronaryMap = {
             document.getElementById('ecg12Pause')?.addEventListener('click', () => sim.pause());
             document.getElementById('ecg12Reset')?.addEventListener('click', () => sim.reset());
 
-            traceCanvas?.addEventListener('click', (event) => {
+            const handleLeadExpandClick = (event) => {
+                if (sim.handleReadoutClick?.(event)) return;
                 const lead = sim.getLeadAtEvent(event);
                 if (lead) {
                     sim.setSelectedLead(lead);
                     const expandedLabel = document.getElementById('ecg12ActiveLead');
                     if (expandedLabel) expandedLabel.textContent = sim.getSelectedLead();
                 }
+            };
+
+            [traceCanvas, overlay].forEach((canvas) => {
+                canvas?.addEventListener('click', handleLeadExpandClick);
             });
 
             updateHighlights();

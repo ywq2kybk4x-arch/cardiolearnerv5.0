@@ -318,6 +318,7 @@
         <div>
           <div class="ecg-expanded-header">
             Expanded Lead: <span id="ecg12ActiveLead">Lead II</span>
+            <span class="ecg-hint">(Click any lead to view below)</span>
           </div>
           <div class="ecg-canvas-wrap ecg-expanded-wrap">
             <canvas id="ecg12BigBackground"></canvas>
@@ -528,12 +529,17 @@
       if (pauseBtn) pauseBtn.addEventListener('click', () => sim.pause());
       if (resetBtn) resetBtn.addEventListener('click', () => sim.reset());
 
-      trace.addEventListener('click', (event) => {
+      const handleLeadExpandClick = (event) => {
+        if (sim.handleReadoutClick && sim.handleReadoutClick(event)) return;
         const lead = sim.getLeadAtEvent(event);
         if (lead) {
           sim.setSelectedLead(lead);
           updateExpandedLabel();
         }
+      };
+
+      [trace, overlay].forEach((canvas) => {
+        if (canvas) canvas.addEventListener('click', handleLeadExpandClick);
       });
 
       if (gridWrap) {

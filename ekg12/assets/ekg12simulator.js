@@ -49,7 +49,7 @@ const LIMB_LEAD_CONFIG = normalizeLeadConfig({
   I: { gain: 0.95, polarity: 1, offsetPx: 0 },
   II: { gain: 1.05, polarity: 1, offsetPx: 0 },
   III: { gain: 0.95, polarity: 1, offsetPx: 0 },
-  AVR: { gain: 1.0, polarity: -1, offsetPx: 0 },
+  AVR: { gain: 1.0, polarity: 1, offsetPx: 0 },
   AVL: { gain: 1.05, polarity: 1, offsetPx: 0 },
   AVF: { gain: 1.0, polarity: 1, offsetPx: 0 }
 });
@@ -60,8 +60,8 @@ const PRECORDIAL_BASE_GAINS = normalizeLeadConfig({
   V2: { baseGain: 0.95, offsetPx: 0 },
   V3: { baseGain: 1.0, offsetPx: 0 },
   V4: { baseGain: 1.05, offsetPx: 0 },
-  V5: { baseGain: 1.1, offsetPx: 0 },
-  V6: { baseGain: 1.05, offsetPx: 0 }
+  V5: { baseGain: 0.9, offsetPx: 0 },
+  V6: { baseGain: 0.9, offsetPx: 0 }
 });
 
 const DEFAULT_LIMB_CONFIG = { gain: 1, polarity: 1, offsetPx: 0 };
@@ -164,7 +164,8 @@ const safeNonZero = (g, minAbs = 0.18) => {
 };
 
 const lerp = (a, b, t) => a + (b - a) * t;
-const TILE_BASELINE_SHIFT_PX = 16;
+const TILE_BASELINE_SHIFT_PX = 8;
+const TILE_EDGE_PAD_PX = 32;
 const GRID_TOP_PADDING_PX = 28;
 const DEFAULT_HR_CLAMP = { min: 40, max: 180 };
 
@@ -309,6 +310,10 @@ class Ecg12Simulator {
     this.randomizeAfibPhases();
     this.debugLeadModel = false;
     this.debugLeadModelOverlay = false;
+
+    this.showReadout = false;
+    this.readoutHiddenText = 'Click to reveal';
+    this.readoutBox = null;
 
     this.highlights = { P: false, QRS: false, T: false, Dropped: false };
     this.intervalHighlights = { PR: false, QRSd: false, QT: false, RR: false };
@@ -557,7 +562,7 @@ class Ecg12Simulator {
   axisDegFromMode(mode) {
     switch (this.normalizeAxisMode(mode)) {
       case 'lad':
-        return -30;
+        return -60;
       case 'rad':
         return 120;
       case 'extreme':
@@ -916,21 +921,22 @@ class Ecg12Simulator {
   computeViewports() {
     const cols = LEADS_12[0].length;
     const rows = LEADS_12.length;
-    const gutter = 8;
+    const gutterX = 8;
+    const gutterY = 8;
     const w = this.renderWidth || (this.traceCanvas ? this.traceCanvas.clientWidth : 0);
     const h =
       (this.renderHeight || (this.traceCanvas ? this.traceCanvas.clientHeight : 0)) -
       this.topReadoutHeight;
 
-    const tileWidth = (w - gutter * (cols + 1)) / cols;
-    const tileHeight = (h - GRID_TOP_PADDING_PX - gutter * (rows + 1)) / rows;
+    const tileWidth = (w - gutterX * (cols + 1)) / cols;
+    const tileHeight = (h - GRID_TOP_PADDING_PX - gutterY * (rows + 1)) / rows;
     const viewports = [];
 
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
         const leadLabel = LEADS_12[r][c];
-        const x = gutter + c * (tileWidth + gutter);
-        const y = this.topReadoutHeight + GRID_TOP_PADDING_PX + gutter + r * (tileHeight + gutter);
+        const x = gutterX + c * (tileWidth + gutterX);
+        const y = this.topReadoutHeight + GRID_TOP_PADDING_PX + gutterY + r * (tileHeight + gutterY);
         viewports.push({
           leadLabel,
           leadKey: normLead(leadLabel),
@@ -1071,7 +1077,10 @@ class Ecg12Simulator {
       }
 
       const baselineYRaw = vp.y + vp.height * 0.5 + TILE_BASELINE_SHIFT_PX;
-      const baselineY = Math.max(vp.y + 18, Math.min(vp.y + vp.height - 18, baselineYRaw));
+      const baselineY = Math.max(
+        vp.y + TILE_EDGE_PAD_PX,
+        Math.min(vp.y + vp.height - TILE_EDGE_PAD_PX, baselineYRaw)
+      );
       ctx.strokeStyle = 'rgba(148,163,184,0.5)';
       ctx.beginPath();
       ctx.moveTo(vp.x, baselineY + 0.5);
@@ -1151,8 +1160,8 @@ class Ecg12Simulator {
     const xMax = Math.max(1, Math.floor(sweepProgress * ((this.renderWidth || w) - 1)));
 
     const baselineY = h * 0.45;
-    const overlayBandHeight = 130;
-    const overlayTopY = baselineY + overlayBandHeight * 0.4;
+    const overlayBandHeight = clamp(h * 0.35, 90, 130);
+    const overlayTopY = Math.min(baselineY + overlayBandHeight * 0.25, h - overlayBandHeight - 8);
     const leadLabel = this.selectedLead;
     const leadKey = this.selectedLeadKey || normLead(leadLabel);
 
@@ -1549,10 +1558,14 @@ class Ecg12Simulator {
     const w = this.renderWidth || this.overlayCanvas.clientWidth || 0;
     const h = this.renderHeight || this.overlayCanvas.clientHeight || 0;
     ctx.clearRect(0, 0, w, h);
+    const showReadout = this.showReadout !== false;
     const summary = this.getReadoutSummary();
     const iv = this.getIntervalReadout();
     const prLine = iv.prMs == null ? 'PR —' : `PR ${iv.prMs} ms`;
-    const lines = [summary.hrText, summary.axisText, prLine, `QRS ${iv.qrsMs} ms`, `QT ${iv.qtMs} ms`];
+    const hiddenText = this.readoutHiddenText || 'Click to reveal';
+    const lines = showReadout
+      ? [summary.hrText, summary.axisText, prLine, `QRS ${iv.qrsMs} ms`, `QT ${iv.qtMs} ms`]
+      : [hiddenText];
     const sc = this.scrollContainer || this.overlayCanvas.parentElement;
     const scrollLeft = sc ? sc.scrollLeft : 0;
     const viewW = sc ? sc.clientWidth : w;
@@ -1582,6 +1595,7 @@ class Ecg12Simulator {
     const margin = 12;
     const x = Math.max(margin, scrollLeft + viewW - boxWidth - margin);
     const y = 8;
+    this.readoutBox = { x, y, width: boxWidth, height: boxHeight };
     ctx.save();
     ctx.fillStyle = 'rgba(255,255,255,0.75)';
     ctx.strokeStyle = 'rgba(0,0,0,0.12)';
@@ -1593,6 +1607,22 @@ class Ecg12Simulator {
     ctx.restore();
     ctx.fillStyle = '#0f172a';
     lines.forEach((line, i) => ctx.fillText(line, x + padding, y + padding + i * lineHeight));
+  }
+
+  handleReadoutClick(event) {
+    if (!this.overlayCanvas || !this.readoutBox) return false;
+    const rect = this.overlayCanvas.getBoundingClientRect();
+    if (!rect.width || !rect.height) return false;
+    const scaleX = (this.renderWidth || rect.width) / rect.width;
+    const scaleY = (this.renderHeight || rect.height) / rect.height;
+    const x = (event.clientX - rect.left) * scaleX;
+    const y = (event.clientY - rect.top) * scaleY;
+    const { x: bx, y: by, width, height } = this.readoutBox;
+    const hit = x >= bx && x <= bx + width && y >= by && y <= by + height;
+    if (!hit) return false;
+    this.showReadout = !this.showReadout;
+    this.drawReadoutOverlay();
+    return true;
   }
 
   getIntervalReadout() {
@@ -2789,15 +2819,18 @@ window.initEcg12Simulator = function initEcg12Simulator(rootEl) {
   if (pauseBtn) pauseBtn.addEventListener('click', () => sim.pause());
   if (resetBtn) resetBtn.addEventListener('click', () => sim.reset());
 
-  if (trace) {
-    trace.addEventListener('click', (event) => {
-      const lead = sim.getLeadAtEvent(event);
-      if (lead) {
-        sim.setSelectedLead(lead);
-        updateExpandedLabel();
-      }
-    });
-  }
+  const handleLeadClick = (event) => {
+    if (sim.handleReadoutClick && sim.handleReadoutClick(event)) return;
+    const lead = sim.getLeadAtEvent(event);
+    if (lead) {
+      sim.setSelectedLead(lead);
+      updateExpandedLabel();
+    }
+  };
+
+  [trace, overlayCanvas].filter(Boolean).forEach((canvas) => {
+    canvas.addEventListener('click', handleLeadClick);
+  });
 
   if (gridWrap) {
     gridWrap.addEventListener('mousemove', (event) => {
