@@ -222,12 +222,12 @@
                 <option value="pos" selected>Lead I: Positive</option>
                 <option value="neg">Lead I: Negative</option>
               </select>
-              <select id="ecg12LeadAVFSign" style="flex:1;">
-                <option value="pos" selected>aVF: Positive</option>
-                <option value="neg">aVF: Negative</option>
+              <select id="ecg12LeadIISign" style="flex:1;">
+                <option value="pos" selected>Lead II: Positive</option>
+                <option value="neg">Lead II: Negative</option>
               </select>
             </div>
-            <div class="ecg-help">Quadrant method: choose Lead I and aVF polarity; simulator picks axis category.</div>
+            <div class="ecg-help">Quadrant method: choose Lead I and Lead II polarity; simulator picks axis category.</div>
           </div>
         </div>
 
@@ -364,7 +364,7 @@
       const heartRateInput = document.getElementById('ecg12HeartRate');
       const axisModeSelect = document.getElementById('ecg12AxisMode');
       const leadISignSelect = document.getElementById('ecg12LeadISign');
-      const leadAVFSignSelect = document.getElementById('ecg12LeadAVFSign');
+      const leadIISignSelect = document.getElementById('ecg12LeadIISign');
       const rhythmSelect = document.getElementById('ecg12RhythmPreset');
       const highlightIds = [
         ['ecg12HighlightP', 'P'],
@@ -419,16 +419,16 @@
       }
 
       const axisModeToQuadrant = {
-        normal: { leadI: 'pos', avf: 'pos' },
-        lad: { leadI: 'pos', avf: 'neg' },
-        rad: { leadI: 'neg', avf: 'pos' },
-        extreme: { leadI: 'neg', avf: 'neg' }
+        normal: { leadI: 'pos', leadII: 'pos' },
+        lad: { leadI: 'pos', leadII: 'neg' },
+        rad: { leadI: 'neg', leadII: 'pos' },
+        extreme: { leadI: 'neg', leadII: 'neg' }
       };
 
-      const quadrantToAxisMode = (leadISign, avfSign) => {
-        if (leadISign === 'pos' && avfSign === 'pos') return 'normal';
-        if (leadISign === 'pos' && avfSign === 'neg') return 'lad';
-        if (leadISign === 'neg' && avfSign === 'pos') return 'rad';
+      const quadrantToAxisMode = (leadISign, leadIISign) => {
+        if (leadISign === 'pos' && leadIISign === 'pos') return 'normal';
+        if (leadISign === 'pos' && leadIISign === 'neg') return 'lad';
+        if (leadISign === 'neg' && leadIISign === 'pos') return 'rad';
         return 'extreme';
       };
 
@@ -438,7 +438,7 @@
         const mapping = axisModeToQuadrant[mode] || axisModeToQuadrant.normal;
         syncingAxisControls = true;
         if (leadISignSelect) leadISignSelect.value = mapping.leadI;
-        if (leadAVFSignSelect) leadAVFSignSelect.value = mapping.avf;
+        if (leadIISignSelect) leadIISignSelect.value = mapping.leadII;
         syncingAxisControls = false;
       };
 
@@ -456,14 +456,14 @@
       const handleQuadrantChange = () => {
         if (syncingAxisControls) return;
         const leadISign = leadISignSelect ? leadISignSelect.value : 'pos';
-        const avfSign = leadAVFSignSelect ? leadAVFSignSelect.value : 'pos';
-        const mode = quadrantToAxisMode(leadISign, avfSign);
+        const leadIISign = leadIISignSelect ? leadIISignSelect.value : 'pos';
+        const mode = quadrantToAxisMode(leadISign, leadIISign);
         if (axisModeSelect) axisModeSelect.value = mode;
         sim.setAxisMode(mode);
       };
 
       if (leadISignSelect) leadISignSelect.addEventListener('change', handleQuadrantChange);
-      if (leadAVFSignSelect) leadAVFSignSelect.addEventListener('change', handleQuadrantChange);
+      if (leadIISignSelect) leadIISignSelect.addEventListener('change', handleQuadrantChange);
 
       const handleRhythmChange = () => {
         if (!rhythmSelect) return;

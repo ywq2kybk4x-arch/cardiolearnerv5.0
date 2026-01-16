@@ -3512,12 +3512,12 @@
                                             <option value="pos" selected>Lead I: Positive</option>
                                             <option value="neg">Lead I: Negative</option>
                                         </select>
-                                        <select id="ecg12LeadAVFSign" style="flex:1;">
-                                            <option value="pos" selected>aVF: Positive</option>
-                                            <option value="neg">aVF: Negative</option>
+                                        <select id="ecg12LeadIISign" style="flex:1;">
+                                            <option value="pos" selected>Lead II: Positive</option>
+                                            <option value="neg">Lead II: Negative</option>
                                         </select>
                                     </div>
-                                    <div class="ecg-help">Quadrant method: choose Lead I and aVF polarity; simulator picks axis category.</div>
+                                    <div class="ecg-help">Quadrant method: choose Lead I and Lead II polarity; simulator picks axis category.</div>
                                 </div>
                             </div>
 
@@ -5628,7 +5628,7 @@ const coronaryMap = {
             const heartRateInput = document.getElementById('ecg12HeartRate');
             const axisModeSelect = document.getElementById('ecg12AxisMode');
             const leadISignSelect = document.getElementById('ecg12LeadISign');
-            const leadAVFSignSelect = document.getElementById('ecg12LeadAVFSign');
+            const leadIISignSelect = document.getElementById('ecg12LeadIISign');
             const rhythmSelect = document.getElementById('ecg12RhythmPreset');
             const measureToggle = document.getElementById('ecg12MeasureTool');
             const measureHint = document.getElementById('ecg12MeasureHint');
@@ -5700,15 +5700,15 @@ const coronaryMap = {
             };
 
             const axisModeToQuadrant = {
-                normal:{leadI:'pos',avf:'pos'},
-                lad:{leadI:'pos',avf:'neg'},
-                rad:{leadI:'neg',avf:'pos'},
-                extreme:{leadI:'neg',avf:'neg'}
+                normal:{leadI:'pos',leadII:'pos'},
+                lad:{leadI:'pos',leadII:'neg'},
+                rad:{leadI:'neg',leadII:'pos'},
+                extreme:{leadI:'neg',leadII:'neg'}
             };
-            const quadrantToAxisMode = (leadI, avf) => {
-                if (leadI==='pos' && avf==='pos') return 'normal';
-                if (leadI==='pos' && avf==='neg') return 'lad';
-                if (leadI==='neg' && avf==='pos') return 'rad';
+            const quadrantToAxisMode = (leadI, leadII) => {
+                if (leadI==='pos' && leadII==='pos') return 'normal';
+                if (leadI==='pos' && leadII==='neg') return 'lad';
+                if (leadI==='neg' && leadII==='pos') return 'rad';
                 return 'extreme';
             };
 
@@ -5717,7 +5717,7 @@ const coronaryMap = {
                 const m = axisModeToQuadrant[mode] || axisModeToQuadrant.normal;
                 syncing = true;
                 if (leadISignSelect) leadISignSelect.value = m.leadI;
-                if (leadAVFSignSelect) leadAVFSignSelect.value = m.avf;
+                if (leadIISignSelect) leadIISignSelect.value = m.leadII;
                 syncing = false;
             };
             const applyAxisMode = (mode) => {
@@ -5730,12 +5730,12 @@ const coronaryMap = {
             axisModeSelect?.addEventListener('change', () => applyAxisMode(axisModeSelect.value));
             const handleQuadrant = () => {
                 if (syncing) return;
-                const mode = quadrantToAxisMode(leadISignSelect?.value || 'pos', leadAVFSignSelect?.value || 'pos');
+                const mode = quadrantToAxisMode(leadISignSelect?.value || 'pos', leadIISignSelect?.value || 'pos');
                 if (axisModeSelect) axisModeSelect.value = mode;
                 sim.setAxisMode(mode);
             };
             leadISignSelect?.addEventListener('change', handleQuadrant);
-            leadAVFSignSelect?.addEventListener('change', handleQuadrant);
+            leadIISignSelect?.addEventListener('change', handleQuadrant);
 
             const populateRhythms = () => {
                 if (!rhythmSelect || !sim.getRhythmList) return;

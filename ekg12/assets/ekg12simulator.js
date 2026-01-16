@@ -2650,7 +2650,7 @@ window.initEcg12Simulator = function initEcg12Simulator(rootEl) {
   const heartRateInput = scoped('ecg12HeartRate');
   const axisModeSelect = scoped('ecg12AxisMode');
   const leadISignSelect = scoped('ecg12LeadISign');
-  const leadAVFSignSelect = scoped('ecg12LeadAVFSign');
+  const leadIISignSelect = scoped('ecg12LeadIISign');
   const rhythmSelect = scoped('ecg12RhythmPreset');
   const measureToggle = scoped('ecg12MeasureTool');
   const measureHint = scoped('ecg12MeasureHint');
@@ -2697,16 +2697,16 @@ window.initEcg12Simulator = function initEcg12Simulator(rootEl) {
   }
 
   const axisModeToQuadrant = {
-    normal: { leadI: 'pos', avf: 'pos' },
-    lad: { leadI: 'pos', avf: 'neg' },
-    rad: { leadI: 'neg', avf: 'pos' },
-    extreme: { leadI: 'neg', avf: 'neg' }
+    normal: { leadI: 'pos', leadII: 'pos' },
+    lad: { leadI: 'pos', leadII: 'neg' },
+    rad: { leadI: 'neg', leadII: 'pos' },
+    extreme: { leadI: 'neg', leadII: 'neg' }
   };
 
-  const quadrantToAxisMode = (leadISign, avfSign) => {
-    if (leadISign === 'pos' && avfSign === 'pos') return 'normal';
-    if (leadISign === 'pos' && avfSign === 'neg') return 'lad';
-    if (leadISign === 'neg' && avfSign === 'pos') return 'rad';
+  const quadrantToAxisMode = (leadISign, leadIISign) => {
+    if (leadISign === 'pos' && leadIISign === 'pos') return 'normal';
+    if (leadISign === 'pos' && leadIISign === 'neg') return 'lad';
+    if (leadISign === 'neg' && leadIISign === 'pos') return 'rad';
     return 'extreme';
   };
 
@@ -2716,7 +2716,7 @@ window.initEcg12Simulator = function initEcg12Simulator(rootEl) {
     const mapping = axisModeToQuadrant[mode] || axisModeToQuadrant.normal;
     syncingAxisControls = true;
     if (leadISignSelect) leadISignSelect.value = mapping.leadI;
-    if (leadAVFSignSelect) leadAVFSignSelect.value = mapping.avf;
+    if (leadIISignSelect) leadIISignSelect.value = mapping.leadII;
     syncingAxisControls = false;
   };
 
@@ -2734,14 +2734,14 @@ window.initEcg12Simulator = function initEcg12Simulator(rootEl) {
   const handleQuadrantChange = () => {
     if (syncingAxisControls) return;
     const leadISign = leadISignSelect ? leadISignSelect.value : 'pos';
-    const avfSign = leadAVFSignSelect ? leadAVFSignSelect.value : 'pos';
-    const mode = quadrantToAxisMode(leadISign, avfSign);
+    const leadIISign = leadIISignSelect ? leadIISignSelect.value : 'pos';
+    const mode = quadrantToAxisMode(leadISign, leadIISign);
     if (axisModeSelect) axisModeSelect.value = mode;
     sim.setAxisMode(mode);
   };
 
   if (leadISignSelect) leadISignSelect.addEventListener('change', handleQuadrantChange);
-  if (leadAVFSignSelect) leadAVFSignSelect.addEventListener('change', handleQuadrantChange);
+  if (leadIISignSelect) leadIISignSelect.addEventListener('change', handleQuadrantChange);
 
   const handleRhythmChange = () => {
     if (!rhythmSelect) return;
