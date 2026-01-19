@@ -924,6 +924,11 @@
             box-shadow: var(--shadow-sm);
         }
 
+        .qbank-topic.zero {
+            opacity: 0.55;
+            pointer-events: none;
+        }
+
         .qbank-system {
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
@@ -1086,6 +1091,12 @@
             background: rgba(248, 113, 113, 0.15);
             border-color: rgba(248, 113, 113, 0.6);
             color: #b91c1c;
+        }
+
+        .qbank-nav-button.corrected {
+            background: rgba(234, 179, 8, 0.18);
+            border-color: rgba(234, 179, 8, 0.65);
+            color: #a16207;
         }
 
         .qbank-nav-button.omitted {
@@ -6776,7 +6787,6 @@ const coronaryMap = {
             unused: { label: 'Unused', count: 0 },
             incorrect: { label: 'Incorrect', count: 0 },
             marked: { label: 'Marked', count: 0 },
-            omitted: { label: 'Omitted', count: 0 },
             correct: { label: 'Correct', count: 0 }
         };
 
@@ -6792,6 +6802,17 @@ const coronaryMap = {
             'Cardiac Anatomy': 70,
             'Cardio Physiology': 130
         };
+        const QBANK_TOPIC_PINNED = new Set([
+            'Aortic Regurgitation',
+            'Aortic Stenosis',
+            'Cardiac Tamponade',
+            'HFpEF',
+            'HFrEF',
+            'Hypertrophic Cardiomyopathy',
+            'Mitral Regurgitation',
+            'Mitral Stenosis',
+            'Shock Questions'
+        ]);
 
         const QBANK_SYSTEMS_TEMPLATE = [
             {
@@ -6851,6 +6872,13 @@ const coronaryMap = {
                 const raw = localStorage.getItem(QBANK_STORAGE_KEY);
                 if (!raw) return { statusById: {}, markedById: {} };
                 const parsed = JSON.parse(raw);
+                if (parsed && parsed.statusById) {
+                    Object.entries(parsed.statusById).forEach(([id, status]) => {
+                        if (status === 'omitted') {
+                            parsed.statusById[id] = 'unused';
+                        }
+                    });
+                }
                 return {
                     statusById: parsed.statusById || {},
                     markedById: parsed.markedById || {}
@@ -6874,13 +6902,15 @@ const coronaryMap = {
 
         function getQuestionStatus(id) {
             if (!id) return 'unused';
-            return qbankProgress.statusById[id] || 'unused';
+            const status = qbankProgress.statusById[id] || 'unused';
+            return status === 'omitted' ? 'unused' : status;
         }
 
         function setQuestionStatus(id, status) {
             if (!id || !status) return;
-            if (qbankProgress.statusById[id] === status) return;
-            qbankProgress.statusById[id] = status;
+            const normalized = status === 'omitted' ? 'unused' : status;
+            if (qbankProgress.statusById[id] === normalized) return;
+            qbankProgress.statusById[id] = normalized;
             saveQbankProgress();
             updateQbankSourceCounts();
         }
@@ -6908,12 +6938,13 @@ const coronaryMap = {
                 unused: 0,
                 incorrect: 0,
                 marked: 0,
-                omitted: 0,
                 correct: 0
             };
             qbankQuestions.forEach((question) => {
                 const status = getQuestionStatus(question.id);
-                if (status && counts.hasOwnProperty(status)) {
+                if (status === 'unused' || status === 'omitted') {
+                    counts.unused += 1;
+                } else if (status && counts.hasOwnProperty(status)) {
                     counts[status] += 1;
                 } else {
                     counts.unused += 1;
@@ -6935,7 +6966,7 @@ const coronaryMap = {
         }
 
         function resetQbankDataWithConfirm() {
-            const confirmed = window.confirm('Reset QBank progress? This will erase all saved Correct/Incorrect/Marked/Omitted status on this device.');
+            const confirmed = window.confirm('Reset QBank progress? This will erase all saved Correct/Incorrect/Marked status on this device.');
             if (!confirmed) return;
             qbankProgress.statusById = {};
             qbankProgress.markedById = {};
@@ -7076,7 +7107,7 @@ const coronaryMap = {
                     break;
                 case 'omitted':
                 default:
-                    setQuestionStatus(id, 'omitted');
+                    setQuestionStatus(id, 'unused');
                     break;
             }
         }
@@ -7179,15 +7210,32 @@ const coronaryMap = {
                 .replace(/Incorrect Answer Choices:\s*/g, '')
                 .replace(/Wrong-answer analogies:\s*/g, '')
                 .replace(/Click-feedback[^:]*:\s*/g, '')
-                .replace(/(^|\s)([A-D][).]\s)/g, '$1\n$2')
-                .replace(/\n{2,}/g, '\n')
+                .replace(/(^|\s)([A-D][).]\s)/g, '$1\n\n$2')
+                .replace(/\n{3,}/g, '\n\n')
                 .trim();
-            return formatted.replace(/\n/g, '<br>');
+            formatted = formatted.replace(/(^|\n)([A-D][).][^\n]*)/g, '$1<strong>$2</strong>');
+            return formatted
+                .split('\n\n')
+                .map(block => block.replace(/\n/g, '<br>'))
+                .join('<br><br>');
+        }
+
+        function escapeRegExp(value) {
+            return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function normalizeQbankChoiceFeedback(text, letter, choiceText) {
+            if (!text) return '';
+            if (!choiceText) return text;
+            const escapedChoice = escapeRegExp(choiceText.trim());
+            const prefixPattern = new RegExp(`^\\s*[${letter}][).]\\s*${escapedChoice}\\s*(?:\\n|$)`, 'i');
+            return text.replace(prefixPattern, '').trimStart();
         }
 
         function updateQbankMetaCounts() {
             const categoryCounts = {};
             qbankQuestions.forEach((question) => {
+                if (getQuestionStatus(question.id) !== 'unused') return;
                 const category = question.category || 'General';
                 categoryCounts[category] = (categoryCounts[category] || 0) + 1;
             });
@@ -7200,9 +7248,16 @@ const coronaryMap = {
                 }
             });
 
+            QBANK_TOPIC_PINNED.forEach((category) => {
+                if (!qbankState.topics[category]) {
+                    qbankState.topics[category] = { selected: false, count: 0 };
+                }
+            });
+
             Object.keys(qbankState.topics).forEach((category) => {
                 if (!categoryCounts[category]) {
                     qbankState.topics[category].count = 0;
+                    qbankState.topics[category].selected = false;
                 }
             });
 
@@ -7328,7 +7383,6 @@ const coronaryMap = {
                 unused: true,
                 incorrect: false,
                 marked: false,
-                omitted: false,
                 correct: false
             };
             return {
@@ -7532,30 +7586,14 @@ const coronaryMap = {
                     </label>
                 `).join('');
             const topicList = Object.entries(qbankState.topics)
+                .filter(([key, meta]) => meta.count > 0 || QBANK_TOPIC_PINNED.has(key))
                 .map(([key, meta]) => `
-                    <label class="qbank-topic">
-                        <input type="checkbox" data-qbank-topic="${key}" ${meta.selected ? 'checked' : ''}>
+                    <label class="qbank-topic ${meta.count === 0 && QBANK_TOPIC_PINNED.has(key) ? 'zero' : ''}">
+                        <input type="checkbox" data-qbank-topic="${key}" ${meta.selected ? 'checked' : ''} ${meta.count === 0 ? 'disabled' : ''}>
                         <span>${key}</span>
                         <span class="qbank-count-badge">${meta.count}</span>
                     </label>
                 `).join('');
-            const systems = qbankState.systemsTree.map((node, idx) => `
-                <div class="qbank-system">
-                    <button class="qbank-system-toggle" data-system-index="${idx}">
-                        <span>${node.name}</span>
-                        <span class="qbank-count-badge">${node.count}</span>
-                        <span>${node.open ? '−' : '+'}</span>
-                    </button>
-                    ${node.open ? `<div class="qbank-system-children">
-                        ${node.children.map(child => `
-                            <div class="qbank-system-child">
-                                <span>${child.name}</span>
-                                <span class="qbank-count-badge">${child.count}</span>
-                            </div>
-                        `).join('')}
-                    </div>` : ''}
-                </div>
-            `).join('');
             const selectedSources = getSelectedSources();
             const selectedTopics = getSelectedTopics();
             const filteredQuestions = getFilteredQbankQuestions();
@@ -7570,7 +7608,7 @@ const coronaryMap = {
             }
             const questionCount = getSelectedQuestionCount(poolSize);
             const timeEstimate = poolSize && qbankState.timing === 'timed'
-                ? `~${Math.max(10, Math.round(questionCount * 1.2))} min`
+                ? `~${Math.max(10, Math.round(questionCount * 2))} min`
                 : (poolSize ? 'Untimed' : 'N/A');
             const previewQuestions = filteredQuestions.slice(0, 5);
             const previewHtml = previewQuestions.length
@@ -7599,13 +7637,6 @@ const coronaryMap = {
                             <div class="qbank-section-title">Topics</div>
                             <div class="qbank-topic-list">${topicList}</div>
                         </div>
-                        <div>
-                            <div class="qbank-section-title" style="display:flex; justify-content:space-between; align-items:center;">
-                                <span>Systems</span>
-                                <button type="button" class="btn btn-ghost btn-compact" id="qbank-expand-all">Expand All</button>
-                            </div>
-                            ${systems}
-                        </div>
                     </div>
                     <div class="qbank-panel">
                         <div class="qbank-summary-card">
@@ -7624,7 +7655,7 @@ const coronaryMap = {
                                 <div class="qbank-section-title">Question Count</div>
                                 <input type="number" id="qbankQuestionCountInput" class="qbank-custom-input" min="1" ${poolSize ? `max="${poolSize}"` : ''} value="${poolSize ? questionCount : ''}" ${poolSize ? '' : 'disabled'}>
                                 ${maxLabel}
-                                <div class="muted-text" style="margin-top:6px;">Estimated time: ${timeEstimate}</div>
+                                <div class="muted-text" style="margin-top:6px;">Estimated time: <span id="qbank-time-estimate">${timeEstimate}</span></div>
                             </div>
                             <div class="qbank-session-actions">
                                 <button id="qbank-start-btn" class="btn btn-primary" ${startDisabled ? 'disabled' : ''}>${startButtonLabel}</button>
@@ -7684,7 +7715,9 @@ const coronaryMap = {
                     feedbackText = '⏭ Omitted';
                 }
             }
-            const explanation = reveal && showExplanation && graded?.status === 'correct' && question.explanation ? question.explanation : '';
+            const explanation = reveal && showExplanation && graded?.status === 'correct' && question.explanation
+                ? formatQbankFeedback(question.explanation)
+                : '';
             const answerReview = reveal && graded?.status === 'correct'
                 ? `<div class="muted-text" style="margin-top:4px;">
                         Your answer: ${hasChoice ? selectedChoice : 'Omitted'}
@@ -7704,13 +7737,20 @@ const coronaryMap = {
                     : (isIncorrectSelection ? 'style="background:rgba(239,68,68,0.12);border-color:rgba(239,68,68,0.6);"' : '');
                 const showChoiceFeedback = isIncorrectSelection && letter !== question.answer;
                 const choiceFeedback = showChoiceFeedback
-                    ? (choiceFeedbackMap[letter] || question.explanation || '')
+                    ? normalizeQbankChoiceFeedback(
+                        choiceFeedbackMap[letter] || '',
+                        letter,
+                        text
+                    )
+                    : '';
+                const inlineFeedback = choiceFeedback
+                    ? formatQbankFeedback(choiceFeedback).replace(/<\/?strong>/g, '')
                     : '';
                 return `
                     <label class="answer-label" ${highlight}>
                         <input type="radio" name="qbank-choice" value="${letter}" id="${inputId}" ${checked} ${disabled}>
                         <span><strong>${letter}.</strong> ${text}</span>
-                        ${showChoiceFeedback && choiceFeedback ? `<div class="muted-text" style="margin-top:6px; color:#b91c1c;">${formatQbankFeedback(choiceFeedback)}</div>` : ''}
+                        ${showChoiceFeedback && inlineFeedback ? `<div class="muted-text" style="margin-top:6px; color:#b91c1c;">${inlineFeedback}</div>` : ''}
                     </label>
                 `;
             }).join('');
@@ -7728,9 +7768,18 @@ const coronaryMap = {
                 const gradedMeta = session.gradedById?.[q.id] || null;
                 let stateClass = '';
                 if ((session.reviewUnlocked && gradedMeta) || gradedMeta) {
-                    if (gradedMeta.status === 'correct') stateClass = 'correct';
-                    else if (gradedMeta.status === 'incorrect') stateClass = 'incorrect';
-                    else stateClass = 'omitted';
+                    const firstAttempt = session.firstAttemptById?.[q.id] || null;
+                    if (gradedMeta.status === 'omitted') {
+                        stateClass = 'omitted';
+                    } else if (firstAttempt && firstAttempt.correct) {
+                        stateClass = 'correct';
+                    } else if (firstAttempt && !firstAttempt.correct) {
+                        stateClass = gradedMeta.status === 'correct' ? 'corrected' : 'incorrect';
+                    } else if (gradedMeta.status === 'correct') {
+                        stateClass = 'correct';
+                    } else if (gradedMeta.status === 'incorrect') {
+                        stateClass = 'incorrect';
+                    }
                 }
                 const activeClass = idx === session.index ? 'active' : '';
                 const flagged = isQuestionMarked(q.id);
@@ -7812,20 +7861,6 @@ const coronaryMap = {
                     renderQbank();
                 });
             });
-            qbankRoot.querySelectorAll('[data-system-index]').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const idx = Number(btn.dataset.systemIndex);
-                    qbankState.systemsTree[idx].open = !qbankState.systemsTree[idx].open;
-                    renderQbank();
-                });
-            });
-            const expandAll = qbankRoot.querySelector('#qbank-expand-all');
-            if (expandAll) {
-                expandAll.addEventListener('click', () => {
-                    qbankState.systemsTree.forEach(node => node.open = true);
-                    renderQbank();
-                });
-            }
             const startBtn = qbankRoot.querySelector('#qbank-start-btn');
             if (startBtn) {
                 startBtn.addEventListener('click', startQbankSession);
@@ -7854,6 +7889,12 @@ const coronaryMap = {
                     if (startButton && poolSize) {
                         startButton.textContent = `Start Session (${clamped} Qs)`;
                     }
+                    const timeEstimateEl = qbankRoot.querySelector('#qbank-time-estimate');
+                    if (timeEstimateEl) {
+                        timeEstimateEl.textContent = poolSize && qbankState.timing === 'timed'
+                            ? `~${Math.max(10, Math.round(clamped * 2))} min`
+                            : (poolSize ? 'Untimed' : 'N/A');
+                    }
                 });
                 countInput.addEventListener('blur', () => {
                     const poolSize = getFilteredQbankQuestions().length;
@@ -7864,6 +7905,12 @@ const coronaryMap = {
                     const startButton = qbankRoot.querySelector('#qbank-start-btn');
                     if (startButton) {
                         startButton.textContent = `Start Session (${clamped} Qs)`;
+                    }
+                    const timeEstimateEl = qbankRoot.querySelector('#qbank-time-estimate');
+                    if (timeEstimateEl) {
+                        timeEstimateEl.textContent = qbankState.timing === 'timed'
+                            ? `~${Math.max(10, Math.round(clamped * 2))} min`
+                            : 'Untimed';
                     }
                 });
             }

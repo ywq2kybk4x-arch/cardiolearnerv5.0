@@ -9,7 +9,7 @@
       "D": "Jugular venous distension"
     },
     "answer": "C",
-    "explanation": "Correct answer: C\nChronic AR causes increased stroke volume (due to LV dilation and high preload) and rapid diastolic runoff back into the LV \u2192 high systolic pressure + low diastolic pressure \u2192 wide pulse pressure and bounding pulses.\n\nClick-feedback (physiology-focused):\nA) S3 gallop\nReorient your thinking:\nAn S3 reflects rapid early diastolic filling into a volume-overloaded ventricle, which can occur in AR but is not specific. AR\u2019s hallmark findings are driven by pulse pressure abnormalities, not filling sounds.\n\nB) Pulsus paradoxus\nReorient your thinking:\nPulsus paradoxus occurs when inspiration reduces LV filling due to external constraint (e.g., tamponade). In AR, the problem is diastolic backflow through the aortic valve, not ventricular interdependence or pericardial constraint.\n\nD) Jugular venous distension\nReorient your thinking:\nJVD reflects elevated right atrial pressure. Chronic AR primarily causes left-sided volume overload; right-sided pressures rise only very late after severe LV failure.",
+    "explanation": "Correct answer: C\nChronic AR causes increased stroke volume (due to LV dilation and high preload) and rapid diastolic runoff back into the LV \u2192 high systolic pressure + low diastolic pressure \u2192 wide pulse pressure and bounding pulses.\n\nA) S3 gallop\n\nAn S3 reflects rapid early diastolic filling into a volume-overloaded ventricle, which can occur in AR but is not specific. AR\u2019s hallmark findings are driven by pulse pressure abnormalities, not filling sounds.\n\nB) Pulsus paradoxus\n\nPulsus paradoxus occurs when inspiration reduces LV filling due to external constraint (e.g., tamponade). In AR, the problem is diastolic backflow through the aortic valve, not ventricular interdependence or pericardial constraint.\n\nD) Jugular venous distension\n\nJVD reflects elevated right atrial pressure. Chronic AR primarily causes left-sided volume overload; right-sided pressures rise only very late after severe LV failure.",
     "tags": [],
     "id": 1
   },
@@ -23,23 +23,9 @@
       "D": "Mitral valve prolapse"
     },
     "answer": "B",
-    "explanation": "Correct answer: B\nBicuspid valves undergo abnormal mechanical stress \u2192 early degeneration \u2192 valve incompetence, making them the most common cause in developed nations.\n\nClick-feedback:\nA) Rheumatic heart disease\nReorient your thinking:\nRheumatic disease causes leaflet fibrosis and commissural fusion, typically producing stenosis or mixed lesions. Its prevalence is lower in developed countries.\n\nC) Infective endocarditis\nReorient your thinking:\nEndocarditis causes AR through acute leaflet destruction, but it is an episodic cause, not the most common etiology of chronic AR.\n\nD) Mitral valve prolapse\nReorient your thinking:\nMVP affects the mitral valve, leading to MR, not incompetence of the aortic valve or diastolic backflow into the LV.",
+    "explanation": "Correct answer: B\nBicuspid valves undergo abnormal mechanical stress \u2192 early degeneration \u2192 valve incompetence, making them the most common cause in developed nations.\n\nA) Rheumatic heart disease\n\nRheumatic disease causes leaflet fibrosis and commissural fusion, typically producing stenosis or mixed lesions. Its prevalence is lower in developed countries.\n\nC) Infective endocarditis\n\nEndocarditis causes AR through acute leaflet destruction, but it is an episodic cause, not the most common etiology of chronic AR.\n\nD) Mitral valve prolapse\n\nMVP affects the mitral valve, leading to MR, not incompetence of the aortic valve or diastolic backflow into the LV.",
     "tags": [],
     "id": 2
-  },
-  {
-    "category": "Aortic Regurgitation",
-    "stem": "Which echocardiographic parameter best defines severe aortic regurgitation?",
-    "choices": {
-      "A": "Jet width <25% of LVOT",
-      "B": "Vena contracta >0.6 cm",
-      "C": "Regurgitant volume <30 mL/beat",
-      "D": "ERO <0.10 cm\u00b2"
-    },
-    "answer": "B",
-    "explanation": "Correct answer: B\nThe vena contracta represents the narrowest regurgitant orifice, making it a relatively load-independent marker of severity.\n\nClick-feedback:\nA) Jet width <25% of LVOT\nReorient your thinking:\nA narrow jet implies limited regurgitant flow, reflecting low regurgitant volume, consistent with mild AR.\n\nC) Regurgitant volume <30 mL/beat\nReorient your thinking:\nRegurgitant volume quantifies backflow per beat. Severe AR requires large regurgitant volumes, not small ones.\n\nD) ERO <0.10 cm\u00b2\nReorient your thinking:\nEffective regurgitant orifice area reflects the size of the valve defect. A small ERO cannot generate severe volume overload.",
-    "tags": [],
-    "id": 3
   },
   {
     "category": "Aortic Regurgitation",
@@ -51,7 +37,7 @@
       "D": "RV volume overload"
     },
     "answer": "C",
-    "explanation": "Correct answer: C\nChronic AR causes volume overload from regurgitant blood and pressure overload from high stroke volumes needed to maintain forward flow.\n\nClick-feedback:\nA) LV pressure overload only\nReorient your thinking:\nPressure overload alone (e.g., AS) does not account for the diastolic regurgitant volume returning to the LV.\n\nB) LV volume overload only\nReorient your thinking:\nThe LV must eject a larger total volume each beat, increasing systolic wall stress and pressure demand.\n\nD) RV volume overload\nReorient your thinking:\nThe regurgitant lesion directly affects the left ventricle; RV overload occurs only secondarily in end-stage disease.",
+    "explanation": "Correct answer: C\nChronic AR causes volume overload from regurgitant blood and pressure overload from high stroke volumes needed to maintain forward flow.\n\nA) LV pressure overload only\n\nPressure overload alone (e.g., AS) does not account for the diastolic regurgitant volume returning to the LV.\n\nB) LV volume overload only\n\nThe LV must eject a larger total volume each beat, increasing systolic wall stress and pressure demand.\n\nD) RV volume overload\n\nThe regurgitant lesion directly affects the left ventricle; RV overload occurs only secondarily in end-stage disease.",
     "tags": [],
     "id": 4
   },
@@ -65,7 +51,7 @@
       "D": "Hemoptysis"
     },
     "answer": "A",
-    "explanation": "Correct answer: A\nDyspnea develops when LV compensatory dilation fails, causing elevated LVEDP \u2192 \u2191 LA pressure \u2192 pulmonary congestion.\n\nClick-feedback:\nB) Syncope\nReorient your thinking:\nSyncope is classically related to fixed outflow obstruction (AS), not regurgitant lesions.\n\nC) Palpitations\nReorient your thinking:\nPalpitations may occur earlier due to hyperdynamic circulation, but do not signal late decompensation.\n\nD) Hemoptysis\nReorient your thinking:\nHemoptysis suggests pulmonary hemorrhage or embolism, not LV volume overload.",
+    "explanation": "Correct answer: A\nDyspnea develops when LV compensatory dilation fails, causing elevated LVEDP \u2192 \u2191 LA pressure \u2192 pulmonary congestion.\n\nB) Syncope\n\nSyncope is classically related to fixed outflow obstruction (AS), not regurgitant lesions.\n\nC) Palpitations\n\nPalpitations may occur earlier due to hyperdynamic circulation, but do not signal late decompensation.\n\nD) Hemoptysis\n\nHemoptysis suggests pulmonary hemorrhage or embolism, not LV volume overload.",
     "tags": [],
     "id": 5
   },
@@ -79,23 +65,9 @@
       "D": "CT angiography"
     },
     "answer": "B",
-    "explanation": "Correct answer: B\nEcho directly visualizes valve morphology, regurgitant flow, and LV response, which defines severity and timing of surgery.\n\nClick-feedback:\nA) Chest X-ray\nReorient your thinking:\nCXR may show cardiomegaly but cannot assess regurgitant severity or valve dynamics.\n\nC) Cardiac MRI\nReorient your thinking:\nMRI quantifies volume accurately but is second-line after echocardiography.\n\nD) CT angiography\nReorient your thinking:\nCT assesses anatomy, not hemodynamic severity of regurgitation.",
+    "explanation": "Correct answer: B\nEcho directly visualizes valve morphology, regurgitant flow, and LV response, which defines severity and timing of surgery.\n\nA) Chest X-ray\n\nCXR may show cardiomegaly but cannot assess regurgitant severity or valve dynamics.\n\nC) Cardiac MRI\n\nMRI quantifies volume accurately but is second-line after echocardiography.\n\nD) CT angiography\n\nCT assesses anatomy, not hemodynamic severity of regurgitation.",
     "tags": [],
     "id": 6
-  },
-  {
-    "category": "Aortic Regurgitation",
-    "stem": "Which finding is most specific for severe AR on physical exam?",
-    "choices": {
-      "A": "Austin Flint murmur",
-      "B": "Systolic ejection murmur",
-      "C": "Loud P2",
-      "D": "Pericardial rub"
-    },
-    "answer": "A",
-    "explanation": "Correct answer: A\nAustin Flint murmur occurs when regurgitant flow impinges on the mitral valve, functionally mimicking mitral stenosis \u2014 a marker of severe AR.\n\nClick-feedback:\nB) Systolic ejection murmur\nReorient your thinking:\nThis reflects increased forward flow, not severity of regurgitation.\n\nC) Loud P2\nReorient your thinking:\nLoud P2 reflects pulmonary hypertension, not primary aortic valve disease.\n\nD) Pericardial rub\nReorient your thinking:\nA friction rub arises from inflamed pericardial surfaces, unrelated to valvular incompetence.",
-    "tags": [],
-    "id": 7
   },
   {
     "category": "Aortic Regurgitation",
@@ -107,23 +79,9 @@
       "D": "Only if regurgitant volume >30 mL/beat"
     },
     "answer": "B",
-    "explanation": "Correct answer: B\nSurgery is timed to prevent irreversible LV remodeling, not to wait for overt failure.\n\nClick-feedback:\nA) Only when symptoms develop\nReorient your thinking:\nSymptoms appear after LV dysfunction has already begun, making this too late.\n\nC) When mild LV dilation is present\nReorient your thinking:\nMild dilation reflects compensation; surgery is based on thresholds signaling decompensation.\n\nD) Only if regurgitant volume >30 mL/beat\nReorient your thinking:\nRegurgitant volume measures severity but does not reflect LV tolerance or function.",
+    "explanation": "Correct answer: B\nSurgery is timed to prevent irreversible LV remodeling, not to wait for overt failure.\n\nA) Only when symptoms develop\n\nSymptoms appear after LV dysfunction has already begun, making this too late.\n\nC) When mild LV dilation is present\n\nMild dilation reflects compensation; surgery is based on thresholds signaling decompensation.\n\nD) Only if regurgitant volume >30 mL/beat\n\nRegurgitant volume measures severity but does not reflect LV tolerance or function.",
     "tags": [],
     "id": 8
-  },
-  {
-    "category": "Aortic Regurgitation",
-    "stem": "Which peripheral sign is NOT associated with severe AR?",
-    "choices": {
-      "A": "Quincke\u2019s pulse",
-      "B": "Musset\u2019s sign",
-      "C": "Hill\u2019s sign",
-      "D": "Kussmaul\u2019s sign"
-    },
-    "answer": "D",
-    "explanation": "Correct answer: D\nKussmaul\u2019s sign reflects impaired RV filling, not systemic arterial runoff.\n\nClick-feedback:\nA) Quincke\u2019s pulse\nReorient your thinking:\nCapillary pulsations result from wide pulse pressure.\n\nB) Musset\u2019s sign\nReorient your thinking:\nHead bobbing reflects forceful systolic ejection.\n\nC) Hill\u2019s sign\nReorient your thinking:\nElevated leg systolic BP reflects amplified pulse pressure.",
-    "tags": [],
-    "id": 9
   },
   {
     "category": "Aortic Regurgitation",
@@ -135,7 +93,7 @@
       "D": "To prevent infective endocarditis"
     },
     "answer": "B",
-    "explanation": "Correct answer: B\nVasodilators reduce afterload, lowering regurgitant fraction and LV wall stress.\n\nClick-feedback:\nA) First-line for all patients\nReorient your thinking:\nSurgery is definitive; vasodilators are adjunctive.\n\nC) To treat acute AR\nReorient your thinking:\nAcute AR causes sudden volume overload with no time for compensation \u2192 emergent surgery.\n\nD) To prevent infective endocarditis\nReorient your thinking:\nVasodilators do not affect infection risk or valve colonization.",
+    "explanation": "Correct answer: B\nVasodilators reduce afterload, lowering regurgitant fraction and LV wall stress.\n\nA) First-line for all patients\n\nSurgery is definitive; vasodilators are adjunctive.\n\nC) To treat acute AR\n\nAcute AR causes sudden volume overload with no time for compensation \u2192 emergent surgery.\n\nD) To prevent infective endocarditis\n\nVasodilators do not affect infection risk or valve colonization.",
     "tags": [],
     "id": 10
   },
@@ -149,7 +107,7 @@
       "D": "Hemoptysis"
     },
     "answer": "A",
-    "explanation": "Correct Answer: A) Angina\nSevere AS causes marked LV pressure overload \u2192 concentric hypertrophy \u2192 increased myocardial oxygen demand, while simultaneously reducing coronary perfusion pressure due to elevated LVEDP.\n\nAnalysis of Incorrect Choices (Physiology-Focused)\nB) Palpitations\nReorient your thinking:\nPalpitations reflect arrhythmias or heightened sympathetic tone, neither of which is intrinsic to the fixed outflow obstruction of AS. AS symptoms arise from inability to augment cardiac output, not rhythm abnormalities.\n\nC) Cough\nReorient your thinking:\nCough is typically due to airway irritation or pulmonary congestion. In AS, pulmonary congestion occurs only late, after LV failure, making cough nonspecific and indirect.\n\nD) Hemoptysis\nReorient your thinking:\nHemoptysis implies pulmonary hemorrhage or elevated pulmonary venous pressures (e.g., mitral stenosis). AS primarily causes LV outflow obstruction, not pulmonary capillary rupture.",
+    "explanation": "Correct Answer: \n\nA) Angina\nSevere AS causes marked LV pressure overload \u2192 concentric hypertrophy \u2192 increased myocardial oxygen demand, while simultaneously reducing coronary perfusion pressure due to elevated LVEDP.\n\nAnalysis of Incorrect Choices (Physiology-Focused)\n\nB) Palpitations\n\nPalpitations reflect arrhythmias or heightened sympathetic tone, neither of which is intrinsic to the fixed outflow obstruction of AS. AS symptoms arise from inability to augment cardiac output, not rhythm abnormalities.\n\nC) Cough\n\nCough is typically due to airway irritation or pulmonary congestion. In AS, pulmonary congestion occurs only late, after LV failure, making cough nonspecific and indirect.\n\nD) Hemoptysis\n\nHemoptysis implies pulmonary hemorrhage or elevated pulmonary venous pressures (e.g., mitral stenosis). AS primarily causes LV outflow obstruction, not pulmonary capillary rupture.",
     "tags": [],
     "id": 11
   },
@@ -163,7 +121,7 @@
       "D": "Congenital bicuspid valve"
     },
     "answer": "B",
-    "explanation": "Correct Answer: B) Calcific degeneration\nCalcific AS results from active fibrocalcific remodeling, similar to atherosclerosis, leading to progressive leaflet stiffening.\n\nAnalysis of Incorrect Choices\nA) Rheumatic fever\nReorient your thinking:\nRheumatic disease causes commissural fusion and leaflet thickening, often producing mixed stenosis and regurgitation, and is now uncommon in developed countries.\n\nC) Infective endocarditis\nReorient your thinking:\nEndocarditis leads to acute valve destruction or regurgitation, not the slow, progressive narrowing characteristic of chronic AS.\n\nD) Congenital bicuspid valve\nReorient your thinking:\nBicuspid valves predispose to earlier calcification, but the mechanism of obstruction is still calcific degeneration, making bicuspid valve a risk factor rather than the acquired cause itself.",
+    "explanation": "Correct Answer: \n\nB) Calcific degeneration\nCalcific AS results from active fibrocalcific remodeling, similar to atherosclerosis, leading to progressive leaflet stiffening.\n\nAnalysis of Incorrect Choices\n\nA) Rheumatic fever\n\nRheumatic disease causes commissural fusion and leaflet thickening, often producing mixed stenosis and regurgitation, and is now uncommon in developed countries.\n\nC) Infective endocarditis\n\nEndocarditis leads to acute valve destruction or regurgitation, not the slow, progressive narrowing characteristic of chronic AS.\n\nD) Congenital bicuspid valve\n\nBicuspid valves predispose to earlier calcification, but the mechanism of obstruction is still calcific degeneration, making bicuspid valve a risk factor rather than the acquired cause itself.",
     "tags": [],
     "id": 12
   },
@@ -177,7 +135,7 @@
       "D": "Opening snap"
     },
     "answer": "A",
-    "explanation": "Correct Answer: A) Delayed carotid upstroke\nPulsus parvus et tardus reflects fixed LV outflow obstruction, limiting both the speed and amplitude of systolic ejection.\n\nAnalysis of Incorrect Choices\nB) Loud S3\nReorient your thinking:\nAn S3 indicates volume overload and rapid ventricular filling, not the pressure overload seen in AS. AS typically produces an S4 due to a stiff hypertrophied ventricle.\n\nC) Early-peaking systolic murmur\nReorient your thinking:\nEarly peaking suggests mild obstruction with rapid early flow. Severe AS causes prolonged ejection, shifting the murmur peak later into systole.\n\nD) Opening snap\nReorient your thinking:\nAn opening snap reflects sudden tensing of stenotic AV valves in early diastole, a feature of mitral stenosis, not aortic pathology.",
+    "explanation": "Correct Answer: \n\nA) Delayed carotid upstroke\nPulsus parvus et tardus reflects fixed LV outflow obstruction, limiting both the speed and amplitude of systolic ejection.\n\nAnalysis of Incorrect Choices\n\nB) Loud S3\n\nAn S3 indicates volume overload and rapid ventricular filling, not the pressure overload seen in AS. AS typically produces an S4 due to a stiff hypertrophied ventricle.\n\nC) Early-peaking systolic murmur\n\nEarly peaking suggests mild obstruction with rapid early flow. Severe AS causes prolonged ejection, shifting the murmur peak later into systole.\n\nD) Opening snap\n\nAn opening snap reflects sudden tensing of stenotic AV valves in early diastole, a feature of mitral stenosis, not aortic pathology.",
     "tags": [],
     "id": 13
   },
@@ -191,7 +149,7 @@
       "D": "Apical"
     },
     "answer": "B",
-    "explanation": "Correct Answer: B) Concentric\nAS causes pressure overload, triggering parallel sarcomere addition and wall thickening to reduce wall stress (Laplace\u2019s law).\n\nAnalysis of Incorrect Choices\nA) Eccentric\nReorient your thinking:\nEccentric hypertrophy occurs when the LV adapts to volume overload (e.g., AR, MR), not fixed systolic outflow resistance.\n\nC) No hypertrophy\nReorient your thinking:\nChronic pressure overload without hypertrophy would lead to rapid decompensation; hypertrophy is the compensatory response that initially preserves function.\n\nD) Apical\nReorient your thinking:\nIsolated apical hypertrophy is seen in hypertrophic cardiomyopathy, not valvular pressure overload.",
+    "explanation": "Correct Answer: \n\nB) Concentric\nAS causes pressure overload, triggering parallel sarcomere addition and wall thickening to reduce wall stress (Laplace\u2019s law).\n\nAnalysis of Incorrect Choices\n\nA) Eccentric\n\nEccentric hypertrophy occurs when the LV adapts to volume overload (e.g., AR, MR), not fixed systolic outflow resistance.\n\nC) No hypertrophy\n\nChronic pressure overload without hypertrophy would lead to rapid decompensation; hypertrophy is the compensatory response that initially preserves function.\n\nD) Apical\n\nIsolated apical hypertrophy is seen in hypertrophic cardiomyopathy, not valvular pressure overload.",
     "tags": [],
     "id": 14
   },
@@ -205,7 +163,7 @@
       "D": "LV EF >70%"
     },
     "answer": "A",
-    "explanation": "Correct Answer: A) Valve area <1.0 cm\u00b2\nValve area directly reflects the degree of anatomic obstruction to systolic flow.\n\nAnalysis of Incorrect Choices\nB) Valve area >2.0 cm\u00b2\nReorient your thinking:\nA normal aortic valve area is ~3\u20134 cm\u00b2; areas above 2.0 cm\u00b2 do not significantly impede flow.\n\nC) Regurgitant fraction >50%\nReorient your thinking:\nRegurgitant fraction quantifies diastolic backflow, which is irrelevant to stenotic lesions that obstruct forward systolic flow.\n\nD) LV EF >70%\nReorient your thinking:\nEF may remain preserved or even elevated early due to concentric remodeling and does not reflect valve narrowing severity.",
+    "explanation": "Correct Answer: \n\nA) Valve area <1.0 cm\u00b2\nValve area directly reflects the degree of anatomic obstruction to systolic flow.\n\nAnalysis of Incorrect Choices\n\nB) Valve area >2.0 cm\u00b2\n\nA normal aortic valve area is ~3\u20134 cm\u00b2; areas above 2.0 cm\u00b2 do not significantly impede flow.\n\nC) Regurgitant fraction >50%\n\nRegurgitant fraction quantifies diastolic backflow, which is irrelevant to stenotic lesions that obstruct forward systolic flow.\n\nD) LV EF >70%\n\nEF may remain preserved or even elevated early due to concentric remodeling and does not reflect valve narrowing severity.",
     "tags": [],
     "id": 15
   },
@@ -219,7 +177,7 @@
       "D": "Continuous murmur"
     },
     "answer": "A",
-    "explanation": "Correct Answer: A) Harsh systolic murmur at RUSB\nTurbulent flow across a narrowed aortic valve during systole produces a crescendo\u2013decrescendo murmur.\n\nAnalysis of Incorrect Choices\nB) Diastolic rumble at apex\nReorient your thinking:\nA diastolic rumble reflects obstruction to ventricular filling, characteristic of mitral stenosis, not LV outflow obstruction.\n\nC) Holosystolic murmur at apex\nReorient your thinking:\nHolosystolic murmurs result from regurgitant flow throughout systole (e.g., MR), not fixed ejection obstruction.\n\nD) Continuous murmur\nReorient your thinking:\nContinuous murmurs require persistent pressure gradients throughout the cardiac cycle (e.g., PDA), which AS does not produce.",
+    "explanation": "Correct Answer: \n\nA) Harsh systolic murmur at RUSB\nTurbulent flow across a narrowed aortic valve during systole produces a crescendo\u2013decrescendo murmur.\n\nAnalysis of Incorrect Choices\n\nB) Diastolic rumble at apex\n\nA diastolic rumble reflects obstruction to ventricular filling, characteristic of mitral stenosis, not LV outflow obstruction.\n\nC) Holosystolic murmur at apex\n\nHolosystolic murmurs result from regurgitant flow throughout systole (e.g., MR), not fixed ejection obstruction.\n\nD) Continuous murmur\n\nContinuous murmurs require persistent pressure gradients throughout the cardiac cycle (e.g., PDA), which AS does not produce.",
     "tags": [],
     "id": 16
   },
@@ -233,7 +191,7 @@
       "D": "Atrial septal defect"
     },
     "answer": "A",
-    "explanation": "Correct Answer: A) Heart failure\nProgressive pressure overload eventually overwhelms compensatory hypertrophy, causing diastolic then systolic dysfunction.\n\nAnalysis of Incorrect Choices\nB) Pulmonary embolism\nReorient your thinking:\nPE is a thromboembolic disease, not a consequence of valvular outflow obstruction.\n\nC) Pericarditis\nReorient your thinking:\nPericarditis arises from inflammatory or infectious processes, not chronic mechanical pressure overload.\n\nD) Atrial septal defect\nReorient your thinking:\nASD is a congenital structural abnormality and does not arise from valvular degeneration.",
+    "explanation": "Correct Answer: \n\nA) Heart failure\nProgressive pressure overload eventually overwhelms compensatory hypertrophy, causing diastolic then systolic dysfunction.\n\nAnalysis of Incorrect Choices\n\nB) Pulmonary embolism\n\nPE is a thromboembolic disease, not a consequence of valvular outflow obstruction.\n\nC) Pericarditis\n\nPericarditis arises from inflammatory or infectious processes, not chronic mechanical pressure overload.\n\nD) Atrial septal defect\n\nASD is a congenital structural abnormality and does not arise from valvular degeneration.",
     "tags": [],
     "id": 17
   },
@@ -247,7 +205,7 @@
       "D": "Children with ASD"
     },
     "answer": "A",
-    "explanation": "Correct Answer: A) Patients with bicuspid aortic valve\nAbnormal valve geometry causes uneven stress distribution, accelerating calcification.\n\nAnalysis of Incorrect Choices\nB) Elderly women\nReorient your thinking:\nElderly patients develop senile calcific AS, but bicuspid valves cause disease decades earlier.\n\nC) Young athletes\nReorient your thinking:\nAthletic conditioning produces physiologic hypertrophy, not valvular narrowing.\n\nD) Children with ASD\nReorient your thinking:\nASD affects interatrial flow, not aortic valve structure or function.",
+    "explanation": "Correct Answer: \n\nA) Patients with bicuspid aortic valve\nAbnormal valve geometry causes uneven stress distribution, accelerating calcification.\n\nAnalysis of Incorrect Choices\n\nB) Elderly women\n\nElderly patients develop senile calcific AS, but bicuspid valves cause disease decades earlier.\n\nC) Young athletes\n\nAthletic conditioning produces physiologic hypertrophy, not valvular narrowing.\n\nD) Children with ASD\n\nASD affects interatrial flow, not aortic valve structure or function.",
     "tags": [],
     "id": 18
   },
@@ -261,7 +219,7 @@
       "C": "Angina"
     },
     "answer": "D",
-    "explanation": "Correct Answer: D) Cough\nCough has no direct mechanistic link to LV outflow obstruction.\n\nAnalysis of Incorrect Choices\nA) Dyspnea\nReorient your thinking:\nDyspnea reflects elevated LV filling pressures \u2192 pulmonary congestion, a direct consequence of AS.\n\nB) Syncope\nReorient your thinking:\nSyncope occurs because a fixed valve limits cardiac output augmentation during exertion.\n\nC) Angina\nReorient your thinking:\nAngina arises from supply\u2013demand mismatch due to hypertrophy and reduced coronary perfusion.",
+    "explanation": "Correct Answer: \n\nD) Cough\nCough has no direct mechanistic link to LV outflow obstruction.\n\nAnalysis of Incorrect Choices\n\nA) Dyspnea\n\nDyspnea reflects elevated LV filling pressures \u2192 pulmonary congestion, a direct consequence of AS.\n\nB) Syncope\n\nSyncope occurs because a fixed valve limits cardiac output augmentation during exertion.\n\nC) Angina\n\nAngina arises from supply\u2013demand mismatch due to hypertrophy and reduced coronary perfusion.",
     "tags": [],
     "id": 19
   },
@@ -275,7 +233,7 @@
       "D": "Infective vegetations"
     },
     "answer": "A",
-    "explanation": "Correct Answer: A) Fibrocalcific remodeling of valve leaflets\nAS is an active inflammatory and calcific process, not simple wear-and-tear.\n\nAnalysis of Incorrect Choices\nB) Mitral annular calcification\nReorient your thinking:\nThis affects mitral valve dynamics, not aortic valve orifice area.\n\nC) Tricuspid valve prolapse\nReorient your thinking:\nTricuspid prolapse affects right-sided valves, unrelated to systemic outflow obstruction.\n\nD) Infective vegetations\nReorient your thinking:\nVegetations cause acute regurgitation or embolic risk, whereas AS develops through chronic calcific narrowing.",
+    "explanation": "Correct Answer: \n\nA) Fibrocalcific remodeling of valve leaflets\nAS is an active inflammatory and calcific process, not simple wear-and-tear.\n\nAnalysis of Incorrect Choices\n\nB) Mitral annular calcification\n\nThis affects mitral valve dynamics, not aortic valve orifice area.\n\nC) Tricuspid valve prolapse\n\nTricuspid prolapse affects right-sided valves, unrelated to systemic outflow obstruction.\n\nD) Infective vegetations\n\nVegetations cause acute regurgitation or embolic risk, whereas AS develops through chronic calcific narrowing.",
     "tags": [],
     "id": 20
   },
@@ -289,7 +247,7 @@
       "D": "Decreased venous pressure"
     },
     "answer": "A",
-    "explanation": "Correct Answer: A. Equalization of diastolic pressures\nB: Afterload isn\u2019t significantly increased.\nC: Pulse pressure narrows, it doesn\u2019t widen.\nD: Venous pressure increases (JVD).",
+    "explanation": "Correct Answer: \n\nA. Equalization of diastolic pressures\nB: Afterload isn\u2019t significantly increased.\nC: Pulse pressure narrows, it doesn\u2019t widen.\nD: Venous pressure increases (JVD).",
     "tags": [],
     "id": 21
   },
@@ -303,7 +261,7 @@
       "D": "Pulsus paradoxus"
     },
     "answer": "D",
-    "explanation": "Correct Answer: D. Pulsus paradoxus: During inspiration, more blood returns to the right side of the heart. But in cardiac tamponade, the heart cannot expand outward because it\u2019s compressed by fluid. The extra right-sided filling pushes the interventricular septum toward the left ventricle, reducing LV filling. With less LV preload, stroke volume and systolic blood pressure drop during inspiration.\nA: S3 = heart failure, not tamponade.\nB: Kussmaul sign = constrictive pericarditis, not tamponade.\nC: Fixed S2 = ASD.",
+    "explanation": "Correct Answer: \n\nD. Pulsus paradoxus: During inspiration, more blood returns to the right side of the heart. But in cardiac tamponade, the heart cannot expand outward because it\u2019s compressed by fluid. The extra right-sided filling pushes the interventricular septum toward the left ventricle, reducing LV filling. With less LV preload, stroke volume and systolic blood pressure drop during inspiration.\nA: S3 = heart failure, not tamponade.\nB: Kussmaul sign = constrictive pericarditis, not tamponade.\nC: Fixed S2 = ASD.",
     "tags": [],
     "id": 22
   },
@@ -317,7 +275,7 @@
       "D": "RV afterload is reduced"
     },
     "answer": "A",
-    "explanation": "Correct Answer: A. RV filling is impaired\nB: Atrial contraction still occurs.\nC: Venous return may increase on inspiration, but filling is blocked.\nD: RV afterload has little relevance here.",
+    "explanation": "Correct Answer: \n\nA. RV filling is impaired\nB: Atrial contraction still occurs.\nC: Venous return may increase on inspiration, but filling is blocked.\nD: RV afterload has little relevance here.",
     "tags": [],
     "id": 23
   },
@@ -331,7 +289,7 @@
       "D": "LV contractility decreases"
     },
     "answer": "B",
-    "explanation": "Correct Answer: B. RV expansion compresses the LV\nA: LV preload decreases.\nC: Intrathoracic pressure decreases, but that isn\u2019t the primary mechanism.\nD: Contractility stays normal.",
+    "explanation": "Correct Answer: \n\nB. RV expansion compresses the LV\nA: LV preload decreases.\nC: Intrathoracic pressure decreases, but that isn\u2019t the primary mechanism.\nD: Contractility stays normal.",
     "tags": [],
     "id": 24
   },
@@ -345,7 +303,7 @@
       "D": "Intrinsic SA node dysfunction"
     },
     "answer": "A",
-    "explanation": "Correct Answer: A. Baroreceptor response to low stroke volume\nB: Vagal tone decreases (sympathetic tone increases).\nC: Pericardial receptors don\u2019t drive tachycardia.\nD: The SA node is normal.",
+    "explanation": "Correct Answer: \n\nA. Baroreceptor response to low stroke volume\nB: Vagal tone decreases (sympathetic tone increases).\nC: Pericardial receptors don\u2019t drive tachycardia.\nD: The SA node is normal.",
     "tags": [],
     "id": 25
   },
@@ -359,7 +317,7 @@
       "D": "Decreased sympathetic tone"
     },
     "answer": "C",
-    "explanation": "Correct Answer: C. Narrow pulse pressure\nA: Afterload isn\u2019t the issue.\nB: RA pressure increases.\nD: Sympathetic tone rises, not falls.",
+    "explanation": "Correct Answer: \n\nC. Narrow pulse pressure\nA: Afterload isn\u2019t the issue.\nB: RA pressure increases.\nD: Sympathetic tone rises, not falls.",
     "tags": [],
     "id": 26
   },
@@ -373,7 +331,7 @@
       "D": "Increased ejection fraction"
     },
     "answer": "B",
-    "explanation": "Correct Answer: B. Decreased diastolic ventricular filling\nA: Contractility is unchanged.\nC: SVR rises due to compensation.\nD: EF doesn\u2019t increase.",
+    "explanation": "Correct Answer: \n\nB. Decreased diastolic ventricular filling\nA: Contractility is unchanged.\nC: SVR rises due to compensation.\nD: EF doesn\u2019t increase.",
     "tags": [],
     "id": 27
   },
@@ -387,7 +345,7 @@
       "D": "Peripheral edema"
     },
     "answer": "C",
-    "explanation": "Correct Answer: C. Absent y-descent\n\u2192 Constrictive pericarditis has a prominent y-descent.\nA, B, D: Can be seen in either condition.",
+    "explanation": "Correct Answer: \n\nC. Absent y-descent\n\u2192 Constrictive pericarditis has a prominent y-descent.\nA, B, D: Can be seen in either condition.",
     "tags": [],
     "id": 28
   },
@@ -401,7 +359,7 @@
       "D": "Left ventricle"
     },
     "answer": "B",
-    "explanation": "Correct Answer: B. Right atrium\nRA has the lowest pressure, so it collapses first.\nA, C, D: Collapse later if tamponade worsens.",
+    "explanation": "Correct Answer: \n\nB. Right atrium\nRA has the lowest pressure, so it collapses first.\nA, C, D: Collapse later if tamponade worsens.",
     "tags": [],
     "id": 29
   },
@@ -415,7 +373,7 @@
       "D": "Hypotension"
     },
     "answer": "C",
-    "explanation": "Correct Answer: C. Hypertension\nA, B, D: All are part of Beck\u2019s triad.\nC: BP is low, not high.",
+    "explanation": "Correct Answer: \n\nC. Hypertension\nA, B, D: All are part of Beck\u2019s triad.\nC: BP is low, not high.",
     "tags": [],
     "id": 30
   },
@@ -429,7 +387,7 @@
       "D": "Excessive stroke volume due to volume overload"
     },
     "answer": "A",
-    "explanation": "Correct Answer: A) Decreased preload due to restricted ventricular filling\n\nExplanation:\nFluid in the pericardial sac compresses the heart \u2192 ventricular diastolic filling is limited \u2192 stroke volume falls \u2192 hypotension.\n\nWrong-answer analogies:\nB) Reorient your thinking: Vasodilation is like opening a garden hose: flow would drop, but in tamponade, the \u201chose\u201d (ventricle) is squeezed, restricting volume, not afterload.\n\nC) Contractility is like the strength of a pump. In tamponade, the pump is fine; the problem is volume getting in, not how hard it pumps.\n\nD) Stroke volume is actually reduced, not increased; imagine trying to inflate a balloon inside a rigid box \u2014 it can\u2019t expand fully.",
+    "explanation": "Correct Answer: \n\nA) Decreased preload due to restricted ventricular filling\n\nExplanation:\nFluid in the pericardial sac compresses the heart \u2192 ventricular diastolic filling is limited \u2192 stroke volume falls \u2192 hypotension.\n\nWrong-answer analogies:\n\nB)  Vasodilation is like opening a garden hose: flow would drop, but in tamponade, the \u201chose\u201d (ventricle) is squeezed, restricting volume, not afterload.\n\nC) Contractility is like the strength of a pump. In tamponade, the pump is fine; the problem is volume getting in, not how hard it pumps.\n\nD) Stroke volume is actually reduced, not increased; imagine trying to inflate a balloon inside a rigid box \u2014 it can\u2019t expand fully.",
     "tags": [],
     "id": 31
   },
@@ -443,7 +401,7 @@
       "D": "LVEDP only"
     },
     "answer": "A",
-    "explanation": "Correct Answer: A) Right atrial, right ventricular, left atrial, left ventricular diastolic pressures\n\nExplanation:\nThe pericardial fluid acts like a pressure jacket around the heart, so all chambers equilibrate to the same diastolic pressure.\n\nWrong-answer analogies:\nB) Pulmonary and aortic pressures are like separate pipes outside the jacket; tamponade doesn\u2019t compress them directly.\n\nC) Systolic pressures remain high enough to eject; the \u201cpump can push,\u201d but filling is limited.\n\nD) Only LVEDP alone is incomplete; all chambers rise together in tamponade.",
+    "explanation": "Correct Answer: \n\nA) Right atrial, right ventricular, left atrial, left ventricular diastolic pressures\n\nExplanation:\nThe pericardial fluid acts like a pressure jacket around the heart, so all chambers equilibrate to the same diastolic pressure.\n\nWrong-answer analogies:\n\nB) Pulmonary and aortic pressures are like separate pipes outside the jacket; tamponade doesn\u2019t compress them directly.\n\nC) Systolic pressures remain high enough to eject; the \u201cpump can push,\u201d but filling is limited.\n\nD) Only LVEDP alone is incomplete; all chambers rise together in tamponade.",
     "tags": [],
     "id": 32
   },
@@ -457,7 +415,7 @@
       "D": "Bradycardia from vagal activation"
     },
     "answer": "A",
-    "explanation": "Correct Answer: A) Compensatory response to low stroke volume\n\nExplanation:\nCO = HR \u00d7 SV. When SV drops, the body increases HR to maintain cardiac output.\n\nWrong-answer analogies:\nB) The fluid is like a water-filled bag around a toy pump \u2014 it doesn\u2019t zap the SA node.\n\nC) Contractility may increase slightly, but the main driver of tachycardia is low preload, not intrinsic pump strength.\n\nD) Bradycardia would worsen CO; the body needs speed, not slowing.",
+    "explanation": "Correct Answer: \n\nA) Compensatory response to low stroke volume\n\nExplanation:\nCO = HR \u00d7 SV. When SV drops, the body increases HR to maintain cardiac output.\n\nWrong-answer analogies:\n\nB) The fluid is like a water-filled bag around a toy pump \u2014 it doesn\u2019t zap the SA node.\n\nC) Contractility may increase slightly, but the main driver of tachycardia is low preload, not intrinsic pump strength.\n\nD) Bradycardia would worsen CO; the body needs speed, not slowing.",
     "tags": [],
     "id": 33
   },
@@ -471,7 +429,7 @@
       "D": "Handgrip"
     },
     "answer": "A",
-    "explanation": "Correct Answer: A) Inspiration (Kussmaul-like phenomenon)\n\nExplanation:\nNegative intrathoracic pressure during inspiration draws blood to the right heart, but a noncompliant pericardium prevents RV expansion, causing paradoxical JVP rise (Kussmaul-like).\n\nWrong-answer analogies:\nB) Expiration is like loosening the vacuum: more blood can enter normally, JVP may fall.\n\nC) Squatting increases preload and venous return; in tamponade, JVP rises, but the hallmark is inspiratory paradox.\n\nD) Handgrip increases afterload, not preload \u2014 imagine squeezing the exit pipe; it doesn\u2019t highlight RV filling limitation.",
+    "explanation": "Correct Answer: \n\nA) Inspiration (Kussmaul-like phenomenon)\n\nExplanation:\nNegative intrathoracic pressure during inspiration draws blood to the right heart, but a noncompliant pericardium prevents RV expansion, causing paradoxical JVP rise (Kussmaul-like).\n\nWrong-answer analogies:\n\nB) Expiration is like loosening the vacuum: more blood can enter normally, JVP may fall.\n\nC) Squatting increases preload and venous return; in tamponade, JVP rises, but the hallmark is inspiratory paradox.\n\nD) Handgrip increases afterload, not preload \u2014 imagine squeezing the exit pipe; it doesn\u2019t highlight RV filling limitation.",
     "tags": [],
     "id": 34
   },
@@ -485,7 +443,7 @@
       "D": "Peripheral vasodilation"
     },
     "answer": "A",
-    "explanation": "Correct Answer: A) Inspiratory decrease in systolic blood pressure >10 mmHg due to exaggerated RV expansion\n\nExplanation:\nDuring inspiration, RV attempts to fill \u2192 septum bulges into LV \u2192 LV stroke volume falls \u2192 systolic pressure drops.\n\nWrong-answer analogies:\nB) LV pump is normal; the problem is septal shift limiting filling, not contraction strength.\n\nC) No valve obstruction; think of the septum being a moving wall, not a blocked gate.\n\nD) Vasodilation affects BP slowly; pulsus paradoxus is a rapid, respiratory-linked drop, not a systemic dilatory effect.",
+    "explanation": "Correct Answer: \n\nA) Inspiratory decrease in systolic blood pressure >10 mmHg due to exaggerated RV expansion\n\nExplanation:\nDuring inspiration, RV attempts to fill \u2192 septum bulges into LV \u2192 LV stroke volume falls \u2192 systolic pressure drops.\n\nWrong-answer analogies:\n\nB) LV pump is normal; the problem is septal shift limiting filling, not contraction strength.\n\nC) No valve obstruction; think of the septum being a moving wall, not a blocked gate.\n\nD) Vasodilation affects BP slowly; pulsus paradoxus is a rapid, respiratory-linked drop, not a systemic dilatory effect.",
     "tags": [],
     "id": 35
   },
@@ -499,7 +457,7 @@
       "D": "Thickened mitral valve"
     },
     "answer": "A",
-    "explanation": "Correct Answer: A) Right atrial and right ventricular diastolic collapse\n\nExplanation:\nRA/RV are low-pressure chambers; external pericardial pressure exceeds internal diastolic pressure \u2192 walls collapse.\n\nWrong-answer analogies:\nB) Hypertrophy = chronic pressure overload; tamponade is acute fluid compression, not muscle growth.\n\nC) Aorta is a high-pressure vessel; fluid can\u2019t collapse it.\n\nD) Mitral valve thickening is a structural disease; tamponade affects chamber pressure, not valve anatomy.",
+    "explanation": "Correct Answer: \n\nA) Right atrial and right ventricular diastolic collapse\n\nExplanation:\nRA/RV are low-pressure chambers; external pericardial pressure exceeds internal diastolic pressure \u2192 walls collapse.\n\nWrong-answer analogies:\n\nB) Hypertrophy = chronic pressure overload; tamponade is acute fluid compression, not muscle growth.\n\nC) Aorta is a high-pressure vessel; fluid can\u2019t collapse it.\n\nD) Mitral valve thickening is a structural disease; tamponade affects chamber pressure, not valve anatomy.",
     "tags": [],
     "id": 36
   },
@@ -513,7 +471,7 @@
       "D": "Blood volume leaves the systemic circulation"
     },
     "answer": "A",
-    "explanation": "Correct Answer: A) Stroke volume decreases due to restricted diastolic filling\n\nExplanation:\nCO = HR \u00d7 SV; SV is limited by ventricular compression, making CO fall even if HR rises.\n\nWrong-answer analogies:\nB) HR actually rises; the body tries to compensate like pedaling faster on a small pump.\n\nC) Peripheral resistance may rise to maintain BP; it doesn\u2019t cause the acute CO drop.\n\nD) Systemic blood volume is preserved; the problem is the pump can\u2019t accept it.",
+    "explanation": "Correct Answer: \n\nA) Stroke volume decreases due to restricted diastolic filling\n\nExplanation:\nCO = HR \u00d7 SV; SV is limited by ventricular compression, making CO fall even if HR rises.\n\nWrong-answer analogies:\n\nB) HR actually rises; the body tries to compensate like pedaling faster on a small pump.\n\nC) Peripheral resistance may rise to maintain BP; it doesn\u2019t cause the acute CO drop.\n\nD) Systemic blood volume is preserved; the problem is the pump can\u2019t accept it.",
     "tags": [],
     "id": 37
   },
@@ -527,7 +485,7 @@
       "D": "Wide pulse pressure"
     },
     "answer": "A",
-    "explanation": "Correct Answer: A) Pulsus paradoxus\n\nExplanation:\n\n10 mmHg inspiratory drop in SBP is classic for ventricular interdependence in tamponade.\n\nWrong-answer analogies:\nB) S3 reflects volume overload, not compression.\n\nC) Continuous murmur = PDA; tamponade is about restriction, not abnormal flow.\n\nD) Wide pulse pressure occurs in AR, not fixed diastolic compression.",
+    "explanation": "Correct Answer: \n\nA) Pulsus paradoxus\n\nExplanation:\n\n10 mmHg inspiratory drop in SBP is classic for ventricular interdependence in tamponade.\n\nWrong-answer analogies:\n\nB) S3 reflects volume overload, not compression.\n\nC) Continuous murmur = PDA; tamponade is about restriction, not abnormal flow.\n\nD) Wide pulse pressure occurs in AR, not fixed diastolic compression.",
     "tags": [],
     "id": 38
   },
@@ -541,7 +499,7 @@
       "D": "Natriuretic peptide increase \u2192 hypotension"
     },
     "answer": "A",
-    "explanation": "Correct Answer: A) Sympathetic activation \u2192 tachycardia and peripheral vasoconstriction\n\nExplanation:\nLow CO triggers baroreceptors \u2192 catecholamine release \u2192 increased HR & SVR to maintain BP.\n\nWrong-answer analogies:\nB) Parasympathetic slows the heart; tamponade needs speed to push the small volume through \u2014 like pedaling faster when water is trapped in a pump.\n\nC) RAAS actually activates \u2192 sodium/water retention to support preload.\n\nD) Natriuretic peptides increase slightly but cannot overcome acute mechanical restriction.",
+    "explanation": "Correct Answer: \n\nA) Sympathetic activation \u2192 tachycardia and peripheral vasoconstriction\n\nExplanation:\nLow CO triggers baroreceptors \u2192 catecholamine release \u2192 increased HR & SVR to maintain BP.\n\nWrong-answer analogies:\n\nB) Parasympathetic slows the heart; tamponade needs speed to push the small volume through \u2014 like pedaling faster when water is trapped in a pump.\n\nC) RAAS actually activates \u2192 sodium/water retention to support preload.\n\nD) Natriuretic peptides increase slightly but cannot overcome acute mechanical restriction.",
     "tags": [],
     "id": 39
   },
@@ -555,7 +513,7 @@
       "D": "Inspiration directly depresses LV contractility"
     },
     "answer": "A",
-    "explanation": "Correct Answer: A) Increased venous return to RV \u2192 septal shift \u2192 reduced LV filling \u2192 lower SBP\n\nExplanation:\nInterventricular dependence is exaggerated \u2192 LV stroke volume drops during inspiration \u2192 pulsus paradoxus.\n\nWrong-answer analogies:\nB) LV filling actually falls, not rises, because the ventricular septum bulges like a moving wall.\n\nC) Afterload doesn\u2019t improve LV output; tamponade is a filling problem, not resistance.\n\nD) Contractility is intact; think of the ventricle as a pump squeezed by a rigid box, not weakened.",
+    "explanation": "Correct Answer: \n\nA) Increased venous return to RV \u2192 septal shift \u2192 reduced LV filling \u2192 lower SBP\n\nExplanation:\nInterventricular dependence is exaggerated \u2192 LV stroke volume drops during inspiration \u2192 pulsus paradoxus.\n\nWrong-answer analogies:\n\nB) LV filling actually falls, not rises, because the ventricular septum bulges like a moving wall.\n\nC) Afterload doesn\u2019t improve LV output; tamponade is a filling problem, not resistance.\n\nD) Contractility is intact; think of the ventricle as a pump squeezed by a rigid box, not weakened.",
     "tags": [],
     "id": 40
   },
@@ -569,7 +527,7 @@
       "D": "Increased ventricular filling time"
     },
     "answer": "C",
-    "explanation": "Correct answer: C \u2014 Impaired ventricular relaxation\nHFpEF = diastolic dysfunction due to a stiff, hypertrophied LV that cannot relax properly \u2192 impaired filling \u2192 \u2191 filling pressures.\n\nClick-feedback (AMBOSS-style):\nA. Increased LV compliance\nReorient your thinking: Hypertrophy makes the ventricle stiffer, not more compliant.\n\nB. Decreased LV end-diastolic pressure\nReorient your thinking: If filling is impaired, the ventricle requires higher, not lower, pressure to fill.\n\nD. Increased ventricular filling time\nReorient your thinking: Time is not the limiting factor \u2014 stiffness and relaxation are.",
+    "explanation": "Correct answer: C \u2014 Impaired ventricular relaxation\nHFpEF = diastolic dysfunction due to a stiff, hypertrophied LV that cannot relax properly \u2192 impaired filling \u2192 \u2191 filling pressures.\n\nA. Increased LV compliance\n Hypertrophy makes the ventricle stiffer, not more compliant.\n\nB. Decreased LV end-diastolic pressure\n If filling is impaired, the ventricle requires higher, not lower, pressure to fill.\n\nD. Increased ventricular filling time\n Time is not the limiting factor \u2014 stiffness and relaxation are.",
     "tags": [],
     "id": 41
   },
@@ -583,7 +541,7 @@
       "D": "Decreased end-diastolic pressure"
     },
     "answer": "B",
-    "explanation": "Correct answer: B \u2014 Upward/leftward shift of EDPVR\nA stiff ventricle reaches higher pressures at lower volumes during diastole.\n\nClick-feedback:\nA. Rightward shift of ESPVR\nReorient your thinking: ESPVR reflects contractility, which is preserved in HFpEF.\n\nC. Increased stroke volume\nReorient your thinking: Poor filling \u2192 lower EDV \u2192 lower SV.\n\nD. Decreased end-diastolic pressure\nReorient your thinking: HFpEF is defined by elevated filling pressures.",
+    "explanation": "Correct answer: B \u2014 Upward/leftward shift of EDPVR\nA stiff ventricle reaches higher pressures at lower volumes during diastole.\n\nA. Rightward shift of ESPVR\n ESPVR reflects contractility, which is preserved in HFpEF.\n\nC. Increased stroke volume\n Poor filling \u2192 lower EDV \u2192 lower SV.\n\nD. Decreased end-diastolic pressure\n HFpEF is defined by elevated filling pressures.",
     "tags": [],
     "id": 42
   },
@@ -597,7 +555,7 @@
       "D": "Viral myocarditis"
     },
     "answer": "B",
-    "explanation": "Correct answer: B \u2014 LV hypertrophy from HTN\nChronic pressure overload \u2192 concentric hypertrophy \u2192 stiff ventricle \u2192 diastolic failure.\n\nClick-feedback:\nA. Chronic aortic regurgitation\nReorient your thinking: AR causes volume overload and eccentric hypertrophy, leading to HFrEF.\n\nC. Dilated cardiomyopathy\nReorient your thinking: Dilated ventricles impair systolic function (low EF).\n\nD. Viral myocarditis\nReorient your thinking: Myocardial damage primarily affects contractility, not relaxation.",
+    "explanation": "Correct answer: B \u2014 LV hypertrophy from HTN\nChronic pressure overload \u2192 concentric hypertrophy \u2192 stiff ventricle \u2192 diastolic failure.\n\nA. Chronic aortic regurgitation\n AR causes volume overload and eccentric hypertrophy, leading to HFrEF.\n\nC. Dilated cardiomyopathy\n Dilated ventricles impair systolic function (low EF).\n\nD. Viral myocarditis\n Myocardial damage primarily affects contractility, not relaxation.",
     "tags": [],
     "id": 43
   },
@@ -611,7 +569,7 @@
       "D": "Increased end-systolic volume (ESV)"
     },
     "answer": "B",
-    "explanation": "Correct answer: B \u2014 Normal EF\nHFpEF = heart failure with preserved ejection fraction.\n\nClick-feedback:\nA. Decreased EF\nReorient your thinking: A low EF defines HFrEF, not HFpEF.\n\nC. Reduced stroke volume\nReorient your thinking: SV may fall due to low EDV, but EF can remain normal.\n\nD. Increased ESV\nReorient your thinking: ESV rises with impaired systolic emptying, which is not the problem here.",
+    "explanation": "Correct answer: B \u2014 Normal EF\nHFpEF = heart failure with preserved ejection fraction.\n\nA. Decreased EF\n A low EF defines HFrEF, not HFpEF.\n\nC. Reduced stroke volume\n SV may fall due to low EDV, but EF can remain normal.\n\nD. Increased ESV\n ESV rises with impaired systolic emptying, which is not the problem here.",
     "tags": [],
     "id": 44
   },
@@ -625,7 +583,7 @@
       "D": "Decreased LV wall thickness"
     },
     "answer": "B",
-    "explanation": "Correct answer: B \u2014 High LVEDP\nA stiff ventricle requires high pressure to fill, backing up into the lungs.\n\nClick-feedback:\nA. Low LV filling pressures\nReorient your thinking: Pulmonary congestion requires elevated filling pressures.\n\nC. Increased LV chamber volume\nReorient your thinking: HFpEF typically has normal or reduced chamber size.\n\nD. Decreased LV wall thickness\nReorient your thinking: HFpEF is associated with concentric hypertrophy.",
+    "explanation": "Correct answer: B \u2014 High LVEDP\nA stiff ventricle requires high pressure to fill, backing up into the lungs.\n\nA. Low LV filling pressures\n Pulmonary congestion requires elevated filling pressures.\n\nC. Increased LV chamber volume\n HFpEF typically has normal or reduced chamber size.\n\nD. Decreased LV wall thickness\n HFpEF is associated with concentric hypertrophy.",
     "tags": [],
     "id": 45
   },
@@ -639,7 +597,7 @@
       "D": "Decreased afterload"
     },
     "answer": "B",
-    "explanation": "Correct answer: B \u2014 Narrow loop with decreased EDV\nImpaired filling \u2192 \u2193 EDV \u2192 \u2193 SV \u2192 narrow loop.\n\nClick-feedback:\nA. Wide loop with increased SV\nReorient your thinking: Wide loops imply good filling, which HFpEF lacks.\n\nC. Downward shift of EDPVR\nReorient your thinking: Decreased compliance shifts the curve upward, not downward.\n\nD. Decreased afterload\nReorient your thinking: Afterload is not the primary abnormality in HFpEF.",
+    "explanation": "Correct answer: B \u2014 Narrow loop with decreased EDV\nImpaired filling \u2192 \u2193 EDV \u2192 \u2193 SV \u2192 narrow loop.\n\nA. Wide loop with increased SV\n Wide loops imply good filling, which HFpEF lacks.\n\nC. Downward shift of EDPVR\n Decreased compliance shifts the curve upward, not downward.\n\nD. Decreased afterload\n Afterload is not the primary abnormality in HFpEF.",
     "tags": [],
     "id": 46
   },
@@ -653,7 +611,7 @@
       "D": "Pulmonary congestion improves"
     },
     "answer": "B",
-    "explanation": "Correct answer: B \u2014 Passive filling decreases\nImpaired relaxation \u2192 \u2193 early filling \u2192 \u2191 reliance on atrial kick.\n\nClick-feedback:\nA. Rapid early filling increases\nReorient your thinking: Relaxation is impaired, so early filling is reduced.\n\nC. LV pressure falls faster than normal\nReorient your thinking: Relaxation is delayed, slowing pressure decline.\n\nD. Pulmonary congestion improves\nReorient your thinking: Elevated filling pressures worsen congestion.",
+    "explanation": "Correct answer: B \u2014 Passive filling decreases\nImpaired relaxation \u2192 \u2193 early filling \u2192 \u2191 reliance on atrial kick.\n\nA. Rapid early filling increases\n Relaxation is impaired, so early filling is reduced.\n\nC. LV pressure falls faster than normal\n Relaxation is delayed, slowing pressure decline.\n\nD. Pulmonary congestion improves\n Elevated filling pressures worsen congestion.",
     "tags": [],
     "id": 47
   },
@@ -667,7 +625,7 @@
       "D": "Wide pulse pressure"
     },
     "answer": "C",
-    "explanation": "Correct answer: C \u2014 S4\nS4 = atrial contraction against a stiff ventricle.\nMnemonic: S3 = di-la-ted (3 syllables), S4 = hy-per-tro-phy (4 syllables).\n\nClick-feedback:\nA. Bounding pulses\nReorient your thinking: Bounding pulses suggest high stroke volume states.\n\nB. S3 gallop\nReorient your thinking: S3 is associated with volume overload and dilation.\n\nD. Wide pulse pressure\nReorient your thinking: Seen in aortic regurgitation, not HFpEF.",
+    "explanation": "Correct answer: C \u2014 S4\nS4 = atrial contraction against a stiff ventricle.\nMnemonic: S3 = di-la-ted (3 syllables), S4 = hy-per-tro-phy (4 syllables).\n\nA. Bounding pulses\n Bounding pulses suggest high stroke volume states.\n\nB. S3 gallop\n S3 is associated with volume overload and dilation.\n\nD. Wide pulse pressure\n Seen in aortic regurgitation, not HFpEF.",
     "tags": [],
     "id": 48
   },
@@ -681,7 +639,7 @@
       "D": "Increased contractility worsens EF"
     },
     "answer": "C",
-    "explanation": "Correct answer: C \u2014 Stiff LV cannot handle more preload\nExercise \u2191 venous return \u2192 LV cannot relax \u2192 \u2191 LA pressure \u2192 pulmonary edema.\n\nClick-feedback:\nA. Increased compliance of the ventricle\nReorient your thinking: HFpEF is defined by decreased compliance.\n\nB. Dramatic fall in LV filling pressures\nReorient your thinking: Filling pressures rise, causing edema.\n\nD. Increased contractility worsens EF\nReorient your thinking: Contractility is not the limiting factor; EF is preserved.",
+    "explanation": "Correct answer: C \u2014 Stiff LV cannot handle more preload\nExercise \u2191 venous return \u2192 LV cannot relax \u2192 \u2191 LA pressure \u2192 pulmonary edema.\n\nA. Increased compliance of the ventricle\n HFpEF is defined by decreased compliance.\n\nB. Dramatic fall in LV filling pressures\n Filling pressures rise, causing edema.\n\nD. Increased contractility worsens EF\n Contractility is not the limiting factor; EF is preserved.",
     "tags": [],
     "id": 49
   },
@@ -695,7 +653,7 @@
       "D": "Volume expansion to increase preload"
     },
     "answer": "B",
-    "explanation": "Correct answer: B \u2014 Afterload reduction & BP control\nTreat the cause: hypertension \u2192 LV hypertrophy \u2192 stiffness.\n\nClick-feedback:\nA. Positive inotropes\nReorient your thinking: Contractility is preserved; inotropes add little benefit.\n\nC. Large fluid boluses\nReorient your thinking: Increasing preload worsens pulmonary congestion.\n\nD. Volume expansion to increase preload\nReorient your thinking: The problem is inability to accommodate preload, not lack of it.",
+    "explanation": "Correct answer: B \u2014 Afterload reduction & BP control\nTreat the cause: hypertension \u2192 LV hypertrophy \u2192 stiffness.\n\nA. Positive inotropes\n Contractility is preserved; inotropes add little benefit.\n\nC. Large fluid boluses\n Increasing preload worsens pulmonary congestion.\n\nD. Volume expansion to increase preload\n The problem is inability to accommodate preload, not lack of it.",
     "tags": [],
     "id": 50
   },
@@ -709,7 +667,7 @@
       "D": "Increased stroke volume"
     },
     "answer": "A",
-    "explanation": "Correct answer: A. Increased end-systolic volume (ESV)\nIn HFrEF, systolic dysfunction \u2192 the ventricle cannot fully eject blood \u2192 ESV increases, lowering EF.\n\nWhy the others are wrong\nB Increased contractility \u2192 Does heart failure with reduced ejection fraction present with increased or decreased contractility?\nC Decreased preload \u2192 HFrEF usually has increased preload due to fluid retention. Think about what would happen with leftover blood in a heart with reduced contractility.\nD Increased stroke volume \u2192 Think again - stroke volume decreases in HFrEF due to reduced contractility.",
+    "explanation": "Correct answer: \n\nA. Increased end-systolic volume (ESV)\nIn HFrEF, systolic dysfunction \u2192 the ventricle cannot fully eject blood \u2192 ESV increases, lowering EF.\n\nWhy the others are wrong\nB Increased contractility \u2192 Does heart failure with reduced ejection fraction present with increased or decreased contractility?\nC Decreased preload \u2192 HFrEF usually has increased preload due to fluid retention. Think about what would happen with leftover blood in a heart with reduced contractility.\nD Increased stroke volume \u2192 Think again - stroke volume decreases in HFrEF due to reduced contractility.",
     "tags": [],
     "id": 51
   },
@@ -723,7 +681,7 @@
       "D": "Decreased venous return"
     },
     "answer": "C",
-    "explanation": "Reconsider. In heart failure, baroreceptor unloading leads to increased, not decreased, sympathetic activation to support heart rate and contractility.\nB. Increased parasympathetic tone\nReconsider. Vagal tone is withdrawn in HFrEF to allow tachycardia and higher cardiac output.\nC. Increased renin release\nCorrect. Reduced renal perfusion activates the RAAS. Increased renin ultimately raises blood volume, increasing preload and temporarily supporting cardiac output via the Frank\u2013Starling mechanism.\nD. Decreased venous return\nReconsider. Heart failure is associated with fluid retention, which increases venous return rather than decreasing it.",
+    "explanation": "Reconsider. In heart failure, baroreceptor unloading leads to increased, not decreased, sympathetic activation to support heart rate and contractility.\n\nB. Increased parasympathetic tone\nReconsider. Vagal tone is withdrawn in HFrEF to allow tachycardia and higher cardiac output.\n\nC. Increased renin release\nCorrect. Reduced renal perfusion activates the RAAS. Increased renin ultimately raises blood volume, increasing preload and temporarily supporting cardiac output via the Frank\u2013Starling mechanism.\n\nD. Decreased venous return\nReconsider. Heart failure is associated with fluid retention, which increases venous return rather than decreasing it.",
     "tags": [],
     "id": 52
   },
@@ -737,7 +695,7 @@
       "D": "Increased stroke volume"
     },
     "answer": "B",
-    "explanation": "Reconsider. Increased contractility makes the ESPVR steeper and shifts it upward, not downward.\nB. Decreased contractility\nCorrect. A reduced ESPVR slope reflects impaired inotropy, which is a defining feature of HFrEF.\nC. Increased afterload\nReconsider. Afterload alters pressure requirements but does not change the slope of the ESPVR, which reflects intrinsic contractility.\nD. Increased stroke volume\nReconsider. Stroke volume is typically reduced in HFrEF due to increased ESV.",
+    "explanation": "Reconsider. Increased contractility makes the ESPVR steeper and shifts it upward, not downward.\n\nB. Decreased contractility\nCorrect. A reduced ESPVR slope reflects impaired inotropy, which is a defining feature of HFrEF.\n\nC. Increased afterload\nReconsider. Afterload alters pressure requirements but does not change the slope of the ESPVR, which reflects intrinsic contractility.\n\nD. Increased stroke volume\nReconsider. Stroke volume is typically reduced in HFrEF due to increased ESV.",
     "tags": [],
     "id": 53
   },
@@ -751,7 +709,7 @@
       "D": "High oncotic pressure"
     },
     "answer": "B",
-    "explanation": "Reconsider. Enhanced RV function would tend to relieve, not worsen, pulmonary congestion.\nB. Increased left atrial pressure due to elevated LV end-diastolic pressure\nCorrect. LV failure causes blood to back up into the left atrium and pulmonary veins, raising pulmonary capillary hydrostatic pressure and leading to edema.\nC. Decreased blood volume\nReconsider. Most patients with HFrEF are volume overloaded, not hypovolemic.\nD. High oncotic pressure\nReconsider. Increased oncotic pressure would oppose fluid movement into the lungs.",
+    "explanation": "Reconsider. Enhanced RV function would tend to relieve, not worsen, pulmonary congestion.\n\nB. Increased left atrial pressure due to elevated LV end-diastolic pressure\nCorrect. LV failure causes blood to back up into the left atrium and pulmonary veins, raising pulmonary capillary hydrostatic pressure and leading to edema.\n\nC. Decreased blood volume\nReconsider. Most patients with HFrEF are volume overloaded, not hypovolemic.\n\nD. High oncotic pressure\nReconsider. Increased oncotic pressure would oppose fluid movement into the lungs.",
     "tags": [],
     "id": 54
   },
@@ -765,7 +723,7 @@
       "D": "Decreased \u03b1\u2081-adrenergic receptor activation"
     },
     "answer": "B",
-    "explanation": "Reconsider. Nitric oxide causes vasodilation, which lowers afterload.\nB. RAAS activation leading to vasoconstriction\nCorrect. Angiotensin II increases systemic vascular resistance, raising afterload and worsening ventricular emptying.\nC. Low sympathetic tone\nReconsider. Sympathetic tone is elevated, not low, in HFrEF.\nD. Decreased \u03b1\u2081-adrenergic receptor activation\nReconsider. \u03b1\u2081 stimulation is increased, contributing to vasoconstriction.",
+    "explanation": "Reconsider. Nitric oxide causes vasodilation, which lowers afterload.\n\nB. RAAS activation leading to vasoconstriction\nCorrect. Angiotensin II increases systemic vascular resistance, raising afterload and worsening ventricular emptying.\n\nC. Low sympathetic tone\nReconsider. Sympathetic tone is elevated, not low, in HFrEF.\n\nD. Decreased \u03b1\u2081-adrenergic receptor activation\nReconsider. \u03b1\u2081 stimulation is increased, contributing to vasoconstriction.",
     "tags": [],
     "id": 55
   },
@@ -779,7 +737,7 @@
       "D": "Increased ESV with decreased EDV"
     },
     "answer": "B",
-    "explanation": "Reconsider. ESPVR slope decreases in systolic dysfunction due to impaired contractility.\nB. Rightward shift of EDV (increased preload)\nCorrect. Neurohormonal activation leads to sodium and water retention, increasing preload and shifting EDV to the right.\nC. Higher peak systolic pressures\nReconsider. Peak systolic pressure is often reduced in HFrEF.\nD. Increased ESV with decreased EDV\nReconsider. Both ESV and EDV increase in HFrEF.",
+    "explanation": "Reconsider. ESPVR slope decreases in systolic dysfunction due to impaired contractility.\n\nB. Rightward shift of EDV (increased preload)\nCorrect. Neurohormonal activation leads to sodium and water retention, increasing preload and shifting EDV to the right.\n\nC. Higher peak systolic pressures\nReconsider. Peak systolic pressure is often reduced in HFrEF.\n\nD. Increased ESV with decreased EDV\nReconsider. Both ESV and EDV increase in HFrEF.",
     "tags": [],
     "id": 56
   },
@@ -793,7 +751,7 @@
       "D": "Increased renal blood flow"
     },
     "answer": "C",
-    "explanation": "Reconsider. Aldosterone secretion is increased, not decreased.\nB. Increased natriuresis\nReconsider. Sodium retention predominates and worsens congestion.\nC. RAAS activation causing sodium and water retention\nCorrect. Although initially compensatory, chronic fluid retention increases preload and venous congestion, worsening symptoms.\nD. Increased renal blood flow\nReconsider. Renal perfusion is typically reduced in HFrEF.",
+    "explanation": "Reconsider. Aldosterone secretion is increased, not decreased.\n\nB. Increased natriuresis\nReconsider. Sodium retention predominates and worsens congestion.\n\nC. RAAS activation causing sodium and water retention\nCorrect. Although initially compensatory, chronic fluid retention increases preload and venous congestion, worsening symptoms.\n\nD. Increased renal blood flow\nReconsider. Renal perfusion is typically reduced in HFrEF.",
     "tags": [],
     "id": 57
   },
@@ -807,7 +765,7 @@
       "D": "Increased ventricular compliance"
     },
     "answer": "A",
-    "explanation": "Correct. With severely impaired contractility, additional preload produces minimal increases in stroke volume.\nB. Inadequate venous return\nReconsider. Venous return is often elevated.\nC. Chronically low afterload\nReconsider. Afterload is frequently increased.\nD. Increased ventricular compliance\nReconsider. Compliance may be normal or increased, but EF reduction is driven by impaired inotropy.",
+    "explanation": "Correct. With severely impaired contractility, additional preload produces minimal increases in stroke volume.\n\nB. Inadequate venous return\nReconsider. Venous return is often elevated.\n\nC. Chronically low afterload\nReconsider. Afterload is frequently increased.\n\nD. Increased ventricular compliance\nReconsider. Compliance may be normal or increased, but EF reduction is driven by impaired inotropy.",
     "tags": [],
     "id": 58
   },
@@ -821,7 +779,7 @@
       "D": "Decreased renin release"
     },
     "answer": "B",
-    "explanation": "Reconsider. Tachycardia and increased wall stress increase oxygen demand.\nB. Downregulation of \u03b2\u2081-adrenergic receptors\nCorrect. Persistent catecholamine exposure leads to receptor downregulation and worsened systolic function.\nC. Sustained increase in cardiac output\nReconsider. Any increase in CO is temporary and declines over time.\nD. Decreased renin release\nReconsider. Sympathetic stimulation increases renin secretion.",
+    "explanation": "Reconsider. Tachycardia and increased wall stress increase oxygen demand.\n\nB. Downregulation of \u03b2\u2081-adrenergic receptors\nCorrect. Persistent catecholamine exposure leads to receptor downregulation and worsened systolic function.\n\nC. Sustained increase in cardiac output\nReconsider. Any increase in CO is temporary and declines over time.\n\nD. Decreased renin release\nReconsider. Sympathetic stimulation increases renin secretion.",
     "tags": [],
     "id": 59
   },
@@ -835,7 +793,7 @@
       "D": "They increase sympathetic tone"
     },
     "answer": "B",
-    "explanation": "Reconsider. ACE inhibitors reduce systemic vascular resistance.\nB. They reduce both preload and afterload\nCorrect. Reduced angiotensin II lowers vasoconstriction and aldosterone-mediated fluid retention, improving hemodynamics and survival.\nC. They decrease serum potassium\nReconsider. ACE inhibitors can cause hyperkalemia.\nD. They increase sympathetic tone\nReconsider. ACE inhibitors blunt maladaptive neurohormonal activation.",
+    "explanation": "Reconsider. ACE inhibitors reduce systemic vascular resistance.\n\nB. They reduce both preload and afterload\nCorrect. Reduced angiotensin II lowers vasoconstriction and aldosterone-mediated fluid retention, improving hemodynamics and survival.\n\nC. They decrease serum potassium\nReconsider. ACE inhibitors can cause hyperkalemia.\n\nD. They increase sympathetic tone\nReconsider. ACE inhibitors blunt maladaptive neurohormonal activation.",
     "tags": [],
     "id": 60
   },
@@ -849,7 +807,7 @@
       "D": "Increased LV cavity size"
     },
     "answer": "A",
-    "explanation": "Correct answer: A \u2014 Decreased preload\nStanding \u2193 venous return \u2192 LV cavity becomes smaller \u2192 septum and mitral valve approximate \u2192 dynamic LVOT obstruction worsens \u2192 murmur increases.\n\nClick-feedback (AMBOSS-style):\nB. Increased preload\nReorient your thinking: More preload enlarges the LV cavity and relieves obstruction, softening the murmur.\n\nC. Increased afterload\nReorient your thinking: Higher afterload keeps the LV cavity open longer and reduces obstruction.\n\nD. Increased LV cavity size\nReorient your thinking: Standing makes the LV smaller, not larger.",
+    "explanation": "Correct answer: A \u2014 Decreased preload\nStanding \u2193 venous return \u2192 LV cavity becomes smaller \u2192 septum and mitral valve approximate \u2192 dynamic LVOT obstruction worsens \u2192 murmur increases.\n\nB. Increased preload\n More preload enlarges the LV cavity and relieves obstruction, softening the murmur.\n\nC. Increased afterload\n Higher afterload keeps the LV cavity open longer and reduces obstruction.\n\nD. Increased LV cavity size\n Standing makes the LV smaller, not larger.",
     "tags": [],
     "id": 61
   },
@@ -863,7 +821,7 @@
       "D": "Diuretics"
     },
     "answer": "C",
-    "explanation": "Correct answer: C \u2014 Squatting\nSquatting \u2191 preload and \u2191 afterload \u2192 LV cavity enlarges \u2192 LVOT opens \u2192 murmur decreases.\n\nClick-feedback:\nA. Valsalva\nReorient your thinking: Valsalva \u2193 preload, which worsens obstruction.\n\nB. Standing\nReorient your thinking: Standing \u2193 venous return, making the murmur louder.\n\nD. Diuretics\nReorient your thinking: Diuretics reduce preload \u2192 smaller LV cavity \u2192 worse murmur.",
+    "explanation": "Correct answer: C \u2014 Squatting\nSquatting \u2191 preload and \u2191 afterload \u2192 LV cavity enlarges \u2192 LVOT opens \u2192 murmur decreases.\n\nA. Valsalva\n Valsalva \u2193 preload, which worsens obstruction.\n\nB. Standing\n Standing \u2193 venous return, making the murmur louder.\n\nD. Diuretics\n Diuretics reduce preload \u2192 smaller LV cavity \u2192 worse murmur.",
     "tags": [],
     "id": 62
   },
@@ -877,7 +835,7 @@
       "D": "Increased LV compliance"
     },
     "answer": "C",
-    "explanation": "Correct answer: C\nAsymmetric septal hypertrophy narrows the LVOT, especially when the LV cavity is small.\n\nClick-feedback:\nA. Systolic dysfunction\nReorient your thinking: EF is usually normal or supranormal in HOCM.\n\nB. Dilated LV\nReorient your thinking: HOCM ventricles are small and thick, not dilated.\n\nD. Increased LV compliance\nReorient your thinking: Hypertrophy causes a stiff, noncompliant ventricle.",
+    "explanation": "Correct answer: C\nAsymmetric septal hypertrophy narrows the LVOT, especially when the LV cavity is small.\n\nA. Systolic dysfunction\n EF is usually normal or supranormal in HOCM.\n\nB. Dilated LV\n HOCM ventricles are small and thick, not dilated.\n\nD. Increased LV compliance\n Hypertrophy causes a stiff, noncompliant ventricle.",
     "tags": [],
     "id": 63
   },
@@ -891,7 +849,7 @@
       "D": "Fibrosis of the mitral valve"
     },
     "answer": "B",
-    "explanation": "Correct answer: B\nFast blood flow through the narrowed LVOT creates a suction force that pulls the anterior mitral leaflet into the outflow tract.\n\nClick-feedback:\nA. Increased afterload\nReorient your thinking: Afterload does not cause SAM; flow dynamics do.\n\nC. Volume overload\nReorient your thinking: HOCM is a low-volume state.\n\nD. Fibrosis of the mitral valve\nReorient your thinking: The mitral valve is structurally normal.",
+    "explanation": "Correct answer: B\nFast blood flow through the narrowed LVOT creates a suction force that pulls the anterior mitral leaflet into the outflow tract.\n\nA. Increased afterload\n Afterload does not cause SAM; flow dynamics do.\n\nC. Volume overload\n HOCM is a low-volume state.\n\nD. Fibrosis of the mitral valve\n The mitral valve is structurally normal.",
     "tags": [],
     "id": 64
   },
@@ -905,7 +863,7 @@
       "D": "Increased stroke volume"
     },
     "answer": "B",
-    "explanation": "Correct answer: B\nHOCM = small, stiff ventricle \u2192 high pressures, low volumes.\n\nClick-feedback:\nA. Increased EDV\nReorient your thinking: Poor filling \u2192 decreased EDV.\n\nC. Decreased contractility\nReorient your thinking: Contractility is normal or increased.\n\nD. Increased stroke volume\nReorient your thinking: LVOT obstruction limits SV.",
+    "explanation": "Correct answer: B\nHOCM = small, stiff ventricle \u2192 high pressures, low volumes.\n\nA. Increased EDV\n Poor filling \u2192 decreased EDV.\n\nC. Decreased contractility\n Contractility is normal or increased.\n\nD. Increased stroke volume\n LVOT obstruction limits SV.",
     "tags": [],
     "id": 65
   },
@@ -919,7 +877,7 @@
       "D": "Increased venous return"
     },
     "answer": "C",
-    "explanation": "Correct answer: C\nNitrates \u2193 preload \u2192 LV cavity shrinks \u2192 obstruction worsens \u2192 \u2193 cardiac output.\n\nClick-feedback:\nA. Increased afterload\nReorient your thinking: Nitrates decrease afterload.\n\nB. Increased LV volume\nReorient your thinking: Preload reduction shrinks, not enlarges, the LV.\n\nD. Increased venous return\nReorient your thinking: Nitrates reduce venous return via venodilation.",
+    "explanation": "Correct answer: C\nNitrates \u2193 preload \u2192 LV cavity shrinks \u2192 obstruction worsens \u2192 \u2193 cardiac output.\n\nA. Increased afterload\n Nitrates decrease afterload.\n\nB. Increased LV volume\n Preload reduction shrinks, not enlarges, the LV.\n\nD. Increased venous return\n Nitrates reduce venous return via venodilation.",
     "tags": [],
     "id": 66
   },
@@ -933,7 +891,7 @@
       "D": "Digoxin"
     },
     "answer": "C",
-    "explanation": "Correct answer: C \u2014 Beta-blockers\nThey \u2193 HR, \u2191 diastolic filling time, and \u2193 contractility \u2192 less LVOT obstruction.\n\nClick-feedback:\nA. Diuretics\nReorient your thinking: Less preload worsens obstruction.\n\nB. ACE inhibitors\nReorient your thinking: Afterload reduction can increase the gradient.\n\nD. Digoxin\nReorient your thinking: Increased contractility worsens obstruction.",
+    "explanation": "Correct answer: C \u2014 Beta-blockers\nThey \u2193 HR, \u2191 diastolic filling time, and \u2193 contractility \u2192 less LVOT obstruction.\n\nA. Diuretics\n Less preload worsens obstruction.\n\nB. ACE inhibitors\n Afterload reduction can increase the gradient.\n\nD. Digoxin\n Increased contractility worsens obstruction.",
     "tags": [],
     "id": 67
   },
@@ -947,7 +905,7 @@
       "D": "Excess preload"
     },
     "answer": "B",
-    "explanation": "Correct answer: B\nThickened myocardium fails to relax \u2192 impaired filling \u2192 \u2191 filling pressures \u2192 dyspnea.\n\nClick-feedback:\nA. Increased compliance\nReorient your thinking: Hypertrophy causes reduced compliance.\n\nC. Low LV pressure\nReorient your thinking: LV pressures are elevated, not low.\n\nD. Excess preload\nReorient your thinking: HOCM patients typically have low preload.",
+    "explanation": "Correct answer: B\nThickened myocardium fails to relax \u2192 impaired filling \u2192 \u2191 filling pressures \u2192 dyspnea.\n\nA. Increased compliance\n Hypertrophy causes reduced compliance.\n\nC. Low LV pressure\n LV pressures are elevated, not low.\n\nD. Excess preload\n HOCM patients typically have low preload.",
     "tags": [],
     "id": 68
   },
@@ -961,7 +919,7 @@
       "D": "U waves"
     },
     "answer": "B",
-    "explanation": "Correct answer: B\nSeptal hypertrophy produces pseudo\u2013infarct Q waves.\n\nClick-feedback:\nA. ST elevation\nReorient your thinking: Suggests acute myocardial infarction.\n\nC. Peaked T waves\nReorient your thinking: Seen in hyperkalemia.\n\nD. U waves\nReorient your thinking: Associated with hypokalemia.",
+    "explanation": "Correct answer: B\nSeptal hypertrophy produces pseudo\u2013infarct Q waves.\n\nA. ST elevation\n Suggests acute myocardial infarction.\n\nC. Peaked T waves\n Seen in hyperkalemia.\n\nD. U waves\n Associated with hypokalemia.",
     "tags": [],
     "id": 69
   },
@@ -975,7 +933,7 @@
       "D": "Decreased contractility"
     },
     "answer": "C",
-    "explanation": "Correct answer: C\nValsalva \u2193 venous return \u2192 LV cavity shrinks \u2192 septum and mitral leaflet approximate \u2192 louder murmur.\n\nClick-feedback:\nA. Increased afterload\nReorient your thinking: Valsalva reduces afterload.\n\nB. Increased stroke volume\nReorient your thinking: Stroke volume falls during Valsalva.\n\nD. Decreased contractility\nReorient your thinking: Contractility transiently increases due to reflex sympathetic activation.",
+    "explanation": "Correct answer: C\nValsalva \u2193 venous return \u2192 LV cavity shrinks \u2192 septum and mitral leaflet approximate \u2192 louder murmur.\n\nA. Increased afterload\n Valsalva reduces afterload.\n\nB. Increased stroke volume\n Stroke volume falls during Valsalva.\n\nD. Decreased contractility\n Contractility transiently increases due to reflex sympathetic activation.",
     "tags": [],
     "id": 70
   },
@@ -1326,7 +1284,7 @@
       "D": "CO \u2193, SVR \u2193, PCWP \u2191"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) CO \u2193, SVR \u2191, PCWP \u2193\nExplanation: Hypovolemic shock is caused by a significant loss of intravascular volume (e.g., hemorrhage or severe dehydration). The reduced circulating volume leads to decreased preload and thus a drop in cardiac output (CO), since the heart has less blood to pump. With less blood filling the left side of the heart, the pulmonary capillary wedge pressure (PCWP) (a measure of left atrial pressure) is low. In response, the body activates the sympathetic nervous system via baroreceptors, causing vasoconstriction and an increase in systemic vascular resistance (SVR) to maintain perfusion. This compensatory vasoconstriction (along with tachycardia) is why patients in hypovolemic shock have cool, clammy skin.\nIncorrect Answer Choices:\nB) This hemodynamic profile indicates increased cardiac output with decreased SVR, which is characteristic of early distributive shock (e.g., septic shock), not hypovolemic shock. Moreover, a high PCWP suggests elevated left heart filling pressure as seen in cardiogenic shock, which contradicts the low filling pressures in hypovolemia.\nC) No shock state presents with simultaneously elevated CO, SVR, and PCWP. If PCWP were high (indicating elevated left-sided filling pressure), a failing pump (as in cardiogenic shock) would typically cause low CO rather than a high CO. Thus, this combination is not physiologically consistent with hypovolemic shock.\nD) This option combines features that don\u2019t occur together in hypovolemic shock. Decreased SVR is seen in distributive shock (septic or neurogenic), not in hypovolemia, and an elevated PCWP indicates pump failure (cardiogenic shock). In true hypovolemic shock, SVR should be increased (compensatory vasoconstriction) and PCWP would be low due to lack of volume.",
+    "explanation": "Correct Answer: \n\nA) CO \u2193, SVR \u2191, PCWP \u2193\nExplanation: Hypovolemic shock is caused by a significant loss of intravascular volume (e.g., hemorrhage or severe dehydration). The reduced circulating volume leads to decreased preload and thus a drop in cardiac output (CO), since the heart has less blood to pump. With less blood filling the left side of the heart, the pulmonary capillary wedge pressure (PCWP) (a measure of left atrial pressure) is low. In response, the body activates the sympathetic nervous system via baroreceptors, causing vasoconstriction and an increase in systemic vascular resistance (SVR) to maintain perfusion. This compensatory vasoconstriction (along with tachycardia) is why patients in hypovolemic shock have cool, clammy skin.\nIncorrect Answer Choices:\n\nB) This hemodynamic profile indicates increased cardiac output with decreased SVR, which is characteristic of early distributive shock (e.g., septic shock), not hypovolemic shock. Moreover, a high PCWP suggests elevated left heart filling pressure as seen in cardiogenic shock, which contradicts the low filling pressures in hypovolemia.\n\nC) No shock state presents with simultaneously elevated CO, SVR, and PCWP. If PCWP were high (indicating elevated left-sided filling pressure), a failing pump (as in cardiogenic shock) would typically cause low CO rather than a high CO. Thus, this combination is not physiologically consistent with hypovolemic shock.\n\nD) This option combines features that don\u2019t occur together in hypovolemic shock. Decreased SVR is seen in distributive shock (septic or neurogenic), not in hypovolemia, and an elevated PCWP indicates pump failure (cardiogenic shock). In true hypovolemic shock, SVR should be increased (compensatory vasoconstriction) and PCWP would be low due to lack of volume.",
     "tags": [],
     "id": 91
   },
@@ -1340,7 +1298,7 @@
       "D": "CVP \u2193, CO \u2193, SVR \u2191"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) CVP \u2191, CO \u2193, SVR \u2191\nExplanation: Cardiac tamponade (an obstructive form of shock) involves fluid buildup in the pericardium that restricts ventricular filling. As a result, blood backs up into the venous system, causing an increase in central venous pressure (CVP) (clinically evident as jugular venous distension). Inadequate filling of the heart leads to a decreased cardiac output (CO). To compensate for the falling blood pressure, the sympathetic nervous system raises the systemic vascular resistance (SVR) through vasoconstriction. Thus, the combination of elevated CVP, low CO, and high SVR is characteristic of cardiac tamponade\u2013induced obstructive shock.\nIncorrect Answer Choices:\nB) This choice shows low CVP with high CO and low SVR, which is the opposite of tamponade\u2019s hemodynamics. A low CVP and low SVR are seen in distributive shock (e.g., early sepsis, where vasodilation causes both decreased venous return and decreased SVR) along with a reflex high CO. This profile does not match cardiac tamponade.\nC) This combination is not physiologically coherent for tamponade. Elevated CVP with decreased SVR would imply mixed features of different shock types (e.g., volume overload or right heart failure plus vasodilation). Tamponade should cause high CVP with high SVR (due to compensation) and a low CO \u2013 it would not present with a high CO and low SVR.\nD) This profile (low CVP, low CO, high SVR) actually matches hypovolemic shock, not tamponade. In hypovolemia, low intravascular volume leads to low CVP and low CO with reflex SVR increase. In cardiac tamponade, CVP would be elevated (from impaired filling and venous backup), so option D is describing the wrong shock type.",
+    "explanation": "Correct Answer: \n\nA) CVP \u2191, CO \u2193, SVR \u2191\nExplanation: Cardiac tamponade (an obstructive form of shock) involves fluid buildup in the pericardium that restricts ventricular filling. As a result, blood backs up into the venous system, causing an increase in central venous pressure (CVP) (clinically evident as jugular venous distension). Inadequate filling of the heart leads to a decreased cardiac output (CO). To compensate for the falling blood pressure, the sympathetic nervous system raises the systemic vascular resistance (SVR) through vasoconstriction. Thus, the combination of elevated CVP, low CO, and high SVR is characteristic of cardiac tamponade\u2013induced obstructive shock.\nIncorrect Answer Choices:\n\nB) This choice shows low CVP with high CO and low SVR, which is the opposite of tamponade\u2019s hemodynamics. A low CVP and low SVR are seen in distributive shock (e.g., early sepsis, where vasodilation causes both decreased venous return and decreased SVR) along with a reflex high CO. This profile does not match cardiac tamponade.\n\nC) This combination is not physiologically coherent for tamponade. Elevated CVP with decreased SVR would imply mixed features of different shock types (e.g., volume overload or right heart failure plus vasodilation). Tamponade should cause high CVP with high SVR (due to compensation) and a low CO \u2013 it would not present with a high CO and low SVR.\n\nD) This profile (low CVP, low CO, high SVR) actually matches hypovolemic shock, not tamponade. In hypovolemia, low intravascular volume leads to low CVP and low CO with reflex SVR increase. In cardiac tamponade, CVP would be elevated (from impaired filling and venous backup), so option D is describing the wrong shock type.",
     "tags": [],
     "id": 92
   },
@@ -1354,7 +1312,7 @@
       "D": "SvO\u2082 variable"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) SvO\u2082 \u2193\nExplanation: In hypovolemic shock, cardiac output is low, so less oxygenated blood is delivered to tissues. As a result, tissues extract more oxygen from the blood to meet their needs, leaving the venous blood with a lower oxygen saturation. Therefore, the mixed venous O\u2082 saturation (SvO\u2082) decreases in hypovolemia (less O\u2082 remains in the venous blood).\nIncorrect Answer Choices:\nB) An elevated SvO\u2082 indicates that tissues are extracting less oxygen than normal, leaving more O\u2082 in the venous blood. This occurs in conditions like early septic shock (high-flow states with impaired oxygen extraction), not in hypovolemic shock.\nC) If the body is in shock from low flow, SvO\u2082 would not stay normal. In hypovolemic shock, the significant reduction in CO causes increased extraction and a drop in SvO\u2082, so it would not remain unchanged.\nD) SvO\u2082 does not fluctuate randomly in hypovolemic shock \u2013 it predictably decreases due to increased oxygen extraction. Describing it as \u201cvariable\u201d is incorrect; the expected change is a decrease in SvO\u2082.",
+    "explanation": "Correct Answer: \n\nA) SvO\u2082 \u2193\nExplanation: In hypovolemic shock, cardiac output is low, so less oxygenated blood is delivered to tissues. As a result, tissues extract more oxygen from the blood to meet their needs, leaving the venous blood with a lower oxygen saturation. Therefore, the mixed venous O\u2082 saturation (SvO\u2082) decreases in hypovolemia (less O\u2082 remains in the venous blood).\nIncorrect Answer Choices:\n\nB) An elevated SvO\u2082 indicates that tissues are extracting less oxygen than normal, leaving more O\u2082 in the venous blood. This occurs in conditions like early septic shock (high-flow states with impaired oxygen extraction), not in hypovolemic shock.\n\nC) If the body is in shock from low flow, SvO\u2082 would not stay normal. In hypovolemic shock, the significant reduction in CO causes increased extraction and a drop in SvO\u2082, so it would not remain unchanged.\n\nD) SvO\u2082 does not fluctuate randomly in hypovolemic shock \u2013 it predictably decreases due to increased oxygen extraction. Describing it as \u201cvariable\u201d is incorrect; the expected change is a decrease in SvO\u2082.",
     "tags": [],
     "id": 93
   },
@@ -1368,7 +1326,7 @@
       "D": "CO \u2191 in hypovolemic, \u2193 in cardiogenic"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) PCWP \u2193 in hypovolemic, \u2191 in cardiogenic\nExplanation: A key difference between these shock types is in the filling pressures of the left heart: Hypovolemic shockinvolves low intravascular volume, so PCWP is low (the heart\u2019s filling pressure is reduced). In cardiogenic shock, the failing left ventricle causes blood to back up into the pulmonary circulation, so PCWP is elevated. Thus, low PCWP (in hypovolemia) vs high PCWP (in cardiogenic shock) best distinguishes the two.\nIncorrect Answer Choices:\nB) This choice is the exact opposite of the true scenario. Hypovolemic shock would not have an elevated PCWP \u2013 it would have a low PCWP due to lack of volume. Conversely, cardiogenic shock does not have a low PCWP \u2013 it typically has an elevated PCWP from blood backing up.\nC) This is incorrect because systemic vascular resistance (SVR) is not decreased in hypovolemic shock \u2013 in fact, it is increased (due to vasoconstrictive compensation). Both hypovolemic and cardiogenic shock typically feature increased SVR as a compensatory response, so SVR is not what differentiates them in this way.\nD) This is false because cardiac output (CO) is actually decreased in hypovolemic shock (low preload leads to low CO), not increased. Cardiogenic shock does indeed have a low CO, but hypovolemia would never present with an increased CO. Thus, option D misstates the hemodynamics of hypovolemia.",
+    "explanation": "Correct Answer: \n\nA) PCWP \u2193 in hypovolemic, \u2191 in cardiogenic\nExplanation: A key difference between these shock types is in the filling pressures of the left heart: Hypovolemic shockinvolves low intravascular volume, so PCWP is low (the heart\u2019s filling pressure is reduced). In cardiogenic shock, the failing left ventricle causes blood to back up into the pulmonary circulation, so PCWP is elevated. Thus, low PCWP (in hypovolemia) vs high PCWP (in cardiogenic shock) best distinguishes the two.\nIncorrect Answer Choices:\n\nB) This choice is the exact opposite of the true scenario. Hypovolemic shock would not have an elevated PCWP \u2013 it would have a low PCWP due to lack of volume. Conversely, cardiogenic shock does not have a low PCWP \u2013 it typically has an elevated PCWP from blood backing up.\n\nC) This is incorrect because systemic vascular resistance (SVR) is not decreased in hypovolemic shock \u2013 in fact, it is increased (due to vasoconstrictive compensation). Both hypovolemic and cardiogenic shock typically feature increased SVR as a compensatory response, so SVR is not what differentiates them in this way.\n\nD) This is false because cardiac output (CO) is actually decreased in hypovolemic shock (low preload leads to low CO), not increased. Cardiogenic shock does indeed have a low CO, but hypovolemia would never present with an increased CO. Thus, option D misstates the hemodynamics of hypovolemia.",
     "tags": [],
     "id": 94
   },
@@ -1382,7 +1340,7 @@
       "D": "CO \u2193, SVR \u2193, PCWP \u2193"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) CO \u2193, SVR \u2191, PCWP \u2191\nExplanation: In this acute myocardial infarction scenario, the damaged left ventricle cannot pump effectively, so cardiac output (CO) falls. The blood backs up into the lungs, causing elevated pulmonary capillary wedge pressure (PCWP)(reflecting pulmonary edema). To compensate for the low blood pressure, SVR increases (systemic vasoconstriction via sympathetic activation). Thus, cardiogenic shock is marked by low CO, high PCWP, and high SVR.\nIncorrect Answer Choices:\nB) This choice (high CO, low SVR, low PCWP) describes a distributive shock picture (like early septic shock, where vasodilation causes low SVR and often a high CO). Cardiogenic shock would not present with an increased cardiac output or reduced SVR, so option B is incorrect.\nC) Cardiogenic shock would not have an increased CO \u2013 the hallmark is decreased CO due to pump failure. A combination of high CO, high SVR, and low PCWP does not correspond to any typical shock state (and certainly not cardiogenic shock), making this option wrong.\nD) This combination (low CO, low SVR, low PCWP) is not consistent with cardiogenic shock. Low SVR indicates widespread vasodilation, which is not a feature of early cardiogenic shock (SVR would be high from sympathetic compensation). All values being decreased is more suggestive of neurogenic shock (loss of sympathetic tone), not acute cardiogenic shock.",
+    "explanation": "Correct Answer: \n\nA) CO \u2193, SVR \u2191, PCWP \u2191\nExplanation: In this acute myocardial infarction scenario, the damaged left ventricle cannot pump effectively, so cardiac output (CO) falls. The blood backs up into the lungs, causing elevated pulmonary capillary wedge pressure (PCWP)(reflecting pulmonary edema). To compensate for the low blood pressure, SVR increases (systemic vasoconstriction via sympathetic activation). Thus, cardiogenic shock is marked by low CO, high PCWP, and high SVR.\nIncorrect Answer Choices:\n\nB) This choice (high CO, low SVR, low PCWP) describes a distributive shock picture (like early septic shock, where vasodilation causes low SVR and often a high CO). Cardiogenic shock would not present with an increased cardiac output or reduced SVR, so option B is incorrect.\n\nC) Cardiogenic shock would not have an increased CO \u2013 the hallmark is decreased CO due to pump failure. A combination of high CO, high SVR, and low PCWP does not correspond to any typical shock state (and certainly not cardiogenic shock), making this option wrong.\n\nD) This combination (low CO, low SVR, low PCWP) is not consistent with cardiogenic shock. Low SVR indicates widespread vasodilation, which is not a feature of early cardiogenic shock (SVR would be high from sympathetic compensation). All values being decreased is more suggestive of neurogenic shock (loss of sympathetic tone), not acute cardiogenic shock.",
     "tags": [],
     "id": 95
   },
@@ -1396,7 +1354,7 @@
       "D": "Preload \u2193, CO \u2191"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) Preload \u2191, CO \u2191\nExplanation: IV fluids restore intravascular volume, increasing preload (filling of the heart). With more volume returning to the heart, the Frank-Starling mechanism allows the heart to pump more forcefully, so cardiac output (CO) increases. Thus, fluids raise both the preload and, as a result, the CO in hypovolemia.\nIncorrect Answer Choices:\nB) This choice is the opposite of what fluids do. Decreased preload and CO would occur if volume were taken away, not added. IV fluids should not decrease preload or CO; they increase them.\nC) This suggests fluids increased preload but somehow decreased CO, which is not expected in hypovolemia. In a volume-depleted patient with a healthy heart, more preload leads to higher CO. A decrease in CO despite higher preload might occur in severe heart failure (fluid overload in cardiogenic shock), but not in hypovolemic shock with an intact heart.\nD) It is not physiologically plausible for preload to decrease while CO increases. If preload went down (less venous return), CO would also drop. Therefore, this option does not make sense for any volume infusion scenario and is incorrect.",
+    "explanation": "Correct Answer: \n\nA) Preload \u2191, CO \u2191\nExplanation: IV fluids restore intravascular volume, increasing preload (filling of the heart). With more volume returning to the heart, the Frank-Starling mechanism allows the heart to pump more forcefully, so cardiac output (CO) increases. Thus, fluids raise both the preload and, as a result, the CO in hypovolemia.\nIncorrect Answer Choices:\n\nB) This choice is the opposite of what fluids do. Decreased preload and CO would occur if volume were taken away, not added. IV fluids should not decrease preload or CO; they increase them.\n\nC) This suggests fluids increased preload but somehow decreased CO, which is not expected in hypovolemia. In a volume-depleted patient with a healthy heart, more preload leads to higher CO. A decrease in CO despite higher preload might occur in severe heart failure (fluid overload in cardiogenic shock), but not in hypovolemic shock with an intact heart.\n\nD) It is not physiologically plausible for preload to decrease while CO increases. If preload went down (less venous return), CO would also drop. Therefore, this option does not make sense for any volume infusion scenario and is incorrect.",
     "tags": [],
     "id": 96
   },
@@ -1410,7 +1368,7 @@
       "D": "SvO\u2082 variable"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) SvO\u2082 \u2191\nExplanation: In distributive shock such as sepsis, systemic vasodilation and often increased cardiac output result in tissues extracting less oxygen from blood than normal. Additionally, cellular dysfunction in septic shock can impair oxygen uptake. Consequently, the blood returning to the heart has a higher SvO\u2082 (venous oxygen saturation is elevated because less O\u2082 is removed by tissues).\nIncorrect Answer Choices:\nB) A decrease in SvO\u2082 is seen in low-output states (like cardiogenic or hypovolemic shock) where tissues extract extra oxygen due to reduced flow. In early distributive shock (septic shock), CO is often high and peripheral tissues can\u2019t extract all the oxygen, so SvO\u2082 is high, not low.\nC) It is unlikely for SvO\u2082 to remain normal in significant septic shock. With profound changes in perfusion and extraction, SvO\u2082 typically rises (in early sepsis). Therefore, an \u201cunchanged\u201d SvO\u2082 is not characteristic of distributive shock.\nD) Describing SvO\u2082 as \u201cvariable\u201d does not identify the key physiologic change. In distributive (septic) shock, SvO\u2082 tends to be elevated (not unpredictably variable) due to increased blood flow and impaired extraction. Thus, this option is not the best description.",
+    "explanation": "Correct Answer: \n\nA) SvO\u2082 \u2191\nExplanation: In distributive shock such as sepsis, systemic vasodilation and often increased cardiac output result in tissues extracting less oxygen from blood than normal. Additionally, cellular dysfunction in septic shock can impair oxygen uptake. Consequently, the blood returning to the heart has a higher SvO\u2082 (venous oxygen saturation is elevated because less O\u2082 is removed by tissues).\nIncorrect Answer Choices:\n\nB) A decrease in SvO\u2082 is seen in low-output states (like cardiogenic or hypovolemic shock) where tissues extract extra oxygen due to reduced flow. In early distributive shock (septic shock), CO is often high and peripheral tissues can\u2019t extract all the oxygen, so SvO\u2082 is high, not low.\n\nC) It is unlikely for SvO\u2082 to remain normal in significant septic shock. With profound changes in perfusion and extraction, SvO\u2082 typically rises (in early sepsis). Therefore, an \u201cunchanged\u201d SvO\u2082 is not characteristic of distributive shock.\n\nD) Describing SvO\u2082 as \u201cvariable\u201d does not identify the key physiologic change. In distributive (septic) shock, SvO\u2082 tends to be elevated (not unpredictably variable) due to increased blood flow and impaired extraction. Thus, this option is not the best description.",
     "tags": [],
     "id": 97
   },
@@ -1424,7 +1382,7 @@
       "D": "CO \u2193, SVR \u2193, CVP \u2193"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) CO \u2193, SVR \u2191, CVP \u2191\nExplanation: A massive pulmonary embolism causes an acute blockage in the pulmonary circulation, which reduces blood flow from the right heart to the left heart. The result is a sharp decrease in cardiac output (CO). Blood backs up behind the obstruction, leading to elevated central venous pressure (CVP) (high pressure in the venous system, often manifesting as jugular venous distension). The body responds to the drop in arterial pressure by raising SVR (systemic vascular resistance) via sympathetic vasoconstriction. So, a massive PE produces low CO, high CVP, and a compensatory increase in SVR.\nIncorrect Answer Choices:\nB) This profile (high CO, low SVR, low CVP) is characteristic of distributive shock (e.g., septic shock), not an obstructive shock like pulmonary embolism. A massive PE would not cause an increased CO or systemic vasodilation \u2013 it causes the opposite (low CO with reflex vasoconstriction).\nC) This combination is not typical of any shock state from a PE. A high CO would not occur in a massive PE (CO would fall), and a low CVP is incorrect for PE because venous pressure would rise due to right ventricular outflow obstruction. Thus, option C is inconsistent with PE physiology.\nD) This shows all values decreased, which is not what happens in a massive PE. While CO would decrease, a massive PE triggers a rise in SVR (not a decrease) via sympathetic output, and CVP would be elevated (not low) because blood is backing up in the venous system. All parameters low is more suggestive of neurogenic shock (loss of sympathetic tone), not PE.",
+    "explanation": "Correct Answer: \n\nA) CO \u2193, SVR \u2191, CVP \u2191\nExplanation: A massive pulmonary embolism causes an acute blockage in the pulmonary circulation, which reduces blood flow from the right heart to the left heart. The result is a sharp decrease in cardiac output (CO). Blood backs up behind the obstruction, leading to elevated central venous pressure (CVP) (high pressure in the venous system, often manifesting as jugular venous distension). The body responds to the drop in arterial pressure by raising SVR (systemic vascular resistance) via sympathetic vasoconstriction. So, a massive PE produces low CO, high CVP, and a compensatory increase in SVR.\nIncorrect Answer Choices:\n\nB) This profile (high CO, low SVR, low CVP) is characteristic of distributive shock (e.g., septic shock), not an obstructive shock like pulmonary embolism. A massive PE would not cause an increased CO or systemic vasodilation \u2013 it causes the opposite (low CO with reflex vasoconstriction).\n\nC) This combination is not typical of any shock state from a PE. A high CO would not occur in a massive PE (CO would fall), and a low CVP is incorrect for PE because venous pressure would rise due to right ventricular outflow obstruction. Thus, option C is inconsistent with PE physiology.\n\nD) This shows all values decreased, which is not what happens in a massive PE. While CO would decrease, a massive PE triggers a rise in SVR (not a decrease) via sympathetic output, and CVP would be elevated (not low) because blood is backing up in the venous system. All parameters low is more suggestive of neurogenic shock (loss of sympathetic tone), not PE.",
     "tags": [],
     "id": 98
   },
@@ -1438,7 +1396,7 @@
       "D": "Vasodilation \u2192 SVR \u2193"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) Sympathetic activation \u2192 SVR \u2191\nExplanation: In the initial stage of hypovolemia, the drop in blood pressure triggers the baroreceptor reflex, leading to increased sympathetic outflow. This sympathetic activation causes vasoconstriction (raising SVR) and tachycardia to maintain perfusion to vital organs. Thus, early hypovolemic shock is characterized by a surge in sympathetic activity causing an increase in SVR (and heart rate).\nIncorrect Answer Choices:\nB) This is the opposite of what occurs. Parasympathetic (vagal) activation leading to a slowed heart rate is not a compensatory response in shock \u2013 in fact, it would worsen hypotension. Early shock prompts sympathetic activation (increased heart rate), not parasympathetic slowing of the heart.\nC) In hypovolemia, the body activates the renin-angiotensin-aldosterone system (RAAS) to conserve water and sodium; it would not inhibit RAAS. In other words, early shock causes increased renin release (leading to sodium retention and vasoconstriction), not RAAS inhibition with increased Na\u207a excretion. So this option is incorrect.\nD) Vasodilation (decreased SVR) is not a compensatory mechanism in hypovolemic shock; it would actually make the hypotension worse. Early hypovolemic shock is marked by vasoconstriction (increased SVR) due to sympathetic discharge, not vasodilation.",
+    "explanation": "Correct Answer: \n\nA) Sympathetic activation \u2192 SVR \u2191\nExplanation: In the initial stage of hypovolemia, the drop in blood pressure triggers the baroreceptor reflex, leading to increased sympathetic outflow. This sympathetic activation causes vasoconstriction (raising SVR) and tachycardia to maintain perfusion to vital organs. Thus, early hypovolemic shock is characterized by a surge in sympathetic activity causing an increase in SVR (and heart rate).\nIncorrect Answer Choices:\n\nB) This is the opposite of what occurs. Parasympathetic (vagal) activation leading to a slowed heart rate is not a compensatory response in shock \u2013 in fact, it would worsen hypotension. Early shock prompts sympathetic activation (increased heart rate), not parasympathetic slowing of the heart.\n\nC) In hypovolemia, the body activates the renin-angiotensin-aldosterone system (RAAS) to conserve water and sodium; it would not inhibit RAAS. In other words, early shock causes increased renin release (leading to sodium retention and vasoconstriction), not RAAS inhibition with increased Na\u207a excretion. So this option is incorrect.\n\nD) Vasodilation (decreased SVR) is not a compensatory mechanism in hypovolemic shock; it would actually make the hypotension worse. Early hypovolemic shock is marked by vasoconstriction (increased SVR) due to sympathetic discharge, not vasodilation.",
     "tags": [],
     "id": 99
   },
@@ -1452,7 +1410,7 @@
       "D": "CO \u2191, SVR \u2191, PCWP \u2191"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) CO \u2191, SVR \u2193, PCWP normal/\u2193\nExplanation: In the early phase of septic shock (a distributive shock), widespread vasodilation from inflammatory mediators causes a sharp decrease in SVR. The reduced afterload, along with direct effects of cytokines, often leads to a compensatory increase in cardiac output (CO) in this hyperdynamic phase. PCWP is usually normal or low because the issue is not cardiac pump failure or fluid overload \u2013 in fact, venous pooling can reduce preload. Thus, early septic shock typically presents with low SVR, elevated or normal CO, and normal to low PCWP.\nIncorrect Answer Choices:\nB) This hemodynamic profile (low CO, high SVR, high PCWP) is actually that of cardiogenic shock (pump failure). In septic shock, CO is not low in the initial phase and SVR is certainly not high \u2013 septic shock has low SVR. So option B does not describe early septic shock.\nC) This option mixes findings that don\u2019t occur together in septic shock. The elevated PCWP suggests cardiogenic pulmonary edema, but the low SVR suggests distributive shock. Septic shock would not cause a high PCWP (the heart is not failing initially), so this combination is incorrect for early sepsis.\nD) All values elevated is not the pattern for septic shock. In early sepsis, SVR is low (due to vasodilation), so it wouldn\u2019t be increased. A simultaneously high CO, high SVR, and high PCWP does not correspond to septic shock (and in fact, no typical shock state presents with everything increased). Therefore, D is incorrect.",
+    "explanation": "Correct Answer: \n\nA) CO \u2191, SVR \u2193, PCWP normal/\u2193\nExplanation: In the early phase of septic shock (a distributive shock), widespread vasodilation from inflammatory mediators causes a sharp decrease in SVR. The reduced afterload, along with direct effects of cytokines, often leads to a compensatory increase in cardiac output (CO) in this hyperdynamic phase. PCWP is usually normal or low because the issue is not cardiac pump failure or fluid overload \u2013 in fact, venous pooling can reduce preload. Thus, early septic shock typically presents with low SVR, elevated or normal CO, and normal to low PCWP.\nIncorrect Answer Choices:\n\nB) This hemodynamic profile (low CO, high SVR, high PCWP) is actually that of cardiogenic shock (pump failure). In septic shock, CO is not low in the initial phase and SVR is certainly not high \u2013 septic shock has low SVR. So option B does not describe early septic shock.\n\nC) This option mixes findings that don\u2019t occur together in septic shock. The elevated PCWP suggests cardiogenic pulmonary edema, but the low SVR suggests distributive shock. Septic shock would not cause a high PCWP (the heart is not failing initially), so this combination is incorrect for early sepsis.\n\nD) All values elevated is not the pattern for septic shock. In early sepsis, SVR is low (due to vasodilation), so it wouldn\u2019t be increased. A simultaneously high CO, high SVR, and high PCWP does not correspond to septic shock (and in fact, no typical shock state presents with everything increased). Therefore, D is incorrect.",
     "tags": [],
     "id": 100
   },
@@ -1466,7 +1424,7 @@
       "D": "CO \u2191, SVR \u2191"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) CO \u2191, SVR \u2193\nExplanation: Anaphylactic shock (severe systemic allergic reaction) leads to massive histamine release and other mediators that cause systemic vasodilation, so SVR drops dramatically. At the same time, the sudden hypotension triggers a reflex increase in cardiac output (tachycardia and increased contractility via sympathetic activation). Early in anaphylaxis, patients often have high CO and low SVR (warm, flushed skin) before later stages of decompensation.\nIncorrect Answer Choices:\nB) This describes a low-output, high-resistance state (as seen in cardiogenic or hypovolemic shock). That is the opposite of anaphylactic shock. In anaphylaxis, SVR is low (due to vasodilation) and CO tends to be high (due to tachycardia) initially.\nC) Both CO and SVR decreased might occur in a terminal, refractory stage of shock when the heart begins to fail, but early anaphylactic shock is characterized by low SVR with a compensatory or intrinsic increase in CO, not a decrease in CO.\nD) Anaphylactic shock would not have an increased SVR \u2013 vasodilation is a hallmark, so SVR stays low. Therefore, a profile with high CO and high SVR does not fit anaphylaxis. High CO can occur, but SVR would be low, not high.",
+    "explanation": "Correct Answer: \n\nA) CO \u2191, SVR \u2193\nExplanation: Anaphylactic shock (severe systemic allergic reaction) leads to massive histamine release and other mediators that cause systemic vasodilation, so SVR drops dramatically. At the same time, the sudden hypotension triggers a reflex increase in cardiac output (tachycardia and increased contractility via sympathetic activation). Early in anaphylaxis, patients often have high CO and low SVR (warm, flushed skin) before later stages of decompensation.\nIncorrect Answer Choices:\n\nB) This describes a low-output, high-resistance state (as seen in cardiogenic or hypovolemic shock). That is the opposite of anaphylactic shock. In anaphylaxis, SVR is low (due to vasodilation) and CO tends to be high (due to tachycardia) initially.\n\nC) Both CO and SVR decreased might occur in a terminal, refractory stage of shock when the heart begins to fail, but early anaphylactic shock is characterized by low SVR with a compensatory or intrinsic increase in CO, not a decrease in CO.\n\nD) Anaphylactic shock would not have an increased SVR \u2013 vasodilation is a hallmark, so SVR stays low. Therefore, a profile with high CO and high SVR does not fit anaphylaxis. High CO can occur, but SVR would be low, not high.",
     "tags": [],
     "id": 101
   },
@@ -1480,7 +1438,7 @@
       "D": "PCWP variable"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) PCWP \u2191\nExplanation: Pulmonary capillary wedge pressure (PCWP) reflects left atrial pressure. In cardiogenic shock (especially from left ventricular failure), the left ventricle cannot pump blood forward effectively, causing blood to accumulate in the left atrium and pulmonary veins. This leads to an elevated PCWP (high left-sided filling pressure). In short, cardiogenic shock is associated with a high PCWP due to pulmonary congestion from the failing left heart.\nIncorrect Answer Choices:\nB) A decreased PCWP would mean low left-sided filling pressure, which occurs in hypovolemic or distributive shock (low volume or vasodilation), not in cardiogenic shock. In cardiogenic shock, the failing heart causes increased filling pressures (high PCWP), so option B is incorrect.\nC) PCWP would not remain normal in true cardiogenic shock \u2013 it rises because of the backlog of blood into the pulmonary circulation. A normal (unchanged) PCWP is not expected when the left ventricle acutely fails, so this option is wrong.\nD) Describing PCWP as \u201cvariable\u201d is not accurate. Cardiogenic shock consistently raises PCWP (due to elevated left atrial pressure from pump failure). Therefore, PCWP is not randomly variable; it is characteristically high in this condition.",
+    "explanation": "Correct Answer: \n\nA) PCWP \u2191\nExplanation: Pulmonary capillary wedge pressure (PCWP) reflects left atrial pressure. In cardiogenic shock (especially from left ventricular failure), the left ventricle cannot pump blood forward effectively, causing blood to accumulate in the left atrium and pulmonary veins. This leads to an elevated PCWP (high left-sided filling pressure). In short, cardiogenic shock is associated with a high PCWP due to pulmonary congestion from the failing left heart.\nIncorrect Answer Choices:\n\nB) A decreased PCWP would mean low left-sided filling pressure, which occurs in hypovolemic or distributive shock (low volume or vasodilation), not in cardiogenic shock. In cardiogenic shock, the failing heart causes increased filling pressures (high PCWP), so option B is incorrect.\n\nC) PCWP would not remain normal in true cardiogenic shock \u2013 it rises because of the backlog of blood into the pulmonary circulation. A normal (unchanged) PCWP is not expected when the left ventricle acutely fails, so this option is wrong.\n\nD) Describing PCWP as \u201cvariable\u201d is not accurate. Cardiogenic shock consistently raises PCWP (due to elevated left atrial pressure from pump failure). Therefore, PCWP is not randomly variable; it is characteristically high in this condition.",
     "tags": [],
     "id": 102
   },
@@ -1494,7 +1452,7 @@
       "D": "S3 gallop"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) Supine hypotension\nExplanation: In a person with severe hypovolemia, even lying flat (supine) does not bring up enough venous return to normalize blood pressure. Supine hypotension (low blood pressure when the patient is lying down) strongly suggests a markedly reduced circulating volume \u2013 under normal circumstances, the supine position increases venous return and helps maintain blood pressure. If a patient is still hypotensive while supine, it indicates that intravascular volume is critically low, which is specific for hypovolemic shock.\nIncorrect Answer Choices:\nB) A \u201cmoist axilla\u201d simply indicates that the patient is sweaty. Sweating (diaphoresis) can occur in many shock states due to sympathetic activation \u2013 it\u2019s not unique to hypovolemia. For example, patients in cardiogenic, obstructive, or even distributive shock can also be cold and sweaty. Therefore, this finding is not specific to hypovolemic shock.\nC) Prolonged capillary refill (slow return of color after blanching a fingertip) signals poor peripheral perfusion. While this is common in hypovolemic shock, it also occurs in other shock types (e.g., cardiogenic or obstructive shock) where output is low. It is a general sign of decreased perfusion and is not uniquely indicative of hypovolemia.\nD) An S3 gallop is a sign of increased left ventricular end-diastolic volume and heart failure (the sound of blood sloshing into an overfilled ventricle). This finding is typically heard in cardiogenic shock (acute heart failure), not in hypovolemic shock (where the heart chambers are under-filled). Thus, an S3 points to pump failure rather than volume loss.",
+    "explanation": "Correct Answer: \n\nA) Supine hypotension\nExplanation: In a person with severe hypovolemia, even lying flat (supine) does not bring up enough venous return to normalize blood pressure. Supine hypotension (low blood pressure when the patient is lying down) strongly suggests a markedly reduced circulating volume \u2013 under normal circumstances, the supine position increases venous return and helps maintain blood pressure. If a patient is still hypotensive while supine, it indicates that intravascular volume is critically low, which is specific for hypovolemic shock.\nIncorrect Answer Choices:\n\nB) A \u201cmoist axilla\u201d simply indicates that the patient is sweaty. Sweating (diaphoresis) can occur in many shock states due to sympathetic activation \u2013 it\u2019s not unique to hypovolemia. For example, patients in cardiogenic, obstructive, or even distributive shock can also be cold and sweaty. Therefore, this finding is not specific to hypovolemic shock.\n\nC) Prolonged capillary refill (slow return of color after blanching a fingertip) signals poor peripheral perfusion. While this is common in hypovolemic shock, it also occurs in other shock types (e.g., cardiogenic or obstructive shock) where output is low. It is a general sign of decreased perfusion and is not uniquely indicative of hypovolemia.\n\nD) An S3 gallop is a sign of increased left ventricular end-diastolic volume and heart failure (the sound of blood sloshing into an overfilled ventricle). This finding is typically heard in cardiogenic shock (acute heart failure), not in hypovolemic shock (where the heart chambers are under-filled). Thus, an S3 points to pump failure rather than volume loss.",
     "tags": [],
     "id": 103
   },
@@ -1508,7 +1466,7 @@
       "D": "Orthopnea"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) Jugular venous distension\nExplanation: A massive pulmonary embolism acutely increases right-sided pressures, as the right ventricle suddenly fails to pump blood through the blocked pulmonary circulation. This produces jugular venous distension (JVD) \u2013 bulging neck veins from elevated central venous pressure \u2013 as a characteristic finding. JVD is a specific clue for acute right-heart strain and obstructive shock caused by a PE.\nIncorrect Answer Choices:\nB) An S3 gallop signifies a failing, volume-overloaded left ventricle (as in acute left heart failure and cardiogenic shock). It is not a feature of acute PE; a massive PE causes right ventricular failure and obstructed outflow, not a primary left ventricular volume overload. Thus, an S3 is not specific to PE-induced shock.\nC) Sweaty (moist) skin is just a sign of adrenergic activation and can occur in any shock state (or even anxiety). It is not specifically indicative of a PE. Many critically ill or shocked patients will be diaphoretic, so a \u201cmoist axilla\u201d does not uniquely point to obstructive shock.\nD) Orthopnea (difficulty breathing when lying flat) is a classic symptom of pulmonary edema from left heart failure (cardiogenic shock). In a massive PE, the shock results from acute right heart failure and obstructed blood flow, not fluid backup in the lungs. Orthopnea is not a specific finding in PE-related shock; a PE causes sudden dyspnea and hypotension regardless of position, not positional breathing difficulty.",
+    "explanation": "Correct Answer: \n\nA) Jugular venous distension\nExplanation: A massive pulmonary embolism acutely increases right-sided pressures, as the right ventricle suddenly fails to pump blood through the blocked pulmonary circulation. This produces jugular venous distension (JV\n\nD) \u2013 bulging neck veins from elevated central venous pressure \u2013 as a characteristic finding. JVD is a specific clue for acute right-heart strain and obstructive shock caused by a PE.\nIncorrect Answer Choices:\n\nB) An S3 gallop signifies a failing, volume-overloaded left ventricle (as in acute left heart failure and cardiogenic shock). It is not a feature of acute PE; a massive PE causes right ventricular failure and obstructed outflow, not a primary left ventricular volume overload. Thus, an S3 is not specific to PE-induced shock.\n\nC) Sweaty (moist) skin is just a sign of adrenergic activation and can occur in any shock state (or even anxiety). It is not specifically indicative of a PE. Many critically ill or shocked patients will be diaphoretic, so a \u201cmoist axilla\u201d does not uniquely point to obstructive shock.\n\nD) Orthopnea (difficulty breathing when lying flat) is a classic symptom of pulmonary edema from left heart failure (cardiogenic shock). In a massive PE, the shock results from acute right heart failure and obstructed blood flow, not fluid backup in the lungs. Orthopnea is not a specific finding in PE-related shock; a PE causes sudden dyspnea and hypotension regardless of position, not positional breathing difficulty.",
     "tags": [],
     "id": 104
   },
@@ -1522,7 +1480,7 @@
       "D": "Cardiac tamponade \u2192 afterload \u2191"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) Peripheral vasodilation \u2192 SVR \u2193\nExplanation: Distributive shock (exemplified by septic shock) is driven by a massive release of inflammatory mediators that cause widespread peripheral vasodilation. The result is a profound decrease in SVR (systemic vascular resistance). This vasodilatory \u201cvasoplegia\u201d leads to severe hypotension even when heart function and intravascular volume are initially normal or increased. In short, septic shock\u2019s primary mechanism is a loss of vascular tone causing very low SVR.\nIncorrect Answer Choices:\nB) This describes cardiogenic shock (pump failure causing decreased contractility and low CO). Septic (distributive) shock, by contrast, starts with peripheral vasodilation rather than primary cardiac dysfunction. Thus, option B is describing the wrong mechanism (myocardial pump failure, not vasodilation).\nC) This is the mechanism of hypovolemic shock (blood loss leading to low preload). Distributive/septic shock is not due to volume loss but rather due to vasodilation and maldistribution of blood flow. Option C describes a different type of shock (volume loss) and not the pathophysiology of sepsis.\nD) Cardiac tamponade causing shock is an example of obstructive shock, not distributive. In tamponade, external pressure on the heart impairs filling (and reflexively, SVR would increase to compensate). This mechanism is unrelated to septic shock. Therefore, option D is incorrect for distributive shock.",
+    "explanation": "Correct Answer: \n\nA) Peripheral vasodilation \u2192 SVR \u2193\nExplanation: Distributive shock (exemplified by septic shock) is driven by a massive release of inflammatory mediators that cause widespread peripheral vasodilation. The result is a profound decrease in SVR (systemic vascular resistance). This vasodilatory \u201cvasoplegia\u201d leads to severe hypotension even when heart function and intravascular volume are initially normal or increased. In short, septic shock\u2019s primary mechanism is a loss of vascular tone causing very low SVR.\nIncorrect Answer Choices:\n\nB) This describes cardiogenic shock (pump failure causing decreased contractility and low CO). Septic (distributive) shock, by contrast, starts with peripheral vasodilation rather than primary cardiac dysfunction. Thus, option B is describing the wrong mechanism (myocardial pump failure, not vasodilation).\n\nC) This is the mechanism of hypovolemic shock (blood loss leading to low preload). Distributive/septic shock is not due to volume loss but rather due to vasodilation and maldistribution of blood flow. Option C describes a different type of shock (volume loss) and not the pathophysiology of sepsis.\n\nD) Cardiac tamponade causing shock is an example of obstructive shock, not distributive. In tamponade, external pressure on the heart impairs filling (and reflexively, SVR would increase to compensate). This mechanism is unrelated to septic shock. Therefore, option D is incorrect for distributive shock.",
     "tags": [],
     "id": 105
   },
@@ -1536,7 +1494,7 @@
       "D": "HR \u2193"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) SVR \u2193\nExplanation: In septic shock, an extremely low systemic vascular resistance (SVR) indicates severe, refractory vasodilation (\u201cvasoplegia\u201d). When even high-dose vasopressors cannot restore adequate vascular tone, the shock is very difficult to reverse. This profound loss of SVR correlates with high mortality in septic shock \u2013 it signals an advanced, refractory state of shock.\nIncorrect Answer Choices:\nB) Many septic patients have an increased cardiac output in the early phase, so a high CO by itself is not an indicator of impending death \u2013 it\u2019s part of the typical hyperdynamic presentation. In fact, a falling CO in later stages (\u201ccold\u201d septic shock) is more concerning. Thus, CO \u2191 is not the parameter most associated with mortality in sepsis.\nC) Elevated PCWP is not a hallmark of septic shock at all (PCWP is usually normal or low in distributive shock). A high PCWP would imply concomitant cardiac dysfunction or fluid overload, which is not the defining issue in sepsis. Loss of SVR (vasoplegia) is far more central to septic shock severity.\nD) Septic shock typically features tachycardia (high HR) due to fever and compensation. Bradycardia (HR \u2193) is not common, and if it occurs it could indicate a pre-terminal state or concurrent neurogenic process. It is not a standard prognostic marker in septic shock. The degree of refractory vasodilation (SVR drop) is much more indicative of severity.",
+    "explanation": "Correct Answer: \n\nA) SVR \u2193\nExplanation: In septic shock, an extremely low systemic vascular resistance (SVR) indicates severe, refractory vasodilation (\u201cvasoplegia\u201d). When even high-dose vasopressors cannot restore adequate vascular tone, the shock is very difficult to reverse. This profound loss of SVR correlates with high mortality in septic shock \u2013 it signals an advanced, refractory state of shock.\nIncorrect Answer Choices:\n\nB) Many septic patients have an increased cardiac output in the early phase, so a high CO by itself is not an indicator of impending death \u2013 it\u2019s part of the typical hyperdynamic presentation. In fact, a falling CO in later stages (\u201ccold\u201d septic shock) is more concerning. Thus, CO \u2191 is not the parameter most associated with mortality in sepsis.\n\nC) Elevated PCWP is not a hallmark of septic shock at all (PCWP is usually normal or low in distributive shock). A high PCWP would imply concomitant cardiac dysfunction or fluid overload, which is not the defining issue in sepsis. Loss of SVR (vasoplegia) is far more central to septic shock severity.\n\nD) Septic shock typically features tachycardia (high HR) due to fever and compensation. Bradycardia (HR \u2193) is not common, and if it occurs it could indicate a pre-terminal state or concurrent neurogenic process. It is not a standard prognostic marker in septic shock. The degree of refractory vasodilation (SVR drop) is much more indicative of severity.",
     "tags": [],
     "id": 106
   },
@@ -1550,7 +1508,7 @@
       "D": "CO \u2193, SVR \u2193, PCWP \u2193"
     },
     "answer": "A",
-    "explanation": "Correct Answer: A) CO \u2193, SVR \u2191, PCWP \u2191\nExplanation: Cardiogenic shock results from cardiac pump failure (for example, a large myocardial infarction). Because the heart cannot pump effectively, CO is low. The blood backs up into the pulmonary circulation, causing increased PCWP (high pulmonary capillary wedge pressure from elevated left atrial pressure). The\nContinuing exactly onward, standardized, word-for-word, with no content changed and no omissions.",
+    "explanation": "Correct Answer: \n\nA) CO \u2193, SVR \u2191, PCWP \u2191\nExplanation: Cardiogenic shock results from cardiac pump failure (for example, a large myocardial infarction). Because the heart cannot pump effectively, CO is low. The blood backs up into the pulmonary circulation, causing increased PCWP (high pulmonary capillary wedge pressure from elevated left atrial pressure). The\nContinuing exactly onward, standardized, word-for-word, with no content changed and no omissions.",
     "tags": [],
     "id": 107
   },
@@ -1564,7 +1522,7 @@
       "D": "Blood loss"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) Increased pulmonary vascular resistance \u2192 RV failure\n\nExplanation:\nA massive pulmonary embolism abruptly increases the pulmonary vascular resistance (PVR) by blocking blood flow through the pulmonary arteries. The right ventricle suddenly faces a very high outflow resistance (acute afterload) and can acutely fail, leading to shock. Thus, the primary mechanism is a sudden rise in PVR causing acute right ventricular failure and collapse of forward flow.\n\nIncorrect Answer Choices:\nB) Peripheral vasodilation is the mechanism of distributive shock (e.g., septic or neurogenic shock). It is not the cause in pulmonary embolism\u2013induced shock. In fact, a PE causes a localized increase in pulmonary resistance, not systemic vasodilation.\n\nC) A myocardial infarction causes cardiogenic shock by impairing the heart\u2019s pump function. In a pulmonary embolism, the heart muscle is intact; the shock arises from an outflow obstruction in the lungs, not from infarction of the myocardium.\n\nD) Blood loss leading to decreased preload is the mechanism of hypovolemic shock. A pulmonary embolism does not cause shock by reducing blood volume; it causes shock by blocking circulation. Therefore, option D is not relevant to PE-induced shock.",
+    "explanation": "Correct Answer: \n\nA) Increased pulmonary vascular resistance \u2192 RV failure\n\nExplanation:\nA massive pulmonary embolism abruptly increases the pulmonary vascular resistance (PVR) by blocking blood flow through the pulmonary arteries. The right ventricle suddenly faces a very high outflow resistance (acute afterload) and can acutely fail, leading to shock. Thus, the primary mechanism is a sudden rise in PVR causing acute right ventricular failure and collapse of forward flow.\n\nIncorrect Answer Choices:\n\nB) Peripheral vasodilation is the mechanism of distributive shock (e.g., septic or neurogenic shock). It is not the cause in pulmonary embolism\u2013induced shock. In fact, a PE causes a localized increase in pulmonary resistance, not systemic vasodilation.\n\nC) A myocardial infarction causes cardiogenic shock by impairing the heart\u2019s pump function. In a pulmonary embolism, the heart muscle is intact; the shock arises from an outflow obstruction in the lungs, not from infarction of the myocardium.\n\nD) Blood loss leading to decreased preload is the mechanism of hypovolemic shock. A pulmonary embolism does not cause shock by reducing blood volume; it causes shock by blocking circulation. Therefore, option D is not relevant to PE-induced shock.",
     "tags": [],
     "id": 108
   },
@@ -1578,7 +1536,7 @@
       "D": "Preload variable"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) Preload \u2193\n\nExplanation:\nA massive pulmonary embolism prevents adequate blood flow from the right heart to the left heart. With the pulmonary circuit blocked, the left ventricle receives much less blood (markedly reduced filling). Therefore, left ventricular preload drops (the LV is under-filled) in the setting of a large PE.\n\nIncorrect Answer Choices:\nB) In a massive PE, left ventricular preload is not increased \u2013 it is significantly reduced. An increased preload would occur if more blood were returning to the left heart (e.g., fluid overload or improved venous return), which is the opposite of what happens in a PE.\n\nC) Left ventricular preload will not stay normal in a massive PE \u2013 it decreases significantly because the left heart is starved of blood from the right side. It is not \u201cunchanged\u201d; it goes down in this scenario.\n\nD) The effect on left ventricular preload in a large PE is not random or variable \u2013 it specifically decreases due to the lack of blood flow through the lungs. Therefore, calling it variable is incorrect; the preload consistently falls in massive PE.",
+    "explanation": "Correct Answer: \n\nA) Preload \u2193\n\nExplanation:\nA massive pulmonary embolism prevents adequate blood flow from the right heart to the left heart. With the pulmonary circuit blocked, the left ventricle receives much less blood (markedly reduced filling). Therefore, left ventricular preload drops (the LV is under-filled) in the setting of a large PE.\n\nIncorrect Answer Choices:\n\nB) In a massive PE, left ventricular preload is not increased \u2013 it is significantly reduced. An increased preload would occur if more blood were returning to the left heart (e.g., fluid overload or improved venous return), which is the opposite of what happens in a PE.\n\nC) Left ventricular preload will not stay normal in a massive PE \u2013 it decreases significantly because the left heart is starved of blood from the right side. It is not \u201cunchanged\u201d; it goes down in this scenario.\n\nD) The effect on left ventricular preload in a large PE is not random or variable \u2013 it specifically decreases due to the lack of blood flow through the lungs. Therefore, calling it variable is incorrect; the preload consistently falls in massive PE.",
     "tags": [],
     "id": 109
   },
@@ -1592,7 +1550,7 @@
       "D": "Lactate \u2193, urine output \u2193"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) Lactate \u2191, urine output \u2193\n\nExplanation:\nIn late-stage cardiogenic shock, tissues are severely under-perfused. Oxygen delivery is so low that organs switch to anaerobic metabolism, generating excess lactic acid \u2013 hence blood lactate levels rise (lactic acidosis). At the same time, the kidneys receive inadequate blood flow, resulting in dramatically reduced urine output (oliguria). High lactate and low urine output are classic signs of inadequate tissue perfusion in advanced shock.\n\nIncorrect Answer Choices:\nB) This combination is essentially the opposite of what occurs. In severe shock, you would not have a lower lactate (you\u2019d have higher lactate from anaerobic metabolism) or increased urine output (urine output falls because the kidneys aren\u2019t being perfused). Option B is wrong.\n\nC) An elevated lactate does fit with poor perfusion, but high urine output does not. If tissues are hypoperfused (causing lactate to rise), the kidneys are also hypoperfused, which would make urine output low, not high. Thus, this combination doesn\u2019t make sense for late-stage shock; option C is incorrect.\n\nD) Low lactate despite low urine output would be very unusual in true shock. If urine output is low (indicating poor renal perfusion), one would expect lactate to be elevated due to overall tissue hypoxia. A normal/low lactate in the face of clear organ hypoperfusion is not typical. Therefore, D is not the best answer for late-stage cardiogenic shock.",
+    "explanation": "Correct Answer: \n\nA) Lactate \u2191, urine output \u2193\n\nExplanation:\nIn late-stage cardiogenic shock, tissues are severely under-perfused. Oxygen delivery is so low that organs switch to anaerobic metabolism, generating excess lactic acid \u2013 hence blood lactate levels rise (lactic acidosis). At the same time, the kidneys receive inadequate blood flow, resulting in dramatically reduced urine output (oliguria). High lactate and low urine output are classic signs of inadequate tissue perfusion in advanced shock.\n\nIncorrect Answer Choices:\n\nB) This combination is essentially the opposite of what occurs. In severe shock, you would not have a lower lactate (you\u2019d have higher lactate from anaerobic metabolism) or increased urine output (urine output falls because the kidneys aren\u2019t being perfused). Option B is wrong.\n\nC) An elevated lactate does fit with poor perfusion, but high urine output does not. If tissues are hypoperfused (causing lactate to rise), the kidneys are also hypoperfused, which would make urine output low, not high. Thus, this combination doesn\u2019t make sense for late-stage shock; option C is incorrect.\n\nD) Low lactate despite low urine output would be very unusual in true shock. If urine output is low (indicating poor renal perfusion), one would expect lactate to be elevated due to overall tissue hypoxia. A normal/low lactate in the face of clear organ hypoperfusion is not typical. Therefore, D is not the best answer for late-stage cardiogenic shock.",
     "tags": [],
     "id": 110
   },
@@ -1606,7 +1564,7 @@
       "D": "CO \u2191, SVR \u2191"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) CO \u2191, SVR \u2193\n\nExplanation:\nIn early anaphylactic shock (a severe allergic reaction), there is widespread vasodilation triggered by massive histamine and other mediators, so SVR drops. The acute hypotension triggers a reflex increase in cardiac output (tachycardia, increased contractility) and catecholamine release, so CO increases initially. Thus, early anaphylaxis typically shows high CO with low SVR.\n\nIncorrect Answer Choices:\nB) This describes a high-resistance, low-output state (like hypovolemic or cardiogenic shock), which is the opposite of anaphylactic shock. In anaphylaxis, SVR is low (not high) and CO is initially elevated (not low).\n\nC) Both a low CO and low SVR might occur in a terminal phase of shock when the heart itself fails, but in early anaphylactic shock, CO is not low \u2013 it\u2019s usually high. So option C doesn\u2019t match the initial presentation of anaphylaxis (it looks more like neurogenic shock or profound late-stage shock).\n\nD) Anaphylactic shock would not have increased SVR \u2013 the hallmark is vasodilation (low SVR). Therefore, a profile with high CO and high SVR does not fit anaphylaxis. (High CO can occur, but SVR would be low, not high.)",
+    "explanation": "Correct Answer: \n\nA) CO \u2191, SVR \u2193\n\nExplanation:\nIn early anaphylactic shock (a severe allergic reaction), there is widespread vasodilation triggered by massive histamine and other mediators, so SVR drops. The acute hypotension triggers a reflex increase in cardiac output (tachycardia, increased contractility) and catecholamine release, so CO increases initially. Thus, early anaphylaxis typically shows high CO with low SVR.\n\nIncorrect Answer Choices:\n\nB) This describes a high-resistance, low-output state (like hypovolemic or cardiogenic shock), which is the opposite of anaphylactic shock. In anaphylaxis, SVR is low (not high) and CO is initially elevated (not low).\n\nC) Both a low CO and low SVR might occur in a terminal phase of shock when the heart itself fails, but in early anaphylactic shock, CO is not low \u2013 it\u2019s usually high. So option C doesn\u2019t match the initial presentation of anaphylaxis (it looks more like neurogenic shock or profound late-stage shock).\n\nD) Anaphylactic shock would not have increased SVR \u2013 the hallmark is vasodilation (low SVR). Therefore, a profile with high CO and high SVR does not fit anaphylaxis. (High CO can occur, but SVR would be low, not high.)",
     "tags": [],
     "id": 111
   },
@@ -1620,7 +1578,7 @@
       "D": "CO \u2193, SVR \u2193, PCWP \u2191"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) CO \u2193, SVR \u2191, PCWP \u2193\n\nExplanation:\nHypovolemic shock is due to significant volume loss (bleeding, dehydration, etc.), leading to low preload. With less venous return, the heart\u2019s output (CO) drops. The reduced cardiac output and blood pressure trigger intense systemic vasoconstriction (\u2191 SVR) via sympathetic activation to maintain perfusion. Because of the low volume, the PCWP is low (reflecting empty heart chambers). So, decreased CO, increased SVR, and decreased PCWP are characteristic of hypovolemic shock.\n\nIncorrect Answer Choices:\nB) This hemodynamic profile indicates increased cardiac output with decreased SVR, which is typical of early distributive shock (e.g., septic shock), not hypovolemic shock. Additionally, an increased PCWP would indicate high left-sided filling pressures (as in cardiogenic shock), which contradicts the low filling pressures in hypovolemia.\n\nC) No form of shock presents with simultaneously high CO, high SVR, and high PCWP. If PCWP is high (lots of filling/back-up in the heart), a healthy heart would not have a high CO (and in a failing heart, CO is low). This combination is not seen in hypovolemic shock.\n\nD) This option combines features of different shocks: low SVR is seen in distributive shock (sepsis or neurogenic), and high PCWP is seen in cardiogenic shock (pump failure). In hypovolemic shock, SVR is increased (compensatory vasoconstriction) and PCWP is low (due to volume depletion). Therefore, option D does not fit hypovolemic shock.",
+    "explanation": "Correct Answer: \n\nA) CO \u2193, SVR \u2191, PCWP \u2193\n\nExplanation:\nHypovolemic shock is due to significant volume loss (bleeding, dehydration, etc.), leading to low preload. With less venous return, the heart\u2019s output (CO) drops. The reduced cardiac output and blood pressure trigger intense systemic vasoconstriction (\u2191 SVR) via sympathetic activation to maintain perfusion. Because of the low volume, the PCWP is low (reflecting empty heart chambers). So, decreased CO, increased SVR, and decreased PCWP are characteristic of hypovolemic shock.\n\nIncorrect Answer Choices:\n\nB) This hemodynamic profile indicates increased cardiac output with decreased SVR, which is typical of early distributive shock (e.g., septic shock), not hypovolemic shock. Additionally, an increased PCWP would indicate high left-sided filling pressures (as in cardiogenic shock), which contradicts the low filling pressures in hypovolemia.\n\nC) No form of shock presents with simultaneously high CO, high SVR, and high PCWP. If PCWP is high (lots of filling/back-up in the heart), a healthy heart would not have a high CO (and in a failing heart, CO is low). This combination is not seen in hypovolemic shock.\n\nD) This option combines features of different shocks: low SVR is seen in distributive shock (sepsis or neurogenic), and high PCWP is seen in cardiogenic shock (pump failure). In hypovolemic shock, SVR is increased (compensatory vasoconstriction) and PCWP is low (due to volume depletion). Therefore, option D does not fit hypovolemic shock.",
     "tags": [],
     "id": 112
   },
@@ -1634,7 +1592,7 @@
       "D": "Decreased renin release"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) Sympathetic activation \u2192 SVR \u2191\n\nExplanation:\nIn cardiogenic shock, the failing cardiac output causes a drop in blood pressure, which triggers the baroreceptor reflex. The result is increased sympathetic activation \u2013 this raises SVR (systemic vascular resistance) via vasoconstriction to help maintain perfusion pressure. This sympathetic surge (along with tachycardia) is the predominant compensatory mechanism in cardiogenic shock.\n\nIncorrect Answer Choices:\nB) Parasympathetic activation (which would slow the heart) is not a compensatory mechanism in shock \u2013 it would worsen cardiac output and hypotension. In cardiogenic shock, the body activates the sympathetic, not parasympathetic, system. Thus, option B is the opposite of what actually happens.\n\nC) Vasodilation (decreased SVR) is not a compensatory response in cardiogenic shock \u2013 it would make hypotension worse. Instead, cardiogenic shock triggers vasoconstriction (increased SVR) to support blood pressure. Therefore, option C is incorrect.\n\nD) In shock, the body does not decrease renin release \u2013 it increases it as part of RAAS activation to retain fluid and vasoconstrict. Cardiogenic shock leads to increased renin (to raise blood volume and SVR), not decreased. Thus, option D is incorrect.",
+    "explanation": "Correct Answer: \n\nA) Sympathetic activation \u2192 SVR \u2191\n\nExplanation:\nIn cardiogenic shock, the failing cardiac output causes a drop in blood pressure, which triggers the baroreceptor reflex. The result is increased sympathetic activation \u2013 this raises SVR (systemic vascular resistance) via vasoconstriction to help maintain perfusion pressure. This sympathetic surge (along with tachycardia) is the predominant compensatory mechanism in cardiogenic shock.\n\nIncorrect Answer Choices:\n\nB) Parasympathetic activation (which would slow the heart) is not a compensatory mechanism in shock \u2013 it would worsen cardiac output and hypotension. In cardiogenic shock, the body activates the sympathetic, not parasympathetic, system. Thus, option B is the opposite of what actually happens.\n\nC) Vasodilation (decreased SVR) is not a compensatory response in cardiogenic shock \u2013 it would make hypotension worse. Instead, cardiogenic shock triggers vasoconstriction (increased SVR) to support blood pressure. Therefore, option C is incorrect.\n\nD) In shock, the body does not decrease renin release \u2013 it increases it as part of RAAS activation to retain fluid and vasoconstrict. Cardiogenic shock leads to increased renin (to raise blood volume and SVR), not decreased. Thus, option D is incorrect.",
     "tags": [],
     "id": 113
   },
@@ -1648,7 +1606,7 @@
       "D": "Preload \u2193, CO \u2191, CVP \u2191"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) Preload \u2193, CO \u2193, CVP \u2191\n\nExplanation:\nTension pneumothorax compresses the great veins and heart, reducing venous return (so preload drops). With less blood filling the heart, cardiac output falls. Meanwhile, pressure on the vena cava causes blood to back up in the venous system, raising the central venous pressure (CVP). Thus, tension pneumothorax causes decreased preload, decreased CO, and an elevated CVP (similar to other forms of obstructive shock like tamponade).\n\nIncorrect Answer Choices:\nB) This option shows increased preload and CO with low CVP \u2013 which is the opposite of what a tension pneumothorax causes. Tension pneumothorax decreases preload and CO, and raises CVP, not the other way around.\n\nC) This combination (preload \u2191, CO \u2193, CVP \u2193) is inconsistent. If preload were truly increased, CVP would typically be high, not low. Moreover, a tension pneumothorax does not increase preload at all \u2013 it reduces it by impeding venous return. So option C does not describe tension pneumothorax physiology.\n\nD) It is not possible to have decreased preload but increased CO in this context \u2013 if preload falls significantly, CO will drop as well (as happens in tension pneumothorax). Also, tension pneumothorax raises CVP (from venous backup) rather than lowering it. Option D is internally inconsistent and not representative of tension pneumothorax.",
+    "explanation": "Correct Answer: \n\nA) Preload \u2193, CO \u2193, CVP \u2191\n\nExplanation:\nTension pneumothorax compresses the great veins and heart, reducing venous return (so preload drops). With less blood filling the heart, cardiac output falls. Meanwhile, pressure on the vena cava causes blood to back up in the venous system, raising the central venous pressure (CVP). Thus, tension pneumothorax causes decreased preload, decreased CO, and an elevated CVP (similar to other forms of obstructive shock like tamponade).\n\nIncorrect Answer Choices:\n\nB) This option shows increased preload and CO with low CVP \u2013 which is the opposite of what a tension pneumothorax causes. Tension pneumothorax decreases preload and CO, and raises CVP, not the other way around.\n\nC) This combination (preload \u2191, CO \u2193, CVP \u2193) is inconsistent. If preload were truly increased, CVP would typically be high, not low. Moreover, a tension pneumothorax does not increase preload at all \u2013 it reduces it by impeding venous return. So option C does not describe tension pneumothorax physiology.\n\nD) It is not possible to have decreased preload but increased CO in this context \u2013 if preload falls significantly, CO will drop as well (as happens in tension pneumothorax). Also, tension pneumothorax raises CVP (from venous backup) rather than lowering it. Option D is internally inconsistent and not representative of tension pneumothorax.",
     "tags": [],
     "id": 114
   },
@@ -1662,7 +1620,7 @@
       "D": "Pulmonary embolism"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) Acute myocardial infarction\n\nExplanation:\nThe single most common cause of cardiogenic shock is an acute myocardial infarction \u2013 specifically a large infarction of the left ventricle that severely impairs pump function. The sudden loss of contractile myocardium (e.g., an extensive AMI) can precipitate acute heart failure and shock, making acute MI the leading cause of cardiogenic shock in adults.\n\nIncorrect Answer Choices:\nB) Sepsis causes distributive shock (due to vasodilation and abnormal distribution of blood flow), not cardiogenic shock. While sepsis is a common cause of shock overall, it is not a cause of cardiogenic shock because the primary problem in sepsis is not cardiac pump failure.\n\nC) Hemorrhage leads to hypovolemic shock (loss of intravascular volume). It does not directly cause cardiogenic shock, since in hemorrhage the heart itself is initially normal \u2013 the issue is insufficient circulating volume.\n\nD) A massive pulmonary embolism causes obstructive shock by blocking blood flow through the lungs. This is not a form of cardiogenic shock because the heart muscle is intact (the pump is fine, but outflow is obstructed). Thus, among the options, acute MI is by far the most common culprit in cardiogenic shock.",
+    "explanation": "Correct Answer: \n\nA) Acute myocardial infarction\n\nExplanation:\nThe single most common cause of cardiogenic shock is an acute myocardial infarction \u2013 specifically a large infarction of the left ventricle that severely impairs pump function. The sudden loss of contractile myocardium (e.g., an extensive AMI) can precipitate acute heart failure and shock, making acute MI the leading cause of cardiogenic shock in adults.\n\nIncorrect Answer Choices:\n\nB) Sepsis causes distributive shock (due to vasodilation and abnormal distribution of blood flow), not cardiogenic shock. While sepsis is a common cause of shock overall, it is not a cause of cardiogenic shock because the primary problem in sepsis is not cardiac pump failure.\n\nC) Hemorrhage leads to hypovolemic shock (loss of intravascular volume). It does not directly cause cardiogenic shock, since in hemorrhage the heart itself is initially normal \u2013 the issue is insufficient circulating volume.\n\nD) A massive pulmonary embolism causes obstructive shock by blocking blood flow through the lungs. This is not a form of cardiogenic shock because the heart muscle is intact (the pump is fine, but outflow is obstructed). Thus, among the options, acute MI is by far the most common culprit in cardiogenic shock.",
     "tags": [],
     "id": 115
   },
@@ -1676,7 +1634,7 @@
       "D": "Orthopnea"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) Persistent hypotension despite fluids\n\nExplanation:\nBy definition, septic shock is present when a patient has persistent hypotension that does not resolve after aggressive fluid resuscitation, necessitating vasopressor support. In other words, even after adequate IV fluids, the blood pressure remains dangerously low. This finding \u2013 hypotension refractory to fluids \u2013 is a defining feature of septic shock and distinguishes it from less severe forms of sepsis or other shock states.\n\nIncorrect Answer Choices:\nB) An S3 gallop indicates a failing, volume-overloaded left ventricle (heard in acute heart failure and cardiogenic shock). It is not a feature of septic shock, which is due to vasodilation and distributive physiology rather than pump failure.\n\nC) A \u201cdry axilla\u201d (lack of sweat in the armpit) is not a recognized specific marker of septic shock. In fact, patients in early septic shock often have warm, well-perfused skin and may not be cold and sweaty like those in hypovolemic or cardiogenic shock. However, a dry axilla is not used clinically to diagnose septic shock and is not specific.\n\nD) Orthopnea (difficulty breathing while lying flat) is typically associated with pulmonary edema in heart failure (cardiogenic shock). Septic shock does not primarily cause pulmonary fluid buildup; instead it causes refractory hypotension and signs of poor perfusion. Orthopnea is not a defining feature of septic shock.",
+    "explanation": "Correct Answer: \n\nA) Persistent hypotension despite fluids\n\nExplanation:\nBy definition, septic shock is present when a patient has persistent hypotension that does not resolve after aggressive fluid resuscitation, necessitating vasopressor support. In other words, even after adequate IV fluids, the blood pressure remains dangerously low. This finding \u2013 hypotension refractory to fluids \u2013 is a defining feature of septic shock and distinguishes it from less severe forms of sepsis or other shock states.\n\nIncorrect Answer Choices:\n\nB) An S3 gallop indicates a failing, volume-overloaded left ventricle (heard in acute heart failure and cardiogenic shock). It is not a feature of septic shock, which is due to vasodilation and distributive physiology rather than pump failure.\n\nC) A \u201cdry axilla\u201d (lack of sweat in the armpit) is not a recognized specific marker of septic shock. In fact, patients in early septic shock often have warm, well-perfused skin and may not be cold and sweaty like those in hypovolemic or cardiogenic shock. However, a dry axilla is not used clinically to diagnose septic shock and is not specific.\n\nD) Orthopnea (difficulty breathing while lying flat) is typically associated with pulmonary edema in heart failure (cardiogenic shock). Septic shock does not primarily cause pulmonary fluid buildup; instead it causes refractory hypotension and signs of poor perfusion. Orthopnea is not a defining feature of septic shock.",
     "tags": [],
     "id": 116
   },
@@ -1690,7 +1648,7 @@
       "D": "SvO\u2082 variable"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) SvO\u2082 \u2191\n\nExplanation:\nEarly septic shock often features a high mixed venous O\u2082 saturation (SvO\u2082). This is because tissues are not extracting oxygen normally \u2013 due to both high flow (rapid transit of blood) and cellular dysfunction in oxygen utilization \u2013 so more oxygen remains in the venous blood. Combined with an increased cardiac output, this leads to elevated SvO\u2082 in early sepsis.\n\nIncorrect Answer Choices:\nB) A decrease in SvO\u2082 is seen in low-flow states (like cardiogenic or hypovolemic shock) where tissues extract more oxygen due to reduced delivery. In early septic shock, CO is high and tissues can\u2019t extract all the oxygen, so SvO\u2082 is high, not low.\n\nC) It is very unlikely for SvO\u2082 to remain normal in significant septic shock. With profound changes in perfusion and oxygen use, SvO\u2082 typically rises in early sepsis. So an \u201cunchanged\u201d SvO\u2082 does not characterize septic shock.\n\nD) Calling SvO\u2082 \u201cvariable\u201d fails to identify the specific pattern. In early septic shock, SvO\u2082 is consistently elevated (rather than unpredictable) because of increased blood flow and impaired extraction.",
+    "explanation": "Correct Answer: \n\nA) SvO\u2082 \u2191\n\nExplanation:\nEarly septic shock often features a high mixed venous O\u2082 saturation (SvO\u2082). This is because tissues are not extracting oxygen normally \u2013 due to both high flow (rapid transit of blood) and cellular dysfunction in oxygen utilization \u2013 so more oxygen remains in the venous blood. Combined with an increased cardiac output, this leads to elevated SvO\u2082 in early sepsis.\n\nIncorrect Answer Choices:\n\nB) A decrease in SvO\u2082 is seen in low-flow states (like cardiogenic or hypovolemic shock) where tissues extract more oxygen due to reduced delivery. In early septic shock, CO is high and tissues can\u2019t extract all the oxygen, so SvO\u2082 is high, not low.\n\nC) It is very unlikely for SvO\u2082 to remain normal in significant septic shock. With profound changes in perfusion and oxygen use, SvO\u2082 typically rises in early sepsis. So an \u201cunchanged\u201d SvO\u2082 does not characterize septic shock.\n\nD) Calling SvO\u2082 \u201cvariable\u201d fails to identify the specific pattern. In early septic shock, SvO\u2082 is consistently elevated (rather than unpredictable) because of increased blood flow and impaired extraction.",
     "tags": [],
     "id": 117
   },
@@ -1704,7 +1662,7 @@
       "D": "HR \u2193"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) SVR \u2193\n\nExplanation:\nIn septic shock, a profoundly low systemic vascular resistance (SVR) indicates severe, refractory vasodilation (vasoplegia). When even aggressive vasopressor therapy cannot restore normal vascular tone, the shock is very hard to reverse. This extreme loss of SVR correlates with high mortality in septic shock \u2013 it signifies an advanced, refractory state of shock.\n\nIncorrect Answer Choices:\nB) An increased cardiac output is common in early septic shock (the hyperdynamic phase), so a high CO by itself is not a predictor of mortality \u2013 it\u2019s part of the typical presentation. In fact, when a septic patient\u2019s CO falls (transitioning to a cold, low-output state), the prognosis worsens. So CO \u2191 is not the key mortality marker.\n\nC) A high PCWP is not characteristic of septic shock (PCWP is usually low or normal in distributive shock). If PCWP is elevated in sepsis, it usually means there is concurrent cardiac dysfunction or fluid overload, not a direct effect of sepsis. It is not the primary prognostic indicator.\n\nD) Bradycardia (HR \u2193) is not typically seen in septic shock (most patients are tachycardic due to fever and stress). A dropping heart rate could be an ominous late sign, but it is not a standard marker of mortality. Refractory low SVR is a much more direct indicator of severe sepsis.",
+    "explanation": "Correct Answer: \n\nA) SVR \u2193\n\nExplanation:\nIn septic shock, a profoundly low systemic vascular resistance (SVR) indicates severe, refractory vasodilation (vasoplegia). When even aggressive vasopressor therapy cannot restore normal vascular tone, the shock is very hard to reverse. This extreme loss of SVR correlates with high mortality in septic shock \u2013 it signifies an advanced, refractory state of shock.\n\nIncorrect Answer Choices:\n\nB) An increased cardiac output is common in early septic shock (the hyperdynamic phase), so a high CO by itself is not a predictor of mortality \u2013 it\u2019s part of the typical presentation. In fact, when a septic patient\u2019s CO falls (transitioning to a cold, low-output state), the prognosis worsens. So CO \u2191 is not the key mortality marker.\n\nC) A high PCWP is not characteristic of septic shock (PCWP is usually low or normal in distributive shock). If PCWP is elevated in sepsis, it usually means there is concurrent cardiac dysfunction or fluid overload, not a direct effect of sepsis. It is not the primary prognostic indicator.\n\nD) Bradycardia (HR \u2193) is not typically seen in septic shock (most patients are tachycardic due to fever and stress). A dropping heart rate could be an ominous late sign, but it is not a standard marker of mortality. Refractory low SVR is a much more direct indicator of severe sepsis.",
     "tags": [],
     "id": 118
   },
@@ -1718,7 +1676,7 @@
       "D": "Prolonged capillary refill"
     },
     "answer": "C",
-    "explanation": "Correct Answer: A) Pulmonary edema\n\nExplanation:\nIn cardiogenic shock, the failing left ventricle causes blood to back up into the lungs, leading to acute pulmonary edema (fluid in the alveoli). Signs of pulmonary edema (such as crackles on lung auscultation, pink frothy sputum, or chest X-ray showing diffuse infiltrates) reflect elevated left-sided filling pressures due to pump failure. This finding is highly indicative of cardiogenic shock, as opposed to other forms of shock.\n\nIncorrect Answer Choices:\nB) A dry axilla (lack of sweat in the armpit) indicates an absence of the usual sympathetic response (shock patients are typically sweaty). Cardiogenic shock patients are generally cold and clammy (diaphoretic) due to increased sympathetic tone; a dry axilla would be unusual unless the sympathetic nervous system is not intact (as in neurogenic shock). It is not specific for cardiogenic shock.\n\nC) Warm extremities imply good peripheral perfusion or vasodilation, which is seen in early septic shock (warm, flushed skin). Cardiogenic shock results in poor perfusion and peripheral vasoconstriction, so extremities are cool and pale. Warm extremities are not a feature of cardiogenic shock.\n\nD) Prolonged capillary refill is a general sign of low perfusion and occurs in many shock states (hypovolemic, cardiogenic, obstructive, etc.). While cardiogenic shock will cause slow capillary refill, this finding is not uniquely characteristic of cardiogenic shock. Pulmonary edema, however, is a distinctive sign pointing toward cardiogenic shock (acute heart failure) rather than other shock types.",
+    "explanation": "Correct Answer: \n\nA) Pulmonary edema\n\nExplanation:\nIn cardiogenic shock, the failing left ventricle causes blood to back up into the lungs, leading to acute pulmonary edema (fluid in the alveoli). Signs of pulmonary edema (such as crackles on lung auscultation, pink frothy sputum, or chest X-ray showing diffuse infiltrates) reflect elevated left-sided filling pressures due to pump failure. This finding is highly indicative of cardiogenic shock, as opposed to other forms of shock.\n\nIncorrect Answer Choices:\n\nB) A dry axilla (lack of sweat in the armpit) indicates an absence of the usual sympathetic response (shock patients are typically sweaty). Cardiogenic shock patients are generally cold and clammy (diaphoretic) due to increased sympathetic tone; a dry axilla would be unusual unless the sympathetic nervous system is not intact (as in neurogenic shock). It is not specific for cardiogenic shock.\n\nC) Warm extremities imply good peripheral perfusion or vasodilation, which is seen in early septic shock (warm, flushed skin). Cardiogenic shock results in poor perfusion and peripheral vasoconstriction, so extremities are cool and pale. Warm extremities are not a feature of cardiogenic shock.\n\nD) Prolonged capillary refill is a general sign of low perfusion and occurs in many shock states (hypovolemic, cardiogenic, obstructive, etc.). While cardiogenic shock will cause slow capillary refill, this finding is not uniquely characteristic of cardiogenic shock. Pulmonary edema, however, is a distinctive sign pointing toward cardiogenic shock (acute heart failure) rather than other shock types.",
     "tags": [],
     "id": 119
   }
