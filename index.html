@@ -7949,9 +7949,10 @@ const coronaryMap = {
             pathologies: { btn: 'pathologies-tab-btn', panel: 'pathologies-content' },
             shock: { btn: 'shock-tab-btn', panel: 'shock-content' },
             quiz: { btn: 'quiz-tab-btn', panel: 'quiz-content' },
+            qbank: { btn: 'qbank-tab-btn', panel: 'qbank-content' },
             conduction: { btn: 'conduction-tab-btn', panel: 'conduction-content' }
         };
-        const lockedTabs = new Set();
+        const lockedTabs = new Set(['qbank']);
         const lockOverlay = document.getElementById('feature-lock-overlay');
         const lockDismiss = document.getElementById('feature-lock-dismiss');
 
