@@ -2483,7 +2483,6 @@
             <button class="tab-button" id="shock-tab-btn">Shock Simulator</button>
             <button class="tab-button" id="quiz-tab-btn">PV Loop Quiz</button>
             <button class="tab-button" id="conduction-tab-btn">EKG Simulator</button>
-            <button class="tab-button" id="qbank-tab-btn">QBank</button>
         </div>
         
         <div id="simulator-content" class="tab-content active">
@@ -7950,10 +7949,9 @@ const coronaryMap = {
             pathologies: { btn: 'pathologies-tab-btn', panel: 'pathologies-content' },
             shock: { btn: 'shock-tab-btn', panel: 'shock-content' },
             quiz: { btn: 'quiz-tab-btn', panel: 'quiz-content' },
-            conduction: { btn: 'conduction-tab-btn', panel: 'conduction-content' },
-            qbank: { btn: 'qbank-tab-btn', panel: 'qbank-content' }
+            conduction: { btn: 'conduction-tab-btn', panel: 'conduction-content' }
         };
-        const lockedTabs = new Set(['pathologies', 'shock', 'quiz', 'qbank']);
+        const lockedTabs = new Set();
         const lockOverlay = document.getElementById('feature-lock-overlay');
         const lockDismiss = document.getElementById('feature-lock-dismiss');
 
