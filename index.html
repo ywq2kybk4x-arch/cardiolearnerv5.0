@@ -7966,14 +7966,71 @@ const coronaryMap = {
             lockOverlay.classList.remove('active');
         }
 
+        function ensureEkgModeVisible() {
+            const singleLeadContainer = document.getElementById('singleLeadEcgContainer');
+            const ecg12Module = document.getElementById('ecg12Module');
+            const ecgQuizSection = document.getElementById('ecgQuizSection');
+            const tutorialSection = document.getElementById('ecgTutorialSection');
+            const singleLeadMount = document.getElementById('singleLeadMount');
+            const ekg12Mount = document.getElementById('ekg12Mount');
+            const tutorialLeadMount = document.getElementById('tutorialLeadMount');
+
+            const sections = [singleLeadContainer, ecg12Module, ecgQuizSection, tutorialSection].filter(Boolean);
+            if (!sections.length) return;
+            const anyVisible = sections.some((el) => el.style.display !== 'none');
+            if (anyVisible) return;
+
+            if (currentEkgMode === 'twelve' && ecg12Module && ekg12Mount) {
+                if (ecg12Module.parentElement !== ekg12Mount) {
+                    ekg12Mount.appendChild(ecg12Module);
+                }
+                ecg12Module.style.display = '';
+                initEcg12Once();
+                return;
+            }
+
+            if (currentEkgMode === 'quiz' && ecgQuizSection && ekg12Mount && ecg12Module) {
+                if (ecg12Module.parentElement !== ekg12Mount) {
+                    ekg12Mount.appendChild(ecg12Module);
+                }
+                ecgQuizSection.style.display = '';
+                initEcgQuizOnce();
+                return;
+            }
+
+            if (currentEkgMode === 'tutorial' && tutorialSection && tutorialLeadMount && singleLeadContainer) {
+                if (singleLeadContainer.parentElement !== tutorialLeadMount) {
+                    tutorialLeadMount.appendChild(singleLeadContainer);
+                }
+                tutorialSection.style.display = '';
+                singleLeadContainer.style.display = '';
+                initSingleLeadSimulatorOnce();
+                return;
+            }
+
+            if (singleLeadContainer && singleLeadMount) {
+                if (singleLeadContainer.parentElement !== singleLeadMount) {
+                    singleLeadMount.appendChild(singleLeadContainer);
+                }
+                singleLeadContainer.style.display = '';
+                initSingleLeadSimulatorOnce();
+            }
+        }
+
         function activateTab(key) {
             if (lockedTabs.has(key)) {
                 showFeatureLock();
                 return;
             }
             Object.values(tabMap).forEach(({ btn, panel }) => {
-                document.getElementById(btn).classList.toggle('active', tabMap[key].btn === btn);
-                document.getElementById(panel).classList.toggle('active', tabMap[key].panel === panel);
+                const btnEl = document.getElementById(btn);
+                if (btnEl) {
+                    btnEl.classList.toggle('active', tabMap[key].btn === btn);
+                }
+                const panelEl = document.getElementById(panel);
+                if (panelEl) {
+                    panelEl.classList.toggle('active', tabMap[key].panel === panel);
+                }
             });
             if (key === 'conduction') {
                 if (window.initConduction3DViewer) {
@@ -7994,6 +8051,7 @@ const coronaryMap = {
                 }
                 initEcgQuizOnce();
                 requestAnimationFrame(() => ecgQuizSim?.handleResize?.());
+                ensureEkgModeVisible();
             }
         }
 
