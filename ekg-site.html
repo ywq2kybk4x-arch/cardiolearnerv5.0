@@ -8141,6 +8141,10 @@ const coronaryMap = {
                 if (!showReal) {
                     realHost.style.minHeight = '';
                     if (simModule) {
+                        // Re-assert the current case waveform/rhythm after returning from real EKG view.
+                        if (item) {
+                            applyCaseBaseEkg(item);
+                        }
                         requestAnimationFrame(() => window.ecg12SimInstance?.handleResize?.());
                     }
                     return;
@@ -8968,6 +8972,9 @@ const coronaryMap = {
                     setCaseMeasureToolEnabled(false);
                 }
                 renderCaseRealEkg(item);
+                if (!ecgCaseRealEkgOpen) {
+                    applyCaseBaseEkg(item);
+                }
             });
 
             tutorialTabs.forEach((tab) => {
