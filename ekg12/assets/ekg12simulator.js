@@ -178,6 +178,13 @@ const RHYTHM_PRESETS = {
     hrClamp: { min: 40, max: 180 },
     intervals: { prIntervalMs: 160, qrsDurationMs: 90, qtIntervalMs: 400, pWaveDurationMs: 90, tWaveDurationMs: 180 }
   },
+  sinus_pac: {
+    id: 'sinus_pac',
+    label: 'Sinus Rhythm With Single PAC',
+    defaultHR: 90,
+    hrClamp: { min: 50, max: 150 },
+    intervals: { prIntervalMs: 160, qrsDurationMs: 90, qtIntervalMs: 400, pWaveDurationMs: 90, tWaveDurationMs: 180 }
+  },
   afib: {
     id: 'afib',
     label: 'Atrial Fibrillation',
@@ -234,6 +241,13 @@ const RHYTHM_PRESETS = {
     hrClamp: { min: 35, max: 120 },
     intervals: { prIntervalMs: 190, qrsDurationMs: 110, qtIntervalMs: 420 }
   },
+  avb2_2to1: {
+    id: 'avb2_2to1',
+    label: '2° AV Block (2:1)',
+    defaultHR: 72,
+    hrClamp: { min: 40, max: 140 },
+    intervals: { prIntervalMs: 190, qrsDurationMs: 110, qtIntervalMs: 420 }
+  },
   avb3: {
     id: 'avb3',
     label: '3° AV Block',
@@ -246,7 +260,8 @@ const RHYTHM_PRESETS = {
     label: 'Left Bundle Branch Block',
     defaultHR: 70,
     hrClamp: { min: 40, max: 140 },
-    intervals: { prIntervalMs: 160, qrsDurationMs: 172, qtIntervalMs: 438 }
+    axisDeg: 0,
+    intervals: { prIntervalMs: 160, qrsDurationMs: 160, qtIntervalMs: 430 }
   },
   rbbb: {
     id: 'rbbb',
@@ -361,6 +376,16 @@ class Ecg12Simulator {
     this.caseStemiLeadOverride = null;
     this.caseAfibBaselineGain = 1;
     this.caseAfibJitterGain = 1;
+    this.casePWaveGain = 1;
+    this.caseUWaveGain = 0;
+    this.caseLvhGain = 1;
+    this.caseLvhStrainGain = 1;
+    this.caseLeadQrsGain = null;
+    this.caseLeadQGain = null;
+    this.caseLeadTGain = null;
+    this.caseStOffsetOverride = null;
+    this.caseQrsMorphologyOverride = null;
+    this.caseQrsMinMs = null;
     this.initRhythmSeed();
     this.randomizeAfibPhases();
     this.debugLeadModel = false;
@@ -452,6 +477,9 @@ class Ecg12Simulator {
   setHeartRate(bpm) {
     const preset = this.getCurrentPreset();
     const clampedValue = this.clampHeartRate(bpm, preset);
+    if (clampedValue === this.config.heartRate) {
+      return clampedValue;
+    }
     this.config.heartRate = clampedValue;
     this.resetRandomness();
     if (this.currentRhythm === 'afib') {
@@ -468,12 +496,26 @@ class Ecg12Simulator {
     if (!preset) {
       console.warn(`[Ecg12Simulator] Unknown rhythm "${rhythm}", defaulting to sinus.`);
     }
-    this.currentRhythm = preset ? preset.id : 'sinus';
+    const nextRhythm = preset ? preset.id : 'sinus';
+    if (nextRhythm === this.currentRhythm) {
+      return;
+    }
+    this.currentRhythm = nextRhythm;
     this.caseStemiKind = null;
     this.caseStemiStMv = null;
     this.caseStemiLeadOverride = null;
     this.caseAfibBaselineGain = 1;
     this.caseAfibJitterGain = 1;
+    this.casePWaveGain = 1;
+    this.caseUWaveGain = 0;
+    this.caseLvhGain = 1;
+    this.caseLvhStrainGain = 1;
+    this.caseLeadQrsGain = null;
+    this.caseLeadQGain = null;
+    this.caseLeadTGain = null;
+    this.caseStOffsetOverride = null;
+    this.caseQrsMorphologyOverride = null;
+    this.caseQrsMinMs = null;
     const targetPreset = preset || this.getPresetForId('sinus');
     if (targetPreset) {
       this.config.heartRate = this.clampHeartRate(
@@ -481,13 +523,17 @@ class Ecg12Simulator {
         targetPreset
       );
       this.applyPresetIntervals(targetPreset);
+      if (Number.isFinite(targetPreset.axisDeg)) {
+        this.axisDeg = clamp(targetPreset.axisDeg, -180, 180);
+        this.axisMode = this.axisModeFromDeg(this.axisDeg);
+      }
     }
     this.resetRandomness();
     if (this.currentRhythm === 'afib') {
       this.randomizeAfibPhases();
     }
     this.regenerateRhythm();
-    if (this.currentRhythm === 'avb2_mobitz2') {
+    if (this.currentRhythm === 'avb2_mobitz2' || this.currentRhythm === 'avb2_2to1') {
       this.logMobitz2SelfCheck();
     }
     this.sweepStartTime = this.simulatedTimeMs;
@@ -566,14 +612,33 @@ class Ecg12Simulator {
     if (Number.isFinite(qtMs)) next.qtIntervalMs = clamp(qtMs, 260, 700);
     if (Number.isFinite(pWaveMs)) next.pWaveDurationMs = clamp(pWaveMs, 0, 200);
     if (Number.isFinite(tWaveMs)) next.tWaveDurationMs = clamp(tWaveMs, 80, 320);
+    if (
+      next.prIntervalMs === this.intervals.prIntervalMs &&
+      next.qrsDurationMs === this.intervals.qrsDurationMs &&
+      next.qtIntervalMs === this.intervals.qtIntervalMs &&
+      next.pWaveDurationMs === this.intervals.pWaveDurationMs &&
+      next.tWaveDurationMs === this.intervals.tWaveDurationMs
+    ) {
+      return;
+    }
     this.intervals = next;
     this.regenerateRhythm();
     this.sweepStartTime = this.simulatedTimeMs;
   }
 
   setCaseState({ rhythmId, heartRate, axisMode, intervals, findings, style, autoLeadHighlights = true } = {}) {
-    if (rhythmId) this.setRhythm(rhythmId);
-    if (Number.isFinite(heartRate)) this.setHeartRate(heartRate);
+    if (rhythmId) {
+      const desiredRhythm = this.normalizeRhythmId(rhythmId);
+      if (desiredRhythm !== this.currentRhythm) {
+        this.setRhythm(desiredRhythm);
+      }
+    }
+    if (Number.isFinite(heartRate)) {
+      const targetHr = this.clampHeartRate(heartRate, this.getCurrentPreset());
+      if (targetHr !== this.config.heartRate) {
+        this.setHeartRate(targetHr);
+      }
+    }
     if (axisMode) this.setAxisMode(axisMode);
     if (intervals && typeof intervals === 'object') {
       this.setIntervals({
@@ -597,6 +662,57 @@ class Ecg12Simulator {
     this.caseAfibJitterGain = Number.isFinite(styleCfg.afibJitterGain)
       ? clamp(styleCfg.afibJitterGain, 0.5, 2.5)
       : 1;
+    this.casePWaveGain = Number.isFinite(styleCfg.pWaveGain)
+      ? clamp(styleCfg.pWaveGain, 0.3, 3.0)
+      : 1;
+    this.caseUWaveGain = Number.isFinite(styleCfg.uWaveGain)
+      ? clamp(styleCfg.uWaveGain, 0, 3.0)
+      : 0;
+    this.caseLvhGain = Number.isFinite(styleCfg.lvhGain)
+      ? clamp(styleCfg.lvhGain, 0.6, 2.5)
+      : 1;
+    this.caseLvhStrainGain = Number.isFinite(styleCfg.lvhStrainGain)
+      ? clamp(styleCfg.lvhStrainGain, 0.6, 2.5)
+      : 1;
+    this.caseLeadQrsGain =
+      styleCfg.leadQrsGain && typeof styleCfg.leadQrsGain === 'object'
+        ? Object.fromEntries(
+            Object.entries(normalizeLeadMap(styleCfg.leadQrsGain))
+              .filter(([, v]) => Number.isFinite(Number(v)))
+              .map(([k, v]) => [k, clamp(Number(v), 0.3, 3.0)])
+          )
+        : null;
+    this.caseLeadQGain =
+      styleCfg.leadQGain && typeof styleCfg.leadQGain === 'object'
+        ? Object.fromEntries(
+            Object.entries(normalizeLeadMap(styleCfg.leadQGain))
+              .filter(([, v]) => Number.isFinite(Number(v)))
+              .map(([k, v]) => [k, clamp(Number(v), 0, 4.0)])
+          )
+        : null;
+    this.caseLeadTGain =
+      styleCfg.leadTGain && typeof styleCfg.leadTGain === 'object'
+        ? Object.fromEntries(
+            Object.entries(normalizeLeadMap(styleCfg.leadTGain))
+              .filter(([, v]) => Number.isFinite(Number(v)))
+              .map(([k, v]) => [k, clamp(Number(v), -3.0, 3.0)])
+          )
+        : null;
+    const morphologyOverride = String(styleCfg.qrsMorphology || '').toLowerCase();
+    this.caseQrsMorphologyOverride = ['lbbb', 'rbbb', 'lvh', 'wpw'].includes(morphologyOverride)
+      ? morphologyOverride
+      : null;
+    this.caseQrsMinMs = Number.isFinite(styleCfg.qrsMinMs)
+      ? clamp(styleCfg.qrsMinMs, 100, 260)
+      : null;
+    this.caseStOffsetOverride =
+      styleCfg.stOffsetMv && typeof styleCfg.stOffsetMv === 'object'
+        ? Object.fromEntries(
+            Object.entries(normalizeLeadMap(styleCfg.stOffsetMv))
+              .filter(([, v]) => Number.isFinite(Number(v)))
+              .map(([k, v]) => [k, clamp(Number(v), -0.4, 0.4)])
+          )
+        : null;
     this.caseStemiLeadOverride =
       styleCfg.stemiLeadOverride && typeof styleCfg.stemiLeadOverride === 'object'
         ? normalizeLeadMap(styleCfg.stemiLeadOverride)
@@ -1179,8 +1295,12 @@ class Ecg12Simulator {
       const leadLabel = vp.leadLabel;
       const leadKey = vp.leadKey;
       ctx.save();
+      // Allow high-voltage complexes to intrude into the row above, like printed ECG paper.
+      // Lower rows are drawn later, so their overlap appears on top of the row above.
+      const overlapUpPx = Math.min(vp.y, vp.height * 0.95);
+      const overlapDownPx = 6;
       ctx.beginPath();
-      ctx.rect(vp.x, vp.y, vp.width, vp.height);
+      ctx.rect(vp.x, vp.y - overlapUpPx, vp.width, vp.height + overlapUpPx + overlapDownPx);
       ctx.clip();
 
       ctx.fillStyle = 'rgba(15,23,42,0.65)';
@@ -1231,27 +1351,34 @@ class Ecg12Simulator {
       ctx.stroke();
 
       const baseTime = this.sweepStartTime;
-      // Per-lead adaptive vertical fit for the tiled 12-lead view:
-      // keep full peaks/troughs visible (e.g., tall V5/V6 in BBB/STEMI) without changing expanded lead amplitude.
-      let maxPos = 0;
-      let maxNeg = 0;
-      const probeStepPx = 2;
-      for (let px = 0; px <= xMax; px += probeStepPx) {
-        const tProbe = baseTime + px * msPerPixel;
-        const vProbe = this.getLeadVoltageAtTimeMs(tProbe, leadKey);
-        if (vProbe > maxPos) maxPos = vProbe;
-        if (vProbe < 0) maxNeg = Math.max(maxNeg, -vProbe);
+      // Keep 12-lead morphology visually aligned with expanded lead in high-voltage
+      // profiles by using fixed scaling; preserve adaptive fit for other rhythms.
+      const activeMorphology = String(this.caseQrsMorphologyOverride || '').toLowerCase();
+      const fixedScaleProfiles = new Set(['lbbb', 'lvh']);
+      const isFixedScaleProfile = fixedScaleProfiles.has(activeMorphology);
+      const rhythmFixedScale = fixedScaleProfiles.has(String(this.currentRhythm || '').toLowerCase());
+      let leadTileScale = MAIN_TRACE_VERTICAL_SCALE;
+      if (!(isFixedScaleProfile || rhythmFixedScale)) {
+        let maxPos = 0;
+        let maxNeg = 0;
+        const probeStepPx = 2;
+        for (let px = 0; px <= xMax; px += probeStepPx) {
+          const tProbe = baseTime + px * msPerPixel;
+          const vProbe = this.getLeadVoltageAtTimeMs(tProbe, leadKey);
+          if (vProbe > maxPos) maxPos = vProbe;
+          if (vProbe < 0) maxNeg = Math.max(maxNeg, -vProbe);
+        }
+        const topBound = vp.y + TILE_EDGE_PAD_PX;
+        const bottomBound = vp.y + vp.height - TILE_EDGE_PAD_PX;
+        const availTop = Math.max(10, baselineY - topBound);
+        const availBottom = Math.max(10, bottomBound - baselineY);
+        let fitRatio = 1;
+        const scaledTop = maxPos * MAIN_TRACE_VERTICAL_SCALE;
+        const scaledBottom = maxNeg * MAIN_TRACE_VERTICAL_SCALE;
+        if (scaledTop > availTop) fitRatio = Math.min(fitRatio, availTop / scaledTop);
+        if (scaledBottom > availBottom) fitRatio = Math.min(fitRatio, availBottom / scaledBottom);
+        leadTileScale = MAIN_TRACE_VERTICAL_SCALE * clamp(fitRatio * 0.98, 0.45, 1.0);
       }
-      const topBound = vp.y + TILE_EDGE_PAD_PX;
-      const bottomBound = vp.y + vp.height - TILE_EDGE_PAD_PX;
-      const availTop = Math.max(10, baselineY - topBound);
-      const availBottom = Math.max(10, bottomBound - baselineY);
-      let fitRatio = 1;
-      const scaledTop = maxPos * MAIN_TRACE_VERTICAL_SCALE;
-      const scaledBottom = maxNeg * MAIN_TRACE_VERTICAL_SCALE;
-      if (scaledTop > availTop) fitRatio = Math.min(fitRatio, availTop / scaledTop);
-      if (scaledBottom > availBottom) fitRatio = Math.min(fitRatio, availBottom / scaledBottom);
-      const leadTileScale = MAIN_TRACE_VERTICAL_SCALE * clamp(fitRatio * 0.98, 0.45, 1.0);
 
       const mV0 = this.getLeadVoltageAtTimeMs(baseTime, leadKey) * leadTileScale;
       let prevY = baselineY - mV0;
@@ -1391,7 +1518,7 @@ class Ecg12Simulator {
     const on = this.intervalHighlights;
     const showDropped =
       this.highlights.Dropped === true &&
-      (this.currentRhythm === 'avb2_mobitz1' || this.currentRhythm === 'avb2_mobitz2');
+      (this.currentRhythm === 'avb2_mobitz1' || this.currentRhythm === 'avb2_mobitz2' || this.currentRhythm === 'avb2_2to1');
     if (!on.PR && !on.QRSd && !on.QT && !on.RR && !showDropped) {
       this.intervalDebugLog('intervalOverlaySkip', { reason: 'no highlights', highlights: on });
       return;
@@ -1584,7 +1711,7 @@ class Ecg12Simulator {
         const prStart = qrsStart - beat.pr;
         const droppedActive =
           this.highlights.Dropped === true &&
-          (this.currentRhythm === 'avb2_mobitz1' || this.currentRhythm === 'avb2_mobitz2') &&
+          (this.currentRhythm === 'avb2_mobitz1' || this.currentRhythm === 'avb2_mobitz2' || this.currentRhythm === 'avb2_2to1') &&
           beat.hasP &&
           !hasQrs;
 
@@ -1918,8 +2045,10 @@ class Ecg12Simulator {
     const TARGET_DURATION_MS = 8000;
     const isRegular =
       this.currentRhythm === 'sinus' ||
+      this.currentRhythm === 'sinus_pac' ||
       this.currentRhythm === 'aflutter' ||
       this.currentRhythm === 'avb1' ||
+      this.currentRhythm === 'avb2_2to1' ||
       this.currentRhythm === 'lbbb' ||
       this.currentRhythm === 'rbbb' ||
       this.currentRhythm === 'junctional_escape' ||
@@ -1975,11 +2104,17 @@ class Ecg12Simulator {
       case 'avb2_mobitz2':
         this.generateMobitzIIBeats(schedule, durationMs);
         break;
+      case 'avb2_2to1':
+        this.generateTwoToOneAvBlockBeats(schedule, durationMs);
+        break;
       case 'avb3':
         this.generateThirdDegreeBeats(schedule, durationMs);
         break;
       case 'lbbb':
-        this.generateBundleBranchBlockBeats(schedule, durationMs, 'lbbb');
+        this.generateSinusBeats(schedule, durationMs, {
+          morphology: 'lbbb',
+          qrs: Math.max(this.intervals.qrsDurationMs, 160)
+        });
         break;
       case 'rbbb':
         this.generateBundleBranchBlockBeats(schedule, durationMs, 'rbbb');
@@ -2001,6 +2136,9 @@ class Ecg12Simulator {
         break;
       case 'sinus_pvc_trigeminy':
         this.generateSinusPvcTrigeminyBeats(schedule, durationMs);
+        break;
+      case 'sinus_pac':
+        this.generateSinusPacBeats(schedule, durationMs);
         break;
       case 'stemi_inferior':
       case 'stemi_anterior':
@@ -2034,7 +2172,23 @@ class Ecg12Simulator {
         beat.pr = 0;
       });
     }
+    this.applyCaseConductionOverrides(schedule);
     return schedule;
+  }
+
+  applyCaseConductionOverrides(schedule) {
+    if (!Array.isArray(schedule) || !schedule.length) return;
+    const morph = this.caseQrsMorphologyOverride;
+    if (!morph) return;
+    const defaultWideQrs = morph === 'lbbb' ? 160 : (morph === 'rbbb' ? 168 : null);
+    const minQrs = Number.isFinite(this.caseQrsMinMs) ? this.caseQrsMinMs : defaultWideQrs;
+    schedule.forEach((beat) => {
+      if (!beat || beat.hasQRS === false) return;
+      beat.morphology = morph;
+      if (Number.isFinite(minQrs)) {
+        beat.qrs = Math.max(beat.qrs || this.intervals.qrsDurationMs || minQrs, minQrs);
+      }
+    });
   }
 
   addBeatToSchedule(schedule, beat) {
@@ -2051,7 +2205,11 @@ class Ecg12Simulator {
       qrsScale: beat.qrsScale || 1,
       polarity: beat.polarity || 1,
       morphology: beat.morphology || 'normal',
-      pacedMode: beat.pacedMode || null
+      pacedMode: beat.pacedMode || null,
+      isPac: !!beat.isPac,
+      pScale: Number.isFinite(beat.pScale) ? beat.pScale : 1,
+      pWidthScale: Number.isFinite(beat.pWidthScale) ? beat.pWidthScale : 1,
+      pCenterShiftMs: Number.isFinite(beat.pCenterShiftMs) ? beat.pCenterShiftMs : 0
     });
   }
 
@@ -2074,7 +2232,7 @@ class Ecg12Simulator {
 
   generateBundleBranchBlockBeats(schedule, durationMs, type = 'lbbb') {
     const baseRrMs = this.getCurrentRrMs();
-    const qrsMs = Math.max(this.intervals.qrsDurationMs, type === 'lbbb' ? 168 : 168);
+    const qrsMs = Math.max(this.intervals.qrsDurationMs, type === 'lbbb' ? 160 : 168);
     let cycleStart = 0;
     while (cycleStart < durationMs) {
       const rTime = cycleStart + this.intervals.prIntervalMs + qrsMs / 2;
@@ -2172,6 +2330,33 @@ class Ecg12Simulator {
     }
   }
 
+  generateSinusPacBeats(schedule, durationMs) {
+    const baseRrMs = this.getCurrentRrMs();
+    const pacAdvanceFraction = 0.20; // one RR shortened by ~20%
+    const postPacFraction = 1.10; // slight noncompensatory pause
+    const totalCycles = Math.max(3, Math.floor(durationMs / baseRrMs));
+    const pacCycleIndex = Math.max(2, Math.floor(totalCycles * 0.45));
+    let cycleStart = 0;
+    let idx = 0;
+    while (cycleStart < durationMs) {
+      let rTime = cycleStart + this.intervals.prIntervalMs + this.intervals.qrsDurationMs / 2;
+      if (idx === pacCycleIndex) {
+        rTime -= baseRrMs * pacAdvanceFraction;
+      }
+      if (rTime >= durationMs) break;
+      this.addBeatToSchedule(schedule, {
+        rTime,
+        morphology: 'normal',
+        isPac: idx === pacCycleIndex,
+        pScale: idx === pacCycleIndex ? 0.82 : 1,
+        pWidthScale: idx === pacCycleIndex ? 0.76 : 1,
+        pCenterShiftMs: idx === pacCycleIndex ? -10 : 0
+      });
+      cycleStart += baseRrMs * (idx === pacCycleIndex ? postPacFraction : 1);
+      idx += 1;
+    }
+  }
+
   generateFirstDegreeBeats(schedule, durationMs) {
     const baseRrMs = this.getCurrentRrMs();
     const longPr = Math.max(this.intervals.prIntervalMs, 240);
@@ -2186,11 +2371,13 @@ class Ecg12Simulator {
 
   generateMobitzIBeats(schedule, durationMs) {
     const baseRrMs = this.getCurrentRrMs();
+    const longPr = Math.max(this.intervals.prIntervalMs, 200);
+    const increment = longPr >= 320 ? 80 : 60;
     const pattern = [
-      { pr: 200, conducted: true },
-      { pr: 260, conducted: true },
-      { pr: 320, conducted: true },
-      { pr: 320, conducted: false }
+      { pr: longPr, conducted: true },
+      { pr: longPr, conducted: true },
+      { pr: longPr + increment, conducted: true },
+      { pr: longPr + increment, conducted: false }
     ];
     let cycleStart = 0;
     let idx = 0;
@@ -2244,6 +2431,27 @@ class Ecg12Simulator {
       }
       cycleStart += baseRrMs;
       idx++;
+    }
+  }
+
+  generateTwoToOneAvBlockBeats(schedule, durationMs) {
+    const baseRrMs = this.getCurrentRrMs();
+    const fixedPr = Math.max(this.intervals.prIntervalMs, 120);
+    const qrsHalf = this.intervals.qrsDurationMs / 2;
+    let cycleStart = 0;
+    let idx = 0;
+    while (cycleStart < durationMs) {
+      const conducted = idx % 2 === 0;
+      const rTime = cycleStart + fixedPr + qrsHalf;
+      this.addBeatToSchedule(schedule, {
+        rTime,
+        pr: fixedPr,
+        hasP: true,
+        hasQRS: conducted,
+        hasT: conducted
+      });
+      cycleStart += baseRrMs;
+      idx += 1;
     }
   }
 
@@ -2622,7 +2830,16 @@ class Ecg12Simulator {
     const qrs = q + r + s;
 
     const pScale = lerp(0.9, 1.05, frac);
-    const tScale = lerp(0.65, 1.2, frac);
+    let tScale = lerp(0.65, 1.2, frac);
+    const activeMorphology = String(this.caseQrsMorphologyOverride || '').toLowerCase();
+    const isLbbbProfile = activeMorphology === 'lbbb';
+    if (isLbbbProfile) {
+      if (leadKey === 'V1') tScale *= 1.7;
+      else if (leadKey === 'V2') tScale *= 1.55;
+      else if (leadKey === 'V3') tScale *= 1.35;
+      else if (leadKey === 'V4') tScale *= 0.92;
+      else if (leadKey === 'V5' || leadKey === 'V6') tScale *= 0.92;
+    }
     const pPart = sample.P * pScale;
     const tPart = sample.T * tScale;
     const ptComponent = (pPart + tPart) * (cfg.baseGain || 1);
@@ -2633,9 +2850,18 @@ class Ecg12Simulator {
     value += (sample.ST || 0) * (cfg.baseGain || 1);
     value += (sample.baseline || 0) * (cfg.baseGain || 1);
 
-    if (leadKey === 'V1') value *= 0.95;
-    else if (leadKey === 'V3') value *= 0.9;
-    else if (leadKey === 'V5') value *= 1.05;
+    if (isLbbbProfile) {
+      if (leadKey === 'V1') value *= 1.06;
+      else if (leadKey === 'V2') value *= 1.10;
+      else if (leadKey === 'V3') value *= 1.15;
+      else if (leadKey === 'V4') value *= 0.96;
+      else if (leadKey === 'V5') value *= 1.12;
+      else if (leadKey === 'V6') value *= 1.08;
+    } else {
+      if (leadKey === 'V1') value *= 0.95;
+      else if (leadKey === 'V3') value *= 0.9;
+      else if (leadKey === 'V5') value *= 1.05;
+    }
 
     if (this.debugLeadModel) {
       console.log(
@@ -2732,6 +2958,7 @@ class Ecg12Simulator {
     let p = 0;
     let qrs = 0;
     let tWave = 0;
+    let uWave = 0;
     let pacerSpike = 0;
     const qrsParts = { q: 0, r: 0, s: 0 };
     const skew = this.getLeadSkewMs(leadKey);
@@ -2750,9 +2977,15 @@ class Ecg12Simulator {
       if (!beat.hasP && !beat.hasQRS) continue;
 
       if (!isAfib && !isFlutter && beat.hasP) {
-        const pCenter = beat.rTime - beat.pr + 40;
+        const pCenter = beat.rTime - beat.pr + 40 + (Number.isFinite(beat.pCenterShiftMs) ? beat.pCenterShiftMs : 0);
+        const basePWidth = 80 * (Number.isFinite(beat.pWidthScale) ? beat.pWidthScale : 1);
+        const pacLeadTuning = beat.isPac
+          ? (leadKey === 'II' ? { amp: 0.88, width: 0.86 } : { amp: 0.95, width: 0.93 })
+          : { amp: 1, width: 1 };
+        const pWidth = basePWidth * pacLeadTuning.width;
+        const pAmp = (Number.isFinite(beat.pScale) ? beat.pScale : 1) * pacLeadTuning.amp;
         if (Math.abs(time - pCenter) <= 160) {
-          p += this.drawP(time, pCenter, 80);
+          p += this.drawP(time, pCenter, pWidth) * pAmp * (Number.isFinite(this.casePWaveGain) ? this.casePWaveGain : 1);
         }
         if (beat.pacedMode === 'atrial') {
           pacerSpike += this.drawPacerSpike(time, pCenter - 28);
@@ -2766,6 +2999,21 @@ class Ecg12Simulator {
 
       if (beat.hasQRS && Math.abs(time - beat.rTime) <= beat.qrs * 2) {
         let parts = this.drawQRSParts(time, beat.rTime, beat.qrs, skew, beat, leadKey);
+        const leadQGain = this.caseLeadQGain?.[leadKey];
+        if (Number.isFinite(leadQGain) && leadQGain >= 0) {
+          parts = {
+            ...parts,
+            q: parts.q * leadQGain
+          };
+        }
+        const leadQrsGain = this.caseLeadQrsGain?.[leadKey];
+        if (Number.isFinite(leadQrsGain) && leadQrsGain > 0) {
+          parts = {
+            q: parts.q * leadQrsGain,
+            r: parts.r * leadQrsGain,
+            s: parts.s * leadQrsGain
+          };
+        }
 
         // In STEMI elevation leads, blunt the S wave so the J-point transitions smoothly into the elevated ST.
         if (hasStemi && stemiMultiplier > 0) {
@@ -2807,24 +3055,48 @@ class Ecg12Simulator {
                 tVal = Math.abs(tVal) * 0.9;
               }
             } else if (morph === 'lbbb') {
-              if (isLateral) {
-                // Discordant repolarization in lateral positive-QRS leads.
-                tVal = -Math.abs(tVal) * 0.96;
-              } else if (isRightPrecordial) {
-                // Discordant upright T with predominantly negative QRS.
-                tVal = Math.abs(tVal) * 0.88;
+              // Secondary discordance tuned for board-style LBBB.
+              if (['V1', 'V2', 'V3', 'AVR'].includes(leadKey)) {
+                if (leadKey === 'V1' || leadKey === 'V2' || leadKey === 'V3') {
+                  const shift = leadKey === 'V1' ? -14 : (leadKey === 'V2' ? -12 : -10);
+                  const width = leadKey === 'V1' ? 170 : (leadKey === 'V2' ? 166 : 160);
+                  const gain = leadKey === 'V1' ? 1.52 : (leadKey === 'V2' ? 1.42 : 1.30);
+                  const broadT = this.drawT(time, tCenter + shift, width);
+                  tVal = Math.abs(broadT) * gain;
+                } else {
+                  const upScale = 0.45;
+                  tVal = Math.abs(tVal) * upScale;
+                }
+              } else if (['I', 'II', 'AVL', 'V4', 'V5', 'V6'].includes(leadKey)) {
+                const invScale = leadKey === 'V5' || leadKey === 'V6' ? 1.12 : (leadKey === 'I' || leadKey === 'AVL' ? 1.0 : (leadKey === 'II' ? 0.7 : 0.62));
+                tVal = -Math.abs(tVal) * invScale;
+              } else if (['III', 'AVF'].includes(leadKey)) {
+                tVal = -Math.abs(tVal) * 0.35;
               }
             } else if (morph === 'lvh') {
               // Optional LVH strain in lateral leads.
+              const lvhStrainGain = Number.isFinite(this.caseLvhStrainGain) ? this.caseLvhStrainGain : 1;
               if (isLateral) {
                 const strainScale = leadKey === 'AVL' ? 1.06 : 0.86;
-                tVal = -Math.abs(tVal) * strainScale;
+                tVal = -Math.abs(tVal) * strainScale * lvhStrainGain;
               } else if (['V1', 'V2', 'V3'].includes(leadKey)) {
-                tVal = Math.abs(tVal) * 0.88;
+                tVal = Math.abs(tVal) * (0.88 + 0.12 * (lvhStrainGain - 1));
               }
             }
           }
+          const leadTGain = this.caseLeadTGain?.[leadKey];
+          if (Number.isFinite(leadTGain)) {
+            tVal *= leadTGain;
+          }
           tWave += tVal;
+        }
+        if (beat.hasT !== false && (Number.isFinite(this.caseUWaveGain) ? this.caseUWaveGain : 0) > 0) {
+          const uCenter = tCenter + 150;
+          if (Math.abs(time - uCenter) <= 180) {
+            const precordialBoost = ['V2', 'V3', 'V4', 'V5', 'V6'].includes(leadKey) ? 1.0 : 0.65;
+            const uVal = this.drawU(time, uCenter, 120) * this.caseUWaveGain * precordialBoost;
+            uWave += uVal;
+          }
         }
         if (beat.hasT !== false) {
           const dtT = time - tCenter;
@@ -2859,7 +3131,10 @@ class Ecg12Simulator {
           }
         } else {
           const morph = beat?.morphology || 'normal';
-          if (morph === 'rbbb' || morph === 'lbbb' || morph === 'lvh') {
+          const hasCaseStOffset =
+            this.caseStOffsetOverride &&
+            Object.prototype.hasOwnProperty.call(this.caseStOffsetOverride, leadKey);
+          if (morph === 'rbbb' || morph === 'lbbb' || morph === 'lvh' || hasCaseStOffset) {
             const qrsEnd = qrsStart + beat.qrs;
             const stStart = qrsEnd;
             const stEnd = Math.min(tEnd, qrsEnd + 170);
@@ -2875,17 +3150,33 @@ class Ecg12Simulator {
                 else if (isLateral) stMv = 0.02;
               } else if (morph === 'lbbb') {
                 // Discordant ST: elevation in right precordials, depression laterally.
-                if (isRightPrecordial) stMv = 0.068;
-                else if (isLateral) stMv = -0.065;
+                if (leadKey === 'V1') stMv = 0.095;
+                else if (leadKey === 'V2') stMv = 0.085;
+                else if (leadKey === 'V3') stMv = 0.075;
+                else if (leadKey === 'V4') stMv = -0.04;
+                else if (leadKey === 'V5' || leadKey === 'V6') stMv = -0.10;
+                else if (leadKey === 'I' || leadKey === 'AVL') stMv = -0.08;
+                else if (leadKey === 'II') stMv = -0.05;
+                else if (leadKey === 'III') stMv = -0.02;
+                else if (leadKey === 'AVF') stMv = -0.03;
+                else if (leadKey === 'AVR') stMv = 0.04;
               } else if (morph === 'lvh') {
                 // Mild lateral downsloping ST depression (strain-like).
+                const lvhStrainGain = Number.isFinite(this.caseLvhStrainGain) ? this.caseLvhStrainGain : 1;
                 if (isLateral) {
-                  stMv = leadKey === 'AVL' ? -0.075 : -0.052;
+                  stMv = (leadKey === 'AVL' ? -0.075 : -0.052) * lvhStrainGain;
                 } else if (['V1', 'V2', 'V3'].includes(leadKey)) {
-                  stMv = 0.01;
+                  stMv = 0.01 * (0.9 + 0.2 * lvhStrainGain);
                 }
               }
-              st += stMv * MV_TO_PX_12 * shape;
+              let stShape = shape;
+              if (morph === 'lbbb' && (leadKey === 'V1' || leadKey === 'V2' || leadKey === 'V3')) {
+                stShape = smoothstep(0.0, 0.34, u) * (1 - smoothstep(0.54, 1.0, u));
+              }
+              if (hasCaseStOffset) {
+                stMv += Number(this.caseStOffsetOverride[leadKey]) || 0;
+              }
+              st += stMv * MV_TO_PX_12 * stShape;
             }
           }
         }
@@ -2906,12 +3197,13 @@ class Ecg12Simulator {
     }
 
     return {
-      total: p + qrs + tWave + baseline + st + pacerSpike,
+      total: p + qrs + tWave + uWave + baseline + st + pacerSpike,
       ST: st,
       baseline,
       P: p,
       QRS: qrs,
       T: tWave,
+      U: uWave,
       qrsParts
     };
   }
@@ -2940,48 +3232,123 @@ class Ecg12Simulator {
     let s = sBase;
 
     if (morphology === 'lbbb') {
-      const isV1V2 = ['V1', 'V2'].includes(leadKey);
+      const isV1 = leadKey === 'V1';
+      const isV2 = leadKey === 'V2';
       const isV3 = leadKey === 'V3';
+      const isI = leadKey === 'I';
+      const isII = leadKey === 'II';
+      const isIII = leadKey === 'III';
       const isV4 = leadKey === 'V4';
-      const isLateral = ['I', 'AVL', 'V5', 'V6'].includes(leadKey);
-      const isInferior = ['II', 'III', 'AVF'].includes(leadKey);
-      if (isV1V2) {
-        // Classic predominantly negative right-precordial QS/rS.
-        r *= 0.08;
-        s *= 2.7;
-        q *= 0.04;
-        const lateS = 0.32 * AMP_PX.S * Math.exp(-0.5 * Math.pow((t - (center + width * 0.33)) / (sigma * 1.55), 2));
+      const isV5 = leadKey === 'V5';
+      const isV6 = leadKey === 'V6';
+      if (isV1) {
+        // Step 1 anchor lead: broad, predominantly negative QRS with tiny initial r.
+        r *= 0.02;
+        s *= 3.7;
+        q *= 0.01;
+        // Broaden and delay terminal negativity so recovery is smooth (not a second deflection).
+        const lateS = 0.44 * AMP_PX.S * Math.exp(-0.5 * Math.pow((t - (center + width * 0.39)) / (sigma * 2.15), 2));
+        s += lateS;
+      } else if (isV2) {
+        // V2 mirrors V1 pattern but slightly less pronounced.
+        r *= 0.024;
+        s *= 3.45;
+        q *= 0.012;
+        const lateS = 0.40 * AMP_PX.S * Math.exp(-0.5 * Math.pow((t - (center + width * 0.385)) / (sigma * 2.0), 2));
         s += lateS;
       } else if (isV3) {
-        // Keep V3 predominantly negative / late negative for delayed LV activation.
-        r *= 0.18;
-        s *= 2.05;
-        q *= 0.06;
-        const lateS = 0.24 * AMP_PX.S * Math.exp(-0.5 * Math.pow((t - (center + width * 0.3)) / (sigma * 1.45), 2));
+        // V3 remains very similar to V1/V2 with another subtle reduction in depth.
+        r *= 0.032;
+        s *= 3.1;
+        q *= 0.016;
+        const lateS = 0.35 * AMP_PX.S * Math.exp(-0.5 * Math.pow((t - (center + width * 0.38)) / (sigma * 1.9), 2));
         s += lateS;
-      } else if (isV4) {
-        // Delay transition so V4 is not too normal/upright too early.
-        r *= 0.95;
-        s *= 0.95;
-        q *= 0.06;
-        const notchV4 = 0.14 * AMP_PX.R * Math.exp(-0.5 * Math.pow((t - (center + width * 0.2)) / (sigma * 1.35), 2));
-        r += notchV4;
-      } else if (isLateral) {
-        // Broad, often notched monophasic R; absent septal q in I/aVL/V5/V6.
+      } else if (isI) {
+        // Lead I: most supportive limb lead for LBBB (broad positive, slurred/notched, no q).
         q = 0;
-        r *= 2.18;
-        s *= 0.03; // remove terminal S appearance in lateral leads
-        const notch1 = 0.32 * AMP_PX.R * Math.exp(-0.5 * Math.pow((t - (center + width * 0.13)) / (sigma * 1.3), 2));
-        const notch2 = 0.24 * AMP_PX.R * Math.exp(-0.5 * Math.pow((t - (center + width * 0.27)) / (sigma * 1.6), 2));
-        r += notch1 + notch2;
-      } else if (isInferior) {
-        r *= 1.08;
-        s *= 0.62;
-        q *= 0.2;
-      } else {
-        r *= 1.1;
-        s *= 0.6;
+        r *= 1.72;
+        s *= 0.18;
+        const slur1 = 0.18 * AMP_PX.R * Math.exp(-0.5 * Math.pow((t - (center + width * 0.16)) / (sigma * 1.85), 2));
+        const slur2 = 0.14 * AMP_PX.R * Math.exp(-0.5 * Math.pow((t - (center + width * 0.30)) / (sigma * 2.2), 2));
+        r += slur1 + slur2;
+      } else if (isII) {
+        // Lead II: broad mostly-positive QRS, less dramatic/notched than I/V5/V6.
+        r *= 1.34;
+        s *= 0.42;
+        q *= 0.08;
+        const terminalSlur = 0.11 * AMP_PX.R * Math.exp(-0.5 * Math.pow((t - (center + width * 0.27)) / (sigma * 1.9), 2));
+        r += terminalSlur;
+      } else if (isIII) {
+        // Lead III: variable morphology but still broad and blunted.
+        r *= 0.88;
+        s *= 0.88;
         q *= 0.16;
+        const broadLateR = 0.06 * AMP_PX.R * Math.exp(-0.5 * Math.pow((t - (center + width * 0.25)) / (sigma * 2.0), 2));
+        const broadLateS = 0.12 * AMP_PX.S * Math.exp(-0.5 * Math.pow((t - (center + width * 0.34)) / (sigma * 1.85), 2));
+        r += broadLateR;
+        s += broadLateS;
+      } else if (isV4) {
+        // V4: near-isoelectric transitional lead.
+        const notchBoost = 0.66;
+        q = 0;
+        r = 0;
+        s *= 0.07;
+        const firstPeak = (0.46 * notchBoost) * AMP_PX.R * Math.exp(-0.5 * Math.pow((t - (center + width * 0.082)) / (sigma * 1.48), 2));
+        const midDip = (-0.30 * notchBoost) * AMP_PX.R * Math.exp(-0.5 * Math.pow((t - (center + width * 0.182)) / (sigma * 0.98), 2));
+        const secondPeak = (0.40 * notchBoost) * AMP_PX.R * Math.exp(-0.5 * Math.pow((t - (center + width * 0.272)) / (sigma * 1.42), 2));
+        const terminalSlur = (0.09 * notchBoost) * AMP_PX.R * Math.exp(-0.5 * Math.pow((t - (center + width * 0.365)) / (sigma * 2.0), 2));
+        r += firstPeak + midDip + secondPeak + terminalSlur;
+        const downstroke = (0.055 * notchBoost) * AMP_PX.S * Math.exp(-0.5 * Math.pow((t - (center + width * 0.355)) / (sigma * 1.55), 2));
+        s += downstroke;
+      } else if (isV5 || isV6) {
+        // LBBB lateral leads: preserve M-shaped notched R, then flow directly
+        // into one broad smooth discordant negative wave.
+        const notchBoost = isV6 ? 1.15 : 1.05;
+        q = 0;
+        r = 0;
+        s = 0;
+
+        const firstPeak = (isV6 ? 0.82 : 0.76) * notchBoost * AMP_PX.R * Math.exp(
+          -0.5 * Math.pow((t - (center + width * (isV6 ? 0.06 : 0.065))) / (sigma * (isV6 ? 1.30 : 1.34)), 2)
+        );
+
+        const midDip = -(isV6 ? 0.72 : 0.62) * notchBoost * AMP_PX.R * Math.exp(
+          -0.5 * Math.pow((t - (center + width * (isV6 ? 0.16 : 0.165))) / (sigma * (isV6 ? 0.90 : 0.94)), 2)
+        );
+
+        const secondPeak = (isV6 ? 0.74 : 0.68) * notchBoost * AMP_PX.R * Math.exp(
+          -0.5 * Math.pow((t - (center + width * (isV6 ? 0.25 : 0.255))) / (sigma * (isV6 ? 1.26 : 1.30)), 2)
+        );
+
+        const terminalSlur = (isV6 ? 0.22 : 0.20) * notchBoost * AMP_PX.R * Math.exp(
+          -0.5 * Math.pow((t - (center + width * (isV6 ? 0.37 : 0.375))) / (sigma * (isV6 ? 2.25 : 2.15)), 2)
+        );
+
+        r += firstPeak + midDip + secondPeak + terminalSlur;
+
+        const bridgeDrop = (isV6 ? 0.10 : 0.09) * notchBoost * AMP_PX.S * Math.exp(
+          -0.5 * Math.pow((t - (center + width * (isV6 ? 0.40 : 0.405))) / (sigma * (isV6 ? 2.6 : 2.45)), 2)
+        );
+
+        const broadTroughMain = (isV6 ? 0.26 : 0.22) * notchBoost * AMP_PX.S * Math.exp(
+          -0.5 * Math.pow((t - (center + width * (isV6 ? 0.58 : 0.575))) / (sigma * (isV6 ? 5.0 : 4.7)), 2)
+        );
+
+        const broadTroughShoulder = (isV6 ? 0.16 : 0.13) * notchBoost * AMP_PX.S * Math.exp(
+          -0.5 * Math.pow((t - (center + width * (isV6 ? 0.69 : 0.68))) / (sigma * (isV6 ? 5.7 : 5.3)), 2)
+        );
+
+        const recoveryTail = (isV6 ? 0.05 : 0.045) * notchBoost * AMP_PX.S * Math.exp(
+          -0.5 * Math.pow((t - (center + width * (isV6 ? 0.82 : 0.80))) / (sigma * (isV6 ? 6.8 : 6.3)), 2)
+        );
+
+        s += bridgeDrop + broadTroughMain + broadTroughShoulder + recoveryTail;
+      } else {
+        // Keep other leads broad but intentionally generic for stepwise build.
+        r *= 1.08;
+        s *= 0.72;
+        q *= 0.14;
+        if (['I', 'AVL', 'V5'].includes(leadKey)) q *= 0.05;
       }
     } else if (morphology === 'paced_ventricular') {
       const isRightPrecordial = ['V1', 'V2', 'V3'].includes(leadKey);
@@ -3090,6 +3457,54 @@ class Ecg12Simulator {
         r *= 1.2;
         s *= 0.55;
       }
+      const lvhGain = Number.isFinite(this.caseLvhGain) ? this.caseLvhGain : 1;
+      if (lvhGain !== 1) {
+        r *= lvhGain;
+        s *= lvhGain;
+        q *= clamp(0.92 * lvhGain, 0.75, 1.35);
+      }
+    } else if (morphology === 'wpw') {
+      const isPrecordial = ['V1', 'V2', 'V3', 'V4', 'V5', 'V6'].includes(leadKey);
+      const isLeadIII = leadKey === 'III';
+      const isLeadV1 = leadKey === 'V1';
+      const isLeadV2 = leadKey === 'V2';
+      const isLeadV3 = leadKey === 'V3';
+      const isLeadV4 = leadKey === 'V4';
+      const isLeadV5 = leadKey === 'V5';
+      const isLeadV6 = leadKey === 'V6';
+
+      // Keep QRS overall narrow, but make pre-excitation clearly visible.
+      q *= isLeadIII ? 1.7 : 0.28;
+      r *= isPrecordial ? 1.28 : 1.0;
+      s *= isPrecordial ? 0.72 : 0.88;
+
+      // Delta wave: stronger/broader early shoulder + bridge into the R upstroke.
+      const deltaMain = (isPrecordial ? 0.82 : 0.62) * AMP_PX.R * Math.exp(
+        -0.5 * Math.pow((t - (center - width * 0.41)) / (sigma * 4.2), 2)
+      );
+      const deltaBridge = (isPrecordial ? 0.40 : 0.30) * AMP_PX.R * Math.exp(
+        -0.5 * Math.pow((t - (center - width * 0.28)) / (sigma * 3.1), 2)
+      );
+      const deltaTail = (isPrecordial ? 0.24 : 0.18) * AMP_PX.R * Math.exp(
+        -0.5 * Math.pow((t - (center - width * 0.20)) / (sigma * 2.0), 2)
+      );
+      r += deltaMain + deltaBridge + deltaTail;
+
+      // Higher precordial voltages (can mimic LVH in WPW pattern).
+      if (isLeadV1) r *= 1.12;
+      if (isLeadV2) r *= 1.2;
+      if (isLeadV3) r *= 1.28;
+      if (isLeadV4) r *= 1.34;
+      if (isLeadV5) r *= 1.32;
+      if (isLeadV6) r *= 1.22;
+
+      // Lead III pseudo-infarct pattern tendency.
+      if (isLeadIII) {
+        const qExtra = 0.26 * AMP_PX.Q * Math.exp(
+          -0.5 * Math.pow((t - (center - width * 0.38)) / (sigma * 1.2), 2)
+        );
+        q += qExtra;
+      }
     } else if (morphology === 'pvc') {
       const isRightPrecordial = ['V1', 'V2'].includes(leadKey);
       if (isRightPrecordial) {
@@ -3118,6 +3533,12 @@ class Ecg12Simulator {
     const sigma = width / 5;
     const delta = t - center;
     return AMP_PX.T * Math.exp(-0.5 * Math.pow(delta / (sigma || 1), 2));
+  }
+
+  drawU(t, center, width) {
+    const sigma = width / 5.5;
+    const delta = t - center;
+    return 0.22 * AMP_PX.T * Math.exp(-0.5 * Math.pow(delta / (sigma || 1), 2));
   }
 
   waveTypeAtTime(tMs) {

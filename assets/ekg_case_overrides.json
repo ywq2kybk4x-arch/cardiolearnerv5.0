@@ -61,7 +61,18 @@
         "2nd degree AV block Mobitz 1/Wenckebach; LBBB"
       ],
       "force": {
-        "rhythm_id": "lbbb"
+        "rhythm_id": "avb2_mobitz1",
+        "rate_bpm": 66,
+        "axis_mode": "lad",
+        "intervals": {
+          "pr_ms": 400,
+          "qrs_ms": 132,
+          "qt_ms": 470
+        },
+        "style": {
+          "qrsMorphology": "lbbb",
+          "qrsMinMs": 132
+        }
       }
     },
     "ekg-32__1": {
@@ -82,7 +93,10 @@
         "Right bundle branch block",
         "Sinus rhythm with PVC trigeminy",
         "monomorphic ventricular tachycardia"
-      ]
+      ],
+      "force": {
+        "rate_bpm": 168
+      }
     },
     "case-6-h369002523": {
       "question": "What is the most likely diagnosis/interpretation for this case?",
@@ -102,7 +116,14 @@
         "Junctional escape rhythm",
         "Anterior STEMI",
         "Normal sinus rhythm"
-      ]
+      ],
+      "force": {
+        "style": {
+          "stOffsetMv": {
+            "V4": -0.08
+          }
+        }
+      }
     },
     "ekg-90__1": {
       "question": "What is the most likely diagnosis/interpretation for this case?",
@@ -112,7 +133,21 @@
         "sinus bradycardia",
         "Atrial flutter with 2:1 block",
         "Monomorphic ventricular tachycardia"
-      ]
+      ],
+      "force": {
+        "rhythm_id": "sinus",
+        "rate_bpm": 36,
+        "axis_mode": "normal",
+        "intervals": {
+          "pr_ms": 180,
+          "qrs_ms": 92,
+          "qt_ms": 460
+        },
+        "style": {
+          "pWaveGain": 1.9,
+          "uWaveGain": 1.25
+        }
+      }
     },
     "ekg-41__1": {
       "question": "What is the most likely diagnosis/interpretation for this case?",
@@ -122,7 +157,29 @@
         "Junctional escape rhythm",
         "Anterior STEMI",
         "atrial flutter with 2:1 block"
-      ]
+      ],
+      "force": {
+        "rhythm_id": "aflutter",
+        "rate_bpm": 150,
+        "axis_mode": "normal",
+        "intervals": {
+          "qrs_ms": 96,
+          "qt_ms": 360
+        },
+        "style": {
+          "qrsMorphology": "lvh",
+          "lvhGain": 1.55,
+          "lvhStrainGain": 1.45,
+          "leadQrsGain": {
+            "V1": 1.46,
+            "V2": 1.46,
+            "V3": 1.46,
+            "V4": 1.46,
+            "V5": 1.46,
+            "V6": 1.46
+          }
+        }
+      }
     },
     "ekg-68__1": {
       "question": "What is the most likely diagnosis/interpretation for this case?",
@@ -178,7 +235,12 @@
         "Right bundle branch block",
         "Inferior STEMI",
         "junctional escape rhythm"
-      ]
+      ],
+      "force": {
+        "intervals": {
+          "qrs_ms": 76
+        }
+      }
     },
     "ekg-252__1": {
       "question": "What is the most likely diagnosis/interpretation for this case?",
@@ -208,7 +270,17 @@
         "sinus w/PAC",
         "Atrial fibrillation",
         "Complete heart block"
-      ]
+      ],
+      "force": {
+        "rhythm_id": "sinus_pac",
+        "rate_bpm": 90,
+        "axis_mode": "normal",
+        "intervals": {
+          "pr_ms": 160,
+          "qrs_ms": 90,
+          "qt_ms": 400
+        }
+      }
     },
     "ekg-13__1": {
       "question": "What is the most likely diagnosis/interpretation for this case?",
@@ -218,7 +290,29 @@
         "Normal sinus rhythm",
         "Second-degree AV block Mobitz II",
         "Q waves and T wave inversions consistent with prior MI"
-      ]
+      ],
+      "force": {
+        "rhythm_id": "sinus",
+        "rate_bpm": 90,
+        "axis_mode": "normal",
+        "intervals": {
+          "pr_ms": 160,
+          "qrs_ms": 90,
+          "qt_ms": 400
+        },
+        "style": {
+          "leadQGain": {
+            "II": 2.3,
+            "III": 2.5,
+            "aVF": 2.3
+          },
+          "leadTGain": {
+            "V1": -1.2,
+            "V2": -1.15,
+            "V3": -1.1
+          }
+        }
+      }
     },
     "ekg-39__1": {
       "question": "What is the most likely diagnosis/interpretation for this case?",
@@ -238,7 +332,52 @@
         "Sinus rhythm with PVC trigeminy",
         "Normal sinus rhythm",
         "WPW"
-      ]
+      ],
+      "force": {
+        "rhythm_id": "sinus",
+        "rate_bpm": 96,
+        "axis_mode": "normal",
+        "intervals": {
+          "pr_ms": 115,
+          "qrs_ms": 98,
+          "qt_ms": 390
+        },
+        "style": {
+          "qrsMorphology": "wpw",
+          "leadQGain": {
+            "III": 2.7
+          },
+          "leadQrsGain": {
+            "V1": 1.2,
+            "V2": 1.32,
+            "V3": 1.42,
+            "V4": 1.5,
+            "V5": 1.5,
+            "V6": 1.38
+          },
+          "leadTGain": {
+            "I": -0.75,
+            "II": -0.72,
+            "III": -0.45,
+            "aVL": -0.82,
+            "aVF": -0.56,
+            "V1": -1.0,
+            "V2": -1.1,
+            "V3": -1.15,
+            "V4": -1.08,
+            "V5": -1.0,
+            "V6": -0.9
+          },
+          "stOffsetMv": {
+            "V1": -0.05,
+            "V2": -0.07,
+            "V3": -0.09,
+            "V4": -0.08,
+            "V5": -0.07,
+            "V6": -0.06
+          }
+        }
+      }
     },
     "ekg-129__1": {
       "question": "What is the most likely diagnosis/interpretation for this case?",
@@ -278,7 +417,25 @@
         "Normal sinus rhythm",
         "Second-degree AV block Mobitz II",
         "pericarditis"
-      ]
+      ],
+      "force": {
+        "style": {
+          "stOffsetMv": {
+            "I": 0.20,
+            "II": 0.24,
+            "III": 0.18,
+            "aVR": -0.08,
+            "aVL": 0.16,
+            "aVF": 0.22,
+            "V1": 0.10,
+            "V2": 0.26,
+            "V3": 0.30,
+            "V4": 0.28,
+            "V5": 0.24,
+            "V6": 0.20
+          }
+        }
+      }
     },
     "ekg-82__1": {
       "question": "What is the most likely diagnosis/interpretation for this case?",
@@ -330,7 +487,23 @@
         "Normal sinus rhythm"
       ],
       "force": {
-        "rhythm_id": "rbbb"
+        "rhythm_id": "avb2_2to1",
+        "rate_bpm": 72,
+        "axis_mode": "normal",
+        "intervals": {
+          "pr_ms": 240,
+          "qrs_ms": 148,
+          "qt_ms": 420
+        },
+        "style": {
+          "qrsMorphology": "rbbb",
+          "qrsMinMs": 148,
+          "leadTGain": {
+            "V1": -1.35,
+            "V2": -1.25,
+            "V3": -1.15
+          }
+        }
       }
     },
     "ekg-202__1": {

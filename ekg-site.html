@@ -2402,10 +2402,15 @@
             .ecg-case-kv-row{grid-template-columns:1fr;gap:4px}
         }
         .ecg-case-finding-row{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
-        .ecg-case-finding{display:inline;color:inherit;font-size:inherit;font-weight:700;line-height:inherit;cursor:pointer;background:none;border:0;padding:0;margin:0;text-decoration-line:underline;text-decoration-style:dotted;text-decoration-thickness:2px;text-underline-offset:3px;text-decoration-color:rgba(30,64,175,.7)}
+        .ecg-case-finding{display:inline;color:inherit;font:inherit;font-weight:700;line-height:inherit;text-align:left;white-space:normal;vertical-align:baseline;cursor:pointer;background:none;border:0;padding:0;margin:0;appearance:none;-webkit-appearance:none;text-decoration-line:underline;text-decoration-style:dotted;text-decoration-thickness:2px;text-underline-offset:3px;text-decoration-color:rgba(30,64,175,.7)}
         .ecg-case-finding:hover{color:#1e40af;text-decoration-color:#1e40af}
         .ecg-case-finding.active{color:#1e3a8a;text-decoration-color:#1e3a8a}
         .ecg-case-tools{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+        .ecg-case-box-toggle{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border:1px solid rgba(148,163,184,.45);border-radius:999px;background:rgba(255,255,255,.78);font-size:.82rem;font-weight:600;color:var(--muted);cursor:pointer;user-select:none}
+        .ecg-case-box-toggle input{margin:0;accent-color:#2563eb}
+        .ecg-case-box-toggle.is-active{border-color:rgba(37,99,235,.55);background:rgba(37,99,235,.10);color:#1d4ed8}
+        #ecg12Module .ecg12-canvas-wrap canvas.ecg-case-box-overlay{display:none;pointer-events:none}
+        #ecg12Module .ecg12-canvas-wrap canvas.ecg-case-box-overlay.is-active{display:block;pointer-events:auto;cursor:crosshair}
         .ecg-case-tools .btn{padding:4px 10px}
         .ecg-case-tools .btn.is-active{background:var(--primary);border-color:var(--primary);color:#fff}
         .ecg-case-measure-state{font-size:.82rem;color:var(--muted-2);align-self:center}
@@ -2414,6 +2419,8 @@
         .ecg-case-assessment{display:flex;flex-direction:column;gap:10px}
         .ecg-case-assessment-row{display:grid;grid-template-columns:minmax(180px,240px) minmax(0,1fr) auto;gap:10px;align-items:start;padding:10px;border:1px solid rgba(148,163,184,.3);border-radius:12px;background:rgba(255,255,255,.65)}
         .ecg-case-assessment-label{font-weight:700;color:#334155;line-height:1.35}
+        .ecg-case-assessment-label.is-rate-with-toggle{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+        .ecg-case-assessment-label.is-rate-with-toggle .ecg-case-box-toggle{margin-top:0;width:max-content}
         .ecg-case-assessment-input{min-width:0;display:flex;flex-direction:column;gap:8px}
         .ecg-case-assessment-input input[type="number"],
         .ecg-case-assessment-input select{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text)}
@@ -3735,6 +3742,11 @@
                                     <canvas id="ecg12BigBackground"></canvas>
                                     <canvas id="ecg12BigTrace"></canvas>
                                     <canvas id="ecg12BigOverlay"></canvas>
+                                    <canvas id="ecgCaseBoxOverlay" class="ecg-case-box-overlay"></canvas>
+                                    <div class="single-lead-box-calc" id="ecgCaseBoxCalc" hidden>
+                                        <strong>HR = 300 / <span id="ecgCaseBoxCalcCount">0</span> Boxes = <span id="ecgCaseBoxCalcResult">—</span></strong>
+                                        <div class="calc-muted">1 = 300 bpm, 2 = 150, 3 = 100, 4 = 75, 5 = 60, 6 = 50</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -3822,7 +3834,13 @@
                         <div class="ecg-case-id">Case Assessment</div>
                         <div class="ecg-case-assessment" id="ecgCaseAssessmentForm">
                             <div class="ecg-case-assessment-row">
-                                <div class="ecg-case-assessment-label">Rate (bpm)</div>
+                                <div class="ecg-case-assessment-label is-rate-with-toggle">
+                                    <span>Rate (bpm)</span>
+                                    <label class="ecg-case-box-toggle" id="ecgCaseBoxToggleWrap">
+                                        <input type="checkbox" id="ecgCaseBoxToolToggle">
+                                        Box tool
+                                    </label>
+                                </div>
                                 <div class="ecg-case-assessment-input">
                                     <input type="number" id="ecgAssessRateInput" min="20" max="240" step="1" />
                                     <div class="ecg-case-assessment-hint" id="ecgAssessRateHint">Enter heart rate in bpm.</div>
@@ -6914,6 +6932,12 @@ const coronaryMap = {
                     intervals.PR = true;
                     waves.QRS = true;
                 }
+                if (/mobitz|wenckebach|dropped beat|dropped qrs|non[-\s]?conducted|not followed by a qrs/.test(lowered)) {
+                    waves.Dropped = true;
+                    intervals.PR = true;
+                    waves.QRS = true;
+                    if (!leads.length) pushUnique(leads, 'II');
+                }
                 if (/left bundle branch block|\blbbb\b|right bundle branch block|\brbbb\b/.test(lowered)) {
                     intervals.QRSd = true;
                     waves.QRS = true;
@@ -7316,6 +7340,9 @@ const coronaryMap = {
                 const expandedLabel = document.getElementById('ecg12ActiveLead');
                 if (expandedLabel) expandedLabel.textContent = selectedLead;
                 window.ecg12SimInstance?.handleResize?.();
+                if (ecgCaseBoxOverlayActive) {
+                    requestAnimationFrame(drawCaseBoxOverlay);
+                }
             };
 
             const buildCaseKeyFeatureFinding = (item) => {
@@ -7429,9 +7456,22 @@ const coronaryMap = {
             };
 
             const buildAnchorsForSegment = (findings, source, segmentIndex) => (
-                findings
-                    .filter((finding) => finding.source === source && finding.segmentIndex === segmentIndex && finding.start >= 0 && finding.end > finding.start)
-                    .sort((a, b) => a.start - b.start)
+                (() => {
+                    const sorted = findings
+                        .filter((finding) => finding.source === source && finding.segmentIndex === segmentIndex && finding.start >= 0 && finding.end > finding.start)
+                        .sort((a, b) => {
+                            if (a.start !== b.start) return a.start - b.start;
+                            return (b.end - b.start) - (a.end - a.start);
+                        });
+                    const nonOverlapping = [];
+                    let cursorEnd = -1;
+                    sorted.forEach((finding) => {
+                        if (finding.start < cursorEnd) return;
+                        nonOverlapping.push(finding);
+                        cursorEnd = finding.end;
+                    });
+                    return nonOverlapping;
+                })()
             );
 
             const renderSegmentWithAnchors = (container, text, anchors, item) => {
@@ -7446,19 +7486,107 @@ const coronaryMap = {
                     if (start > cursor) {
                         container.appendChild(document.createTextNode(text.slice(cursor, start)));
                     }
-                    const button = document.createElement('button');
-                    button.type = 'button';
-                    button.className = 'ecg-case-finding';
-                    button.dataset.findingId = finding.id;
-                    button.textContent = text.slice(start, end) || finding.label;
-                    button.addEventListener('click', () => applyCaseFindingHighlight(item, finding));
-                    container.appendChild(button);
+                    const chip = document.createElement('span');
+                    chip.className = 'ecg-case-finding';
+                    chip.dataset.findingId = finding.id;
+                    chip.textContent = text.slice(start, end) || finding.label;
+                    chip.setAttribute('role', 'button');
+                    chip.setAttribute('tabindex', '0');
+                    chip.addEventListener('click', () => applyCaseFindingHighlight(item, finding));
+                    chip.addEventListener('keydown', (event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            applyCaseFindingHighlight(item, finding);
+                        }
+                    });
+                    container.appendChild(chip);
                     cursor = end;
                 });
                 if (cursor < text.length) {
                     container.appendChild(document.createTextNode(text.slice(cursor)));
                 }
             };
+
+            const splitExplanationIntoChunks = (text) => {
+                const source = normalizeInlineText(text);
+                if (!source) return [];
+                const sentenceRegex = /[^.!?]+[.!?]*/g;
+                const sentences = [];
+                let match;
+                while ((match = sentenceRegex.exec(source)) !== null) {
+                    const raw = match[0];
+                    const leadingWs = (raw.match(/^\s+/)?.[0] || '').length;
+                    const trailingWs = (raw.match(/\s+$/)?.[0] || '').length;
+                    const sentenceStart = match.index + leadingWs;
+                    const sentenceEnd = match.index + raw.length - trailingWs;
+                    const normalized = source.slice(sentenceStart, sentenceEnd).trim();
+                    if (!normalized) continue;
+                    sentences.push({
+                        text: normalized,
+                        start: sentenceStart,
+                        end: sentenceEnd
+                    });
+                }
+                if (!sentences.length) {
+                    return [{ text: source, textStart: 0, end: source.length }];
+                }
+                const isConceptTransition = (sentence) =>
+                    /^(first|second|third|next|then|continuing|additionally|another finding|another|finally|in summary|to summarize)\b/i.test(
+                        sentence.trim()
+                    );
+                const chunks = [];
+                let current = null;
+                sentences.forEach((sentence) => {
+                    if (!current) {
+                        current = {
+                            text: sentence.text,
+                            start: sentence.start,
+                            end: sentence.end,
+                            count: 1
+                        };
+                        return;
+                    }
+                    const shouldBreak =
+                        isConceptTransition(sentence.text) ||
+                        current.count >= 2 ||
+                        current.text.length >= 280;
+                    if (shouldBreak) {
+                        chunks.push(current);
+                        current = {
+                            text: sentence.text,
+                            start: sentence.start,
+                            end: sentence.end,
+                            count: 1
+                        };
+                        return;
+                    }
+                    current.text = `${current.text} ${sentence.text}`.replace(/\s+/g, ' ').trim();
+                    current.end = sentence.end;
+                    current.count += 1;
+                });
+                if (current) chunks.push(current);
+                return chunks.map(({ text: chunkText, start, end }) => {
+                    const raw = source.slice(start, end);
+                    const leadingWs = (raw.match(/^\s+/)?.[0] || '').length;
+                    const textStart = start + leadingWs;
+                    return {
+                        text: source.slice(textStart, end).trim(),
+                        textStart,
+                        end
+                    };
+                });
+            };
+
+            const mapAnchorsToChunk = (anchors, textStart, end) => (
+                (Array.isArray(anchors) ? anchors : [])
+                    .filter((finding) => finding.end > textStart && finding.start < end)
+                    .map((finding) => ({
+                        ...finding,
+                        start: Math.max(0, finding.start - textStart),
+                        end: Math.max(0, Math.min(end, finding.end) - textStart)
+                    }))
+                    .filter((finding) => finding.end > finding.start)
+            );
 
             const renderInteractiveRevealContent = (wrapId, bodyId, content, source, item) => {
                 const wrap = document.getElementById(wrapId);
@@ -7572,12 +7700,16 @@ const coronaryMap = {
                 }
 
                 if (typeof content === 'string' && content.trim()) {
-                    const lines = [normalizeInlineText(content)].filter(Boolean);
-                    lines.forEach((line, segmentIndex) => {
+                    const normalized = normalizeInlineText(content);
+                    const baseAnchors = buildAnchorsForSegment(findings, source, 0);
+                    const chunks = source === 'explanation'
+                        ? splitExplanationIntoChunks(normalized)
+                        : [{ text: normalized, textStart: 0, end: normalized.length }];
+                    chunks.forEach((chunk, chunkIndex) => {
                         const p = document.createElement('p');
-                        p.style.margin = segmentIndex === lines.length - 1 ? '0' : '0 0 8px';
-                        const anchors = buildAnchorsForSegment(findings, source, segmentIndex);
-                        renderSegmentWithAnchors(p, line, anchors, item);
+                        p.style.margin = chunkIndex === chunks.length - 1 ? '0' : '0 0 12px';
+                        const anchors = mapAnchorsToChunk(baseAnchors, chunk.textStart, chunk.end);
+                        renderSegmentWithAnchors(p, chunk.text, anchors, item);
                         body.appendChild(p);
                     });
                     const fallbackFindings = findings.filter((finding) => finding.source === source && finding.segmentIndex < 0);
@@ -7604,17 +7736,73 @@ const coronaryMap = {
                 wrap.style.display = '';
             };
 
-            const setSimpleRevealContent = (wrapId, bodyId, content) => {
+            const setSimpleRevealContent = (wrapId, bodyId, content, options = {}) => {
                 const wrap = document.getElementById(wrapId);
                 const body = document.getElementById(bodyId);
                 if (!wrap || !body) return;
                 wrap.open = false;
                 body.innerHTML = '';
+                const hideWhenEmpty = !!options.hideWhenEmpty;
+                const hasContent = (() => {
+                    if (Array.isArray(content)) {
+                        return content.some((item) => normalizeInlineText(item));
+                    }
+                    if (typeof content === 'string') {
+                        return !!normalizeInlineText(content);
+                    }
+                    return false;
+                })();
+                const linkifyInto = (container, rawText) => {
+                    const text = normalizeInlineText(rawText);
+                    const urlRegex = /https?:\/\/[^\s]+/gi;
+                    let cursor = 0;
+                    let match;
+                    while ((match = urlRegex.exec(text)) !== null) {
+                        const start = match.index;
+                        const end = start + match[0].length;
+                        if (start > cursor) {
+                            container.appendChild(document.createTextNode(text.slice(cursor, start)));
+                        }
+                        let href = match[0];
+                        let trailing = '';
+                        while (/[.,;:!?)]$/.test(href)) {
+                            trailing = href.slice(-1) + trailing;
+                            href = href.slice(0, -1);
+                        }
+                        const anchor = document.createElement('a');
+                        anchor.href = href;
+                        anchor.textContent = href;
+                        anchor.target = '_blank';
+                        anchor.rel = 'noopener noreferrer';
+                        container.appendChild(anchor);
+                        if (trailing) container.appendChild(document.createTextNode(trailing));
+                        cursor = end;
+                    }
+                    if (cursor < text.length) {
+                        container.appendChild(document.createTextNode(text.slice(cursor)));
+                    }
+                };
                 if (Array.isArray(content) && content.length) {
+                    const items = content
+                        .map((item) => normalizeInlineText(item))
+                        .filter(Boolean);
+                    if (!items.length) {
+                        if (hideWhenEmpty) {
+                            wrap.style.display = 'none';
+                            return;
+                        }
+                        body.textContent = 'Not provided for this case yet.';
+                        wrap.style.display = '';
+                        return;
+                    }
                     const ul = document.createElement('ul');
-                    content.forEach((item) => {
+                    items.forEach((item) => {
                         const li = document.createElement('li');
-                        li.textContent = normalizeInlineText(item);
+                        if (bodyId === 'ecgCaseReferences') {
+                            linkifyInto(li, item);
+                        } else {
+                            li.textContent = item;
+                        }
                         ul.appendChild(li);
                     });
                     body.appendChild(ul);
@@ -7622,8 +7810,16 @@ const coronaryMap = {
                     return;
                 }
                 if (typeof content === 'string' && content.trim()) {
-                    body.textContent = normalizeInlineText(content);
+                    if (bodyId === 'ecgCaseReferences') {
+                        linkifyInto(body, content);
+                    } else {
+                        body.textContent = normalizeInlineText(content);
+                    }
                     wrap.style.display = '';
+                    return;
+                }
+                if (hideWhenEmpty && !hasContent) {
+                    wrap.style.display = 'none';
                     return;
                 }
                 body.textContent = 'Not provided for this case yet.';
@@ -7879,6 +8075,7 @@ const coronaryMap = {
                 const assessStatusEl = document.getElementById('ecgCaseAssessmentStatus');
                 const revealListEl = document.getElementById('ecgCaseRevealList');
                 const measureToolBtn = document.getElementById('ecgCaseMeasureToolBtn');
+                const boxToolToggle = document.getElementById('ecgCaseBoxToolToggle');
                 const highlightFeaturesBtn = document.getElementById('ecgCaseHighlightFeaturesBtn');
                 const clearHighlightBtn = document.getElementById('ecgCaseClearHighlightBtn');
 
@@ -7896,10 +8093,12 @@ const coronaryMap = {
                     renderInteractiveRevealContent('ecgCaseExplanationWrap', 'ecgCaseExplanation', null, 'explanation', null);
                     setSimpleRevealContent('ecgCaseNextStepWrap', 'ecgCaseNextStep', null);
                     setSimpleRevealContent('ecgCasePearlWrap', 'ecgCasePearl', null);
-                    setSimpleRevealContent('ecgCaseReferencesWrap', 'ecgCaseReferences', null);
+                    setSimpleRevealContent('ecgCaseReferencesWrap', 'ecgCaseReferences', null, { hideWhenEmpty: true });
                     if (assessStatusEl) assessStatusEl.textContent = 'No case available.';
                     setCaseMeasureToolEnabled(false);
+                    setCaseBoxToolEnabled(false);
                     if (measureToolBtn) measureToolBtn.disabled = true;
+                    if (boxToolToggle) boxToolToggle.disabled = true;
                     if (highlightFeaturesBtn) highlightFeaturesBtn.disabled = true;
                     if (clearHighlightBtn) clearHighlightBtn.disabled = true;
                     if (revealListEl) revealListEl.classList.remove('is-locked');
@@ -7919,6 +8118,7 @@ const coronaryMap = {
                 if (ecgCaseActiveCaseKey !== item.caseKey) {
                     ecgCaseActiveCaseKey = item.caseKey;
                     ecgCaseActiveFindingId = null;
+                    clearCaseBoxOverlay();
                 }
 
                 if (counterEl) counterEl.textContent = `Case ${ecgCurrentCaseIndex + 1} / ${count}`;
@@ -7945,7 +8145,7 @@ const coronaryMap = {
                 renderInteractiveRevealContent('ecgCaseExplanationWrap', 'ecgCaseExplanation', item.explanation, 'explanation', item);
                 setSimpleRevealContent('ecgCaseNextStepWrap', 'ecgCaseNextStep', item.nextStep);
                 setSimpleRevealContent('ecgCasePearlWrap', 'ecgCasePearl', item.pearl);
-                setSimpleRevealContent('ecgCaseReferencesWrap', 'ecgCaseReferences', item.references);
+                setSimpleRevealContent('ecgCaseReferencesWrap', 'ecgCaseReferences', item.references, { hideWhenEmpty: true });
                 const state = getAssessmentState(item.caseKey);
                 populateDatalist('ecgAssessRhythmOptions', CASE_ASSESSMENT_OPTIONS.rhythm);
                 populateDatalist('ecgAssessInterpRhythmOptions', CASE_ASSESSMENT_OPTIONS.interpretation.rhythm);
@@ -8032,6 +8232,9 @@ const coronaryMap = {
                 if (measureToolBtn) {
                     measureToolBtn.disabled = false;
                 }
+                if (boxToolToggle) {
+                    boxToolToggle.disabled = false;
+                }
                 if (clearHighlightBtn) {
                     clearHighlightBtn.disabled = !ecgCaseActiveFindingId;
                 }
@@ -8107,6 +8310,16 @@ const coronaryMap = {
             const boxCalc = document.getElementById('singleLeadBoxCalc');
             const boxCalcCount = document.getElementById('boxCalcCount');
             const boxCalcResult = document.getElementById('boxCalcResult');
+            const ecgCaseBoxOverlayCanvas = document.getElementById('ecgCaseBoxOverlay');
+            const ecgCaseBoxOverlayCtx = ecgCaseBoxOverlayCanvas?.getContext('2d') || null;
+            const ecgCaseBoxCalc = document.getElementById('ecgCaseBoxCalc');
+            const ecgCaseBoxCalcCount = document.getElementById('ecgCaseBoxCalcCount');
+            const ecgCaseBoxCalcResult = document.getElementById('ecgCaseBoxCalcResult');
+            const ecgCaseBoxToolToggle = document.getElementById('ecgCaseBoxToolToggle');
+            const ecgCaseBoxToggleWrap = document.getElementById('ecgCaseBoxToggleWrap');
+            let ecgCaseBoxOverlayActive = false;
+            const ecgCaseBoxRects = [];
+            let ecgCaseBoxRowY = null;
 
             const updateBoxCalc = () => {
                 const count = boxOverlayRects.length;
@@ -8227,6 +8440,65 @@ const coronaryMap = {
                 }
             };
 
+            const updateCaseBoxCalc = () => {
+                const count = ecgCaseBoxRects.length;
+                if (ecgCaseBoxCalcCount) ecgCaseBoxCalcCount.textContent = String(count);
+                if (ecgCaseBoxCalcResult) {
+                    ecgCaseBoxCalcResult.textContent = count ? `${Math.round(300 / count)} BPM` : '—';
+                }
+            };
+
+            const syncCaseBoxOverlaySize = () => {
+                if (!ecgCaseBoxOverlayCanvas) return;
+                const rect = ecgCaseBoxOverlayCanvas.getBoundingClientRect();
+                const width = Math.round(rect.width);
+                const height = Math.round(rect.height);
+                if (!width || !height) return;
+                if (ecgCaseBoxOverlayCanvas.width !== width) ecgCaseBoxOverlayCanvas.width = width;
+                if (ecgCaseBoxOverlayCanvas.height !== height) ecgCaseBoxOverlayCanvas.height = height;
+            };
+
+            const drawCaseBoxOverlay = () => {
+                if (!ecgCaseBoxOverlayCanvas || !ecgCaseBoxOverlayCtx) return;
+                syncCaseBoxOverlaySize();
+                ecgCaseBoxOverlayCtx.clearRect(0, 0, ecgCaseBoxOverlayCanvas.width, ecgCaseBoxOverlayCanvas.height);
+                if (!ecgCaseBoxRects.length) return;
+                ecgCaseBoxOverlayCtx.strokeStyle = '#2563eb';
+                ecgCaseBoxOverlayCtx.lineWidth = 2;
+                ecgCaseBoxOverlayCtx.fillStyle = 'rgba(37,99,235,0.12)';
+                ecgCaseBoxRects.forEach((rect) => {
+                    ecgCaseBoxOverlayCtx.fillRect(rect.x, rect.y, rect.size, rect.size);
+                    ecgCaseBoxOverlayCtx.strokeRect(rect.x, rect.y, rect.size, rect.size);
+                });
+            };
+
+            const clearCaseBoxOverlay = () => {
+                ecgCaseBoxRects.length = 0;
+                ecgCaseBoxRowY = null;
+                if (ecgCaseBoxOverlayCanvas && ecgCaseBoxOverlayCtx) {
+                    ecgCaseBoxOverlayCtx.clearRect(0, 0, ecgCaseBoxOverlayCanvas.width, ecgCaseBoxOverlayCanvas.height);
+                }
+                updateCaseBoxCalc();
+            };
+
+            const setCaseBoxToolEnabled = (active) => {
+                const enabled = !!active && currentEkgMode === 'cases';
+                ecgCaseBoxOverlayActive = enabled;
+                if (ecgCaseBoxToolToggle) ecgCaseBoxToolToggle.checked = enabled;
+                if (ecgCaseBoxToggleWrap) ecgCaseBoxToggleWrap.classList.toggle('is-active', enabled);
+                if (ecgCaseBoxOverlayCanvas) {
+                    ecgCaseBoxOverlayCanvas.classList.toggle('is-active', enabled);
+                }
+                if (ecgCaseBoxCalc) {
+                    ecgCaseBoxCalc.hidden = !enabled;
+                }
+                if (!enabled) {
+                    clearCaseBoxOverlay();
+                } else {
+                    drawCaseBoxOverlay();
+                }
+            };
+
             const getTutorialSweepDuration = () => {
                 const sim = window.ecgSimInstance;
                 if (!sim || !sim.traceCanvas) return 0;
@@ -8344,6 +8616,7 @@ const coronaryMap = {
                 if (currentEkgMode === 'tutorial') {
                     resetEkgOnTutorialExit();
                 }
+                setCaseBoxToolEnabled(false);
                 currentEkgMode = 'twelve';
                 setEkg3dModelVisible(true);
                 clearActive();
@@ -8361,6 +8634,7 @@ const coronaryMap = {
                 if (currentEkgMode === 'tutorial') {
                     resetEkgOnTutorialExit();
                 }
+                setCaseBoxToolEnabled(false);
                 currentEkgMode = 'single';
                 setEkg3dModelVisible(true);
                 clearActive();
@@ -8377,6 +8651,7 @@ const coronaryMap = {
 
             const activateQuiz = () => {
                 if (currentEkgMode === 'quiz') return;
+                setCaseBoxToolEnabled(false);
                 currentEkgMode = 'quiz';
                 setEkg3dModelVisible(true);
                 clearActive();
@@ -8392,6 +8667,7 @@ const coronaryMap = {
 
             const activateTutorial = () => {
                 if (currentEkgMode === 'tutorial') return;
+                setCaseBoxToolEnabled(false);
                 currentEkgMode = 'tutorial';
                 setEkg3dModelVisible(true);
                 clearActive();
@@ -8422,6 +8698,7 @@ const coronaryMap = {
                 if (ecgCaseSection) ecgCaseSection.style.display = '';
                 initEcg12Once();
                 applyNormalCaseShellToEcg12();
+                setCaseBoxToolEnabled(false);
                 window.ecg12SimInstance?.handleResize?.();
                 await ensureCasesLoaded();
                 renderCaseLab();
@@ -8561,7 +8838,9 @@ const coronaryMap = {
 
             ecgCaseMeasureToolBtn?.addEventListener('click', () => {
                 const toggle = document.getElementById('ecg12MeasureTool');
-                setCaseMeasureToolEnabled(!toggle?.checked);
+                const next = !toggle?.checked;
+                if (next) setCaseBoxToolEnabled(false);
+                setCaseMeasureToolEnabled(next);
             });
 
             tutorialTabs.forEach((tab) => {
@@ -8635,6 +8914,59 @@ const coronaryMap = {
             boxOverlayCanvas?.addEventListener('dblclick', () => {
                 if (!boxOverlayActive) return;
                 clearBoxOverlay();
+            });
+
+            ecgCaseBoxOverlayCanvas?.addEventListener('click', (event) => {
+                if (!ecgCaseBoxOverlayActive || currentEkgMode !== 'cases') return;
+                const sim = window.ecg12SimInstance;
+                if (!sim || !ecgCaseBoxOverlayCanvas) return;
+                const rect = ecgCaseBoxOverlayCanvas.getBoundingClientRect();
+                if (!rect.width || !rect.height) return;
+                syncCaseBoxOverlaySize();
+                const x = ((event.clientX - rect.left) / rect.width) * ecgCaseBoxOverlayCanvas.width;
+                const y = ((event.clientY - rect.top) / rect.height) * ecgCaseBoxOverlayCanvas.height;
+                const bigBoxSize = 5 * (sim.pixelPerMm || 4);
+                const originX = Math.floor(x / bigBoxSize) * bigBoxSize;
+                const originY = Math.floor(y / bigBoxSize) * bigBoxSize;
+                const hitIndex = ecgCaseBoxRects.findIndex((box) => {
+                    return (
+                        x >= box.x &&
+                        x <= box.x + box.size &&
+                        y >= box.y &&
+                        y <= box.y + box.size
+                    );
+                });
+                if (hitIndex !== -1) {
+                    ecgCaseBoxRects.splice(hitIndex, 1);
+                    if (!ecgCaseBoxRects.length) {
+                        ecgCaseBoxRowY = null;
+                    } else {
+                        ecgCaseBoxRowY = ecgCaseBoxRects[0].y;
+                    }
+                    updateCaseBoxCalc();
+                    drawCaseBoxOverlay();
+                    return;
+                }
+                if (ecgCaseBoxRowY === null) {
+                    ecgCaseBoxRowY = originY;
+                }
+                if (originY !== ecgCaseBoxRowY) return;
+                const last = ecgCaseBoxRects[ecgCaseBoxRects.length - 1];
+                if (last && originX !== last.x + bigBoxSize) return;
+                ecgCaseBoxRects.push({ x: originX, y: originY, size: bigBoxSize });
+                updateCaseBoxCalc();
+                drawCaseBoxOverlay();
+            });
+
+            ecgCaseBoxOverlayCanvas?.addEventListener('dblclick', () => {
+                if (!ecgCaseBoxOverlayActive || currentEkgMode !== 'cases') return;
+                clearCaseBoxOverlay();
+            });
+
+            ecgCaseBoxToolToggle?.addEventListener('change', () => {
+                const enabled = !!ecgCaseBoxToolToggle.checked;
+                if (enabled) setCaseMeasureToolEnabled(false);
+                setCaseBoxToolEnabled(enabled);
             });
 
             const tutorialActionButtons = Array.from(
@@ -8814,6 +9146,9 @@ const coronaryMap = {
             window.addEventListener('resize', () => {
                 if (boxOverlayActive) {
                     window.requestAnimationFrame(drawBoxOverlay);
+                }
+                if (ecgCaseBoxOverlayActive && currentEkgMode === 'cases') {
+                    window.requestAnimationFrame(drawCaseBoxOverlay);
                 }
             });
 
