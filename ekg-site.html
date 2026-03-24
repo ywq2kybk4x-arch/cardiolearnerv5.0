@@ -2227,6 +2227,12 @@
         #ecg12Module .ecg12-expanded-header{font-weight:800;color:#0f172a;margin:2px 0 8px}
         #ecg12Module .ecg12-canvas-wrap canvas{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
         #ecg12Module #ecg12Trace,#ecg12Module #ecg12Overlay,#ecg12Module #ecg12BigTrace,#ecg12Module #ecg12BigOverlay{pointer-events:auto}
+        #ecg12Module .ecg12-expanded-tools{position:absolute;top:10px;right:10px;z-index:8;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.92);border:1px solid var(--border);border-radius:12px;padding:6px 10px;box-shadow:0 8px 18px rgba(15,23,42,.12)}
+        #ecg12Module .ecg12-expanded-measure-toggle{display:inline-flex;align-items:center;gap:8px;font-size:.86rem;font-weight:700;color:#0f172a;white-space:nowrap}
+        #ecg12Module .ecg12-expanded-measure-toggle input{margin:0}
+        #ecg12Module .ecg12-expanded-tools .measure-clear-btn{padding:5px 8px;font-size:.78rem}
+        #ecg12Module .ecg12-expanded-tools.box-active .ecg12-expanded-measure-toggle,
+        #ecg12Module .ecg12-expanded-tools.box-active .measure-clear-btn{display:none!important}
 
         .ekg-mode-toggle{display:flex;gap:10px;margin:24px 0}
         .ekg-mode-toggle button{flex:1;border:1px solid rgba(148,163,184,.35);background:#fff;border-radius:999px;padding:10px;font-weight:600;font-size:1rem;cursor:pointer;transition:all .2s}
@@ -2413,7 +2419,6 @@
         #ecg12Module .ecg12-canvas-wrap canvas.ecg-case-box-overlay.is-active{display:block;pointer-events:auto;cursor:crosshair}
         .ecg-case-tools .btn{padding:4px 10px}
         .ecg-case-tools .btn.is-active{background:var(--primary);border-color:var(--primary);color:#fff}
-        .ecg-case-measure-state{font-size:.82rem;color:var(--muted-2);align-self:center}
         .ecg-case-status{font-size:.9rem;color:var(--muted)}
         .ecg-case-reveal-list.is-locked{opacity:.55;pointer-events:none}
         .ecg-case-assessment{display:flex;flex-direction:column;gap:10px}
@@ -3703,14 +3708,6 @@
                                     </div>
                                     <div class="ecg12-hint">Normal: ~350–440 ms</div>
                                 </div>
-                                <div class="ecg12-row" style="padding-bottom:0;">
-                                    <div class="ecg12-row-left">
-                                        <input type="checkbox" id="ecg12MeasureTool" />
-                                        <span>Click &amp; Measure</span>
-                                        <button type="button" id="ecg12ClearMeasurements" class="measure-clear-btn" hidden>Clear measurements</button>
-                                    </div>
-                                    <div class="ecg12-hint"></div>
-                                </div>
                                 <div id="ecg12MeasureHint" class="ecg12-measure-hint">
                                     Click to set start/end.<br />
                                     Drag to measure.<br />
@@ -3739,6 +3736,13 @@
                                     <span class="ecg12-hint">(Click any lead to view below)</span>
                                 </div>
                                 <div class="ecg12-canvas-wrap ecg12-expanded-wrap">
+                                    <div class="ecg12-expanded-tools">
+                                        <label class="ecg12-expanded-measure-toggle" for="ecg12MeasureTool">
+                                            <input type="checkbox" id="ecg12MeasureTool" />
+                                            <span>Click &amp; Measure</span>
+                                        </label>
+                                        <button type="button" id="ecg12ClearMeasurements" class="measure-clear-btn" hidden>Clear measurements</button>
+                                    </div>
                                     <canvas id="ecg12BigBackground"></canvas>
                                     <canvas id="ecg12BigTrace"></canvas>
                                     <canvas id="ecg12BigOverlay"></canvas>
@@ -3966,8 +3970,6 @@
                     </div>
                     <div id="ecgCaseRevealList" class="ecg-case-reveal-list">
                         <div class="ecg-case-tools">
-                            <button type="button" id="ecgCaseMeasureToolBtn" class="btn btn-ghost btn-compact">Click &amp; Measure</button>
-                            <span id="ecgCaseMeasureState" class="ecg-case-measure-state">Measure off</span>
                             <button type="button" id="ecgCaseHighlightFeaturesBtn" class="btn btn-ghost btn-compact">Highlight key features</button>
                             <button type="button" id="ecgCaseClearHighlightBtn" class="btn btn-ghost btn-compact">Clear highlight</button>
                         </div>
@@ -7303,18 +7305,8 @@ const coronaryMap = {
                 if (el) el.textContent = message || '';
             };
 
-            const syncCaseMeasureToolUi = () => {
-                const btn = document.getElementById('ecgCaseMeasureToolBtn');
-                const state = document.getElementById('ecgCaseMeasureState');
-                const toggle = document.getElementById('ecg12MeasureTool');
-                const active = !!toggle?.checked;
-                if (btn) btn.classList.toggle('is-active', active);
-                if (state) state.textContent = active ? 'Measure active' : 'Measure off';
-            };
-
             const setCaseMeasureToolEnabled = (enabled) => {
                 setCheckbox('ecg12MeasureTool', !!enabled);
-                syncCaseMeasureToolUi();
             };
 
             const getCaseDefaultLead = (item) => (
@@ -8074,7 +8066,6 @@ const coronaryMap = {
                 const caseStemEl = document.getElementById('ecgCaseStem');
                 const assessStatusEl = document.getElementById('ecgCaseAssessmentStatus');
                 const revealListEl = document.getElementById('ecgCaseRevealList');
-                const measureToolBtn = document.getElementById('ecgCaseMeasureToolBtn');
                 const boxToolToggle = document.getElementById('ecgCaseBoxToolToggle');
                 const highlightFeaturesBtn = document.getElementById('ecgCaseHighlightFeaturesBtn');
                 const clearHighlightBtn = document.getElementById('ecgCaseClearHighlightBtn');
@@ -8097,7 +8088,6 @@ const coronaryMap = {
                     if (assessStatusEl) assessStatusEl.textContent = 'No case available.';
                     setCaseMeasureToolEnabled(false);
                     setCaseBoxToolEnabled(false);
-                    if (measureToolBtn) measureToolBtn.disabled = true;
                     if (boxToolToggle) boxToolToggle.disabled = true;
                     if (highlightFeaturesBtn) highlightFeaturesBtn.disabled = true;
                     if (clearHighlightBtn) clearHighlightBtn.disabled = true;
@@ -8252,7 +8242,6 @@ const coronaryMap = {
                 }
 
                 applyCaseBaseEkg(item);
-                syncCaseMeasureToolUi();
             };
 
             const ensureCasesLoaded = async () => {
@@ -8486,6 +8475,8 @@ const coronaryMap = {
                 ecgCaseBoxOverlayActive = enabled;
                 if (ecgCaseBoxToolToggle) ecgCaseBoxToolToggle.checked = enabled;
                 if (ecgCaseBoxToggleWrap) ecgCaseBoxToggleWrap.classList.toggle('is-active', enabled);
+                const expandedTools = document.querySelector('#ecg12Module .ecg12-expanded-tools');
+                if (expandedTools) expandedTools.classList.toggle('box-active', enabled);
                 if (ecgCaseBoxOverlayCanvas) {
                     ecgCaseBoxOverlayCanvas.classList.toggle('is-active', enabled);
                 }
@@ -8723,7 +8714,6 @@ const coronaryMap = {
             const ecgAssessSttCheckBtn = document.getElementById('ecgAssessSttCheckBtn');
             const ecgAssessInterpretationCheckBtn = document.getElementById('ecgAssessInterpretationCheckBtn');
             const ecgAssessResetBtn = document.getElementById('ecgAssessResetBtn');
-            const ecgCaseMeasureToolBtn = document.getElementById('ecgCaseMeasureToolBtn');
             const ecgCaseHighlightFeaturesBtn = document.getElementById('ecgCaseHighlightFeaturesBtn');
             const ecgCaseClearHighlightBtn = document.getElementById('ecgCaseClearHighlightBtn');
 
@@ -8834,13 +8824,6 @@ const coronaryMap = {
                 if (!item) return;
                 const finding = buildCaseKeyFeatureFinding(item);
                 applyCaseFindingHighlight(item, finding);
-            });
-
-            ecgCaseMeasureToolBtn?.addEventListener('click', () => {
-                const toggle = document.getElementById('ecg12MeasureTool');
-                const next = !toggle?.checked;
-                if (next) setCaseBoxToolEnabled(false);
-                setCaseMeasureToolEnabled(next);
             });
 
             tutorialTabs.forEach((tab) => {
