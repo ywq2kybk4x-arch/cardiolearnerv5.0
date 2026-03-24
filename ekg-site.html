@@ -2419,6 +2419,11 @@
         #ecg12Module .ecg12-canvas-wrap canvas.ecg-case-box-overlay.is-active{display:block;pointer-events:auto;cursor:crosshair}
         .ecg-case-tools .btn{padding:4px 10px}
         .ecg-case-tools .btn.is-active{background:var(--primary);border-color:var(--primary);color:#fff}
+        .ecg-case-ecg-toolbar{display:flex;justify-content:flex-end;margin:6px 0 8px}
+        .ecg-case-real-ekg-host{width:100%}
+        .ecg-case-real-ekg-header{font-size:.9rem;font-weight:700;color:#334155;margin:0 0 8px}
+        .ecg-case-real-ekg-host iframe{width:100%;min-height:560px;border:1px solid rgba(148,163,184,.35);border-radius:10px;background:#fff}
+        .ecg-case-real-ekg-host img{display:block;width:100%;height:auto;border:1px solid rgba(148,163,184,.35);border-radius:10px;background:#fff}
         .ecg-case-status{font-size:.9rem;color:var(--muted)}
         .ecg-case-reveal-list.is-locked{opacity:.55;pointer-events:none}
         .ecg-case-assessment{display:flex;flex-direction:column;gap:10px}
@@ -3831,7 +3836,15 @@
                     <div class="ecg-case-id" id="ecgCaseId">Case</div>
                     <p class="ecg-case-stem" id="ecgCaseStem">Loading cases...</p>
                 </div>
-                <div class="ecg-case-ecg-host" id="ecgCase12LeadHost"></div>
+                <div class="ecg-case-ecg-toolbar">
+                    <button type="button" id="ecgCaseRealEkgBtn" class="btn btn-ghost btn-compact" hidden>Compare with Real EKG</button>
+                </div>
+                <div class="ecg-case-ecg-host" id="ecgCase12LeadHost">
+                    <div id="ecgCaseRealEkgHost" class="ecg-case-real-ekg-host" hidden>
+                        <p class="ecg-case-real-ekg-header">Real EKG Trace</p>
+                        <div id="ecgCaseRealEkgContent"></div>
+                    </div>
+                </div>
                 <p class="ecg-case-locked-note">12-lead controls are locked in Case Lab while the case-defined ECG target is active.</p>
                 <div class="ecg-case-layout">
                     <div id="ecgCaseAssessmentBlock" class="ecg-case-card">
@@ -4424,10 +4437,12 @@ const coronaryMap = {
         let ecgCasesLoading = false;
         let ecgCases = [];
         let ecgCaseOverrides = {};
+        let ecgCaseRealEkgByIndex = new Map();
         let ecgCurrentCaseIndex = 0;
         const ecgCaseAnswers = new Map();
         let ecgCaseActiveFindingId = null;
         let ecgCaseActiveCaseKey = null;
+        let ecgCaseRealEkgOpen = false;
         const RHYTHM_LABELS = {
             sinus: 'Normal sinus rhythm',
             afib: 'Atrial fibrillation',
@@ -7240,6 +7255,35 @@ const coronaryMap = {
                 };
             };
 
+            const buildCaseRealEkgMap = (files) => {
+                const map = new Map();
+                (Array.isArray(files) ? files : []).forEach((entry) => {
+                    const file = String(entry || '').trim();
+                    if (!file) return;
+                    const match = file.match(/^Case\s*(\d+)_/i);
+                    if (!match) return;
+                    const idx = Number(match[1]) - 1;
+                    if (!Number.isInteger(idx) || idx < 0) return;
+                    if (!map.has(idx)) map.set(idx, file);
+                });
+                return map;
+            };
+
+            const toCaseRealEkgAssetPath = (file) =>
+                `./assets/All%20EKG%20Cases/${encodeURIComponent(file)}`;
+
+            const getCaseRealEkgInfoForIndex = (index) => {
+                const file = ecgCaseRealEkgByIndex.get(index);
+                if (!file) return { file: null, path: null, ext: null };
+                const extMatch = file.match(/\.([a-zA-Z0-9]+)$/);
+                const ext = (extMatch?.[1] || '').toLowerCase();
+                return {
+                    file,
+                    path: toCaseRealEkgAssetPath(file),
+                    ext
+                };
+            };
+
             const buildCaseKey = (rawCase, index, idCounts) => {
                 const rawId = rawCase?.ekg_id ? slugifyCaseValue(rawCase.ekg_id) : '';
                 if (rawId) {
@@ -7297,7 +7341,23 @@ const coronaryMap = {
                     target,
                     override
                 });
-                return { caseKey, id, stem, interpretation, explanation, nextStep, pearl, references, target, interactiveFindings, assessmentKey };
+                const realEkg = getCaseRealEkgInfoForIndex(index);
+                return {
+                    caseKey,
+                    id,
+                    stem,
+                    interpretation,
+                    explanation,
+                    nextStep,
+                    pearl,
+                    references,
+                    target,
+                    interactiveFindings,
+                    assessmentKey,
+                    realEkgFile: realEkg.file,
+                    realEkgPath: realEkg.path,
+                    realEkgExt: realEkg.ext
+                };
             };
 
             const setCaseStatus = (message) => {
@@ -8056,6 +8116,60 @@ const coronaryMap = {
                 if (locked) wrap.open = false;
             };
 
+            const renderCaseRealEkg = (item) => {
+                const compareBtn = document.getElementById('ecgCaseRealEkgBtn');
+                const realHost = document.getElementById('ecgCaseRealEkgHost');
+                const content = document.getElementById('ecgCaseRealEkgContent');
+                const simHost = document.getElementById('ecgCase12LeadHost');
+                const simModule = document.getElementById('ecg12Module');
+                const lockNote = document.querySelector('#ecgCaseSection .ecg-case-locked-note');
+                if (!compareBtn || !realHost || !content) return;
+
+                const hasFile = !!item?.realEkgPath;
+                if (!hasFile) ecgCaseRealEkgOpen = false;
+                const showReal = hasFile && ecgCaseRealEkgOpen;
+                compareBtn.hidden = !hasFile;
+                compareBtn.textContent = showReal ? 'Back to Simulated EKG' : 'Compare with Real EKG';
+                realHost.hidden = !showReal;
+                if (lockNote) lockNote.style.display = showReal ? 'none' : '';
+
+                if (simModule) {
+                    simModule.style.display = showReal ? 'none' : '';
+                }
+
+                while (content.firstChild) content.removeChild(content.firstChild);
+                if (!showReal) {
+                    realHost.style.minHeight = '';
+                    if (simModule) {
+                        requestAnimationFrame(() => window.ecg12SimInstance?.handleResize?.());
+                    }
+                    return;
+                }
+
+                const simHeight = Math.round(simModule?.getBoundingClientRect().height || simHost?.getBoundingClientRect().height || 0);
+                if (simHeight > 0) {
+                    realHost.style.minHeight = `${simHeight}px`;
+                }
+
+                if (item.realEkgExt === 'pdf') {
+                    const frame = document.createElement('iframe');
+                    frame.src = item.realEkgPath;
+                    frame.title = `Real EKG for ${item.id || 'case'}`;
+                    frame.loading = 'lazy';
+                    if (simHeight > 0) frame.style.height = `${Math.max(560, simHeight - 16)}px`;
+                    content.appendChild(frame);
+                    return;
+                }
+
+                if (item.realEkgExt === 'png' || item.realEkgExt === 'jpg' || item.realEkgExt === 'jpeg') {
+                    const img = document.createElement('img');
+                    img.src = item.realEkgPath;
+                    img.alt = `Real EKG for ${item.id || 'case'}`;
+                    img.loading = 'lazy';
+                    content.appendChild(img);
+                }
+            };
+
             const renderCaseLab = () => {
                 const count = ecgCases.length;
                 const counterEl = document.getElementById('ecgCaseCounter');
@@ -8099,7 +8213,9 @@ const coronaryMap = {
                     setRevealLocked('ecgCaseReferencesWrap', true);
                     ecgCaseActiveCaseKey = null;
                     ecgCaseActiveFindingId = null;
+                    ecgCaseRealEkgOpen = false;
                     updateCaseFindingActiveStyles();
+                    renderCaseRealEkg(null);
                     return;
                 }
 
@@ -8108,6 +8224,7 @@ const coronaryMap = {
                 if (ecgCaseActiveCaseKey !== item.caseKey) {
                     ecgCaseActiveCaseKey = item.caseKey;
                     ecgCaseActiveFindingId = null;
+                    ecgCaseRealEkgOpen = false;
                     clearCaseBoxOverlay();
                 }
 
@@ -8136,6 +8253,7 @@ const coronaryMap = {
                 setSimpleRevealContent('ecgCaseNextStepWrap', 'ecgCaseNextStep', item.nextStep);
                 setSimpleRevealContent('ecgCasePearlWrap', 'ecgCasePearl', item.pearl);
                 setSimpleRevealContent('ecgCaseReferencesWrap', 'ecgCaseReferences', item.references, { hideWhenEmpty: true });
+                renderCaseRealEkg(item);
                 const state = getAssessmentState(item.caseKey);
                 populateDatalist('ecgAssessRhythmOptions', CASE_ASSESSMENT_OPTIONS.rhythm);
                 populateDatalist('ecgAssessInterpRhythmOptions', CASE_ASSESSMENT_OPTIONS.interpretation.rhythm);
@@ -8249,9 +8367,10 @@ const coronaryMap = {
                 ecgCasesLoading = true;
                 setCaseStatus('Loading cases...');
                 try {
-                    const [caseResp, overrideResp] = await Promise.all([
+                    const [caseResp, overrideResp, realEkgManifestResp] = await Promise.all([
                         fetch('./assets/ekg_cases.json', { cache: 'no-store' }),
-                        fetch('./assets/ekg_case_overrides.json', { cache: 'no-store' }).catch(() => null)
+                        fetch('./assets/ekg_case_overrides.json', { cache: 'no-store' }).catch(() => null),
+                        fetch('./assets/all_ekg_cases_manifest.json', { cache: 'no-store' }).catch(() => null)
                     ]);
                     if (!caseResp.ok) {
                         throw new Error(`Failed to load cases (${caseResp.status})`);
@@ -8263,6 +8382,17 @@ const coronaryMap = {
                     } else {
                         ecgCaseOverrides = {};
                     }
+                    if (realEkgManifestResp && realEkgManifestResp.ok) {
+                        const manifestPayload = await realEkgManifestResp.json();
+                        const files = Array.isArray(manifestPayload)
+                            ? manifestPayload
+                            : Array.isArray(manifestPayload?.files)
+                                ? manifestPayload.files
+                                : [];
+                        ecgCaseRealEkgByIndex = buildCaseRealEkgMap(files);
+                    } else {
+                        ecgCaseRealEkgByIndex = new Map();
+                    }
                     const rawCases = Array.isArray(payload?.cases) ? payload.cases : [];
                     const idCounts = new Map();
                     ecgCases = rawCases.map((entry, idx) => normalizeCase(entry, idx, idCounts));
@@ -8270,6 +8400,7 @@ const coronaryMap = {
                     setCaseStatus(`Loaded ${ecgCases.length} cases.`);
                 } catch (err) {
                     ecgCases = [];
+                    ecgCaseRealEkgByIndex = new Map();
                     ecgCasesInitialized = true;
                     setCaseStatus(`Unable to load cases: ${err?.message || 'Unknown error'}`);
                 } finally {
@@ -8714,6 +8845,7 @@ const coronaryMap = {
             const ecgAssessSttCheckBtn = document.getElementById('ecgAssessSttCheckBtn');
             const ecgAssessInterpretationCheckBtn = document.getElementById('ecgAssessInterpretationCheckBtn');
             const ecgAssessResetBtn = document.getElementById('ecgAssessResetBtn');
+            const ecgCaseRealEkgBtn = document.getElementById('ecgCaseRealEkgBtn');
             const ecgCaseHighlightFeaturesBtn = document.getElementById('ecgCaseHighlightFeaturesBtn');
             const ecgCaseClearHighlightBtn = document.getElementById('ecgCaseClearHighlightBtn');
 
@@ -8824,6 +8956,18 @@ const coronaryMap = {
                 if (!item) return;
                 const finding = buildCaseKeyFeatureFinding(item);
                 applyCaseFindingHighlight(item, finding);
+            });
+
+            ecgCaseRealEkgBtn?.addEventListener('click', () => {
+                if (!ecgCases.length) return;
+                const item = ecgCases[ecgCurrentCaseIndex];
+                if (!item?.realEkgPath) return;
+                ecgCaseRealEkgOpen = !ecgCaseRealEkgOpen;
+                if (ecgCaseRealEkgOpen) {
+                    setCaseBoxToolEnabled(false);
+                    setCaseMeasureToolEnabled(false);
+                }
+                renderCaseRealEkg(item);
             });
 
             tutorialTabs.forEach((tab) => {
