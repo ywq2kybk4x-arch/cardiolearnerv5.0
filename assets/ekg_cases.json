@@ -1,0 +1,542 @@
+{
+  "cases": [
+    {
+      "ekg_id": "EKG-279",
+      "case": "A 55-year-old male presents to the emergency room with chest pain which started after\nmowing the lawn. EKG is below.",
+      "interpretation": [
+        "Rate: 114 (accept 100-120), encourage students to use method of counting the\nnumber of QRS complexes and multiplying by 6 since the rate is irregular instead of\ndividing 300 by the number of large boxes in between QRS complexes",
+        "Rhythm: atrial fibrillation",
+        "Axis: normal",
+        "PR interval (normal or abnormal): abnormal (no P waves)",
+        "QRS interval (normal or abnormal): normal",
+        "ST segment-T wave changes: ST elevations in leads II, III, aVF, V3, V4. Reciprocal\ndepressions in lead aVL, V1, V2",
+        "Interpretation: inferior STEMI with atrial fibrillation"
+      ],
+      "explanation": "This EKG shows an inferior STEMI with ST elevations in leads II, III, and aVF. There\nis likely occlusion of the right coronary artery. Given there are also ST elevations in V3 and V4, it\nis possible that there are multiple coronary arteries with chronic atherosclerotic disease in\naddition to the acutely occluded RCA. There is additionally an irregularly irregular rhythm\nwithout P waves, consistent with atrial fibrillation.",
+      "next_best_step_in_management": "This patient is having a STEMI, so the cardiac catheterization lab\nshould be activated and the patient should be taken urgently for revascularization. Additional\ntherapies include aspirin, heparin/antiplatelet agents, and a beta blocker if there are no signs of\nshock or heart failure.",
+      "clinical_pearls": "Inferior MI caused by proximal right coronary artery can result in RV infarction.\nThese patients are preload dependent and as such can become very hypotensive with nitrates\nwhich reduce preload. In these cases, you may need to give fluid to support cardiac output."
+    },
+    {
+      "ekg_id": "EKG-11",
+      "case": "A 35-year-old female comes to the clinic with several weeks of fatigue and dry skin. An EKG\nis done which is shown below.",
+      "basic_interpretation": [
+        "Rate: 42",
+        "Rhythm: sinus bradycardia",
+        "Axis: normal",
+        "PR interval: normal",
+        "QRS interval: normal",
+        "ST-T changes: none",
+        "Interpretation: sinus bradycardia"
+      ],
+      "explanation": "This EKG shows sinus bradycardia with a rate of 42 and normal PR interval so\nno evidence of AV block.",
+      "next_best_step_in_management": "This patient has symptoms concerning for hypothyroidism,\nso we should check thyroid function tests (TSH & T4).",
+      "clinical_pearl": "There are many causes of sinus bradycardia. Nonpharmacological causes\ninclude hypothyroidism, sinus node disease, inferior MI (where the sinus node is infarcted),\nincreased vagal tone (athletes), and hypothermia. Pharmacological causes include beta\nblockers, calcium channel blockers, amiodarone, opioids and GABA-ergic medications\n(barbiturates, benzodiazepines)."
+    },
+    {
+      "ekg_id": "EKG-8",
+      "case": "A 66-year-old male with a history of hypertension presents to the emergency room\nwith palpitations. EKG is below.",
+      "basic_interpretation": [
+        "Rate: ventricular – 48, atrial - 66",
+        "Rhythm: sinus",
+        "Axis: LAD",
+        "PR interval: abnormal – 2nd degree AV block Mobitz 1",
+        "QRS interval: abnormal – LBBB",
+        "ST-T changes: upsloping ST elevations V3-V4, T wave inversions I and aVL",
+        "Other findings: poor R wave progression",
+        "Interpretation: 2nd degree AV block Mobitz 1/Wenckebach; LBBB"
+      ],
+      "explanation": "There are several abnormalities in this EKG, which are more easily identified if\na systematic approach to review is employed.\nFirst, you’ll notice that the ventricular rate is slow – this is because although the sinus node\nis firing appropriately (as evidenced by our normal atrial rate of 66), there is a 2nd degree AV\nblock which is preventing some of the impulses spreading to the ventricles. So the rhythm\nis still sinus, but the AV block is preventing all of the sinus beats to conduct appropriately.\nContinuing with our systematic read, we see that the QRS complex is positive in lead I but\nnegative in lead II and aVF, which is consistent with a left axis deviation.\nThen we come to our PR interval – looking at our rhythm strip the first PR interval we see is\nlong (approx 400 ms or 2 large boxes). The next P wave is not followed by a QRS complex.\nThe next PR interval is also prolonged, approximately 400 ms. The following PR interval is\neven longer, approximately 480 ms. The next P wave is again not followed by a QRS\ncomplex. So we have a prolonged PR interval, dropped QRS complexes, and a progressive\nlengthening of the PR interval prior to a dropped beat, making this a second degree AV\nblock Mobitz type 1, or Wenckebach.\nThe QRS interval is also abnormal. It is prolonged with QRS slightly longer than 120 ms.\nThere is a prominent S wave in lead V1, making this a left bundle branch block.\nThere are also some ST wave changes which are likely related to the LBBB – there an\nupsloping ST elevations in leads V2-V4 and T wave inversions in leads I and aVL.\nAnother finding here is poor R wave progression. In a normal EKG, there is a dominant S\nwave in lead V1, and then a gradually increasing R wave throughout the precordial leads\nuntil there is a dominant R wave by lead V4. This finding is nonspecific but is associated\nwith prior anteroseptal MI, LVH or RVH.",
+      "resources_further_reading": [
+        "Burns, Ed, Robert Buttner, and Ed Burns and Robert Buttner. “AV Block: 2nd Degree,\nMobitz I (Wenckebach Phenomenon).” Life in the Fast Lane • LITFL (blog), August 1,\n2020. https://litfl.com/av-block-2nd-degree-mobitz-i-wenckebach-phenomenon/.",
+        "———. “Poor R Wave Progression (PRWP).” Life in the Fast Lane • LITFL (blog), August\n1, 2018. https://litfl.com/poor-r-wave-progression-prwp-ecg-library/.",
+        "Buttner, Robert, Ed Burns, and Robert Buttner and Ed Burns. “Left Bundle Branch\nBlock (LBBB).” Life in the Fast Lane • LITFL (blog), January 3, 2021.\nhttps://litfl.com/left-bundle-branch-block-lbbb-ecg-library/."
+      ]
+    },
+    {
+      "ekg_id": "EKG-32",
+      "case": "A 66-year-old male with a PMH of HTN and coronary artery disease who is admitted to the\nhospital for pneumonia complains of acute onset of palpitations. Telemetry showed a\nsudden increase in heart rates over 150. 12 lead EKG is done and is shown below.",
+      "basic_interpretation": [
+        "Rate: 150",
+        "Rhythm: atrial fibrillation",
+        "Axis: normal",
+        "PR interval: abnormal (no P waves)",
+        "QRS interval: normal",
+        "ST-T changes: T wave inversions in lead I, II, aVL, V4-V6",
+        "Interpretation: atrial fibrillation with rapid ventricular response"
+      ],
+      "explanation": "This EKG shows tachycardia and an irregularly irregular rhythm, with absent P\nwaves. This is atrial fibrillation with a rapid ventricular response.",
+      "next_best_step_in_management": "The next best step in management depends on the\npatient’s stability. If his blood pressure was low or he had any signs of end-organ\ndysfunction like altered mental status, we would consider this unstable atrial fibrillation.\nThe next step would be synchronized cardioversion.\nIf the blood pressure is normal and there are no signs of end-organ dysfunction, we can try\nto lower the rate with IV metoprolol or diltiazem. You could then try pharmacologic\ncardioversion with the initiation of amiodarone.",
+      "clinical_pearls": "For new-onset atrial fibrillation (a reliable duration <48 hours), we can\nassume that there has not been enough time for the development of a left atrial appendage\nclot. In this case, we can safely use chemical (i.e. amiodarone) or electrical cardioversion\nwithout prior anticoagulation. In a patient with a longer duration of atrial fibrillation or\nunknown duration (i.e. they present to the ED after several days or weeks of symptoms),\nwe should get a TEE to ensure there is no left atrial appendage clot prior to attempting\ncardioversion. However, if the patient is clinically unstable (low blood pressure, end organ\ndysfunction) due to their rapid rates, we still need to proceed with synchronized\ncardioversion.\nThe need for anticoagulation in atrial fibrillation is generally based on the patient’s\nCHADS2VASC score, which estimates the annual stroke risk. For this patient with age 66\nand history of HTN and vascular disease (CAD), his score is at least 3 and he would be a\ncandidate for anticoagulation.",
+      "references_further_reading": []
+    },
+    {
+      "ekg_id": "EKG-10",
+      "case": "A 59-year-old male presents to the emergency room with several hours of crushing\nchest pain. He loses consciousness and becomes unresponsive. EKG is below.",
+      "basic_interpretation": [
+        "Rate: 168",
+        "Rhythm: wide complex tachycardia: ventricular tachycardia",
+        "Axis: normal",
+        "PR interval: unable to say",
+        "QRS interval: wide",
+        "ST-T changes: unable to say",
+        "Other findings: none",
+        "Interpretation: monomorphic ventricular tachycardia"
+      ],
+      "explanation": "This EKG shows a wide complex tachycardia. There are few causes of this and the most\nimportant to consider (and which is the case here) is ventricular tachycardia. The rhythm is\nfairly regular with wide QRS complexes. The QRS complexes appear similar in morphology\nto each other, making this monomorphic ventricular tachycardia.",
+      "next_best_step_in_management": "You should follow ACLS guidelines here. Since this patient\nis unstable (he has lost consciousness), you should perform synchronized electrical\ncardioversion.",
+      "clinical_pearl": "Ischemic heart disease is an important cause of ventricular arrhythmias.\nAfter cardioversion, this patient should have a repeat EKG to evaluate for ischemia."
+    },
+    {
+      "ekg_id": null,
+      "case": "A 36-year-old male comes to the emergency room with chest pain. EKG is below.",
+      "basic_interpretation": [
+        "Rate: 72",
+        "Rhythm: sinus",
+        "Axis: normal",
+        "PR interval: normal",
+        "QRS interval: normal",
+        "ST segment – T wave changes: none",
+        "Other findings: none",
+        "Interpretation: normal EKG"
+      ],
+      "explanation": "This is an example of a normal EKG. The rhythm is sinus with a normal rate. All of the\nintervals are normal and there are no additional abnormal findings.",
+      "next_best_step_in_management": "You should obtain more history from the patient about the nature of\nhis chest pain (i.e. brought on with exertion/relieved by rest, location of the pain). If this is\nconcerning for cardiac chest pain (substernal, brought on by exertion and relieved by rest),\nyou should obtain a troponin and consider further workup such as stress testing. If it sounds atypical,\nconsider other causes of chest pain and obtain appropriate studies such as a chest x-ray."
+    },
+    {
+      "ekg_id": "EKG 1128",
+      "case": "A 75-year-old female presents to the emergency department after several episodes of\nsyncope. EKG is below.",
+      "interpretation": [
+        "Rate: ventricular rate = 24, atrial rate = 78",
+        "Rhythm: underlying rhythm is sinus but w/complete AV dissociation",
+        "Axis: normal",
+        "PR interval (normal or abnormal): abnormal",
+        "QRS interval (normal or abnormal): can’t tell for sure but looks like a RBB",
+        "ST segment-T wave changes: isolated ST depression in V4",
+        "Interpretation: complete heart block / 3rd degree AV block with slow ventricular escape\nrhythm"
+      ],
+      "explanation": "This EKG shows complete heart block or third-degree AV block. We can see that\nthe P waves occur at regular intervals, but do not have any relationship to the QRS complexes,\nwhich also march out at their own rate. There is a ventricular escape rhythm as the impulses\nfrom the SA node are not being conducted through the AV node.\nThe most important causes of CHB include advanced age, inferior myocardial infarction, AV\nnodal blocking drugs (beta blockers, calcium channel blockers), and degeneration of the\nconduction system.",
+      "next_best_step_in_management": "This patient should be admitted to the hospital for telemetry\nmonitoring. If their blood pressure is stable, they can be monitored with cutaneous pacer pads\non until permanent pacemaker insertion. If they are unstable, they should receive atropine,\nhave a temporary pacing wire placed and be monitored in an ICU setting until permanent\npacemaker insertion.",
+      "clinical_pearls": "Recall that there are potential pacemakers throughout all chambers of the heart,\nand there is an intrinsic rate in each area – 60-100 in the SA node, ~60 in the atria, 40-60 in the\nAV node, and 20-40 in the ventricles. Because there is a complete block here at the level of the\nAV node, the ventricles are the only remaining pacemaker and so the ventricular rate is called a\nventricular escape rhythm. Because the ventricles do not conduct down the His-Purkinje\nsystem, the impulse must spread cell to cell, which can result in a left or right bundle\nmorphology."
+    },
+    {
+      "ekg_id": "EKG 90",
+      "case": "A 17 year old female with a history of an eating disorder presents to the emergency room for\nlethargy. EKG is below.",
+      "interpretation": [
+        "Rate: 36",
+        "Rhythm: sinus bradycardia",
+        "Axis: normal axis",
+        "PR interval (normal or abnormal): approximately normal, maybe slightly prolonged",
+        "QRS interval (normal or abnormal): Normal",
+        "ST segment-T wave changes: none",
+        "Other findings: U waves",
+        "Interpretation: sinus bradycardia"
+      ],
+      "explanation": "This EKG shows profound sinus bradycardia. There is additionally the presence of U waves, best\nseen in lead V3. U waves are a common finding in sinus bradycardia.",
+      "next_best_step_in_management": "Assess for clinical stability (blood pressure). If unstable, administer atropine. If stable, assess for\nelectrolyte abnormalities.",
+      "clinical_pearls": "Anorexia nervosa commonly causes sinus bradycardia, due to decreased metabolic rate,\nincreased parasympathetic activity, and malnutrition which can result in structural cardiac\nabnormalities. Other important causes of sinus bradycardia include ischemia (inferior MI),\nhypoxia, hypoglycemia, hypothyroidism, and medications (BBs/CCBs)."
+    },
+    {
+      "ekg_id": "EKG-41",
+      "case": "A 45 year old male presents to the emergency room with complaint of palpitations.",
+      "basic_interpretation": [
+        "Rate: 150",
+        "Rhythm: atrial flutter",
+        "Axis: normal",
+        "PR interval: unable to say exactly, but there is a two to one block",
+        "QRS interval: normal",
+        "ST-T changes: none",
+        "Interpretation: atrial flutter with 2:1 block"
+      ],
+      "explanation": "This EKG shows a narrow QRS-complex tachycardia with a regular rate and\nsaw tooth baseline, consistent with atrial flutter. The atrial flutter rhythm originates from a\nwave traveling around the atrium and characteristically the arrhythmia circuit includes the\ntricuspid isthmus; the atrial rate around 280-300 bpm. It is rare for this rate to be\nconducted 1:1 to the ventricles, and if it is, it is very unstable and typically degenerates to\nventricular fibrillation. The most common AV block that is present with atrial flutter is 2:1,\nmeaning that the AV node conducts one impulse to the ventricles for every 2 flutter atrial\nbeats. This results in a ventricular rate around 140-150. Higher degrees of AV block can be\npresent, and these are usually associated with underlying AV nodal disease or medications\nsuch as beta blockers.\nJust by looking at this EKG, it seems that the patient may have LVH based on how tall those\nQRS complexes are. However, they do not quite meet voltage criteria for LVH, which\ninclude:\n- R wave in lead I + S wave in lead II > 25 mm\n- R wave in aVL > 11 mm\n- R wave in aVF > 20 mm\n- S wave in aVR > 14 mm\n- R wave in V4, V5, or V6 > 26 mm\n- R wave in V5 or V6 plus S wave in V1 > 35 mm\n- Largest R wave plus largest S wave in precordial leads > 45 mm",
+      "next_best_step_in_management": "The NBSIM here all depends on patient stability. If the\nblood pressure is low, this patient requires urgent electrical cardioversion. However, if the\npatient is stable, we have some more time to manage this. Atrial flutter, like atrial\nfibrillation, has an increased risk of left atrial thrombus. If we don’t know the duration of\natrial flutter, the patient should have a TEE to assess for LA thrombus prior to electrical\ncardioversion. They should also be started on anticoagulation based on their\nCHADS2VASC score. While rate control medications can be attempted, they have lower\nsuccess in atrial flutter versus atrial fibrillation. Ablation of the cavo-tricuspid isthmus can\nstop and prevent reoccurrence of atrial flutter.",
+      "clinical_pearls": "Atrial flutter is commonly associated with underlying heart or lung disease.\nIn a patient presenting with a first episode of atrial flutter without known history of cardiac\nor pulmonary conditions, you should evaluate for pulmonary conditions (PE, pneumonia,\nCOPD), underlying structural heart disease (obtain an echocardiogram), and check a TSH\nto evaluate for hyperthyroidism."
+    },
+    {
+      "ekg_id": "EKG-68",
+      "case": "A 60-year-old male with a history of HTN and osteoarthritis presents for pre-operative\nevaluation prior to knee replacement surgery. EKG is below.",
+      "basic_interpretation": [
+        "Rate: 90",
+        "Rhythm: sinus",
+        "Axis: normal",
+        "PR interval: normal",
+        "QRS interval: normal",
+        "ST-T changes: ST depressions and T wave inversions in lead II, III, aVF, V4-V6",
+        "Other findings: LVH",
+        "Interpretation: sinus rhythm with LVH"
+      ],
+      "explanation": "This EKG demonstrates sinus rhythm with left ventricular hypertrophy. The magnitude of\nthe QRS complexes in this EKG jumps out as being abnormal, but there are specific criteria\nfor identifying LVH on EKG. There are both voltage and non-voltage criteria, both of which\nhave to be met. The most used voltage criteria are the Sokolow-Lyon criteria: R wave in V5\nor V6 plus S wave in V1 > 35 mm. There are several others:\n- R wave in lead I + S wave in lead II > 25 mm\n- R wave in aVL > 11 mm\n- Largest R wave plus largest S wave in precordial leads > 45 mm\nAfter meeting voltage criteria, the EKG must also be accompanied by non-voltage\ncriteria:\n- Increased R wave peak time > 50 ms in lead V5 or V6\n- ST segment depression and T wave inversion in the left sided leads, called the\nventricular strain pattern\nIn the EKG shown here, we meet Sokolow-Lyon criteria, and we can see the presence of\nthe ventricular strain pattern.",
+      "next_best_step_in_management": "This patient should have an echocardiogram to assess the\nLV function, quantify the degree of LV hypertrophy and assess whether hypertrophic\ncardiomyopathy may be present. Additionally, better control of his hypertension is\nwarranted to prevent further remodeling of the LV.",
+      "clinical_pearls": "LVH is most commonly caused by hypertension, due to the increased\nafterload on the ventricle. Other causes include aortic valve stenosis, which also increases\nafterload. Hypertrophic cardiomyopathy is another important cause of LVH, due to a\ngenetic mutation which causes significant wall thickening."
+    },
+    {
+      "ekg_id": "EKG-65",
+      "case": "A 59 year old male presents to primary care clinic for an annual physical. EKG is below.",
+      "basic_interpretation": [
+        "Rate: 72",
+        "Rhythm: sinus rhythm",
+        "Axis: normal",
+        "PR interval: normal",
+        "QRS interval: wide - LBBB",
+        "ST-T changes: ST depression / T wave inversion in lead I, aVL, V6; upsloping ST\nelevation in V1-V3",
+        "Other findings: poor R wave progression",
+        "Interpretation: sinus rhythm with LBBB"
+      ],
+      "explanation": "This EKG demonstrates a left bundle branch block (LBBB). There are a few\ncriteria here that go into diagnosing this. First, the QRS duration is prolonged > 120 ms.\nSecond, there is a predominant negative deflection Q/S wave in lead V1. Third, there are\nbroad, monophasic R waves in the lateral leads (I, aVL, V5-V6). LBBB often causes a\nnotching or M-shaped appearance to the QRS complex which we can best appreciate here\nin leads III and V5. There are often associated findings of left ward axis deviation (not seen\nhere) and poor R wave progression (seen here).\nBecause the left bundle branch block results in abnormal myocardial depolarization\ncaused by the spread of impulses cell to cell from the RV to the LV instead of down the LBB\nthere is abnormal repolarization. In leads with deep S waves (usually V1-V4), there is often\nST segment elevation that does not necessarily indicate ischemia. The same is true for ST\nsegment depression in the lateral leads with tall R waves (usually I, aVL, V5-V6).\nTo diagnose ischemia in patients with a LBBB, we need to use the Sgarbossa criteria,\nwhich generally suggest that ST segment elevation >25% of the preceding S wave is\npathologic and greater than 5mm (one big box).",
+      "next_best_step_in_management": "If the patient is not having symptoms of chest pain\nconcerning for ischemia and is otherwise well, nothing necessarily needs to be done.\nHowever, obtaining a non-urgent TTE would be reasonable to evaluate for underlying\ncardiac dysfunction.",
+      "clinical_pearls": "Patients who are ventricular paced (meaning they have a pacer lead in the\nright ventricle) will have a left bundle branch morphology on EKG. The spread of the\nimpulse is very similar in both RV pacing and LBBB – electrical impulses travel into the right\nventricle and then must spread cell to cell to depolarize the left ventricle, resulting in a\nwide QRS complex. Look out for pacer spikes on an EKG to distinguish these."
+    },
+    {
+      "ekg_id": "EKG-86",
+      "case": "A 66-year-old female is evaluated in the emergency room for shortness of breath. EKG is\nbelow.",
+      "basic_interpretation": [
+        "Rate: 72",
+        "Rhythm: sinus rhythm",
+        "Axis: normal / slight leftward axis",
+        "PR interval: normal",
+        "QRS interval: prolonged (RBBB)",
+        "ST-T changes: T wave inversions lead V1, biphasic T wave lead V2",
+        "Interpretation: sinus rhythm with RBBB"
+      ],
+      "explanation": "This EKG demonstrates a right bundle branch block (RBBB). The criteria we\nuse to determine this are first, a QRS duration >120 ms. Second, there is an RSR’ pattern in\nV1-V3. Third, the S wave in the lateral leads (I, aVL, V5-V6) is wide and has an almost\n“slurred” appearance. Similar to left bundle branch blocks, when we have abnormal\ndepolarization, we can also expect abnormal repolarization. In the case of RBBB, this\nmeans ST segment depression or T wave inversions in leads V1-V3.",
+      "next_best_step_in_management": "Nothing necessarily needs to be done immediately in the\ncase of a RBBB. A non-urgent echocardiogram can be performed to screen for structural\nheart disease.",
+      "clinical_pearls": "There are many potential causes of RBBB, including right ventricular\nhypertrophy or cor pulmonale, ischemic heart disease, and cardiomyopathy. PE is also a\npotential cause of RBBB and should be considered in this patient presenting with\nshortness of breath."
+    },
+    {
+      "ekg_id": "EKG-59",
+      "case": "A 50 year old female is evaluated in the emergency room after an episode of syncope.",
+      "basic_interpretation": [
+        "Rate: 54",
+        "Rhythm: junctional rhythm",
+        "Axis: normal",
+        "PR interval: abnormal (no p waves)",
+        "QRS interval: normal",
+        "ST-T changes: diminished/flattened T waves throughout all leads",
+        "Interpretation: junctional escape rhythm"
+      ],
+      "explanation": "This EKG shows narrow QRS complexes without any consistent atrial activity.\nThis is called a junctional escape rhythm. We can identify this based on:\n- Rate 40-60 bpm\n- Narrow QRS complexes occurring at regular intervals (not irregularly irregular)\n- No identifiable atrial activity (the baseline should be flat)\nThis rhythm occurs when the rate of the ectopic pacemaker (which is typically in the AV\nnode or in the His bundle for a junctional rhythm) is responsible for the rhythm typically\nwhen the sinus node is not functioning as the pacemaker. The QRS complex is narrow\nbecause the impulse is from the AV node still taking advantage of the His-Purkinje system.",
+      "next_best_step_in_management": "NBSIM depends on patient stability. If the patient has low\nblood pressure or signs of end organ dysfunction, transcutaneous pacing and/or atropine is\nwarranted. If the patient is stable, they can be closely monitored on telemetry until\npermanent pacemaker placement, unless a reversible cause is found. Check electrolights\nand metabolic status. Discontinue AV node blocking drugs.",
+      "clinical_pearls": "There are multiple causes that can lead to the emergence of a junctional\nescape rhythm, which all relate to problems with conducting an impulse from the SA node\nthrough the AV node. High 2nd degree and 3rd degree AV blocks, sinus node dysfunction,\nsevere sinus bradycardia, and medications such as beta blockers and calcium channel\nblockers can all cause this."
+    },
+    {
+      "ekg_id": "EKG 252",
+      "case": "A 72 year old female with a history of 2nd degree AV block presents to cardiology clinic for\nroutine follow up. EKG is below.",
+      "basic_interpretation": [
+        "Rate: 84",
+        "Rhythm: Sinus rhythm with demand ventricular pacing",
+        "Axis: right axis deviation",
+        "PR interval: normal",
+        "QRS interval: wide/LBBB pattern",
+        "ST-T changes: T wave inversions",
+        "Interpretation: V-paced rhythm"
+      ],
+      "explanation": "This EKG shows ventricular pacing. This is evident from the pacer spikes\nwhich precede each QRS complex. The rhythm is still sinus because P waves precede each\npaced QRS complex. The patient must have a dual chamber (atrial and ventricular)\npacemaker such that there is A-sensed V-pacing, where the lead in the atrium is sensing\nthe atrial depolarization, and then communicating to the lead in the ventricle to initiate\npacing of the ventricles. Ventricular pacing is typically from the RV apex that produces a\nLBBB-like pattern on EKG, because the impulse from the RV spreads cell to cell and slowly\ndepolarizes the RV. The T wave inversions in multiple leads represent abnormal\nrepolarization from abnormal depolarization.",
+      "clinical_pearls": "Over time, patients with right ventricular pacing can develop a pacer-\ninduced cardiomyopathy. The etiology of this is thought to be due to abnormal synchrony\nof depolarization resulting in asynchronous contraction of the ventricles. Newer\npacemakers use other strategies such as biventricular pacing or conduction system\npacing to try to more closely simulate the natural conduction system."
+    },
+    {
+      "ekg_id": "EKG-365",
+      "case": "A 39-year-old male presents to primary care clinic with complaint of frequent palpitations.\nEKG is below.",
+      "basic_interpretation": [
+        "Rate: 84",
+        "Rhythm: sinus with frequent premature ventricular contractions (PVCs, identified by\nthe wide QRS complexes occurring in a “trigeminy” pattern with two sinus beats\nfollowed by one PVC.",
+        "Axis: normal",
+        "PR interval: normal",
+        "QRS interval: normal in sinus beats, wide in PVCs",
+        "ST-T changes: ST depressions/T wave inversions following PVCs",
+        "Interpretation: sinus rhythm with PVCs / ventricular trigeminy"
+      ],
+      "explanation": "Premature ventricular complexes arise from ectopic pacemaker cells in the\nventricles. Because the impulse arises from the ventricles and is not propagated down the\nHis-Purkinje system, the morphology of the QRS complex is wide (QRS > 120 ms). The\nimpulse comes prematurely (earlier than the next sinus beat would occur). Since there is\nabnormal depolarization, we also expect abnormal repolarization (appropriate\ndiscordance) – i.e. ST segment depression and T wave inversions following the PVCs.\nPVCs may occur in isolation or in patterns, as we see above. This pattern, where there is a\nPVC on every third beat, is called trigeminy. If there is a PVC every other beat, this would be\ncalled bigeminy.",
+      "next_best_step_in_management": "PVCs are frequently benign but can be associated with\nunderlying heart disease. In this patient with frequent PVCs, it would be good to obtain an\necho to assess cardiac function. If the PVCs are very frequent and symptomatic, first line\ntreatment is with a beta blocker or calcium channel blocker.",
+      "clinical_pearls": "Frequent PVCs can cause a PVC-induced cardiomyopathy. This decrease\nin cardiac function is typically reversible with medical therapy or catheter PVC ablation."
+    },
+    {
+      "ekg_id": "EKG-143",
+      "case": "A 56-year-old female is admitted to the hospital for an elective knee replacement. Pre-op\nEKG is below.",
+      "basic_interpretation": [
+        "Rate: 90",
+        "Rhythm: Sinus rhythm, irregular",
+        "Axis: normal",
+        "PR interval: normal",
+        "QRS interval: normal",
+        "ST-T changes: none",
+        "Other findings: PAC",
+        "Interpretation: sinus w/PAC"
+      ],
+      "explanation": "The PAC in this EKG may not jump out immediately. If you look closely at the\nrhythm strip, you can see there is slight irregularity. Zooming in on this complex, we notice\nit is not preceded by a normal P wave that is shown in lead II. However, the QRS is the\nsame morphology as the other QRS complexes consistent with the premature impulse\ncoming from the atrium. Following this complex, there is a pause before the next sinus P\nwave. This complex is a premature atrial complex (PAC). This complex originates from an\nectopic pacemaker in the atria that sends signals down the His-Purkinje system, producing\na normal QRS complex. The P wave often looks abnormal in a PAC because the atrial\ndepolarization is abnormal.",
+      "next_best_step_in_management": "PACs are a normal electrical phenomenon and typically do\nnot require further workup or treatment unless they are frequent and symptomatic.",
+      "clinical_pearl": "In patients with an underlying predisposition, a PAC may trigger an arrythmia\nsuch as atrial fibrillation, flutter, AVNRT or AVRT."
+    },
+    {
+      "ekg_id": "EKG-13",
+      "case": "A 58-year-old male with a history of diabetes presents to the emergency room with\nsubacute dyspnea and lower extremity edema. EKG is below.",
+      "basic_interpretation": [
+        "Rate: 90",
+        "Rhythm: sinus",
+        "Axis: normal",
+        "PR interval: normal",
+        "QRS interval: normal",
+        "ST-T changes: T wave inversions in the anterior leads (V1-V3)",
+        "Other findings: “Pathologic” Q waves in II, III, aVF",
+        "Interpretation: Q waves and T wave inversions consistent with prior MI"
+      ],
+      "explanation": "This EKG shows sinus rhythm with ischemic changes consistent with a prior\nmyocardial infarction, with the development of Q waves (negative deflections that precede\nthe R wave) and T wave inversions. Small Q waves can be normal, but Q waves that are > 2\nmm or >25% of the total QRS amplitude are considered pathologic.",
+      "next_best_step_in_management": "This patient should be evaluated for active ischemia with\ntroponin levels as well as evaluation of heart failure with clinical exam, BNP, and TTE.",
+      "clinical_pearl": "Patients with diabetes are more likely to have “silent” MIs, meaning they do\nnot experience clinical symptoms that bring them into the hospital at the time of the event."
+    },
+    {
+      "ekg_id": "EKG-39",
+      "case": "A 70-year-old female with a history of COPD presents with palpitations. EKG is below.",
+      "basic_interpretation": [
+        "Rate: ventricular rate 66, atrial rate ~300",
+        "Rhythm: atrial flutter",
+        "Axis: normal",
+        "PR interval: 4:1 block",
+        "QRS interval: normal",
+        "ST-T changes: none",
+        "Other findings: none",
+        "Interpretation: atrial flutter with 4:1 block"
+      ],
+      "explanation": "This EKG shows a “sawtooth” baseline of P waves consistent with atrial\nflutter, but a normal ventricular rate. There are 4 P waves prior to each QRS complex, so we\ndescribe this as atrial flutter with a 4:1 block. Recall that the atrial flutter rate is\napproximately 280-300 bpm. The AV node does not conduct all of these impulses to the\nventricles, and in this case only every 4th atrial depolarization is conducted to the AV node.\nThis is a bit atypical, and flutter is more likely to be conducted 2:1. This relatively slow\nventricular rate suggests treatment with an AV nodal blocking agent (such as a beta\nblocker or adenosine), or an underlying AV block.",
+      "next_best_step_in_management": "Check for stability! If the patient’s blood pressure is low,\nthey should undergo emergent cardioversion. With a slow ventricular rate such as in this\npatient, they are unlikely to have hemodynamic compromise from this rhythm. If the\npatient is stable, they can be started on anticoagulation based on CHADS2VASC and initial\nmanagement can focus on rate control with beta blockers or non-dihydropyridine calcium\nchannel blockers.",
+      "clinical_pearl": "Remember that the flutter rate is 280-300 bpm and it is rare for that rate to\nbe conducted to the ventricles. If you see a rate of 140-150 which is regular and stays very\nconsistent, you should think about atrial flutter."
+    },
+    {
+      "ekg_id": "EKG-142",
+      "case": "A 30-year-old healthy male has a screening EKG at a health fair. The EKG is below.",
+      "basic_interpretation": [
+        "Rate: 96",
+        "Rhythm: sinus",
+        "Axis: normal",
+        "PR interval: normal",
+        "QRS duration: normal",
+        "ST-T changes: diffuse T wave inversions, ST depression in the precordial leads",
+        "Other findings: delta wave, Q wave lead III",
+        "Interpretation: WPW"
+      ],
+      "explanation": "This EKG shows the upsloping/slurred delta wave of the QRS complex, which\nis seen in WPW. This indicates the presence of an accessory pathway that conducts\nimpulses from the atria to the ventricles. This accessory pathway conducts slightly faster\nthan the AV node initially, which is why we get early depolarization and that upsloping delta\nwave, as well as a relatively short PR interval. The AV node and His-Purkinje system then\ncatches up and takes over, so the resulting QRS remains narrow. Because there is\nabnormal depolarization, we also see abnormal repolarization, in this case ST\ndepressions, T wave inversions, and a Q wave in lead III that mimic ischemic changes.\nAdditionally, we see high amplitude QRS complexes along with the T wave inversions in the\nprecordial leads that mimics LVH, but are actually due to the WPW pathway.",
+      "next_best_step_in_management": "Seeing a WPW pattern on EKG in an asymptomatic patient\ndoes not require any urgent workup. However, the WPW pattern predisposes to atrial\narrhythmias and poses a risk of sudden cardiac death (although this is quite rare). This\npatient should be referred to a cardiologist and be advised to report any symptoms of\npalpitations to a physician. Heart rhythm monitoring for 2-weeks can also be used to\nscreen for SVT.",
+      "clinical_pearl": "The arrythmia that is most associated with WPW is AVRT. This occurs due to\nretrograde conduction from the ventricles to the atria through the accessory pathway,\ncreating a circuit involving the AV node and the accessory pathway."
+    },
+    {
+      "ekg_id": "EKG-129",
+      "case": "A 34-year-old female admitted to the hospital for gastroenteritis has a sudden increase in\nheart rate on telemetry and complains of palpitations. EKG is below.",
+      "basic_interpretation": [
+        "Rate: 168",
+        "Rhythm: SVT – likely AVRT",
+        "Axis: normal",
+        "PR interval: abnormal/unable to determine",
+        "QRS interval: normal",
+        "ST segment-T wave changes: none",
+        "Other findings: none",
+        "Interpretation: SVT / AVRT"
+      ],
+      "explanation": "This EKG shows a regular, narrow complex tachycardia. This narrows the\ndifferential to a supraventricular tachycardia, likely AVNRT or AVRT. These arrhythmias are\ntypically precipitated by a PAC or PVC, and result in an abnormal circuit of electrical\nactivation – involving either the slow and fast pathways of the AV node in AVNRT, or the AV\nnode and the accessory pathway in AVRT. In this scenario, the management of both will be\nthe same, but if you want to get into the specifics, there are clues in the EKG to further\nnarrow down the diagnosis. Both of these rhythms cause abnormal depolarization of the\natria (impulses travel retrograde up through the AV node instead of the SA node), so there\nis a retrograde (inverted) P wave. In AVNRT, the retrograde P wave is usually not visible, as\nit is buried in the QRS complex. AVRT has a longer R-P interval, and you can see a\nretrograde P wave in this EKG as a notch in the T wave.",
+      "next_best_step_in_management": "If the patient’s blood pressure is low, they should have\nurgent electrical cardioversion. If stable, you can first try vagal maneuvers (ie having the\npatient bear down or blow into a straw/syringe), and if these are unsuccessful you should\nadminister adenosine.",
+      "clinical_pearl": "AVRT occurs when there is an accessory pathway as well as appropriate\nstimulus, most commonly in WPW. You should obtain an EKG after the episode of\ntachycardia is resolved to assess for a delta wave."
+    },
+    {
+      "ekg_id": "EKG-32",
+      "case": "A 56-year-old male undergoes a CABG operation. Several hours after the procedure, he\ncomplains of dizziness and an EKG is performed.",
+      "basic_interpretation": [
+        "Rate: 150",
+        "Rhythm: irregularly irregular, atrial fibrillation",
+        "Axis: normal",
+        "PR interval: abnormal, no P waves",
+        "QRS complex: normal",
+        "ST segment – T wave changes: T wave inversions in the anterior/lateral leads",
+        "Other findings: none",
+        "Interpretation: atrial fibrillation with rapid ventricular response"
+      ],
+      "explanation": "This EKG shows an irregularly irregular rhythm, with no discernible P waves\nconsistent with atrial fibrillation. In addition, the ventricular rate is fast (150). Typically\nrates in afib >100 can be considered “rapid ventricular response”. This EKG also\ndemonstrates some T wave changes which may represent some demand ischemia and\nabnormal repolarization in the setting of very fast heart rates.",
+      "next_best_step_in_management": "Assess for stability! If the BP is low (this patient is reporting\ndizziness, which could be due to tachycardia alone or to resultant hypotension), this\npatient will require urgent cardioversion. If their blood pressure is stable, initial rate control\nwith beta blockers is appropriate.",
+      "clinical_pearl": "Atrial fibrillation is common after cardiac surgery and occurs in 15-40% of\npatients after CABG. These patients commonly have spontaneous conversion to sinus\nrhythm."
+    },
+    {
+      "ekg_id": "EKG- 18",
+      "case": "A 67-year-old female presents to the emergency room with lightheadedness and\npresyncope. EKG is below.",
+      "basic_interpretation": [
+        "Rate: 48",
+        "Rhythm: sinus with 2nd degree AV block",
+        "Axis: left axis deviation",
+        "PR interval: normal w/dropped beat, 2nd degree AV block Mobitz II",
+        "QRS interval: normal",
+        "ST segment – T wave changes: none",
+        "Other findings: poor R wave progression, left anterior fascicular block",
+        "Interpretation: Mobitz 2"
+      ],
+      "explanation": "This EKG shows bradycardia with a normal PR interval but a non-conducted\n“dropped” beat (P wave without a following QRS complex). The PR intervals are consistent\nwithout progressive lengthening, so this is consistent with a 2nd degree AV block, Mobitz 2.\nThere is additionally a left anterior fascicular block with a resultant left axis deviation. The\nleft bundle branch divides further into two main branches, the left anterior fascicle and the\nleft posterior fascicle. When there is a block along the left anterior fascicle, we get a\ndistinct EKG pattern of qR complexes in lead I and aVL, and rS complexes in lead II, III, and\naVF, as well as a left axis deviation.",
+      "next_best_step_in_management": "This patient should be admitted for telemetry monitoring\nand pacemaker implant. Any potentially reversible causes of AV block, such as\nmedications, Lyme disease, thyroid disease should be sought.",
+      "clinical_pearl": "Left anterior fascicular block has many possible etiologies, but it is\nimportant to consider hypertension, coronary artery disease, aortic valve disease,\ncardiomyopathy, and obstructive sleep apnea."
+    },
+    {
+      "ekg_id": "EKG-79",
+      "case": "A 61-year-old male who was admitted to the hospital last month for an MI presents to the\nED with chest pain.",
+      "basic_interpretation": [
+        "Rate: 102",
+        "Rhythm: sinus",
+        "Axis: normal",
+        "PR interval: normal (but very difficult to see p waves here)",
+        "QRS interval: normal",
+        "ST-T changes: diffuse ST elevations – II, III, aVF and precordial leads",
+        "Other findings: none",
+        "Interpretation: pericarditis"
+      ],
+      "explanation": "This EKG demonstrates widespread ST elevations throughout most of the limb\nleads and precordial leads, consistent with pericarditis. Other findings that you can expect\nto see in pericarditis are ST depressions in lead aVR +/- lead V1, and PR segment\ndepression (which is not super evident in this EKG). The ST elevations are usually minimal\nand concave. Sinus tachycardia is also a common finding, and can be secondary to pain or\nto a pericardial effusion.",
+      "next_best_step_in_management": "This patient should be admitted for further workup. He\nshould have troponin levels to rule out active ischemia, and undergo a TTE to assess for a\npericardial effusion.",
+      "clinical_pearl": "Dressler’s syndrome is an immune-mediated pericarditis which occurs in\nthe weeks following myocardial infarction."
+    },
+    {
+      "ekg_id": "EKG-82",
+      "case": "An 82-year-old female with a history of COPD is admitted to the hospital for fevers and\nshortness of breath. EKG is below.",
+      "basic_interpretation": [
+        "Rate: 72",
+        "Rhythm: sinus",
+        "Axis: right axis deviation",
+        "PR interval: normal",
+        "QRS interval: normal",
+        "ST-T changes: diffuse T wave flattening",
+        "Other findings: poor R wave progression",
+        "Interpretation: sinus with R axis deviation"
+      ],
+      "explanation": "This EKG demonstrates right axis deviation – there is a primarily downwardly\ndeflected QRS complex in lead I, and primarily upwardly deflected QRS complexes in lead\nII and aVF. Additionally, there is poor R wave progression, which is seen in the precordial\nleads. There should be a transition from a dominant S wave to a dominant R wave around\nlead V3-V4. Here that transition does not occur until V5.",
+      "clinical_pearl": "There are several important possible causes of right axis deviation, including\nRVH and lateral MI. There are no other findings to suggest these causes in this EKG. Right\naxis deviation is also associated with acute and chronic pulmonary disease, due to stress\non the right side of the heart. Right axis deviation in general is a reliable indicator of\nunderlying structural heart disease whereas left axis deviation can be found in up to 5% of\npeople with no cardiac disease."
+    },
+    {
+      "ekg_id": "EKG-134",
+      "case": "A 30-year-old female presents to the emergency room with palpitations. EKG is below.",
+      "basic_interpretation": [
+        "Rate: 180",
+        "Rhythm: SVT/AVNRT",
+        "Axis: normal",
+        "PR interval: N/A",
+        "QRS interval: normal",
+        "ST-T changes: none",
+        "Other findings: none",
+        "Interpretation: AVNRT"
+      ],
+      "explanation": "This EKG shows a regular, narrow complex tachycardia. The P waves are not\nvisible before the QRS complexes, so it is not sinus rhythm. This is an SVT. The differential\nfor regular, narrow complex tachycardia is AVRT, AVNRT, and focal atrial tachycardia.\nFocal atrial tachycardia is rare. AVNRT is the most common, and AVRT exists in the\npresence of an accessory pathway. AVNRT and AVRT can also be distinguished by the R-P\ninterval. The retrograde P waves are visible here at the end of the QRS complex. This is a\nshort R-P interval consistent with AVNRT.",
+      "next_best_step_in_management": "Assess the patient’s blood pressure. If low, cardiovert! If\nstable, you can trial vagal maneuvers (bear down, have the patient blow into a straw or\nsyringe), and if unsuccessful administer adenosine."
+    },
+    {
+      "ekg_id": "EKG-51",
+      "case": "A 64-year-old male with a history of coronary artery disease presents after an episode of\nsyncope.",
+      "basic_interpretation": [
+        "Rate: atrial rate 66, ventricular rate 42",
+        "Rhythm: sinus rhythm with complete heart block and a junctional escape rhythm",
+        "Axis: normal",
+        "PR interval: abnormal",
+        "QRS complex: normal",
+        "ST-T changes: ST depressions in V5-V6, large T waves in the precordial leads",
+        "Other findings: LVH",
+        "Interpretation: complete heart block with a junctional escape rhythm"
+      ],
+      "explanation": "This EKG shows independent P waves and QRS complexes, consistent with 3rd\ndegree AV block or complete heart block. The ventricular rhythm is a junctional escape\nrhythm (rate 40-60, narrow QRS, and no relationship to the atrial activity). There is\nadditionally evidence of LVH by Sokolow-Lyon criteria (S wave in V1+largest R wave in\nV5/V6 >35 mm). The ST depressions and large T waves in the precordial leads are likely due\nto LV strain.",
+      "next_best_step_in_management": "This patient should be admitted to the hospital for telemetry\nmonitoring. If blood pressure is stable, he can be monitored until permanent pacer implantation,\nbut if it is unstable or the ventricular rate drops, he should receive atropine and have a temporary pacing lead inserted.",
+      "clinical_pearl": "Important causes of complete heart block include advanced age, ischemia\n(inferior MI), premature degenerative disease of the conduction system (Lenegre’s\ndisease), and AV nodal blocking drugs."
+    },
+    {
+      "ekg_id": "EKG-141",
+      "case": "A 72-year-old male presents to the emergency room with chest pain and dizziness. EKG is\nbelow.",
+      "basic_interpretation": [
+        "Rate: 156",
+        "Rhythm: wide complex tachycardia: ventricular tachycardia",
+        "Axis: probable left axis deviation",
+        "PR interval: unable to say",
+        "QRS interval: wide",
+        "ST-T changes: unable to say",
+        "Other findings: none",
+        "Interpretation: monomorphic ventricular tachycardia"
+      ],
+      "explanation": "This EKG shows a wide QRS complex tachycardia. There is a limited\ndifferential for this, and the most important cause is ventricular tachycardia. This rhythm is\nregular, with broad, uniform QRS complexes. VT can be monomorphic, as we see here,\nwhere the QRS complexes are similar in appearance. It can also be polymorphic, with\nmultiple morphologies to the QRS complexes. The differential diagnosis is SVT with\naberrancy.",
+      "next_best_step_in_management": "You should follow ACLS guidelines here. If there is\nhypotension, altered mental status, signs of shock, acute heart failure, or ischemic chest\ndiscomfort (as we see in this patient), you should perform synchronized cardioversion. If\nthe patient is stable, you can start antiarrhythmic infusions (amiodarone) and consult a\ncardiologist.",
+      "clinical_pearl": "Ischemic heart disease is an important cause of ventricular arrhythmias.\nAfter cardioversion, this patient should have a repeat EKG to evaluate for ischemia."
+    },
+    {
+      "ekg_id": "EKG-239",
+      "case": "A 39-year-old female presents to urgent care for a rash and palpitations. EKG is below.",
+      "basic_interpretation": [
+        "Rate: atrial rate = 72, ventricular rate = 36",
+        "Rhythm: Sinus rhythm with 2:1 AV block",
+        "Axis: normal",
+        "PR interval: prolonged and dropped beats",
+        "QRS interval: RBBB",
+        "ST-T changes: T wave inversions in V1-V3",
+        "Other findings: none",
+        "Interpretation: 2nd degree AV block, 2:1 with RBBB"
+      ],
+      "explanation": "This EKG shows a slightly prolonged PR interval, followed by a P wave with a\ndropped QRS complex. Every other P wave is not followed by a QRS complex. Since we\nhave dropped beats, we are dealing with a 2nd degree AV block. However, we cannot\ndefinitively classify this as Mobitz I or Mobitz II. Since every other beat is dropped, we can’t\ntell whether the PR interval is prolonging. This is called a 2:1 AV block or fixed ratio block.\nWe additionally see a right bundle branch block in this EKG – the QRS is >120 ms (3 small\nboxes) and there is an RSR’ in leads V1-V3 as well as appropriate discordance (abnormal\nrepolarization following abnormal depolarization) with inverted T waves.",
+      "next_best_step_in_management": "This patient should be admitted to the hospital for telemetry\nmonitoring. If blood pressure is unstable, she should receive atropine and transcutaneous\npacing followed by a temporary pacing wire. If she is stable, reversible causes of heart block\nshould be evaluated and there are none, should have a permanent pacer placed.",
+      "clinical_pearl": "Lyme disease is an important cause of AV block to consider in patients with\npossible exposures or symptoms of fevers or rash."
+    },
+    {
+      "ekg_id": "EKG-202",
+      "case": "A 70-year-old female with a history of hypertension is admitted for cholecystitis. EKG is\nbelow.",
+      "basic_interpretation": [
+        "Rate: 54",
+        "Rhythm: sinus",
+        "Axis: left axis deviation",
+        "PR interval: normal",
+        "QRS interval: prolonged, LBB block",
+        "ST-T changes: ST elevation in V2-V3, T wave inversions in the inferior leads",
+        "Other findings: poor R wave progression",
+        "Interpretation: LBBB and LAD"
+      ],
+      "explanation": "This EKG demonstrates a few abnormalities. First, there is a left bundle\nbranch block – the QRS interval is prolonged >120 ms (3 small boxes) and there is a broad\nnegative R wave in leads V4-V6. There is appropriate discordance (abnormal repolarization\nafter abnormal depolarization) seen in the ST elevations in V2 and V3, as well as the T wave\ninversions in the inferior leads (II, III, aVF). There is additionally a left axis deviation, seen by\nthe negative QRS complex in lead I, and positive QRS in leads II and aVF. There is also poor R\nwave progression in the precordial leads, with an R wave height < 3 mm in lead V3. We can see\nthat the lateral leads (V4-V6) do not switch to being upright with a predominant R wave,\nwhich we would expect in a normal EKG. Both the LAD and poor R wave progression are\nassociated with left bundle branch blocks.",
+      "next_best_step_in_management": "If the patient is not having symptoms of chest pain concerning for ischemia and is\notherwise well, there is likely no immediate next step. However, obtaining a non-urgent TTE\nwould be reasonable to evaluate for underlying cardiac dysfunction.",
+      "clinical_pearls": "LBBB often reflects underlying structural cardiac disease, such as hypertension, coronary\nartery disease, or cardiomyopathies which lead to fibrosis and destruction of the conduction\nsystem."
+    },
+    {
+      "ekg_id": "EKG-199",
+      "case": "A 65-year-old female with a history of breast cancer presents with shortness of breath.\nEKG is below.",
+      "basic_interpretation": [
+        "Rate: 102",
+        "Rhythm: sinus tachycardia",
+        "Axis: normal",
+        "PR interval: normal",
+        "QRS interval: wide – RBBB",
+        "ST-T changes: T wave inversions V1-V4",
+        "Other findings: none",
+        "Interpretation: sinus tachycardia with RBBB"
+      ],
+      "explanation": "This EKG demonstrates a right bundle branch block. There is a wide QRS complex (>120\nms), an RSR’ complex in leads V1-V3, and a wide, slurred S wave in the lateral leads (I, aVL,\nV5-V6). There is abnormal depolarization so there is also abnormal repolarization\n(appropriate discordance), seen in the T wave inversions in the precordial leads (V1-V4).",
+      "next_best_step_in_management_clinical_pearl": "While a right bundle branch is nonspecific, in this patient with risk factors for\nhypercoagulability, sinus tachycardia, and shortness of breath, it may indicate a\npulmonary embolism. She should have imaging (CTA chest) to look for this."
+    },
+    {
+      "ekg_id": "EKG-112",
+      "case": "A 25-year-old male is evaluated in the cardiology clinic after an episode of syncope. EKG is\nbelow.",
+      "basic_interpretation": [
+        "Rate: 72",
+        "Rhythm: sinus",
+        "Axis: normal",
+        "PR interval: normal",
+        "QRS interval: normal",
+        "ST-T changes: ST depressions and T wave inversions in the lateral leads (I, aVL, V3-\nV6)",
+        "Other findings: LVH",
+        "Interpretation: sinus with LVH"
+      ],
+      "explanation": "This EKG demonstrates LVH. Recall there are numerous voltage criteria for diagnosing\nLVH. The most common is Sokolow-Lyon, with height of the S wave in V1 + the height of the\ntallest R wave in V5 or V6 >35 mm, which this EKG meets. There is also the presence of ST\ndepressions and T wave inversions in leads I, aVL, V3-V6, which is known as the left\nventricular strain pattern. This is a non-voltage criteria for LVH.",
+      "next_best_step_in_management": "This young patient with syncope and evidence of LVH should be evaluated for hypertrophic\ncardiomyopathy with an echocardiogram."
+    },
+    {
+      "ekg_id": "EKG-280",
+      "case": "An 82-year-old female with a history of sinus node disease presents for follow-up. EKG is\nbelow.",
+      "basic_interpretation": [
+        "Rate: 60",
+        "Rhythm: A paced",
+        "Axis: normal",
+        "PR interval: prolonged (~280 ms)",
+        "QRS interval: normal",
+        "ST-T changes: none",
+        "Other findings: none",
+        "Interpretation: atrial pacing"
+      ],
+      "explanation": "This EKG is a little tricky, because the atrial pacing spikes are very small and don’t initially\nstand out. However, you can see that there is a small pacer spike preceding each of the P\nwaves. There are no pacer spikes preceding the QRS complexes. This could be\nrepresentative of a single chamber (atrial) pacemaker, or a dual chamber (AV pacing) with\nan underlying/native rhythm that is inhibiting the ventricular pacing.",
+      "clinical_pearl": "There are few indications for atrial pacing alone. These include symptomatic sinus\nbradycardia, sick sinus syndrome, and tachy-brady syndrome. This would not work for any\ndegree of AV block, as the atrial impulse may not be conducted through the AV block to the\nventricles."
+    },
+    {
+      "ekg_id": "EKG-166"
+    },
+    {
+      "ekg_id": "EKG-153"
+    }
+  ]
+}

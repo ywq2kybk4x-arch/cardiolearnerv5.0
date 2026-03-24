@@ -1,0 +1,403 @@
+{
+  "cases": {
+    "ekg-279__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "inferior STEMI with atrial fibrillation",
+      "choices": [
+        "Sinus bradycardia",
+        "Inferior STEMI",
+        "Atrial fibrillation",
+        "inferior STEMI with atrial fibrillation"
+      ],
+      "force": {
+        "rhythm_id": "afib",
+        "rate_bpm": 98,
+        "axis_mode": "normal",
+        "intervals": {
+          "qrs_ms": 92,
+          "qt_ms": 390
+        },
+        "findings": [
+          "stemi_inferior"
+        ],
+        "style": {
+          "stemiMv": 0.29,
+          "afibBaselineGain": 1.35,
+          "afibJitterGain": 1.25,
+          "stemiLeadOverride": {
+            "I": -0.08,
+            "II": 0.62,
+            "III": 0.74,
+            "aVR": -0.22,
+            "aVL": -0.82,
+            "aVF": 0.66,
+            "V1": -0.46,
+            "V2": -0.34,
+            "V3": 0.52,
+            "V4": 0.62,
+            "V5": 0.12,
+            "V6": 0.06
+          }
+        }
+      }
+    },
+    "ekg-11__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "sinus bradycardia",
+      "choices": [
+        "Atrial paced rhythm",
+        "sinus bradycardia",
+        "Atrial flutter with 2:1 block",
+        "Monomorphic ventricular tachycardia"
+      ]
+    },
+    "ekg-8__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "2nd degree AV block Mobitz 1/Wenckebach; LBBB",
+      "choices": [
+        "Ventricular paced rhythm",
+        "Lateral STEMI",
+        "First-degree AV block",
+        "2nd degree AV block Mobitz 1/Wenckebach; LBBB"
+      ],
+      "force": {
+        "rhythm_id": "lbbb"
+      }
+    },
+    "ekg-32__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "atrial fibrillation with rapid ventricular response",
+      "choices": [
+        "First-degree AV block",
+        "atrial fibrillation with rapid ventricular response",
+        "Ventricular paced rhythm",
+        "Lateral STEMI"
+      ]
+    },
+    "ekg-10__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "monomorphic ventricular tachycardia",
+      "choices": [
+        "First-degree AV block",
+        "Right bundle branch block",
+        "Sinus rhythm with PVC trigeminy",
+        "monomorphic ventricular tachycardia"
+      ]
+    },
+    "case-6-h369002523": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "normal EKG",
+      "choices": [
+        "Right bundle branch block",
+        "normal EKG",
+        "LVH with strain pattern",
+        "Second-degree AV block Mobitz I"
+      ]
+    },
+    "ekg-1128__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "Normal sinus rhythm",
+      "choices": [
+        "Complete heart block",
+        "Junctional escape rhythm",
+        "Anterior STEMI",
+        "Normal sinus rhythm"
+      ]
+    },
+    "ekg-90__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "sinus bradycardia",
+      "choices": [
+        "Atrial paced rhythm",
+        "sinus bradycardia",
+        "Atrial flutter with 2:1 block",
+        "Monomorphic ventricular tachycardia"
+      ]
+    },
+    "ekg-41__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "atrial flutter with 2:1 block",
+      "choices": [
+        "Complete heart block",
+        "Junctional escape rhythm",
+        "Anterior STEMI",
+        "atrial flutter with 2:1 block"
+      ]
+    },
+    "ekg-68__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "sinus rhythm with LVH",
+      "choices": [
+        "Monomorphic ventricular tachycardia",
+        "sinus rhythm with LVH",
+        "Anterior STEMI",
+        "Atrial flutter with 2:1 block"
+      ],
+      "force": {
+        "rhythm_id": "lvh",
+        "rate_bpm": 72,
+        "axis_mode": "normal",
+        "intervals": {
+          "pr_ms": 160,
+          "qrs_ms": 108,
+          "qt_ms": 410
+        }
+      }
+    },
+    "ekg-65__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "sinus rhythm with LBBB",
+      "choices": [
+        "Atrial fibrillation",
+        "Complete heart block",
+        "Junctional escape rhythm",
+        "sinus rhythm with LBBB"
+      ],
+      "force": {
+        "rhythm_id": "lbbb"
+      }
+    },
+    "ekg-86__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "sinus rhythm with RBBB",
+      "choices": [
+        "Lateral STEMI",
+        "sinus rhythm with RBBB",
+        "Monomorphic ventricular tachycardia",
+        "Ventricular paced rhythm"
+      ],
+      "force": {
+        "rhythm_id": "rbbb"
+      }
+    },
+    "ekg-59__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "junctional escape rhythm",
+      "choices": [
+        "Second-degree AV block Mobitz I",
+        "Right bundle branch block",
+        "Inferior STEMI",
+        "junctional escape rhythm"
+      ]
+    },
+    "ekg-252__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "V-paced rhythm",
+      "choices": [
+        "Sinus rhythm with PVC trigeminy",
+        "V-paced rhythm",
+        "Second-degree AV block Mobitz I",
+        "Right bundle branch block"
+      ]
+    },
+    "ekg-365__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "sinus rhythm with PVCs / ventricular trigeminy",
+      "choices": [
+        "First-degree AV block",
+        "Left bundle branch block",
+        "Atrial paced rhythm",
+        "sinus rhythm with PVCs / ventricular trigeminy"
+      ]
+    },
+    "ekg-143__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "sinus w/PAC",
+      "choices": [
+        "Junctional escape rhythm",
+        "sinus w/PAC",
+        "Atrial fibrillation",
+        "Complete heart block"
+      ]
+    },
+    "ekg-13__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "Q waves and T wave inversions consistent with prior MI",
+      "choices": [
+        "Sinus rhythm with PVC trigeminy",
+        "Normal sinus rhythm",
+        "Second-degree AV block Mobitz II",
+        "Q waves and T wave inversions consistent with prior MI"
+      ]
+    },
+    "ekg-39__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "atrial flutter with 4:1 block",
+      "choices": [
+        "Second-degree AV block Mobitz I",
+        "atrial flutter with 4:1 block",
+        "Atrial paced rhythm",
+        "LVH with strain pattern"
+      ]
+    },
+    "ekg-142__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "WPW",
+      "choices": [
+        "Right bundle branch block",
+        "Sinus rhythm with PVC trigeminy",
+        "Normal sinus rhythm",
+        "WPW"
+      ]
+    },
+    "ekg-129__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "SVT / AVRT",
+      "choices": [
+        "LVH with strain pattern",
+        "SVT / AVRT",
+        "Left bundle branch block",
+        "Atrial paced rhythm"
+      ]
+    },
+    "ekg-32__2": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "atrial fibrillation with rapid ventricular response",
+      "choices": [
+        "Ventricular paced rhythm",
+        "Lateral STEMI",
+        "First-degree AV block",
+        "atrial fibrillation with rapid ventricular response"
+      ]
+    },
+    "ekg-18__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "Mobitz 2",
+      "choices": [
+        "Normal sinus rhythm",
+        "Mobitz 2",
+        "Right bundle branch block",
+        "Sinus rhythm with PVC trigeminy"
+      ]
+    },
+    "ekg-79__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "pericarditis",
+      "choices": [
+        "Sinus rhythm with PVC trigeminy",
+        "Normal sinus rhythm",
+        "Second-degree AV block Mobitz II",
+        "pericarditis"
+      ]
+    },
+    "ekg-82__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "sinus with R axis deviation",
+      "choices": [
+        "Atrial paced rhythm",
+        "sinus with R axis deviation",
+        "First-degree AV block",
+        "Left bundle branch block"
+      ]
+    },
+    "ekg-134__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "AVNRT",
+      "choices": [
+        "Inferior STEMI",
+        "Atrial fibrillation",
+        "Complete heart block",
+        "AVNRT"
+      ]
+    },
+    "ekg-51__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "complete heart block with a junctional escape rhythm",
+      "choices": [
+        "Second-degree AV block Mobitz II",
+        "complete heart block with a junctional escape rhythm",
+        "Sinus rhythm with PVC trigeminy",
+        "Normal sinus rhythm"
+      ]
+    },
+    "ekg-141__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "monomorphic ventricular tachycardia",
+      "choices": [
+        "First-degree AV block",
+        "Right bundle branch block",
+        "Sinus rhythm with PVC trigeminy",
+        "monomorphic ventricular tachycardia"
+      ]
+    },
+    "ekg-239__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "2nd degree AV block, 2:1 with RBBB",
+      "choices": [
+        "Second-degree AV block Mobitz II",
+        "2nd degree AV block, 2:1 with RBBB",
+        "Sinus rhythm with PVC trigeminy",
+        "Normal sinus rhythm"
+      ],
+      "force": {
+        "rhythm_id": "rbbb"
+      }
+    },
+    "ekg-202__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "LBBB and LAD",
+      "choices": [
+        "LVH with strain pattern",
+        "Second-degree AV block Mobitz I",
+        "Right bundle branch block",
+        "LBBB and LAD"
+      ],
+      "force": {
+        "rhythm_id": "lbbb"
+      }
+    },
+    "ekg-199__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "sinus tachycardia with RBBB",
+      "choices": [
+        "Complete heart block",
+        "sinus tachycardia with RBBB",
+        "Inferior STEMI",
+        "Atrial fibrillation"
+      ],
+      "force": {
+        "rhythm_id": "rbbb"
+      }
+    },
+    "ekg-112__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "sinus with LVH",
+      "choices": [
+        "Left bundle branch block",
+        "Atrial paced rhythm",
+        "LVH with strain pattern",
+        "sinus with LVH"
+      ]
+    },
+    "ekg-280__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "atrial pacing",
+      "choices": [
+        "First-degree AV block",
+        "atrial pacing",
+        "Ventricular paced rhythm",
+        "Lateral STEMI"
+      ]
+    },
+    "ekg-166__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "Normal sinus rhythm",
+      "choices": [
+        "Complete heart block",
+        "Junctional escape rhythm",
+        "Anterior STEMI",
+        "Normal sinus rhythm"
+      ]
+    },
+    "ekg-153__1": {
+      "question": "What is the most likely diagnosis/interpretation for this case?",
+      "diagnosis": "Normal sinus rhythm",
+      "choices": [
+        "Anterior STEMI",
+        "Normal sinus rhythm",
+        "Complete heart block",
+        "Junctional escape rhythm"
+      ]
+    }
+  }
+}

@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cardiac Murmur Learning Lab</title>
+  <link rel="stylesheet" href="murmur-boxes.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="page-header">
+      <h1>Cardiac Murmur Learning Lab</h1>
+      <p>Learn timing, location, and hemodynamics with synchronized heart flow, sounds, maneuvers, and quiz mode.</p>
+    </header>
+
+    <main class="layout">
+      <section class="heart-panel" aria-label="Heart box model">
+        <div class="heart-toolbar">
+          <button id="compare-toggle" class="btn btn-light" type="button">Single view</button>
+          <button id="murmur-reset" class="btn btn-light" type="button">Reset</button>
+        </div>
+        <div id="valve-tooltip" class="valve-tooltip" role="tooltip" aria-hidden="true"></div>
+
+        <div class="beat-progress" aria-hidden="true">
+          <div class="beat-track">
+            <span class="beat-segment beat-systole"></span>
+            <span class="beat-segment beat-diastole"></span>
+            <span id="beat-playhead" class="beat-playhead"></span>
+          </div>
+          <div class="beat-labels">
+            <span>Systole</span>
+            <span>Diastole</span>
+          </div>
+        </div>
+
+        <div class="heart-display compare-on" id="heart-display">
+          <div class="heart-view heart-view-normal" data-view="normal">
+            <svg id="heart-svg-normal" viewBox="0 0 520 420" role="img" aria-label="Normal heart box model">
+              <rect class="heart-outline" x="40" y="40" width="440" height="320" rx="18" ry="18"></rect>
+              <text class="heart-title" x="260" y="70" text-anchor="middle">Normal</text>
+
+              <g>
+                <rect id="chamber-la-normal" class="chamber chamber-la" x="290" y="100" width="150" height="110" rx="10"></rect>
+                <rect id="chamber-ra-normal" class="chamber chamber-ra" x="80" y="100" width="150" height="110" rx="10"></rect>
+                <rect id="chamber-lv-normal" class="chamber chamber-lv" x="290" y="235" width="150" height="110" rx="10"></rect>
+                <rect id="chamber-rv-normal" class="chamber chamber-rv" x="80" y="235" width="150" height="110" rx="10"></rect>
+
+                <text id="label-la-normal" class="chamber-label" x="425" y="130" text-anchor="end">LA</text>
+                <text id="label-ra-normal" class="chamber-label" x="95" y="130" text-anchor="start">RA</text>
+                <text id="label-lv-normal" class="chamber-label" x="425" y="335" text-anchor="end">LV</text>
+                <text id="label-rv-normal" class="chamber-label" x="95" y="335" text-anchor="start">RV</text>
+              </g>
+
+              <g>
+                <g id="valve-mitral-group-normal" class="valve-group">
+                  <rect id="valve-mitral-normal" class="valve" x="355" y="210" width="20" height="16" rx="4"></rect>
+                  <path class="valve-leaf" d="M349 218 Q357 210 365 218"></path>
+                  <path class="valve-leaf" d="M365 218 Q373 210 381 218"></path>
+                </g>
+                <g id="valve-tricuspid-group-normal" class="valve-group">
+                  <rect id="valve-tricuspid-normal" class="valve" x="145" y="210" width="20" height="16" rx="4"></rect>
+                  <path class="valve-leaf" d="M139 218 Q147 210 155 218"></path>
+                  <path class="valve-leaf" d="M155 218 Q163 210 171 218"></path>
+                </g>
+                <g id="valve-aortic-group-normal" class="valve-group">
+                  <rect id="valve-aortic-normal" class="valve" x="355" y="336" width="20" height="16" rx="4"></rect>
+                  <path class="valve-leaf" d="M349 344 Q357 336 365 344"></path>
+                  <path class="valve-leaf" d="M365 344 Q373 336 381 344"></path>
+                </g>
+                <g id="valve-pulmonic-group-normal" class="valve-group">
+                  <rect id="valve-pulmonic-normal" class="valve" x="145" y="336" width="20" height="16" rx="4"></rect>
+                  <path class="valve-leaf" d="M139 344 Q147 336 155 344"></path>
+                  <path class="valve-leaf" d="M155 344 Q163 336 171 344"></path>
+                </g>
+              </g>
+
+
+              <g class="flow-group">
+                <path id="flow-la-lv-normal" class="flow-band flow-normal" d="M365 140 L365 296"></path>
+                <circle id="dot-la-lv-normal" class="flow-dot" r="4" cx="0" cy="0"></circle>
+                <path id="flow-ra-rv-normal" class="flow-band flow-normal" d="M155 140 L155 296"></path>
+                <circle id="dot-ra-rv-normal" class="flow-dot" r="4" cx="0" cy="0"></circle>
+                <path id="flow-lv-ao-normal" class="flow-band flow-normal" d="M365 336 L395 385"></path>
+                <circle id="dot-lv-ao-normal" class="flow-dot" r="4" cx="0" cy="0"></circle>
+                <path id="flow-rv-pa-normal" class="flow-band flow-normal" d="M155 336 L125 385"></path>
+                <circle id="dot-rv-pa-normal" class="flow-dot" r="4" cx="0" cy="0"></circle>
+
+                <path id="flow-lv-la-normal" class="flow-band flow-murmur" d="M365 296 L365 140"></path>
+                <circle id="dot-lv-la-normal" class="flow-dot flow-dot-murmur" r="4" cx="0" cy="0"></circle>
+                <path id="arrow-lv-la-normal" class="flow-arrow flow-dot-murmur" d="M0 -6 L14 0 L0 6 Z"></path>
+                <path id="flow-ao-lv-normal" class="flow-band flow-murmur" d="M395 385 L365 336"></path>
+                <circle id="dot-ao-lv-normal" class="flow-dot flow-dot-murmur" r="4" cx="0" cy="0"></circle>
+                <path id="arrow-ao-lv-normal" class="flow-arrow flow-dot-murmur" d="M0 -6 L14 0 L0 6 Z"></path>
+                <path id="flow-ms-la-lv-normal" class="flow-band flow-murmur" d="M365 140 L365 296"></path>
+                <circle id="dot-ms-la-lv-normal" class="flow-dot flow-dot-murmur" r="4" cx="0" cy="0"></circle>
+                <path id="arrow-ms-la-lv-normal" class="flow-arrow flow-dot-murmur" d="M0 -6 L14 0 L0 6 Z"></path>
+                <path class="flow-band flow-murmur flow-static" d="M155 140 L155 296"></path>
+              </g>
+            </svg>
+            <div class="phono-live">
+              <canvas id="phono-mini-normal" width="420" height="120"></canvas>
+              <div class="phono-live-labels">
+                <span>S1</span>
+                <span>S2</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="heart-view" data-view="murmur">
+            <svg id="heart-svg" viewBox="0 0 520 420" role="img" aria-label="Box model heart diagram">
+              <rect class="heart-outline" x="40" y="40" width="440" height="320" rx="18" ry="18"></rect>
+              <text id="heart-title-murmur" class="heart-title" x="260" y="70" text-anchor="middle">Heart</text>
+
+              <g>
+                <rect id="chamber-la" class="chamber chamber-la" x="290" y="100" width="150" height="110" rx="10"></rect>
+                <rect id="chamber-ra" class="chamber chamber-ra" x="80" y="100" width="150" height="110" rx="10"></rect>
+                <rect id="chamber-lv" class="chamber chamber-lv" x="290" y="235" width="150" height="110" rx="10"></rect>
+                <rect id="chamber-rv" class="chamber chamber-rv" x="80" y="235" width="150" height="110" rx="10"></rect>
+
+                <text id="label-la" class="chamber-label" x="425" y="130" text-anchor="end">LA</text>
+                <text id="label-ra" class="chamber-label" x="95" y="130" text-anchor="start">RA</text>
+                <text id="label-lv" class="chamber-label" x="425" y="335" text-anchor="end">LV</text>
+                <text id="label-rv" class="chamber-label" x="95" y="335" text-anchor="start">RV</text>
+              </g>
+
+              <g>
+                <g id="valve-mitral-group" class="valve-group">
+                  <rect id="valve-mitral" class="valve" x="355" y="210" width="20" height="16" rx="4"></rect>
+                  <path class="valve-leaf" d="M349 218 Q357 210 365 218"></path>
+                  <path class="valve-leaf" d="M365 218 Q373 210 381 218"></path>
+                </g>
+                <g id="valve-tricuspid-group" class="valve-group">
+                  <rect id="valve-tricuspid" class="valve" x="145" y="210" width="20" height="16" rx="4"></rect>
+                  <path class="valve-leaf" d="M139 218 Q147 210 155 218"></path>
+                  <path class="valve-leaf" d="M155 218 Q163 210 171 218"></path>
+                </g>
+                <g id="valve-aortic-group" class="valve-group">
+                  <rect id="valve-aortic" class="valve" x="355" y="336" width="20" height="16" rx="4"></rect>
+                  <path class="valve-leaf" d="M349 344 Q357 336 365 344"></path>
+                  <path class="valve-leaf" d="M365 344 Q373 336 381 344"></path>
+                </g>
+                <g id="valve-pulmonic-group" class="valve-group">
+                  <rect id="valve-pulmonic" class="valve" x="145" y="336" width="20" height="16" rx="4"></rect>
+                  <path class="valve-leaf" d="M139 344 Q147 336 155 344"></path>
+                  <path class="valve-leaf" d="M155 344 Q163 336 171 344"></path>
+                </g>
+              </g>
+
+
+              <g class="flow-group">
+                <path id="flow-la-lv" class="flow-band flow-normal" d="M365 140 L365 296"></path>
+                <circle id="dot-la-lv" class="flow-dot" r="4" cx="0" cy="0"></circle>
+                <path id="flow-ra-rv" class="flow-band flow-normal" d="M155 140 L155 296"></path>
+                <circle id="dot-ra-rv" class="flow-dot" r="4" cx="0" cy="0"></circle>
+                <path id="flow-lv-ao" class="flow-band flow-normal" d="M365 336 L395 385"></path>
+                <circle id="dot-lv-ao" class="flow-dot" r="4" cx="0" cy="0"></circle>
+                <path id="flow-rv-pa" class="flow-band flow-normal" d="M155 336 L125 385"></path>
+                <circle id="dot-rv-pa" class="flow-dot" r="4" cx="0" cy="0"></circle>
+
+                <path id="flow-lv-la" class="flow-band flow-murmur" d="M365 296 L365 140"></path>
+                <circle id="dot-lv-la" class="flow-dot flow-dot-murmur" r="4" cx="0" cy="0"></circle>
+                <path id="arrow-lv-la" class="flow-arrow flow-dot-murmur" d="M0 -6 L14 0 L0 6 Z"></path>
+                <path id="flow-ao-lv" class="flow-band flow-murmur" d="M395 385 L365 336"></path>
+                <circle id="dot-ao-lv" class="flow-dot flow-dot-murmur" r="4" cx="0" cy="0"></circle>
+                <path id="arrow-ao-lv" class="flow-arrow flow-dot-murmur" d="M0 -6 L14 0 L0 6 Z"></path>
+                <path id="flow-ms-la-lv" class="flow-band flow-murmur" d="M365 140 L365 296"></path>
+                <circle id="dot-ms-la-lv" class="flow-dot flow-dot-murmur" r="4" cx="0" cy="0"></circle>
+                <path id="arrow-ms-la-lv" class="flow-arrow flow-dot-murmur" d="M0 -6 L14 0 L0 6 Z"></path>
+                <path class="flow-band flow-murmur flow-static" d="M155 140 L155 296"></path>
+              </g>
+            </svg>
+            <div class="phono-live">
+              <canvas id="phono-mini-murmur" width="420" height="120"></canvas>
+              <div class="phono-live-labels">
+                <span id="label-s1" class="phono-label">S1</span>
+                <span id="label-s2" class="phono-label">S2</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="compact-stack">
+          <div class="compact-controls">
+            <button id="play-toggle" class="btn" type="button">Play</button>
+            <button id="sound-toggle" class="btn btn-light" type="button" aria-pressed="false" aria-label="Toggle heart sounds">
+              Sound: On
+            </button>
+            <div class="speed-control volume-control">
+              <label for="volume-slider">Volume</label>
+              <input id="volume-slider" type="range" min="0" max="1" step="0.01" value="0.6" aria-label="Volume">
+            </div>
+            <div class="speed-control hr-control">
+              <label for="hr-slider">HR</label>
+              <input id="hr-slider" type="range" min="40" max="120" step="1" value="75" aria-label="Heart rate">
+              <div class="speed-meta">
+                <span id="hr-value">75 bpm</span>
+              </div>
+            </div>
+          </div>
+          <div class="compact-grid">
+            <div class="compact-section">
+              <h3>Select a Murmur</h3>
+              <div class="murmur-options compact-options" role="radiogroup" aria-label="Murmur selector">
+                <label class="murmur-option">
+                  <input type="radio" name="murmur" value="normal" checked>
+                  <span class="murmur-text">Normal (no murmur)</span>
+                  <span class="murmur-badge murmur-badge-neutral">Normal</span>
+                </label>
+                <label class="murmur-option">
+                  <input type="radio" name="murmur" value="as">
+                  <span class="murmur-text">Aortic stenosis – systolic ejection murmur</span>
+                  <span class="murmur-badge murmur-badge-systolic">Systolic</span>
+                </label>
+                <label class="murmur-option">
+                  <input type="radio" name="murmur" value="mr">
+                  <span class="murmur-text">Mitral regurgitation – holosystolic regurgitant murmur</span>
+                  <span class="murmur-badge murmur-badge-systolic">Systolic</span>
+                </label>
+                <label class="murmur-option">
+                  <input type="radio" name="murmur" value="ar">
+                  <span class="murmur-text">Aortic regurgitation – early diastolic decrescendo murmur</span>
+                  <span class="murmur-badge murmur-badge-diastolic">Diastolic</span>
+                </label>
+                <label class="murmur-option">
+                  <input type="radio" name="murmur" value="ms">
+                  <span class="murmur-text">Mitral stenosis – opening snap + low diastolic rumble</span>
+                  <span class="murmur-badge murmur-badge-diastolic">Diastolic</span>
+                </label>
+                <label class="murmur-option">
+                  <input type="radio" name="murmur" value="hcm">
+                  <span class="murmur-text">Hypertrophic cardiomyopathy – dynamic systolic outflow murmur</span>
+                  <span class="murmur-badge murmur-badge-systolic">Systolic</span>
+                </label>
+                <label class="murmur-option">
+                  <input type="radio" name="murmur" value="mvp">
+                  <span class="murmur-text">Mitral valve prolapse – click with late systolic murmur</span>
+                  <span class="murmur-badge murmur-badge-systolic">Systolic</span>
+                </label>
+              </div>
+            </div>
+            <aside class="compact-panel" aria-label="Maneuvers">
+              <h3>Maneuvers</h3>
+              <div class="maneuver-toggle" role="group" aria-label="Maneuvers">
+                <button class="maneuver-btn" type="button" data-maneuver="inspiration">Inspiration</button>
+                <button class="maneuver-btn" type="button" data-maneuver="valsalva">Valsalva (strain)</button>
+                <button class="maneuver-btn" type="button" data-maneuver="stand">Standing</button>
+                <button class="maneuver-btn" type="button" data-maneuver="leg-raise">Passive leg raise</button>
+                <div class="maneuver-row">
+                  <button class="maneuver-btn" type="button" data-maneuver="squat">Squatting</button>
+                  <button class="maneuver-btn" type="button" data-maneuver="handgrip">Handgrip</button>
+                </div>
+              </div>
+              <div id="maneuver-explain" class="maneuver-explain is-hidden">
+                <p id="maneuver-effect" class="maneuver-effect"></p>
+                <p id="maneuver-pathology" class="maneuver-pathology"></p>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="control-panel">
+        <div class="control-card">
+          <div class="mode-toggle" role="tablist" aria-label="Mode switch">
+            <button class="mode-btn is-active" type="button" data-mode="learn">Learn</button>
+            <button class="mode-btn" type="button" data-mode="quiz">Quiz</button>
+          </div>
+        </div>
+
+        <div id="quiz-card" class="control-card is-hidden">
+          <h2>Quiz</h2>
+          <p id="quiz-prompt" class="quiz-prompt">Listen first, then choose the most likely murmur.</p>
+          <div id="quiz-options" class="quiz-options"></div>
+          <button id="quiz-check" class="btn btn-light" type="button">Check answer</button>
+          <button id="quiz-next" class="btn is-hidden" type="button">Next question</button>
+          <p id="quiz-feedback" class="quiz-feedback"></p>
+        </div>
+
+        <div class="control-card">
+          <h2>How To Listen</h2>
+          <ol id="approach-list" class="approach-list">
+            <li>Anchor S1 and S2 first, then identify whether turbulence is systolic or diastolic.</li>
+            <li>Classify the contour: crescendo-decrescendo, holosystolic, early decrescendo, rumble, or late systolic.</li>
+            <li>Use best auscultation area and expected radiation to narrow the differential.</li>
+            <li>Apply maneuvers and track which lesions increase or decrease.</li>
+            <li>Confirm mechanism with the flow diagram and valve behavior.</li>
+          </ol>
+        </div>
+
+        <div class="control-card">
+          <h2>Current Murmur Profile</h2>
+          <dl class="profile-grid">
+            <dt>Timing</dt><dd id="profile-timing"></dd>
+            <dt>Quality</dt><dd id="profile-quality"></dd>
+            <dt>Pitch</dt><dd id="profile-pitch"></dd>
+            <dt>Best location</dt><dd id="profile-location"></dd>
+            <dt>Radiation</dt><dd id="profile-radiation"></dd>
+            <dt>Increases with</dt><dd id="profile-increase"></dd>
+            <dt>Decreases with</dt><dd id="profile-decrease"></dd>
+            <dt>Mechanism</dt><dd id="profile-mechanism"></dd>
+          </dl>
+        </div>
+
+        <div class="control-card">
+          <h2>Key details</h2>
+          <ul id="info-list" class="info-list"></ul>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="murmur-boxes.js"></script>
+</body>
+</html>
