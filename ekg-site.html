@@ -2356,13 +2356,13 @@
         .ecg-case-section{margin-top:18px;border:1px solid rgba(148,163,184,.35);border-radius:20px;padding:14px;background:var(--surface,#fff);box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:10px}
         .ecg-case-header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
         .ecg-case-header h3{margin:0}
-        .ecg-case-header-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-        .ecg-case-header-actions #ecgCasePlaylabsShowBtn{display:none}
-        #ecgCaseSection.playlabs-hidden .ecg-case-header-actions #ecgCasePlaylabsShowBtn{display:inline-flex}
-        .ecg-case-nav{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+        .ecg-case-header > div:first-child{width:100%;text-align:center}
+        .ecg-case-header-actions{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;width:100%}
+        .ecg-case-header-actions #ecgCasePlaylabsShowBtn{display:inline-flex}
+        .ecg-case-nav{display:grid;grid-template-columns:auto auto auto;align-items:center;justify-content:center;gap:10px;width:100%}
         .ecg-case-counter{font-weight:700;font-size:.92rem;color:var(--muted)}
-        .ecg-case-nav select{min-width:200px;padding:8px 10px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text)}
-        .ecg-case-layout{display:grid;grid-template-columns:1fr;gap:10px}
+        .ecg-case-nav select{grid-column:1 / -1;width:100%;min-width:0;padding:8px 10px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text)}
+        .ecg-case-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px 12px;align-items:start}
         .ecg-case-card{border:1px solid rgba(148,163,184,.35);border-radius:14px;background:var(--surface-2,#f8fafc);padding:10px 12px}
         .ecg-case-id{font-size:.8rem;color:var(--muted-2);margin-bottom:6px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
         .ecg-case-stem{margin:0;white-space:normal;max-width:none;width:100%}
@@ -2386,7 +2386,9 @@
             color:#1f2937;
             max-width:none;
             width:100%;
+            text-align:center;
         }
+        #ecgCaseId{text-align:center}
         .ecg-case-reveal-body,
         .ecg-case-reveal-body p,
         .ecg-case-reveal-body li{
@@ -2422,7 +2424,7 @@
         #ecg12Module .ecg12-canvas-wrap canvas.ecg-case-box-overlay.is-active{display:block;pointer-events:auto;cursor:crosshair}
         .ecg-case-tools .btn{padding:4px 10px}
         .ecg-case-tools .btn.is-active{background:var(--primary);border-color:var(--primary);color:#fff}
-        .ecg-case-ecg-toolbar{display:flex;justify-content:flex-end;margin:6px 0 8px}
+        .ecg-case-ecg-toolbar{display:flex;justify-content:flex-start;margin:6px 0 8px}
         .ecg-case-real-ekg-host{width:100%}
         .ecg-case-real-ekg-header{font-size:.9rem;font-weight:700;color:#334155;margin:0 0 8px}
         .ecg-case-real-ekg-host iframe{width:100%;min-height:560px;border:1px solid rgba(148,163,184,.35);border-radius:10px;background:#fff}
@@ -2527,19 +2529,6 @@
             box-shadow:0 4px 12px rgba(15,23,42,.14);
         }
         .ecg-case-playlabs-close:hover{background:rgba(148,163,184,.18)}
-        .ecg-case-playlabs-toolbar{
-            display:flex;
-            align-items:center;
-            padding:10px 12px 14px;
-            border-top:1px solid rgba(148,163,184,.24);
-            background:var(--surface,#fff);
-            margin-top:auto;
-        }
-        #ecgCasePlaylabsVisibilityBtn{
-            width:100%;
-            justify-content:center;
-            font-weight:700;
-        }
         .ecg-case-playlabs-content{
             width:100%;
             flex:1;
@@ -2580,13 +2569,10 @@
         }
         #ecgCaseSection .ecg12-grid{grid-template-columns:1fr}
         #ecgCaseSection .ecg12-controls{display:none}
-        @media (min-width: 1400px){
-            .ecg-case-layout{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px 12px;align-items:start}
-            .ecg-case-layout > .ecg-case-card:first-child{grid-column:1}
-            #ecgCaseAssessmentBlock{grid-column:1}
-            #ecgCaseRevealList{grid-column:2;display:flex;flex-direction:column;gap:8px}
-            #ecgCaseStatus{grid-column:1 / -1}
-        }
+        .ecg-case-layout > .ecg-case-card:first-child{grid-column:1}
+        #ecgCaseAssessmentBlock{grid-column:1}
+        #ecgCaseRevealList{grid-column:2;display:flex;flex-direction:column;gap:8px}
+        #ecgCaseStatus{grid-column:1 / -1}
         @media (max-width: 920px){
             .ecg-case-assessment-row{grid-template-columns:1fr;gap:8px}
         }
@@ -2622,8 +2608,14 @@
             #ecgCaseSection.playlabs-hidden{
                 grid-template-columns:minmax(0,1fr);
             }
-            #ecgCaseSection > :not(.ecg-case-playlabs-panel):not(.ecg-case-playlabs-toggle):not(.ecg-case-playlabs-overlay){
+            #ecgCaseSection > :not(.ecg-case-playlabs-panel):not(.ecg-case-playlabs-toggle):not(.ecg-case-playlabs-overlay):not(.ecg-case-header):not(.ecg-case-card):not(.ecg-case-ecg-toolbar):not(.ecg-case-ecg-host):not(.ecg-case-locked-note):not(.ecg-case-layout){
                 grid-column:1;
+                min-width:0;
+            }
+            #ecgCaseSection > .ecg-case-header,
+            #ecgCaseSection > .ecg-case-card,
+            #ecgCaseSection > .ecg-case-ecg-toolbar{
+                grid-column:1 / -1;
                 min-width:0;
             }
             #ecgCaseSection > .ecg-case-playlabs-toggle,
@@ -2632,14 +2624,14 @@
             }
             #ecgCaseSection > .ecg-case-playlabs-panel{
                 grid-column:2;
-                grid-row:1 / span 12;
+                grid-row:4;
                 position:sticky;
                 top:14px;
                 right:auto;
                 width:100%;
                 min-width:0;
-                height:calc(100vh - 42px);
-                max-height:980px;
+                height:var(--ecg-case-ekg-height,560px);
+                max-height:none;
                 transform:none !important;
                 z-index:2;
                 border:1px solid rgba(148,163,184,.35);
@@ -2647,10 +2639,19 @@
                 box-shadow:var(--shadow-sm);
                 overflow:hidden;
             }
+            #ecgCaseSection > #ecgCase12LeadHost{
+                grid-column:1;
+            }
+            #ecgCaseSection > .ecg-case-locked-note{
+                grid-column:1 / -1;
+            }
+            #ecgCaseSection > .ecg-case-layout{
+                grid-column:1 / -1;
+                min-width:0;
+            }
             #ecgCaseSection > .ecg-case-playlabs-panel .ecg-case-playlabs-close{
                 display:none;
             }
-            #ecgCaseSection > .ecg-case-playlabs-panel .ecg-case-playlabs-toolbar{position:static}
             #ecgCaseSection > .ecg-case-playlabs-panel .ecg-case-playlabs-content{
                 flex:1;
                 min-height:0;
@@ -4035,9 +4036,9 @@
                     </div>
                     <div class="ecg-case-header-actions">
                         <div class="ecg-case-nav">
-                            <button type="button" class="btn btn-ghost btn-compact" id="ecgCasePrevBtn">Previous</button>
+                            <button type="button" class="btn btn-ghost btn-compact" id="ecgCasePrevBtn" aria-label="Previous case">&larr;</button>
                             <span class="ecg-case-counter" id="ecgCaseCounter">Case 0 / 0</span>
-                            <button type="button" class="btn btn-ghost btn-compact" id="ecgCaseNextBtn">Next</button>
+                            <button type="button" class="btn btn-ghost btn-compact" id="ecgCaseNextBtn" aria-label="Next case">&rarr;</button>
                             <select id="ecgCaseJumpSelect" aria-label="Jump to case"></select>
                         </div>
                         <button type="button" class="btn btn-ghost btn-compact" id="ecgCasePlaylabsShowBtn">Show PlayLabs</button>
@@ -4232,9 +4233,6 @@
                 <aside id="ecgCasePlaylabsPanel" class="ecg-case-playlabs-panel" role="dialog" aria-modal="true" aria-label="PlayLabs chatbot panel" aria-hidden="true">
                     <button type="button" id="ecgCasePlaylabsClose" class="ecg-case-playlabs-close" aria-label="Close PlayLabs panel">&times;</button>
                     <div id="ecgCasePlaylabsContent" class="ecg-case-playlabs-content"></div>
-                    <div class="ecg-case-playlabs-toolbar">
-                        <button type="button" class="btn btn-ghost btn-compact" id="ecgCasePlaylabsVisibilityBtn">Hide PlayLabs</button>
-                    </div>
                 </aside>
             </div>
         </div>
@@ -6526,7 +6524,6 @@ const coronaryMap = {
             const ecgCasePlaylabsPanel = document.getElementById('ecgCasePlaylabsPanel');
             const ecgCasePlaylabsOverlay = document.getElementById('ecgCasePlaylabsOverlay');
             const ecgCasePlaylabsClose = document.getElementById('ecgCasePlaylabsClose');
-            const ecgCasePlaylabsVisibilityBtn = document.getElementById('ecgCasePlaylabsVisibilityBtn');
             const ecgCasePlaylabsShowBtn = document.getElementById('ecgCasePlaylabsShowBtn');
             const singleLeadMount = document.getElementById('singleLeadMount');
             const tutorialLeadMount = document.getElementById('tutorialLeadMount');
@@ -8406,6 +8403,7 @@ const coronaryMap = {
                         }
                         requestAnimationFrame(() => window.ecg12SimInstance?.handleResize?.());
                     }
+                    requestAnimationFrame(syncCasePlaylabsPanelHeight);
                     return;
                 }
 
@@ -8421,6 +8419,7 @@ const coronaryMap = {
                     frame.loading = 'lazy';
                     if (simHeight > 0) frame.style.height = `${Math.max(560, simHeight - 16)}px`;
                     content.appendChild(frame);
+                    requestAnimationFrame(syncCasePlaylabsPanelHeight);
                     return;
                 }
 
@@ -8431,6 +8430,7 @@ const coronaryMap = {
                     img.loading = 'lazy';
                     content.appendChild(img);
                 }
+                requestAnimationFrame(syncCasePlaylabsPanelHeight);
             };
 
             const renderCasePlaylabs = (item) => {
@@ -8642,6 +8642,7 @@ const coronaryMap = {
                 }
 
                 applyCaseBaseEkg(item);
+                requestAnimationFrame(syncCasePlaylabsPanelHeight);
             };
 
             const ensureCasesLoaded = async () => {
@@ -9026,14 +9027,22 @@ const coronaryMap = {
                 if (credits) credits.style.display = visible ? '' : 'none';
             };
 
+            const syncCasePlaylabsPanelHeight = () => {
+                if (!ecgCaseSection || !ecgCase12LeadHost) return;
+                const height = Math.round(ecgCase12LeadHost.getBoundingClientRect().height || 0);
+                if (height > 0) {
+                    ecgCaseSection.style.setProperty('--ecg-case-ekg-height', `${height}px`);
+                } else {
+                    ecgCaseSection.style.removeProperty('--ecg-case-ekg-height');
+                }
+            };
+
             const syncPlaylabsVisibilityUi = () => {
                 if (!ecgCaseSection) return;
                 ecgCaseSection.classList.toggle('playlabs-hidden', !!caseLabPlaylabsHidden);
-                if (ecgCasePlaylabsVisibilityBtn) {
-                    ecgCasePlaylabsVisibilityBtn.textContent = caseLabPlaylabsHidden ? 'Show PlayLabs' : 'Hide PlayLabs';
-                }
                 if (ecgCasePlaylabsShowBtn) {
-                    ecgCasePlaylabsShowBtn.hidden = !caseLabPlaylabsHidden;
+                    ecgCasePlaylabsShowBtn.hidden = false;
+                    ecgCasePlaylabsShowBtn.textContent = caseLabPlaylabsHidden ? 'Show PlayLabs' : 'Hide PlayLabs';
                 }
             };
 
@@ -9183,6 +9192,7 @@ const coronaryMap = {
                 applyNormalCaseShellToEcg12();
                 setCaseBoxToolEnabled(false);
                 window.ecg12SimInstance?.handleResize?.();
+                requestAnimationFrame(syncCasePlaylabsPanelHeight);
                 await ensureCasesLoaded();
                 renderCaseLab();
             };
@@ -9194,11 +9204,8 @@ const coronaryMap = {
             showCasesBtn?.addEventListener('click', () => {
                 activateCases();
             });
-            ecgCasePlaylabsVisibilityBtn?.addEventListener('click', () => {
-                setCasePlaylabsHidden(!caseLabPlaylabsHidden);
-            });
             ecgCasePlaylabsShowBtn?.addEventListener('click', () => {
-                setCasePlaylabsHidden(false);
+                setCasePlaylabsHidden(!caseLabPlaylabsHidden);
             });
             ecgCasePlaylabsToggle?.addEventListener('click', toggleCaseLabDrawer);
             ecgCasePlaylabsClose?.addEventListener('click', () => closeCaseLabDrawer());
@@ -9650,7 +9657,17 @@ const coronaryMap = {
                 if (ecgCaseBoxOverlayActive && currentEkgMode === 'cases') {
                     window.requestAnimationFrame(drawCaseBoxOverlay);
                 }
+                if (currentEkgMode === 'cases') {
+                    window.requestAnimationFrame(syncCasePlaylabsPanelHeight);
+                }
             });
+
+            if (typeof ResizeObserver !== 'undefined' && ecgCase12LeadHost) {
+                const caseEkgHeightObserver = new ResizeObserver(() => {
+                    window.requestAnimationFrame(syncCasePlaylabsPanelHeight);
+                });
+                caseEkgHeightObserver.observe(ecgCase12LeadHost);
+            }
 
             hideAllSections();
             mountSingleLead(singleLeadMount);
