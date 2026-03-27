@@ -46,7 +46,7 @@
             --s4: 24px;
             --s5: 32px;
             --ring: 0 0 0 2px rgba(37, 99, 235, 0.35);
-            --container-max: 1260px;
+            --container-max: 1700px;
             --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
             --kc-bg: var(--surface, #ffffff);
             --kc-text: var(--text, #0a0f1a);
@@ -90,7 +90,7 @@
             background: var(--bg);
             color: var(--text);
             line-height: 1.55;
-            padding: 32px 24px;
+            padding: 20px 12px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
@@ -2356,6 +2356,7 @@
         .ecg-case-section{margin-top:18px;border:1px solid rgba(148,163,184,.35);border-radius:20px;padding:14px;background:var(--surface,#fff);box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:10px}
         .ecg-case-header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
         .ecg-case-header h3{margin:0}
+        .ecg-case-header-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
         .ecg-case-nav{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
         .ecg-case-counter{font-weight:700;font-size:.92rem;color:var(--muted)}
         .ecg-case-nav select{min-width:200px;padding:8px 10px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text)}
@@ -2427,7 +2428,7 @@
         .ecg-case-status{font-size:.9rem;color:var(--muted)}
         .ecg-case-reveal-list.is-locked{opacity:.55;pointer-events:none}
         .ecg-case-assessment{display:flex;flex-direction:column;gap:10px}
-        .ecg-case-assessment-row{display:grid;grid-template-columns:minmax(180px,240px) minmax(0,1fr) auto;gap:10px;align-items:start;padding:10px;border:1px solid rgba(148,163,184,.3);border-radius:12px;background:rgba(255,255,255,.65)}
+        .ecg-case-assessment-row{display:grid;grid-template-columns:minmax(150px,220px) minmax(0,1fr) auto;gap:10px;align-items:start;padding:10px;border:1px solid rgba(148,163,184,.3);border-radius:12px;background:rgba(255,255,255,.65)}
         .ecg-case-assessment-label{font-weight:700;color:#334155;line-height:1.35}
         .ecg-case-assessment-label.is-rate-with-toggle{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
         .ecg-case-assessment-label.is-rate-with-toggle .ecg-case-box-toggle{margin-top:0;width:max-content}
@@ -2448,9 +2449,117 @@
         .ecg-case-assessment-hint{font-size:.8rem;color:var(--muted-2)}
         .ecg-case-ecg-host{border:1px solid rgba(148,163,184,.35);border-radius:14px;padding:8px;background:var(--surface,#fff)}
         .ecg-case-locked-note{margin:0;font-size:.85rem;color:var(--muted-2)}
+        .ecg-case-playlabs-toggle{
+            position:fixed;
+            top:50%;
+            right:0;
+            transform:translateY(-50%);
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            min-height:126px;
+            padding:10px 8px;
+            border:1px solid rgba(37,99,235,.45);
+            border-right:0;
+            border-radius:12px 0 0 12px;
+            background:var(--surface,#fff);
+            color:#1d4ed8;
+            font-size:.82rem;
+            font-weight:700;
+            letter-spacing:.02em;
+            writing-mode:vertical-rl;
+            text-orientation:mixed;
+            cursor:pointer;
+            box-shadow:0 8px 22px rgba(15,23,42,.14);
+            transition:right .24s ease,background-color .18s ease,color .18s ease,border-color .18s ease;
+            z-index:60;
+        }
+        .ecg-case-playlabs-toggle:hover{
+            background:rgba(37,99,235,.10);
+            border-color:rgba(37,99,235,.65);
+        }
+        .ecg-case-playlabs-toggle[aria-expanded="true"]{
+            background:rgba(37,99,235,.15);
+            color:#1e3a8a;
+            border-color:#2563eb;
+        }
+        .ecg-case-playlabs-overlay{
+            position:fixed;
+            inset:0;
+            background:transparent;
+            opacity:0;
+            pointer-events:none;
+            transition:opacity .24s ease;
+            z-index:58;
+        }
+        .ecg-case-playlabs-panel{
+            position:fixed;
+            top:0;
+            right:0;
+            width:min(32vw,390px);
+            min-width:290px;
+            height:100vh;
+            display:flex;
+            flex-direction:column;
+            background:#fff;
+            border-left:1px solid rgba(148,163,184,.38);
+            box-shadow:-14px 0 34px rgba(2,6,23,.18);
+            transform:translateX(100%);
+            transition:transform .26s ease;
+            z-index:59;
+            overflow:hidden;
+        }
+        .ecg-case-playlabs-close{
+            border:0;
+            background:rgba(255,255,255,.92);
+            color:#334155;
+            font-size:1.4rem;
+            line-height:1;
+            cursor:pointer;
+            padding:2px 6px;
+            border-radius:8px;
+            position:absolute;
+            top:10px;
+            right:10px;
+            z-index:2;
+            box-shadow:0 4px 12px rgba(15,23,42,.14);
+        }
+        .ecg-case-playlabs-close:hover{background:rgba(148,163,184,.18)}
+        .ecg-case-playlabs-content{
+            width:100%;
+            height:100%;
+            background:#fff;
+            overflow:hidden;
+        }
+        .ecg-case-playlabs-content iframe{
+            width:100%;
+            height:100%;
+            border:0;
+            background:#fff;
+        }
+        #ecgCaseSection.is-playlabs-open .ecg-case-playlabs-overlay{
+            opacity:0;
+            pointer-events:none;
+        }
+        #ecgCaseSection.is-playlabs-open .ecg-case-playlabs-panel{
+            transform:translateX(0);
+        }
+        #ecgCaseSection.is-playlabs-open .ecg-case-playlabs-toggle{
+            right:min(32vw,390px);
+        }
+        #ecgCaseSection .ecg-case-ecg-toolbar,
+        #ecgCaseSection #ecgCase12LeadHost,
+        #ecgCaseSection .ecg-case-locked-note{
+            transition:margin-right .26s ease;
+        }
+        #ecgCaseSection.is-playlabs-open .ecg-case-ecg-toolbar,
+        #ecgCaseSection.is-playlabs-open #ecgCase12LeadHost,
+        #ecgCaseSection.is-playlabs-open .ecg-case-locked-note{
+            margin-right:min(32vw,390px);
+        }
         #ecgCaseSection .ecg12-grid{grid-template-columns:1fr}
         #ecgCaseSection .ecg12-controls{display:none}
-        @media (min-width: 1080px){
+        @media (min-width: 1400px){
             .ecg-case-layout{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px 12px;align-items:start}
             .ecg-case-layout > .ecg-case-card:first-child{grid-column:1}
             #ecgCaseAssessmentBlock{grid-column:1}
@@ -2465,6 +2574,71 @@
             #ecgCaseSection > .ecg-case-card{padding:14px 14px}
             #ecgCaseId{font-size:1.14rem;margin-bottom:8px}
             #ecgCaseStem{font-size:1rem;line-height:1.52}
+            .ecg-case-playlabs-panel{
+                width:min(88vw,400px);
+                min-width:0;
+            }
+            #ecgCaseSection.is-playlabs-open .ecg-case-ecg-toolbar,
+            #ecgCaseSection.is-playlabs-open #ecgCase12LeadHost,
+            #ecgCaseSection.is-playlabs-open .ecg-case-locked-note{
+                margin-right:0;
+            }
+            #ecgCaseSection.is-playlabs-open .ecg-case-playlabs-toggle{
+                right:min(88vw,400px);
+            }
+            .ecg-case-playlabs-toggle{
+                min-height:116px;
+                font-size:.78rem;
+            }
+        }
+        @media (min-width: 1500px){
+            #ecgCaseSection{
+                display:grid;
+                grid-template-columns:minmax(0,1fr) 516px;
+                column-gap:14px;
+                align-items:start;
+            }
+            #ecgCaseSection > :not(.ecg-case-playlabs-panel):not(.ecg-case-playlabs-toggle):not(.ecg-case-playlabs-overlay){
+                grid-column:1;
+                min-width:0;
+            }
+            #ecgCaseSection > .ecg-case-playlabs-toggle,
+            #ecgCaseSection > .ecg-case-playlabs-overlay{
+                display:none !important;
+            }
+            #ecgCaseSection > .ecg-case-playlabs-panel{
+                grid-column:2;
+                grid-row:1 / span 12;
+                position:sticky;
+                top:14px;
+                right:auto;
+                width:100%;
+                min-width:0;
+                height:calc(100vh - 42px);
+                max-height:980px;
+                transform:none !important;
+                z-index:2;
+                border:1px solid rgba(148,163,184,.35);
+                border-radius:14px;
+                box-shadow:var(--shadow-sm);
+                overflow:hidden;
+            }
+            #ecgCaseSection > .ecg-case-playlabs-panel .ecg-case-playlabs-close{
+                display:none;
+            }
+            #ecgCaseSection > .ecg-case-playlabs-panel .ecg-case-playlabs-content{
+                height:100%;
+                min-height:0;
+                overflow:hidden;
+            }
+            #ecgCaseSection > .ecg-case-playlabs-panel .ecg-case-playlabs-content iframe{
+                height:100%;
+            }
+            #ecgCaseSection.is-playlabs-open .ecg-case-ecg-toolbar,
+            #ecgCaseSection.is-playlabs-open #ecgCase12LeadHost,
+            #ecgCaseSection.is-playlabs-open .ecg-case-locked-note{
+                margin-right:0;
+            }
         }
         @media (max-width: 820px){
             .ecg-quiz-header{flex-direction:column}
@@ -2552,6 +2726,12 @@
             .chart-title-row {
                 flex-direction: column;
                 align-items: flex-start;
+            }
+        }
+
+        @media (min-width: 1400px) {
+            body {
+                padding: 14px 8px;
             }
         }
 
@@ -3825,11 +4005,13 @@
                         <h3>Case Lab</h3>
                         <p class="muted-text" style="margin:4px 0 0;">Interactive case activity: each case configures the 12-lead ECG, then progressively unlocks teaching content as structured ECG findings are solved.</p>
                     </div>
-                    <div class="ecg-case-nav">
-                        <button type="button" class="btn btn-ghost btn-compact" id="ecgCasePrevBtn">Previous</button>
-                        <span class="ecg-case-counter" id="ecgCaseCounter">Case 0 / 0</span>
-                        <button type="button" class="btn btn-ghost btn-compact" id="ecgCaseNextBtn">Next</button>
-                        <select id="ecgCaseJumpSelect" aria-label="Jump to case"></select>
+                    <div class="ecg-case-header-actions">
+                        <div class="ecg-case-nav">
+                            <button type="button" class="btn btn-ghost btn-compact" id="ecgCasePrevBtn">Previous</button>
+                            <span class="ecg-case-counter" id="ecgCaseCounter">Case 0 / 0</span>
+                            <button type="button" class="btn btn-ghost btn-compact" id="ecgCaseNextBtn">Next</button>
+                            <select id="ecgCaseJumpSelect" aria-label="Jump to case"></select>
+                        </div>
                     </div>
                 </div>
                 <div class="ecg-case-card">
@@ -4009,6 +4191,19 @@
                     </div>
                     <p class="ecg-case-status" id="ecgCaseStatus"></p>
                 </div>
+                <button
+                    type="button"
+                    id="ecgCasePlaylabsToggle"
+                    class="ecg-case-playlabs-toggle"
+                    aria-controls="ecgCasePlaylabsPanel"
+                    aria-expanded="false"
+                    aria-label="Open PlayLabs panel"
+                >PlayLabs</button>
+                <div id="ecgCasePlaylabsOverlay" class="ecg-case-playlabs-overlay" aria-hidden="true"></div>
+                <aside id="ecgCasePlaylabsPanel" class="ecg-case-playlabs-panel" role="dialog" aria-modal="true" aria-label="PlayLabs chatbot panel" aria-hidden="true">
+                    <button type="button" id="ecgCasePlaylabsClose" class="ecg-case-playlabs-close" aria-label="Close PlayLabs panel">&times;</button>
+                    <div id="ecgCasePlaylabsContent" class="ecg-case-playlabs-content"></div>
+                </aside>
             </div>
         </div>
 
@@ -4438,6 +4633,7 @@ const coronaryMap = {
         let ecgCases = [];
         let ecgCaseOverrides = {};
         let ecgCaseRealEkgByIndex = new Map();
+        let ecgCaseEmbedByCaseNumber = new Map();
         let ecgCurrentCaseIndex = 0;
         const ecgCaseAnswers = new Map();
         let ecgCaseActiveFindingId = null;
@@ -6294,8 +6490,13 @@ const coronaryMap = {
             const tutorialSection = document.getElementById('ecgTutorialSection');
             const ecgCaseSection = document.getElementById('ecgCaseSection');
             const ecgCase12LeadHost = document.getElementById('ecgCase12LeadHost');
+            const ecgCasePlaylabsToggle = document.getElementById('ecgCasePlaylabsToggle');
+            const ecgCasePlaylabsPanel = document.getElementById('ecgCasePlaylabsPanel');
+            const ecgCasePlaylabsOverlay = document.getElementById('ecgCasePlaylabsOverlay');
+            const ecgCasePlaylabsClose = document.getElementById('ecgCasePlaylabsClose');
             const singleLeadMount = document.getElementById('singleLeadMount');
             const tutorialLeadMount = document.getElementById('tutorialLeadMount');
+            let caseLabDrawerLastFocus = null;
 
             const tutorialHighlightIds = [
                 'ecgHighlightP',
@@ -7269,6 +7470,26 @@ const coronaryMap = {
                 return map;
             };
 
+            const parseEmbedSrcFromIframe = (iframeHtml) => {
+                const html = String(iframeHtml || '');
+                if (!html) return '';
+                const match = html.match(/src\s*=\s*["']([^"']+)["']/i);
+                return match?.[1] ? String(match[1]).trim() : '';
+            };
+
+            const buildCaseEmbedMap = (payload) => {
+                const map = new Map();
+                const entries = Array.isArray(payload?.ekgCases) ? payload.ekgCases : [];
+                entries.forEach((entry) => {
+                    const caseNumber = Number(entry?.caseNumber);
+                    const src = parseEmbedSrcFromIframe(entry?.iframe);
+                    if (!Number.isInteger(caseNumber) || caseNumber <= 0) return;
+                    if (!src) return;
+                    if (!map.has(caseNumber)) map.set(caseNumber, src);
+                });
+                return map;
+            };
+
             const toCaseRealEkgAssetPath = (file) =>
                 `./assets/All%20EKG%20Cases/${encodeURIComponent(file)}`;
 
@@ -7295,6 +7516,7 @@ const coronaryMap = {
             };
 
             const normalizeCase = (rawCase, index, idCounts) => {
+                const caseNumber = index + 1;
                 const id = (rawCase?.ekg_id && String(rawCase.ekg_id).trim()) || `Case ${index + 1}`;
                 const stem = normalizeInlineText(rawCase?.case) || 'Case details pending';
                 const interpretation = Array.isArray(rawCase?.interpretation)
@@ -7354,6 +7576,8 @@ const coronaryMap = {
                     target,
                     interactiveFindings,
                     assessmentKey,
+                    caseNumber,
+                    playlabsEmbedSrc: ecgCaseEmbedByCaseNumber.get(caseNumber) || '',
                     realEkgFile: realEkg.file,
                     realEkgPath: realEkg.path,
                     realEkgExt: realEkg.ext
@@ -8174,6 +8398,23 @@ const coronaryMap = {
                 }
             };
 
+            const renderCasePlaylabs = (item) => {
+                const content = document.getElementById('ecgCasePlaylabsContent');
+                if (!content) return;
+                while (content.firstChild) content.removeChild(content.firstChild);
+
+                if (!item || !item.playlabsEmbedSrc) {
+                    return;
+                }
+
+                const frame = document.createElement('iframe');
+                frame.src = item.playlabsEmbedSrc;
+                frame.title = `PlayLabs chatbot for ${item.id || `Case ${item.caseNumber || ''}`}`.trim();
+                frame.loading = 'lazy';
+                frame.allow = 'clipboard-write';
+                content.appendChild(frame);
+            };
+
             const renderCaseLab = () => {
                 const count = ecgCases.length;
                 const counterEl = document.getElementById('ecgCaseCounter');
@@ -8220,6 +8461,7 @@ const coronaryMap = {
                     ecgCaseRealEkgOpen = false;
                     updateCaseFindingActiveStyles();
                     renderCaseRealEkg(null);
+                    renderCasePlaylabs(null);
                     return;
                 }
 
@@ -8258,6 +8500,7 @@ const coronaryMap = {
                 setSimpleRevealContent('ecgCasePearlWrap', 'ecgCasePearl', item.pearl);
                 setSimpleRevealContent('ecgCaseReferencesWrap', 'ecgCaseReferences', item.references, { hideWhenEmpty: true });
                 renderCaseRealEkg(item);
+                renderCasePlaylabs(item);
                 const state = getAssessmentState(item.caseKey);
                 populateDatalist('ecgAssessRhythmOptions', CASE_ASSESSMENT_OPTIONS.rhythm);
                 populateDatalist('ecgAssessInterpRhythmOptions', CASE_ASSESSMENT_OPTIONS.interpretation.rhythm);
@@ -8371,10 +8614,11 @@ const coronaryMap = {
                 ecgCasesLoading = true;
                 setCaseStatus('Loading cases...');
                 try {
-                    const [caseResp, overrideResp, realEkgManifestResp] = await Promise.all([
+                    const [caseResp, overrideResp, realEkgManifestResp, embedResp] = await Promise.all([
                         fetch('./assets/ekg_cases.json', { cache: 'no-store' }),
                         fetch('./assets/ekg_case_overrides.json', { cache: 'no-store' }).catch(() => null),
-                        fetch('./assets/all_ekg_cases_manifest.json', { cache: 'no-store' }).catch(() => null)
+                        fetch('./assets/all_ekg_cases_manifest.json', { cache: 'no-store' }).catch(() => null),
+                        fetch('./assets/EKG%20Embed%20.json', { cache: 'no-store' }).catch(() => null)
                     ]);
                     if (!caseResp.ok) {
                         throw new Error(`Failed to load cases (${caseResp.status})`);
@@ -8397,6 +8641,15 @@ const coronaryMap = {
                     } else {
                         ecgCaseRealEkgByIndex = new Map();
                     }
+                    ecgCaseEmbedByCaseNumber = new Map();
+                    if (embedResp && embedResp.ok) {
+                        try {
+                            const embedPayload = await embedResp.json();
+                            ecgCaseEmbedByCaseNumber = buildCaseEmbedMap(embedPayload);
+                        } catch (embedErr) {
+                            console.warn('[Case Lab] Failed to parse EKG Embed JSON. Continuing without chatbot mapping.', embedErr);
+                        }
+                    }
                     const rawCases = Array.isArray(payload?.cases) ? payload.cases : [];
                     const idCounts = new Map();
                     ecgCases = rawCases.map((entry, idx) => normalizeCase(entry, idx, idCounts));
@@ -8405,6 +8658,7 @@ const coronaryMap = {
                 } catch (err) {
                     ecgCases = [];
                     ecgCaseRealEkgByIndex = new Map();
+                    ecgCaseEmbedByCaseNumber = new Map();
                     ecgCasesInitialized = true;
                     setCaseStatus(`Unable to load cases: ${err?.message || 'Unknown error'}`);
                 } finally {
@@ -8737,8 +8991,51 @@ const coronaryMap = {
                 if (credits) credits.style.display = visible ? '' : 'none';
             };
 
+            const handleCaseLabDrawerEsc = (event) => {
+                if (event.key !== 'Escape') return;
+                if (!ecgCaseSection?.classList.contains('is-playlabs-open')) return;
+                event.preventDefault();
+                closeCaseLabDrawer();
+            };
+
+            const openCaseLabDrawer = () => {
+                if (!ecgCaseSection || currentEkgMode !== 'cases') return;
+                if (ecgCaseSection.classList.contains('is-playlabs-open')) return;
+                caseLabDrawerLastFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+                ecgCaseSection.classList.add('is-playlabs-open');
+                if (ecgCasePlaylabsToggle) ecgCasePlaylabsToggle.setAttribute('aria-expanded', 'true');
+                if (ecgCasePlaylabsPanel) ecgCasePlaylabsPanel.setAttribute('aria-hidden', 'false');
+                if (ecgCasePlaylabsOverlay) ecgCasePlaylabsOverlay.setAttribute('aria-hidden', 'false');
+                document.addEventListener('keydown', handleCaseLabDrawerEsc);
+                requestAnimationFrame(() => {
+                    ecgCasePlaylabsClose?.focus?.();
+                });
+            };
+
+            const closeCaseLabDrawer = ({ restoreFocus = true } = {}) => {
+                if (!ecgCaseSection?.classList.contains('is-playlabs-open')) return;
+                ecgCaseSection.classList.remove('is-playlabs-open');
+                if (ecgCasePlaylabsToggle) ecgCasePlaylabsToggle.setAttribute('aria-expanded', 'false');
+                if (ecgCasePlaylabsPanel) ecgCasePlaylabsPanel.setAttribute('aria-hidden', 'true');
+                if (ecgCasePlaylabsOverlay) ecgCasePlaylabsOverlay.setAttribute('aria-hidden', 'true');
+                document.removeEventListener('keydown', handleCaseLabDrawerEsc);
+                if (restoreFocus && caseLabDrawerLastFocus?.focus) {
+                    caseLabDrawerLastFocus.focus();
+                }
+                caseLabDrawerLastFocus = null;
+            };
+
+            const toggleCaseLabDrawer = () => {
+                if (ecgCaseSection?.classList.contains('is-playlabs-open')) {
+                    closeCaseLabDrawer();
+                    return;
+                }
+                openCaseLabDrawer();
+            };
+
             const activate12Lead = () => {
                 if (currentEkgMode === 'twelve') return;
+                closeCaseLabDrawer({ restoreFocus: false });
                 if (currentEkgMode === 'tutorial') {
                     resetEkgOnTutorialExit();
                 }
@@ -8757,6 +9054,7 @@ const coronaryMap = {
 
             const activateSingleLead = () => {
                 if (currentEkgMode === 'single') return;
+                closeCaseLabDrawer({ restoreFocus: false });
                 if (currentEkgMode === 'tutorial') {
                     resetEkgOnTutorialExit();
                 }
@@ -8777,6 +9075,7 @@ const coronaryMap = {
 
             const activateQuiz = () => {
                 if (currentEkgMode === 'quiz') return;
+                closeCaseLabDrawer({ restoreFocus: false });
                 setCaseBoxToolEnabled(false);
                 currentEkgMode = 'quiz';
                 setEkg3dModelVisible(true);
@@ -8793,6 +9092,7 @@ const coronaryMap = {
 
             const activateTutorial = () => {
                 if (currentEkgMode === 'tutorial') return;
+                closeCaseLabDrawer({ restoreFocus: false });
                 setCaseBoxToolEnabled(false);
                 currentEkgMode = 'tutorial';
                 setEkg3dModelVisible(true);
@@ -8814,6 +9114,7 @@ const coronaryMap = {
                 if (currentEkgMode === 'tutorial') {
                     resetEkgOnTutorialExit();
                 }
+                closeCaseLabDrawer({ restoreFocus: false });
                 currentEkgMode = 'cases';
                 setEkg3dModelVisible(false);
                 clearActive();
@@ -8837,6 +9138,9 @@ const coronaryMap = {
             showCasesBtn?.addEventListener('click', () => {
                 activateCases();
             });
+            ecgCasePlaylabsToggle?.addEventListener('click', toggleCaseLabDrawer);
+            ecgCasePlaylabsClose?.addEventListener('click', () => closeCaseLabDrawer());
+            ecgCasePlaylabsOverlay?.addEventListener('click', () => closeCaseLabDrawer());
 
             const ecgCasePrevBtn = document.getElementById('ecgCasePrevBtn');
             const ecgCaseNextBtn = document.getElementById('ecgCaseNextBtn');
