@@ -1272,15 +1272,9 @@ class Ecg12Simulator {
     const msPerPixel = 1000 / (this.config.speed * pxPerMm);
     this._lastBigMsPerPixel = msPerPixel;
     const windowMs = w * msPerPixel;
-    const duration = this.rhythmDurationMs || windowMs || 1;
     let elapsedInSweep = this.simulatedTimeMs - this.sweepStartTime;
     if (this.shouldLoopSweep) {
-      if (duration <= windowMs) {
-        // Align sweep to rhythm boundary to avoid mid-strip wraps in the R-R spacing.
-        const cycleStart = Math.floor(this.simulatedTimeMs / duration) * duration;
-        this.sweepStartTime = cycleStart;
-        elapsedInSweep = this.simulatedTimeMs - cycleStart;
-      } else if (elapsedInSweep >= windowMs || elapsedInSweep < 0) {
+      if (elapsedInSweep >= windowMs || elapsedInSweep < 0) {
         this.sweepStartTime = this.simulatedTimeMs;
         elapsedInSweep = 0;
       }
@@ -1433,15 +1427,9 @@ class Ecg12Simulator {
     const pxPerMm = this.pixelPerMm;
     const msPerPixel = 1000 / (this.config.speed * pxPerMm);
     const windowMs = (this.renderWidth || w) * msPerPixel;
-    const duration = this.rhythmDurationMs || windowMs || 1;
     let elapsedInSweep = this.simulatedTimeMs - this.sweepStartTime;
     if (this.shouldLoopSweep) {
-      if (duration <= windowMs) {
-        // Align sweep to rhythm boundary to avoid mid-strip wraps in the R-R spacing.
-        const cycleStart = Math.floor(this.simulatedTimeMs / duration) * duration;
-        this.sweepStartTime = cycleStart;
-        elapsedInSweep = this.simulatedTimeMs - cycleStart;
-      } else if (elapsedInSweep >= windowMs || elapsedInSweep < 0) {
+      if (elapsedInSweep >= windowMs || elapsedInSweep < 0) {
         this.sweepStartTime = this.simulatedTimeMs;
         elapsedInSweep = 0;
       }

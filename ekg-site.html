@@ -2357,6 +2357,8 @@
         .ecg-case-header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
         .ecg-case-header h3{margin:0}
         .ecg-case-header-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+        .ecg-case-header-actions #ecgCasePlaylabsShowBtn{display:none}
+        #ecgCaseSection.playlabs-hidden .ecg-case-header-actions #ecgCasePlaylabsShowBtn{display:inline-flex}
         .ecg-case-nav{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
         .ecg-case-counter{font-weight:700;font-size:.92rem;color:var(--muted)}
         .ecg-case-nav select{min-width:200px;padding:8px 10px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text)}
@@ -2525,9 +2527,23 @@
             box-shadow:0 4px 12px rgba(15,23,42,.14);
         }
         .ecg-case-playlabs-close:hover{background:rgba(148,163,184,.18)}
+        .ecg-case-playlabs-toolbar{
+            display:flex;
+            align-items:center;
+            padding:10px 12px 14px;
+            border-top:1px solid rgba(148,163,184,.24);
+            background:var(--surface,#fff);
+            margin-top:auto;
+        }
+        #ecgCasePlaylabsVisibilityBtn{
+            width:100%;
+            justify-content:center;
+            font-weight:700;
+        }
         .ecg-case-playlabs-content{
             width:100%;
-            height:100%;
+            flex:1;
+            min-height:0;
             background:#fff;
             overflow:hidden;
         }
@@ -2536,6 +2552,11 @@
             height:100%;
             border:0;
             background:#fff;
+        }
+        #ecgCaseSection.playlabs-hidden .ecg-case-playlabs-panel,
+        #ecgCaseSection.playlabs-hidden .ecg-case-playlabs-overlay,
+        #ecgCaseSection.playlabs-hidden .ecg-case-playlabs-toggle{
+            display:none !important;
         }
         #ecgCaseSection.is-playlabs-open .ecg-case-playlabs-overlay{
             opacity:0;
@@ -2598,6 +2619,9 @@
                 column-gap:14px;
                 align-items:start;
             }
+            #ecgCaseSection.playlabs-hidden{
+                grid-template-columns:minmax(0,1fr);
+            }
             #ecgCaseSection > :not(.ecg-case-playlabs-panel):not(.ecg-case-playlabs-toggle):not(.ecg-case-playlabs-overlay){
                 grid-column:1;
                 min-width:0;
@@ -2626,13 +2650,17 @@
             #ecgCaseSection > .ecg-case-playlabs-panel .ecg-case-playlabs-close{
                 display:none;
             }
+            #ecgCaseSection > .ecg-case-playlabs-panel .ecg-case-playlabs-toolbar{position:static}
             #ecgCaseSection > .ecg-case-playlabs-panel .ecg-case-playlabs-content{
-                height:100%;
+                flex:1;
                 min-height:0;
                 overflow:hidden;
             }
             #ecgCaseSection > .ecg-case-playlabs-panel .ecg-case-playlabs-content iframe{
                 height:100%;
+            }
+            #ecgCaseSection.playlabs-hidden > .ecg-case-playlabs-panel{
+                display:none !important;
             }
             #ecgCaseSection.is-playlabs-open .ecg-case-ecg-toolbar,
             #ecgCaseSection.is-playlabs-open #ecgCase12LeadHost,
@@ -4012,6 +4040,7 @@
                             <button type="button" class="btn btn-ghost btn-compact" id="ecgCaseNextBtn">Next</button>
                             <select id="ecgCaseJumpSelect" aria-label="Jump to case"></select>
                         </div>
+                        <button type="button" class="btn btn-ghost btn-compact" id="ecgCasePlaylabsShowBtn">Show PlayLabs</button>
                     </div>
                 </div>
                 <div class="ecg-case-card">
@@ -4203,6 +4232,9 @@
                 <aside id="ecgCasePlaylabsPanel" class="ecg-case-playlabs-panel" role="dialog" aria-modal="true" aria-label="PlayLabs chatbot panel" aria-hidden="true">
                     <button type="button" id="ecgCasePlaylabsClose" class="ecg-case-playlabs-close" aria-label="Close PlayLabs panel">&times;</button>
                     <div id="ecgCasePlaylabsContent" class="ecg-case-playlabs-content"></div>
+                    <div class="ecg-case-playlabs-toolbar">
+                        <button type="button" class="btn btn-ghost btn-compact" id="ecgCasePlaylabsVisibilityBtn">Hide PlayLabs</button>
+                    </div>
                 </aside>
             </div>
         </div>
@@ -6494,9 +6526,12 @@ const coronaryMap = {
             const ecgCasePlaylabsPanel = document.getElementById('ecgCasePlaylabsPanel');
             const ecgCasePlaylabsOverlay = document.getElementById('ecgCasePlaylabsOverlay');
             const ecgCasePlaylabsClose = document.getElementById('ecgCasePlaylabsClose');
+            const ecgCasePlaylabsVisibilityBtn = document.getElementById('ecgCasePlaylabsVisibilityBtn');
+            const ecgCasePlaylabsShowBtn = document.getElementById('ecgCasePlaylabsShowBtn');
             const singleLeadMount = document.getElementById('singleLeadMount');
             const tutorialLeadMount = document.getElementById('tutorialLeadMount');
             let caseLabDrawerLastFocus = null;
+            let caseLabPlaylabsHidden = false;
 
             const tutorialHighlightIds = [
                 'ecgHighlightP',
@@ -8991,6 +9026,25 @@ const coronaryMap = {
                 if (credits) credits.style.display = visible ? '' : 'none';
             };
 
+            const syncPlaylabsVisibilityUi = () => {
+                if (!ecgCaseSection) return;
+                ecgCaseSection.classList.toggle('playlabs-hidden', !!caseLabPlaylabsHidden);
+                if (ecgCasePlaylabsVisibilityBtn) {
+                    ecgCasePlaylabsVisibilityBtn.textContent = caseLabPlaylabsHidden ? 'Show PlayLabs' : 'Hide PlayLabs';
+                }
+                if (ecgCasePlaylabsShowBtn) {
+                    ecgCasePlaylabsShowBtn.hidden = !caseLabPlaylabsHidden;
+                }
+            };
+
+            const setCasePlaylabsHidden = (hidden) => {
+                caseLabPlaylabsHidden = !!hidden;
+                if (caseLabPlaylabsHidden) {
+                    closeCaseLabDrawer({ restoreFocus: false });
+                }
+                syncPlaylabsVisibilityUi();
+            };
+
             const handleCaseLabDrawerEsc = (event) => {
                 if (event.key !== 'Escape') return;
                 if (!ecgCaseSection?.classList.contains('is-playlabs-open')) return;
@@ -9000,6 +9054,7 @@ const coronaryMap = {
 
             const openCaseLabDrawer = () => {
                 if (!ecgCaseSection || currentEkgMode !== 'cases') return;
+                if (caseLabPlaylabsHidden) return;
                 if (ecgCaseSection.classList.contains('is-playlabs-open')) return;
                 caseLabDrawerLastFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
                 ecgCaseSection.classList.add('is-playlabs-open');
@@ -9115,6 +9170,7 @@ const coronaryMap = {
                     resetEkgOnTutorialExit();
                 }
                 closeCaseLabDrawer({ restoreFocus: false });
+                setCasePlaylabsHidden(false);
                 currentEkgMode = 'cases';
                 setEkg3dModelVisible(false);
                 clearActive();
@@ -9137,6 +9193,12 @@ const coronaryMap = {
             showTutorialBtn?.addEventListener('click', activateTutorial);
             showCasesBtn?.addEventListener('click', () => {
                 activateCases();
+            });
+            ecgCasePlaylabsVisibilityBtn?.addEventListener('click', () => {
+                setCasePlaylabsHidden(!caseLabPlaylabsHidden);
+            });
+            ecgCasePlaylabsShowBtn?.addEventListener('click', () => {
+                setCasePlaylabsHidden(false);
             });
             ecgCasePlaylabsToggle?.addEventListener('click', toggleCaseLabDrawer);
             ecgCasePlaylabsClose?.addEventListener('click', () => closeCaseLabDrawer());
