@@ -4,7 +4,7 @@
       "ekg_id": "EKG-279",
       "case": "A 55-year-old male presents to the emergency room with chest pain which started after\nmowing the lawn. EKG is below.",
       "interpretation": [
-        "Rate: 114 (accept 100-120), encourage students to use method of counting the\nnumber of QRS complexes and multiplying by 6 since the rate is irregular instead of\ndividing 300 by the number of large boxes in between QRS complexes",
+        "Rate: 114 (100-120 accepted)",
         "Rhythm: atrial fibrillation",
         "Axis: normal",
         "PR interval (normal or abnormal): abnormal (no P waves)",

@@ -362,6 +362,8 @@ class Ecg12Simulator {
       heartRate: config.heartRate || 75,
       speed: 25
     };
+    this.showRhythmStrip = config.showRhythmStrip !== false;
+    this.fitMainCanvasToContent = !!config.fitMainCanvasToContent;
     this.currentRhythm = this.normalizeRhythmId(config.rhythm || 'sinus');
     this._seedBase = Math.floor(Math.random() * 0x7fffffff);
     this._seedCounter = 1;
@@ -447,16 +449,22 @@ class Ecg12Simulator {
     this.handleBigMouseLeave = this.handleBigMouseLeave.bind(this);
     this.handleBigClick = this.handleBigClick.bind(this);
     this.handleBigDoubleClick = this.handleBigDoubleClick.bind(this);
+    this.mainContainerObserver = null;
     this.bigContainerObserver = null;
 
     this.handleResize();
     window.addEventListener('resize', this.handleResize);
 
-    if (typeof window !== 'undefined' && 'ResizeObserver' in window && this.bigTraceCanvas) {
-      const parent = this.bigTraceCanvas.parentElement;
-      if (parent) {
+    if (typeof window !== 'undefined' && 'ResizeObserver' in window) {
+      const mainParent = this.traceCanvas ? this.traceCanvas.parentElement : null;
+      if (mainParent) {
+        this.mainContainerObserver = new ResizeObserver(() => this.handleResize());
+        this.mainContainerObserver.observe(mainParent);
+      }
+      const bigParent = this.bigTraceCanvas ? this.bigTraceCanvas.parentElement : null;
+      if (bigParent) {
         this.bigContainerObserver = new ResizeObserver(() => this.handleResize());
-        this.bigContainerObserver.observe(parent);
+        this.bigContainerObserver.observe(bigParent);
       }
     }
 
@@ -1145,12 +1153,39 @@ class Ecg12Simulator {
     const paperCssWidth = Math.round(REQUIRED_MM * this.pixelPerMm * this.viewScale);
     const containerCssWidth = this.scrollContainer ? this.scrollContainer.clientWidth : 0;
     const requiredCssWidth = Math.max(paperCssWidth, containerCssWidth);
-    const mainHeight = this.traceCanvas.clientHeight || 320;
-    const bigParentHeight = this.bigTraceCanvas?.parentElement?.clientHeight || 0;
-    const bigHeight = this.bigTraceCanvas ? (bigParentHeight || this.bigTraceCanvas.clientHeight || 220) : 220;
+    const resolveCanvasHeight = (canvas, fallbackHeight) => {
+      if (!canvas) return fallbackHeight;
+      const parent = canvas.parentElement;
+      const parentHeight = parent ? parent.clientHeight : 0;
+      if (parentHeight > 0) return parentHeight;
+      if (parent && typeof window !== 'undefined' && typeof window.getComputedStyle === 'function') {
+        const parentCssHeight = Number.parseFloat(window.getComputedStyle(parent).height);
+        if (Number.isFinite(parentCssHeight) && parentCssHeight > 0) {
+          return Math.round(parentCssHeight);
+        }
+      }
+      const canvasHeight = canvas.clientHeight || canvas.offsetHeight || 0;
+      if (canvasHeight > 0) return canvasHeight;
+      if (typeof window !== 'undefined' && typeof window.getComputedStyle === 'function') {
+        const canvasCssHeight = Number.parseFloat(window.getComputedStyle(canvas).height);
+        if (Number.isFinite(canvasCssHeight) && canvasCssHeight > 0) {
+          return Math.round(canvasCssHeight);
+        }
+      }
+      return fallbackHeight;
+    };
+
+    const mainHeight = resolveCanvasHeight(this.traceCanvas, this.renderHeight || 320);
+    const bigHeight = this.bigTraceCanvas
+      ? resolveCanvasHeight(this.bigTraceCanvas, this.bigRenderHeight || 220)
+      : 220;
 
     const resizeCanvas = (canvas, height) => {
       if (!canvas) return;
+      canvas.style.left = '0px';
+      canvas.style.top = '0px';
+      canvas.style.right = 'auto';
+      canvas.style.bottom = 'auto';
       canvas.style.width = `${requiredCssWidth}px`;
       canvas.style.height = `${height}px`;
       canvas.width = Math.floor(requiredCssWidth * dpr);
@@ -1171,10 +1206,47 @@ class Ecg12Simulator {
     this.bigRenderHeight = bigHeight;
 
     this.computeViewports();
+
+    if (this.fitMainCanvasToContent && !this.showRhythmStrip && this.traceCanvas?.parentElement) {
+      const bottomMostViewport = this.viewports.reduce(
+        (maxBottom, vp) => Math.max(maxBottom, vp.y + vp.height),
+        this.topReadoutHeight
+      );
+      const fittedHeight = Math.ceil(bottomMostViewport + 8);
+      if (Number.isFinite(fittedHeight) && fittedHeight > 0 && Math.abs(fittedHeight - this.renderHeight) > 1) {
+        resizeCanvas(this.backgroundCanvas, fittedHeight);
+        resizeCanvas(this.traceCanvas, fittedHeight);
+        resizeCanvas(this.overlayCanvas, fittedHeight);
+        this.traceCanvas.parentElement.style.height = `${fittedHeight}px`;
+        this.renderHeight = fittedHeight;
+        this.computeViewports();
+      }
+    }
+
     this.drawGrid();
     this.drawBigGrid();
     this.drawTrace();
     this.drawExpandedTrace();
+  }
+
+  syncLayoutFromDomIfNeeded() {
+    const REQUIRED_MM = 250;
+    const expectedWidth = Math.max(
+      Math.round(REQUIRED_MM * this.pixelPerMm * this.viewScale),
+      this.scrollContainer ? this.scrollContainer.clientWidth : 0
+    );
+    const expectedMainHeight = this.traceCanvas?.parentElement?.clientHeight || this.traceCanvas?.clientHeight || 0;
+    const expectedBigHeight = this.bigTraceCanvas?.parentElement?.clientHeight || this.bigTraceCanvas?.clientHeight || 0;
+    const widthDelta = Math.abs((this.renderWidth || 0) - expectedWidth);
+    const mainHeightDelta = Math.abs((this.renderHeight || 0) - expectedMainHeight);
+    const bigHeightDelta = Math.abs((this.bigRenderHeight || 0) - expectedBigHeight);
+    const needsSync =
+      (expectedWidth > 0 && widthDelta > 2) ||
+      (expectedMainHeight > 0 && mainHeightDelta > 2) ||
+      (expectedBigHeight > 0 && bigHeightDelta > 2);
+    if (!needsSync) return false;
+    this.handleResize();
+    return true;
   }
 
   computeViewports() {
@@ -1187,8 +1259,12 @@ class Ecg12Simulator {
       (this.renderHeight || (this.traceCanvas ? this.traceCanvas.clientHeight : 0)) -
       this.topReadoutHeight;
 
+    const stripRatio = this.showRhythmStrip ? 0.85 : 0;
     const tileWidth = (w - gutterX * (cols + 1)) / cols;
-    const tileHeight = (h - GRID_TOP_PADDING_PX - gutterY * (rows + 1)) / rows;
+    const extraGutters = this.showRhythmStrip ? 2 : 1;
+    const usableHeight = Math.max(80, h - GRID_TOP_PADDING_PX - gutterY * (rows + extraGutters));
+    const tileHeight = usableHeight / Math.max(1, rows + stripRatio);
+    let stripHeight = this.showRhythmStrip ? Math.max(36, tileHeight * stripRatio) : 0;
     const viewports = [];
 
     for (let r = 0; r < rows; r++) {
@@ -1205,6 +1281,27 @@ class Ecg12Simulator {
           height: tileHeight
         });
       }
+    }
+
+    if (this.showRhythmStrip) {
+      const stripY =
+        this.topReadoutHeight +
+        GRID_TOP_PADDING_PX +
+        gutterY +
+        rows * (tileHeight + gutterY);
+      const maxStripHeight = Math.max(
+        24,
+        (this.renderHeight || 0) - gutterY - stripY
+      );
+      stripHeight = Math.min(stripHeight, maxStripHeight);
+      viewports.push({
+        leadLabel: 'II',
+        leadKey: normLead('II'),
+        x: gutterX,
+        y: stripY,
+        width: Math.max(40, w - gutterX * 2),
+        height: stripHeight
+      });
     }
 
     this.viewports = viewports;
@@ -1260,6 +1357,7 @@ class Ecg12Simulator {
   }
 
   drawTrace() {
+    if (this.syncLayoutFromDomIfNeeded()) return;
     const ctx = this.traceCtx;
     if (!ctx) return;
     const w = this.renderWidth || this.traceCanvas.clientWidth || 0;
@@ -1919,6 +2017,10 @@ class Ecg12Simulator {
     this.pause();
     this.cancelSingleRun();
     window.removeEventListener('resize', this.handleResize);
+    if (this.mainContainerObserver) {
+      this.mainContainerObserver.disconnect();
+      this.mainContainerObserver = null;
+    }
     if (this.bigContainerObserver) {
       this.bigContainerObserver.disconnect();
       this.bigContainerObserver = null;

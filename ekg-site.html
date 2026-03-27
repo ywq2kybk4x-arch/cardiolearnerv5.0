@@ -83,10 +83,14 @@
             box-sizing: border-box;
         }
 
+        html {
+            font-size: 112.5%;
+        }
+
         body {
             margin: 0;
             font-family: var(--font-sans);
-            font-size: 15px;
+            font-size: 1rem;
             background: var(--bg);
             color: var(--text);
             line-height: 1.55;
@@ -2222,10 +2226,10 @@
         #ecg12Module .ecg12-buttons{display:flex;gap:10px}
         #ecg12Module .ecg12-buttons button{flex:1;padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:var(--surface-2);font-weight:700;cursor:pointer;color:var(--text)}
         #ecg12Module .ecg12-display{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0;box-shadow:var(--shadow-sm)}
-        #ecg12Module .ecg12-canvas-wrap{position:relative;width:100%;height:340px;max-height:none;aspect-ratio:auto;border:1px solid #e5e7eb;border-radius:12px;overflow:auto;background:#fff}
+        #ecg12Module .ecg12-canvas-wrap{position:relative;width:100%;height:340px;max-height:none;aspect-ratio:auto;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;background:#fff}
         #ecg12Module .ecg12-expanded-wrap{height:300px}
         #ecg12Module .ecg12-expanded-header{font-weight:800;color:#0f172a;margin:2px 0 8px}
-        #ecg12Module .ecg12-canvas-wrap canvas{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+        #ecg12Module .ecg12-canvas-wrap canvas{position:absolute;top:0;left:0;width:100%;height:100%;display:block;pointer-events:none}
         #ecg12Module #ecg12Trace,#ecg12Module #ecg12Overlay,#ecg12Module #ecg12BigTrace,#ecg12Module #ecg12BigOverlay{pointer-events:auto}
         #ecg12Module .ecg12-expanded-tools{position:absolute;top:10px;right:10px;z-index:8;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.92);border:1px solid var(--border);border-radius:12px;padding:6px 10px;box-shadow:0 8px 18px rgba(15,23,42,.12)}
         #ecg12Module .ecg12-expanded-measure-toggle{display:inline-flex;align-items:center;gap:8px;font-size:.86rem;font-weight:700;color:#0f172a;white-space:nowrap}
@@ -2319,7 +2323,7 @@
         .ecg12-quiz-layout-main,.ecg12-quiz-layout-expanded{flex:1 1 auto;width:100%;min-width:0}
         .ecg12-quiz-display .ecg12-canvas-wrap{position:relative;width:100%;height:340px;max-height:none;aspect-ratio:auto;border-radius:12px;overflow:hidden;border:1px solid rgba(148,163,184,.35);background:transparent}
         .ecg12-quiz-display .ecg12-expanded-wrap{height:220px}
-        .ecg12-quiz-display .ecg12-canvas-wrap canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+        .ecg12-quiz-display .ecg12-canvas-wrap canvas{position:absolute;top:0;left:0;width:100%;height:100%;display:block}
         .ecg-quiz-measure-hint{font-size:.85rem;color:var(--muted-2);margin-top:6px;opacity:.85}
         .ecg-quiz-meta{font-size:.85rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
         .ecg-quiz-question{font-weight:600;margin:0;font-size:1rem}
@@ -2362,7 +2366,7 @@
         .ecg-case-nav{display:grid;grid-template-columns:auto auto auto;align-items:center;justify-content:center;gap:10px;width:100%}
         .ecg-case-counter{font-weight:700;font-size:.92rem;color:var(--muted)}
         .ecg-case-nav select{grid-column:1 / -1;width:100%;min-width:0;padding:8px 10px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text)}
-        .ecg-case-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px 12px;align-items:start}
+        .ecg-case-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px 12px;align-items:stretch}
         .ecg-case-card{border:1px solid rgba(148,163,184,.35);border-radius:14px;background:var(--surface-2,#f8fafc);padding:10px 12px}
         .ecg-case-id{font-size:.8rem;color:var(--muted-2);margin-bottom:6px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
         .ecg-case-stem{margin:0;white-space:normal;max-width:none;width:100%}
@@ -2416,7 +2420,7 @@
         .ecg-case-finding{display:inline;color:inherit;font:inherit;font-weight:700;line-height:inherit;text-align:left;white-space:normal;vertical-align:baseline;cursor:pointer;background:none;border:0;padding:0;margin:0;appearance:none;-webkit-appearance:none;text-decoration-line:underline;text-decoration-style:dotted;text-decoration-thickness:2px;text-underline-offset:3px;text-decoration-color:rgba(30,64,175,.7)}
         .ecg-case-finding:hover{color:#1e40af;text-decoration-color:#1e40af}
         .ecg-case-finding.active{color:#1e3a8a;text-decoration-color:#1e3a8a}
-        .ecg-case-tools{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+        .ecg-case-tools{display:none;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin:0}
         .ecg-case-box-toggle{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border:1px solid rgba(148,163,184,.45);border-radius:999px;background:rgba(255,255,255,.78);font-size:.82rem;font-weight:600;color:var(--muted);cursor:pointer;user-select:none}
         .ecg-case-box-toggle input{margin:0;accent-color:#2563eb}
         .ecg-case-box-toggle.is-active{border-color:rgba(37,99,235,.55);background:rgba(37,99,235,.10);color:#1d4ed8}
@@ -2424,7 +2428,22 @@
         #ecg12Module .ecg12-canvas-wrap canvas.ecg-case-box-overlay.is-active{display:block;pointer-events:auto;cursor:crosshair}
         .ecg-case-tools .btn{padding:4px 10px}
         .ecg-case-tools .btn.is-active{background:var(--primary);border-color:var(--primary);color:#fff}
-        .ecg-case-ecg-toolbar{display:flex;justify-content:flex-start;margin:6px 0 8px}
+        .ecg-case-ecg-toolbar{display:flex;justify-content:flex-start;align-items:center;gap:8px;flex-wrap:wrap;margin:6px 0 8px}
+        #ecgCaseSection #ecg12Module .ecg12-expanded-panel{
+            position:relative;
+        }
+        #ecgCaseSection #ecg12Module .ecg12-expanded-panel .ecg-case-tools{
+            display:flex;
+            position:absolute;
+            top:0;
+            right:10px;
+            z-index:9;
+            background:transparent;
+            border:0;
+            border-radius:0;
+            padding:0;
+            box-shadow:none;
+        }
         .ecg-case-real-ekg-host{width:100%}
         .ecg-case-real-ekg-header{font-size:.9rem;font-weight:700;color:#334155;margin:0 0 8px}
         .ecg-case-real-ekg-host iframe{width:100%;min-height:560px;border:1px solid rgba(148,163,184,.35);border-radius:10px;background:#fff}
@@ -2571,7 +2590,7 @@
         #ecgCaseSection .ecg12-controls{display:none}
         .ecg-case-layout > .ecg-case-card:first-child{grid-column:1}
         #ecgCaseAssessmentBlock{grid-column:1}
-        #ecgCaseRevealList{grid-column:2;display:flex;flex-direction:column;gap:8px}
+        #ecgCaseRevealList{grid-column:2;display:flex;flex-direction:column;gap:8px;height:100%}
         #ecgCaseStatus{grid-column:1 / -1}
         @media (max-width: 920px){
             .ecg-case-assessment-row{grid-template-columns:1fr;gap:8px}
@@ -3944,10 +3963,15 @@
                                 <canvas id="ecg12Overlay"></canvas>
                             </div>
 
-                            <div>
+                            <div class="ecg12-expanded-panel">
                                 <div class="ecg12-expanded-header">
                                     Expanded Lead: <span id="ecg12ActiveLead">II</span>
                                     <span class="ecg12-hint">(Click any lead to view below)</span>
+                                </div>
+                                <div class="ecg-case-tools">
+                                    <button type="button" id="ecgCasePauseEkgBtn" class="btn btn-ghost btn-compact">Pause EKG</button>
+                                    <button type="button" id="ecgCaseHighlightFeaturesBtn" class="btn btn-ghost btn-compact">Highlight key features</button>
+                                    <button type="button" id="ecgCaseClearHighlightBtn" class="btn btn-ghost btn-compact">Clear highlight</button>
                                 </div>
                                 <div class="ecg12-canvas-wrap ecg12-expanded-wrap">
                                     <div class="ecg12-expanded-tools">
@@ -4028,12 +4052,11 @@
                 <div id="ecgQuizFeedback" class="ecg-quiz-feedback">Select the rhythm that matches this printout.</div>
                 <div id="ecgQuizSummary" class="ecg-quiz-summary" style="display:none;"></div>
             </div>
-            <div id="ecgCaseSection" class="ecg-case-section" style="display:none;">
-                <div class="ecg-case-header">
-                    <div>
-                        <h3>Case Lab</h3>
-                        <p class="muted-text" style="margin:4px 0 0;">Interactive case activity: each case configures the 12-lead ECG, then progressively unlocks teaching content as structured ECG findings are solved.</p>
-                    </div>
+	            <div id="ecgCaseSection" class="ecg-case-section" style="display:none;">
+	                <div class="ecg-case-header">
+	                    <div>
+	                        <h3>Case Lab</h3>
+	                    </div>
                     <div class="ecg-case-header-actions">
                         <div class="ecg-case-nav">
                             <button type="button" class="btn btn-ghost btn-compact" id="ecgCasePrevBtn" aria-label="Previous case">&larr;</button>
@@ -4057,7 +4080,6 @@
                         <div id="ecgCaseRealEkgContent"></div>
                     </div>
                 </div>
-                <p class="ecg-case-locked-note">12-lead controls are locked in Case Lab while the case-defined ECG target is active.</p>
                 <div class="ecg-case-layout">
                     <div id="ecgCaseAssessmentBlock" class="ecg-case-card">
                         <div class="ecg-case-id">Case Assessment</div>
@@ -4190,14 +4212,10 @@
                         </div>
                         <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px;">
                             <button type="button" id="ecgAssessResetBtn" class="btn btn-ghost btn-compact">Reset answers</button>
-                            <span id="ecgCaseAssessmentStatus" class="ecg-case-status">Complete each field to unlock teaching content.</span>
+	                            <span id="ecgCaseAssessmentStatus" class="ecg-case-status" hidden></span>
                         </div>
                     </div>
                     <div id="ecgCaseRevealList" class="ecg-case-reveal-list">
-                        <div class="ecg-case-tools">
-                            <button type="button" id="ecgCaseHighlightFeaturesBtn" class="btn btn-ghost btn-compact">Highlight key features</button>
-                            <button type="button" id="ecgCaseClearHighlightBtn" class="btn btn-ghost btn-compact">Clear highlight</button>
-                        </div>
                         <details class="ecg-case-reveal" id="ecgCaseInterpretationWrap">
                             <summary>Interpretation</summary>
                             <div class="ecg-case-reveal-body" id="ecgCaseInterpretation"></div>
@@ -4219,7 +4237,7 @@
                             <div class="ecg-case-reveal-body" id="ecgCaseReferences"></div>
                         </details>
                     </div>
-                    <p class="ecg-case-status" id="ecgCaseStatus"></p>
+	                    <p class="ecg-case-status" id="ecgCaseStatus" hidden></p>
                 </div>
                 <button
                     type="button"
@@ -4639,7 +4657,7 @@ const coronaryMap = {
     </script>
 
     <script src="./assets/ekgsimulatorcopy.js"></script>
-    <script src="./ekg12/assets/ekg12simulator.js"></script>
+    <script src="./ekg12/assets/ekg12simulator.js?v=20260327b"></script>
 
     <script>
         // Initialize charts
@@ -4664,6 +4682,8 @@ const coronaryMap = {
         let ecgCaseOverrides = {};
         let ecgCaseRealEkgByIndex = new Map();
         let ecgCaseEmbedByCaseNumber = new Map();
+        let ecgCasePlaylabsRenderedCaseKey = null;
+        let ecgCasePlaylabsRenderedSrc = '';
         let ecgCurrentCaseIndex = 0;
         const ecgCaseAnswers = new Map();
         let ecgCaseActiveFindingId = null;
@@ -6190,7 +6210,7 @@ const coronaryMap = {
                     bigTraceCanvas: bigTrace,
                     bigOverlayCanvas: bigOverlay
                 },
-                { displayTime: 10, heartRate: 75 }
+                { displayTime: 10, heartRate: 75, showRhythmStrip: false, fitMainCanvasToContent: true }
             );
             window.ecg12SimInstance = sim;
 
@@ -7618,7 +7638,9 @@ const coronaryMap = {
 
             const setCaseStatus = (message) => {
                 const el = document.getElementById('ecgCaseStatus');
-                if (el) el.textContent = message || '';
+                if (!el) return;
+                el.textContent = '';
+                el.hidden = true;
             };
 
             const setCaseMeasureToolEnabled = (enabled) => {
@@ -7900,7 +7922,6 @@ const coronaryMap = {
                 const wrap = document.getElementById(wrapId);
                 const body = document.getElementById(bodyId);
                 if (!wrap || !body) return;
-                wrap.open = false;
                 body.innerHTML = '';
                 const findings = Array.isArray(item?.interactiveFindings) ? item.interactiveFindings : [];
 
@@ -8048,7 +8069,6 @@ const coronaryMap = {
                 const wrap = document.getElementById(wrapId);
                 const body = document.getElementById(bodyId);
                 if (!wrap || !body) return;
-                wrap.open = false;
                 body.innerHTML = '';
                 const hideWhenEmpty = !!options.hideWhenEmpty;
                 const hasContent = (() => {
@@ -8259,6 +8279,16 @@ const coronaryMap = {
                 if (field === 'rate') {
                     const value = Number(state.inputs.rate);
                     if (!Number.isFinite(value)) return { ok: false, message: 'Enter a numeric heart rate.' };
+
+                    if (Number(item?.caseNumber) === 1) {
+                        const minRate = 100;
+                        const maxRate = 120;
+                        const ok = value >= minRate && value <= maxRate;
+                        return ok
+                            ? { ok: true, message: `Correct. Acceptable rate for this case: ${minRate}-${maxRate} bpm.` }
+                            : { ok: false, message: `Try again. Expected rate: ${minRate}-${maxRate} bpm.` };
+                    }
+
                     const delta = Math.abs(value - Number(key?.rate?.target_bpm || 0));
                     const tol = Number(key?.rate?.tolerance_bpm || CASE_ASSESSMENT_DEFAULTS.rate_tolerance_bpm);
                     return delta <= tol
@@ -8436,18 +8466,34 @@ const coronaryMap = {
             const renderCasePlaylabs = (item) => {
                 const content = document.getElementById('ecgCasePlaylabsContent');
                 if (!content) return;
-                while (content.firstChild) content.removeChild(content.firstChild);
+                const nextCaseKey = item?.caseKey || null;
+                const nextSrc = item?.playlabsEmbedSrc ? String(item.playlabsEmbedSrc).trim() : '';
 
-                if (!item || !item.playlabsEmbedSrc) {
+                if (!nextCaseKey || !nextSrc) {
+                    while (content.firstChild) content.removeChild(content.firstChild);
+                    ecgCasePlaylabsRenderedCaseKey = null;
+                    ecgCasePlaylabsRenderedSrc = '';
                     return;
                 }
 
+                const existingFrame = content.querySelector('iframe');
+                if (
+                    existingFrame &&
+                    ecgCasePlaylabsRenderedCaseKey === nextCaseKey &&
+                    ecgCasePlaylabsRenderedSrc === nextSrc
+                ) {
+                    return;
+                }
+
+                while (content.firstChild) content.removeChild(content.firstChild);
                 const frame = document.createElement('iframe');
-                frame.src = item.playlabsEmbedSrc;
+                frame.src = nextSrc;
                 frame.title = `PlayLabs chatbot for ${item.id || `Case ${item.caseNumber || ''}`}`.trim();
                 frame.loading = 'lazy';
                 frame.allow = 'clipboard-write';
                 content.appendChild(frame);
+                ecgCasePlaylabsRenderedCaseKey = nextCaseKey;
+                ecgCasePlaylabsRenderedSrc = nextSrc;
             };
 
             const renderCaseLab = () => {
@@ -8461,6 +8507,7 @@ const coronaryMap = {
                 const assessStatusEl = document.getElementById('ecgCaseAssessmentStatus');
                 const revealListEl = document.getElementById('ecgCaseRevealList');
                 const boxToolToggle = document.getElementById('ecgCaseBoxToolToggle');
+                const pauseEkgBtn = document.getElementById('ecgCasePauseEkgBtn');
                 const highlightFeaturesBtn = document.getElementById('ecgCaseHighlightFeaturesBtn');
                 const clearHighlightBtn = document.getElementById('ecgCaseClearHighlightBtn');
 
@@ -8483,6 +8530,10 @@ const coronaryMap = {
                     setCaseMeasureToolEnabled(false);
                     setCaseBoxToolEnabled(false);
                     if (boxToolToggle) boxToolToggle.disabled = true;
+                    if (pauseEkgBtn) {
+                        pauseEkgBtn.disabled = true;
+                        pauseEkgBtn.textContent = 'Pause EKG';
+                    }
                     if (highlightFeaturesBtn) highlightFeaturesBtn.disabled = true;
                     if (clearHighlightBtn) clearHighlightBtn.disabled = true;
                     if (revealListEl) revealListEl.classList.remove('is-locked');
@@ -8507,6 +8558,16 @@ const coronaryMap = {
                     ecgCaseActiveFindingId = null;
                     ecgCaseRealEkgOpen = false;
                     clearCaseBoxOverlay();
+                    [
+                        'ecgCaseInterpretationWrap',
+                        'ecgCaseExplanationWrap',
+                        'ecgCaseNextStepWrap',
+                        'ecgCasePearlWrap',
+                        'ecgCaseReferencesWrap'
+                    ].forEach((id) => {
+                        const panel = document.getElementById(id);
+                        if (panel) panel.open = false;
+                    });
                 }
 
                 if (counterEl) counterEl.textContent = `Case ${ecgCurrentCaseIndex + 1} / ${count}`;
@@ -8619,6 +8680,10 @@ const coronaryMap = {
                 if (highlightFeaturesBtn) {
                     highlightFeaturesBtn.disabled = false;
                 }
+                if (pauseEkgBtn) {
+                    pauseEkgBtn.disabled = false;
+                    pauseEkgBtn.textContent = window.ecg12SimInstance?.isPlaying === false ? 'Resume EKG' : 'Pause EKG';
+                }
                 if (measureToolBtn) {
                     measureToolBtn.disabled = false;
                 }
@@ -8628,18 +8693,19 @@ const coronaryMap = {
                 if (clearHighlightBtn) {
                     clearHighlightBtn.disabled = !ecgCaseActiveFindingId;
                 }
-                if (assessStatusEl) {
-                    if (fullUnlocked) {
-                        assessStatusEl.textContent = 'All fields correct. Full case details unlocked.';
-                        assessStatusEl.style.color = '#15803d';
-                    } else if (coreUnlocked) {
-                        assessStatusEl.textContent = 'Core fields correct. Interpretation panel unlocked.';
-                        assessStatusEl.style.color = '#1d4ed8';
-                    } else {
-                        assessStatusEl.textContent = 'Complete each field to unlock teaching content.';
-                        assessStatusEl.style.color = '';
-                    }
-                }
+	                if (assessStatusEl) {
+	                    if (fullUnlocked) {
+	                        assessStatusEl.textContent = '';
+	                        assessStatusEl.style.color = '#15803d';
+	                    } else if (coreUnlocked) {
+	                        assessStatusEl.textContent = '';
+	                        assessStatusEl.style.color = '#1d4ed8';
+	                    } else {
+	                        assessStatusEl.textContent = '';
+	                        assessStatusEl.style.color = '';
+	                    }
+	                    assessStatusEl.hidden = true;
+	                }
 
                 applyCaseBaseEkg(item);
                 requestAnimationFrame(syncCasePlaylabsPanelHeight);
@@ -9223,6 +9289,7 @@ const coronaryMap = {
             const ecgAssessInterpretationCheckBtn = document.getElementById('ecgAssessInterpretationCheckBtn');
             const ecgAssessResetBtn = document.getElementById('ecgAssessResetBtn');
             const ecgCaseRealEkgBtn = document.getElementById('ecgCaseRealEkgBtn');
+            const ecgCasePauseEkgBtn = document.getElementById('ecgCasePauseEkgBtn');
             const ecgCaseHighlightFeaturesBtn = document.getElementById('ecgCaseHighlightFeaturesBtn');
             const ecgCaseClearHighlightBtn = document.getElementById('ecgCaseClearHighlightBtn');
 
@@ -9325,6 +9392,17 @@ const coronaryMap = {
                 ecgCaseActiveCaseKey = item.caseKey;
                 applyCaseBaseEkg(item);
                 updateCaseFindingActiveStyles();
+            });
+
+            ecgCasePauseEkgBtn?.addEventListener('click', () => {
+                const sim = window.ecg12SimInstance;
+                if (!sim) return;
+                if (sim.isPlaying) {
+                    sim.pause?.();
+                } else {
+                    sim.play?.();
+                }
+                ecgCasePauseEkgBtn.textContent = sim.isPlaying ? 'Pause EKG' : 'Resume EKG';
             });
 
             ecgCaseHighlightFeaturesBtn?.addEventListener('click', () => {
